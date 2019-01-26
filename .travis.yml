@@ -6,6 +6,7 @@ install:
 script:
   - sed -i "s/sed -i ''/sed -i/g" Makefile # Make Makefile works on GNU
   - make run
+  - echo "fullstackpython.qiwihui.com" > generated/updated_site/CNAME
 deploy:
   provider: pages
   skip-cleanup: true
