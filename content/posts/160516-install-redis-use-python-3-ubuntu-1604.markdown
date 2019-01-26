@@ -1,12 +1,12 @@
-title: How to Use Redis with Python 3 and redis-py on Ubuntu 16.04
+title: 如何在 Ubuntu 16.04 上使用 Redis 和 Python 3 以及 redis-py
 slug: install-redis-use-python-3-ubuntu-1604 
-meta: Step-by-step instructions to install Redis and use it with Python 3 and redis-py on Ubuntu 16.04 Xenial Xerus.
+meta: 逐步说明安装 Redis 并在 Ubuntu 16.04 Xenial Xerus 上使用 Python 3 和 redis-py。
 category: post
 date: 2016-05-16
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/160516-redis-ubuntu-1604/header.jpg
-headeralt: Redis and Ubuntu logos. Copyright their respective owners.
+headeralt: Redis 和 Ubuntu logos，版权归各自所有者所有。
 
 
 [Redis](/redis.html) is an in-memory key-value pair 

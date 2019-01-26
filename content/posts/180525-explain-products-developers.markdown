@@ -1,12 +1,12 @@
-title: How to Explain Your Products to Developers
+title: 如何向开发者解释你的产品
 slug: explain-products-developers
-meta: Talk slides, notes and more resources for a technical talk on developer marketing for tech products, by Matt Makai.
+meta: 讲座幻灯片，笔记和更多资源，以获取有关技术产品给开发人员营销的技术讲座，Matt Makai主讲。
 category: talk
 date: 2018-05-25
 modified: 2018-05-25
 newsletter: False
 headerimage: /img/visuals/talk-header.jpg
-headeralt: Comment bubble with code representing a technical talk-based blog post.
+headeralt: 带有代码的评论泡泡代表基于技术谈话的博客文章。
 
 
 This blog post contains the slides along with a loose transcript

@@ -1,12 +1,12 @@
-title: How to Make Phone Calls in Python
+title: 如何用 Python 打电话
 slug: make-phone-calls-python
-meta: This tutorial shows how to use a Python program and the Twilio API to dial phone calls.
+meta: 本教程介绍如何使用 Python 程序和 Twilio API 拨打电话。
 category: post
 date: 2016-11-23
 modified: 2017-07-22
 newsletter: False
 headerimage: /img/161123-python-phone-calls/header.jpg
-headeralt: Python and Twilio logos. Copyright their respective owners.
+headeralt: Python 和 Twilio logos，版权归各自所有者所有。
 
 
 Good old-fashioned phone calls remain one of the best forms of communication

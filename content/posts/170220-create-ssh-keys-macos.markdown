@@ -1,12 +1,12 @@
-title: Creating SSH Keys on macOS Sierra
+title: 在macOS Sierra上创建SSH密钥
 slug: ssh-keys-macos-sierra
-meta: Learn how to quickly create new SSH keys on macOS Sierra.
+meta: 了解如何在macOS Sierra上快速创建新的SSH密钥。
 category: post
 date: 2017-02-20
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/170220-ssh-keys-macos/header.jpg
-headeralt: Apple logo, copyright Apple.
+headeralt: Apple logo，版权归属 Apple。
 
 
 [Deploying](/deployment.html) Python applications typically requires

@@ -1,12 +1,12 @@
-title: Adding Okta Authentication to an Existing Flask Web App
+title: 给现有 Flask Web 应用程序添加 Okta 认证
 slug: okta-user-auth-existing-flask-web-app
-meta: Learn to add Okta for user authentication to an existing Flask web application.
+meta: 学习如何给现有 Flask Web 应用程序的用户认证添加 Okta 认证。
 category: post
 date: 2018-10-31
 modified: 2018-11-02
 newsletter: False
 headerimage: /img/181031-okta-exist-flask/header.jpg
-headeralt: Flask and Okta logos. Copyright their respective owners.
+headeralt: Flask 和 Okta logos。版权归各自所有者所有。
 
 
 It can be a lot of work to piece together a full authentication system

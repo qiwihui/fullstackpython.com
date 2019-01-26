@@ -1,12 +1,12 @@
-title: Developing Flask Apps in Docker Containers on macOS
+title: 在 macOS 上用 Docker 容器开发 Flask 应用程序
 slug: develop-flask-web-apps-docker-containers-macos
-meta: Learn how to set up and develop a new Flask web application within a Docker container.
+meta: 用 Docker 容器设置和开发 Flask 应用程序
 category: post
 date: 2018-03-09
 modified: 2018-06-05
 newsletter: False
 headerimage: /img/180309-flask-docker/header.jpg
-headeralt: Flask, Docker and Apple logos, copyright their respective owners.
+headeralt: Flask, Docker 和 Apple logos，版权归各自所有者所有。
 
 
 Adding [Docker](/docker.html) to your [Python](/why-use-python.html) and 

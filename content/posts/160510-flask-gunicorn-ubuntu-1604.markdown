@@ -1,12 +1,12 @@
-title: How to set up Python 3, Flask and Green Unicorn on Ubuntu 16.04 LTS
+title: 如何在 Ubuntu 16.04 LTS 上设置 Python 3，Flask 和 Green Unicorn
 slug: python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus
-meta: Instructions for setting up Ubuntu 16.04 with Python 3, Flask and Green Unicorn (Gunicorn).
+meta: 使用 Python 3，Flask 和 Green Unicorn（Gunicorn） 设置 Ubuntu 16.04 的说明。
 category: post
 date: 2016-05-10
 modified: 2017-06-14
 newsletter: False
 headerimage: /img/160510-ubuntu-flask-gunicorn/header.jpg
-headeralt: Flask, Green Unicorn and Ubuntu logos. Copyright their respective owners.
+headeralt: Flask, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。
 
 
 [Ubuntu](/ubuntu.html)'s latest Long Term Support (LTS) 

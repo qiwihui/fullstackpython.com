@@ -1,12 +1,12 @@
-title: Setting up PostgreSQL with Python 3 and psycopg on Ubuntu 16.04
+title: 在 Ubuntu 16.04 上使用 Python 3 和 psycopg 设置 PostgreSQL
 slug: postgresql-python-3-psycopg2-ubuntu-1604 
-meta: A guide for installing and using PostgreSQL with Python 3 and psycopg2 on Ubuntu 16.04 Xenial Xerus.
+meta: 在 Ubuntu 16.04 Xenial Xerus 上安装和使用 PostgreSQL 与 Python 3 和 psycopg2 的指南。
 category: post
 date: 2016-05-18
 modified: 2017-12-25
 newsletter: False
 headerimage: /img/160518-postgresql-ubuntu-1604/header.jpg
-headeralt: PostgreSQL and Ubuntu logos. Copyright their respective owners.
+headeralt: PostgreSQL 和 Ubuntu logos，版权归各自所有者所有。
 
 
 [PostgreSQL](/postgresql.html) is a powerful open source 

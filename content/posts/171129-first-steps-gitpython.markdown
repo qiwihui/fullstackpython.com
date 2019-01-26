@@ -1,12 +1,12 @@
-title: First Steps with GitPython
+title: 使用 GitPython 的第一步
 slug: first-steps-gitpython
-meta: Learn to use the GitPython library to programmatically interact with Git repositories.
+meta: 学习使用GitPython库以编程方式与Git存储库进行交互。
 category: post
 date: 2017-11-29
 modified: 2017-11-30
 newsletter: False
 headerimage: /img/171129-gitpython/header.jpg
-headeralt: Python and Git logos, copyright their respective owners.
+headeralt: Python 和 Git logos，版权归各自所有者所有。
 
 
 [GitPython](http://gitpython.readthedocs.io/) is a Python code library

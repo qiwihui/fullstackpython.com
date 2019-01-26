@@ -1,12 +1,12 @@
-title: Responding to SMS Text Messages with Python & Flask
+title: 使用 Python 和 Flask 响应 SMS 文本消息
 slug: respond-sms-text-messages-python-flask
-meta: A quick tutorial on receiving and responding to SMS text messages in a Flask application built with Python.
+meta: 在使用 Python 构建的 Flask 应用程序中接收和响应 SMS 文本消息的快速教程。
 category: post
 date: 2016-05-30
 modified: 2017-05-11
 newsletter: False
 headerimage: /img/160530-respond-sms-python-flask/header.jpg
-headeralt: Twilio, Python and Flask logos. Copyright their respective owners.
+headeralt: Twilio，Python 和 Flask logos，版权归各自所有者所有。
 
 
 Short Message Service (SMS) text messages are 

@@ -1,12 +1,12 @@
-title: Replying to SMS Text Messages with Python and Bottle
+title: 使用 Python 和 Bottle 回复 SMS 文本消息
 slug: reply-sms-text-messages-python-bottle
-meta: A short walkthrough for how to reply to SMS text messages in a Bottle web application built with Python.
+meta: 有关如何在使用 Python 构建的 Bottle Web 应用程序中回复 SMS 文本消息的简短教材。
 category: post
 date: 2016-06-05
 modified: 2016-08-10
 newsletter: False
 headerimage: /img/160605-reply-sms-python-bottle/header.jpg
-headeralt: Twilio, Python and Bottle logos. Copyright their respective owners.
+headeralt: Twilio, Python 和 Bottle logos，版权归各自所有者所有。
 
 
 Python applications can 

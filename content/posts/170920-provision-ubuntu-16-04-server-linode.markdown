@@ -1,12 +1,12 @@
-title: How to Provision Ubuntu 16.04 Linux Servers on Linode
+title: 如何在 Linode 上配置 Ubuntu 16.04 Linux 服务器
 slug: provision-ubuntu-linux-servers-linode
-meta: Learn to provision Ubuntu 16.04 LTS servers on Linode for your web applications.
+meta: 学习在 Linode 上为您的Web应用程序配置 Ubuntu 16.04 LTS 服务器。
 category: post
 date: 2017-09-20
 modified: 2017-09-20
 newsletter: False
 headerimage: /img/170920-provision-ubuntu-linode/header.jpg
-headeralt: Ubuntu Linux logo, copyright Canonical Ltd. and Linode logo.
+headeralt: Ubuntu Linux logo，版权归 Canonical Ltd. 和 Linode logo。
 
 
 Your live web application must be [deployed](/deployment.html) and run 

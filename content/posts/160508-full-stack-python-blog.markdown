@@ -1,12 +1,12 @@
-title: The Full Stack Python Blog
+title: 全栈 Python 博客
 slug: full-stack-python-blog
 category: post
 date: 2016-05-08
 modified: 2017-12-28
 newsletter: False
-meta: The Full Stack Python blog provides detailed tutorials for Python programmers.
+meta: 全栈 Python 博客为 Python 程序员提供详细的教程。
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Full Stack Python and Python logos. Copyright their respective owners.
+headeralt: 全栈 Python 和 Python logos。版权归各自所有者所有。
 
 
 [Full Stack Python](https://www.fullstackpython.com/) began 

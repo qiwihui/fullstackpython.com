@@ -1,12 +1,12 @@
-title: 5 Years of Full Stack Python
+title: 全栈 Python 五周年
 slug: five-years-full-stack-python
-meta: Full Stack Python was started five years ago on December 23, 2012.
+meta: 全栈 Python 启动于5年前的2012年12月13日。
 category: post
 date: 2017-12-23
 modified: 2017-12-23
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。
 
 
 **[Full Stack Python](https://www.fullstackpython.com/)** began five years 

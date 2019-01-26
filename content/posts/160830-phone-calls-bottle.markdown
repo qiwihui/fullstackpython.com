@@ -1,12 +1,12 @@
-title: Dialing Outbound Phone Calls with a Bottle Web App
+title: 使用 Bottle Web 应用程序拨打出站电话
 slug: dial-outbound-phone-calls-python-bottle
-meta: A tutorial that shows how to dial outbound phone calls with a Bottle web application built with Python 3.
+meta: 一个教程，演示如何使用 Python 3 构建的 Bottle Web 应用程序拨打出站电话。
 category: post
 date: 2016-08-30
 modified: 2017-06-16
 newsletter: False
 headerimage: /img/160830-phone-calls-bottle/header.jpg
-headeralt: Bottle, Python and Twilio logos. Copyright their respective owners.
+headeralt: Bottle, Python 和 Twilio logos，版权归各自所有者所有。
 
 
 Python web apps built with the [Bottle web framework](/bottle.html) can 

@@ -1,12 +1,12 @@
-title: DevOps, Continuous Delivery... and You
+title: DevOps, 持续交付... 和你
 slug: devops-continuous-delivery-you
-meta: Talk slides, notes and more resources for a technical talk on basic DevOps and continuous delivery concepts, by Matt Makai.
+meta: Matt Makai 为谈论基本 DevOps 和持续交付概念的技术讲座，讲座幻灯片，笔记和更多资源。
 category: post
 date: 2017-11-01
 modified: 2017-11-05
 newsletter: False
 headerimage: /img/visuals/talk-header.jpg
-headeralt: Comment bubble with code representing a technical talk-based blog post.
+headeralt: 带有代码的评论泡泡代表基于技术谈话的博客文章。
 
 
 This blog post contains the slides along with a loose transcript and 

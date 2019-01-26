@@ -1,12 +1,12 @@
-title: How to Send MMS Picture Messages with Python
+title: 如何使用 Python 发送彩信图片信息
 slug: send-mms-picture-messages-python
-meta: A tutorial on how to send MMS (picture multimedia messages) using the Python programming language.
+meta: 关于如何使用 Python 编程语言发送 MMS（图片多媒体消息）的教程。
 category: post
 date: 2016-05-15
 modified: 2018-03-28
 newsletter: False
 headerimage: /img/160515-mms-python/header.jpg
-headeralt: Twilio and Python logos. Copyright their respective owners.
+headeralt: Twilio 和 Python logos，版权归各自所有者所有。
 
 
 Multimedia Message Service (MMS) picture and video messages are a common 

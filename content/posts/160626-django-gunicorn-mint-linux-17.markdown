@@ -1,12 +1,12 @@
-title: Setting Up Python 3, Django & Gunicorn on Linux Mint 17.3
+title: 在 Linux Mint 17.3 上设置 Python 3，Django 和 Gunicorn
 slug: python-3-django-gunicorn-linux-mint-17
-meta: A step-by-step walkthrough on configuring Linux Mint 17.3 with Python 3, Django and Green Unicorn (Gunicorn).
+meta: 使用 Python 3，Django 和 Green Unicorn（Gunicorn） 配置 Linux Mint 17.3 的分步教程。
 category: post
 date: 2016-06-26
 modified: 2016-07-22
 newsletter: False
 headerimage: /img/160626-mint-django-gunicorn/header.jpg
-headeralt: Django, Green Unicorn and Linux Mint logos. Copyright their respective owners.
+headeralt: Django, Green Unicorn 和 Linux Mint logos，版权归各自所有者所有。
 
 
 Linux Mint 17.3 "Rosa" is December 2015 release of the polished and 

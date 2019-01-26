@@ -1,12 +1,12 @@
-title: How to Choose the Right DevOps Tools for You and Your Team
+title: 如何为你和你的团队选择合适的 DevOps 工具
 slug: choose-right-devops-tools
-meta: Talk slides, notes and more resources for a technical talk on choosing appropriate DevOps tools, by Matt Makai.
+meta: 谈论幻灯片，笔记和更多资源，以便选择适当的 DevOps 工具进行技术讨论，由 Matt Makai 撰写。
 category: post
 date: 2017-02-27
 modified: 2017-03-01
 newsletter: False
 headerimage: /img/170227-choose-devops-tools/header.jpg
-headeralt: Comment bubble with code representing a technical talk-based blog post.
+headeralt: 带有代码的评论泡泡代表基于技术谈话的博客文章。
 
 
 This blog post contains a loose transcript along with the slides and 

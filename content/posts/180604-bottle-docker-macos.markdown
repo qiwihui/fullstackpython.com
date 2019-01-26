@@ -1,12 +1,12 @@
-title: Running Bottle Apps in Docker Containers on macOS
+title: 在 macOS 上用 Docker 容器启动 Bottle 应用
 slug: first-steps-bottle-web-apps-docker-containers
-meta: Learn how to set up and develop a new Bottle web application within a Docker container.
+meta: 学习如何用 Docker 容器部署和开发一个新的 Bottle web 应用程序。
 category: post
 date: 2018-06-04
 modified: 2018-06-05
 newsletter: False
 headerimage: /img/180604-bottle-docker/header.jpg
-headeralt: Bottle, Docker and Apple logos, copyright their respective owners.
+headeralt: Bottle, Docker 和 Apple logos。版权归各自所有者所有。
 
 
 It can be confusing to figure out how to use [Docker](/docker.html) 

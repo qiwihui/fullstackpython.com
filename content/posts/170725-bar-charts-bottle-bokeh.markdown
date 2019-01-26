@@ -1,12 +1,12 @@
-title: Creating Bar Chart Visuals with Bokeh, Bottle and Python 3
+title: 使用 Bokeh，Bottle 和 Python 3 创建条形图视觉效果
 slug: python-bottle-bokeh-bar-charts
-meta: Learn to create responsive bar charts using Bokeh, Bottle and Python 3.
+meta: 学习使用 Bokeh，Bottle 和 Python 3 创建响应式条形图。
 category: post
 date: 2017-07-25
 modified: 2017-07-30
 newsletter: False
 headerimage: /img/170725-bottle-bokeh-bar-charts/header.jpg
-headeralt: Python, Bottle and Bokeh logos.
+headeralt: Python, Bottle 和 Bokeh logos。
 
 
 The [Bokeh](/bokeh.html) open source Python visualization library assists 

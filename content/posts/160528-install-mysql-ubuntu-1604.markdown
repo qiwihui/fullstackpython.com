@@ -1,12 +1,12 @@
-title: How to Install and Use MySQL on Ubuntu 16.04
+title: 如何在 Ubuntu 16.04 上安装和使用 MySQL
 slug: install-mysql-ubuntu-1604 
-meta: A quick tutorial to install and use MySQL on Ubuntu 16.04 Xenial Xerus.
+meta: 在 Ubuntu 16.04 Xenial Xerus 上安装和使用 MySQL 的快速教程。
 category: post
 date: 2016-05-28
 modified: 2017-12-22
 newsletter: False
 headerimage: /img/160528-mysql-ubuntu-1604/header.jpg
-headeralt: MySQL and Ubuntu logos. Copyright their respective owners.
+headeralt: MySQL 和 Ubuntu logos，版权归各自所有者所有。
 
 
 [MySQL](/mysql.html) is a common open source 

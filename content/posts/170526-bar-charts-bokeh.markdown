@@ -1,12 +1,12 @@
-title: Responsive Bar Charts with Bokeh, Flask and Python 3
+title: 使用 Bokeh，Flask 和 Python 3 创建条形图视觉效果
 slug: responsive-bar-charts-bokeh-flask-python-3
-meta: How to build responsive bar charts with the Bokeh data visualization library, Flask and Pyton 3.
+meta: 如何使用 Bokeh 数据可视化库，Flask 和 Python 3 构建响应式条形图。
 category: post
 date: 2017-05-26
 modified: 2017-07-30
 newsletter: False
 headerimage: /img/170526-bar-charts-bokeh-flask/header.jpg
-headeralt: Python, Flask and Bokeh logos.
+headeralt: Python, Flask 和 Bokeh logos。
 
 
 [Bokeh](/bokeh.html) is a powerful open source Python library that allows 

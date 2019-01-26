@@ -1,12 +1,12 @@
-title: Monitoring Python 3.6 Functions on AWS Lambda
+title: 在 AWS Lambda 上监控 Python 3.6 函数
 slug: monitor-python-3-6-example-code-aws-lambda-rollbar
-meta: Monitor your Python 3.6 application code on Amazon Web Services (AWS) Lambda functions using Rollbar.
+meta: 使用 Rollbar 监控你在 Amazon Web Services (AWS) Lambda 的 Python 3.6 应用代码.
 category: post
 date: 2018-04-20
 modified: 2018-04-25
 newsletter: False
 headerimage: /img/180420-monitor-aws-lambda/header.jpg
-headeralt: Python, AWS Lambda and Rollbar logos are copyright their respective owners.
+headeralt: Python, AWS Lambda 和 Rollbar logos 版权归各自所有者所有。
 
 
 [Amazon Web Services (AWS) Lambda](/aws-lambda.html) is a usage-based

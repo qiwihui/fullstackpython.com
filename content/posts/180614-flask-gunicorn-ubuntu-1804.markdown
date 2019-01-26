@@ -1,12 +1,12 @@
-title: Configure Python 3, Flask and Gunicorn on Ubuntu 18.04 LTS
+title: 在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn
 slug: python-3-flask-gunicorn-ubuntu-1804-bionic-beaver
-meta: Instructions for configuring Ubuntu 18.04 Bionic Beaver with Python 3, Flask and Green Unicorn (Gunicorn).
+meta: 在 Ubuntu 18.04 Bionic Beaver 上配置 Python 3, Flask and Green Unicorn (Gunicorn) 的说明。
 category: post
 date: 2018-06-14
 modified: 2018-06-15
 newsletter: False
 headerimage: /img/180614-ubuntu-flask-gunicorn/header.jpg
-headeralt: Flask, Green Unicorn and Ubuntu logos. Copyright their respective owners.
+headeralt: Flask, Green Unicorn 和 Ubuntu logos。版权归各自所有者所有。
 
 
 [Ubuntu Linux's](/ubuntu.html) latest Long Term Support (LTS)

@@ -1,12 +1,12 @@
-title: How to Monitor Python Web Applications
+title: 如何监控 Python web 应用程序
 slug: monitor-python-web-applications
-meta: Learn how to add monitoring to a Python web application using a hosted monitoring service such as Rollbar.
+meta: 了解如何使用托管监视服务（如Rollbar）将监视添加到Python Web应用程序。
 category: post
 date: 2017-09-26
 modified: 2017-09-29
 newsletter: False
 headerimage: /img/170926-monitor-python-web-apps/header.jpg
-headeralt: Python, Rollbar and Bottle logos, copyright their respective owners.
+headeralt: Python, Rollbar 和 Bottle logos。版权归各自所有者所有。
 
 
 A quick way to check for errors and issues in your operational 

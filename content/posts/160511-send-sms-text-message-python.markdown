@@ -1,12 +1,12 @@
-title: How to Send SMS Text Messages with Python
+title: 如何使用 Python 发送 SMS 文本消息
 slug: send-sms-text-messages-python
-meta: A how-to guide for sending SMS (text messages) using the Python programming language.
+meta: 使用 Python 编程语言发送 SMS（文本消息）的操作指南。
 category: post
 date: 2016-05-11
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/160511-send-sms-python/header.jpg
-headeralt: Twilio and Python logos. Copyright their respective owners.
+headeralt: Twilio 和 Python logos，版权归各自所有者所有。
 
 
 Short Message Service (SMS) text messages are ubiquitous for communication

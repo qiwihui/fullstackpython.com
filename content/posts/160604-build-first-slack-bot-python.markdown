@@ -1,12 +1,12 @@
-title: How to Build Your First Slack Bot with Python
+title: 如何使用 Python 构建你的第一个 Slack 机器人
 slug: build-first-slack-bot-python
-meta: Learn how to build a simple Slack bot in Python, no prior bot experience needed.
+meta: 了解如何在 Python 中构建一个简单的 Slack 机器人，无需事先获得机器人经验。
 category: post
 date: 2016-06-04
 modified: 2017-12-13
 newsletter: False
 headerimage: /img/160604-simple-python-slack-bot/header.jpg
-headeralt: Slack and Python logos. Copyright their respective owners.
+headeralt: Slack 和 Python logos，版权归各自所有者所有。
 
 
 [Bots](/bots.html) are a useful way to interact with chat services such as

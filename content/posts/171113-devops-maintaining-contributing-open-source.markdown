@@ -1,12 +1,12 @@
-title: DevOps, Thank You Maintainers and Contributing to Open Source
+title: DevOps，感谢维护人员为开源做贡献
 slug: devops-python-maintaining-contributing-open-source
-meta: Read about using Python for DevOps, maintaining open source projects and contributing to open source.
+meta: 阅读有关使用 Python 进行 DevOps，维护开源项目以及为开源做贡献的信息。
 category: post
 date: 2017-11-13
 modified: 2017-11-13
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。.
 
 
 [**DevOps, Continuous Delivery... and You**](/blog/devops-continuous-delivery-you.html)

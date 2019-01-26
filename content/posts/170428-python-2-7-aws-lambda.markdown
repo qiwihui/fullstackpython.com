@@ -1,12 +1,12 @@
-title: Getting Started with AWS Lambda & Python 2.7
+title: AWS Lambda 和 Python 2.7 入门
 slug: aws-lambda-python-2-7
-meta: Learn how to create and deploy your first Amazon Web Services (AWS) Lambda function with Python 2.7.
+meta: 了解如何使用 Python 2.7 创建和部署您的第一个 Amazon Web Services（AWS）Lambda 函数。
 category: post
 date: 2017-04-28
 modified: 2017-04-29
 newsletter: False
 headerimage: /img/170428-aws-lambda-python-2-7/header.jpg
-headeralt: AWS, AWS Lambda and Python logos, copyright their respective owners.
+headeralt: AWS, AWS Lambda 和 Python logos。版权归各自所有者所有。
 
 
 [Amazon Web Services (AWS) Lambda](/aws-lambda.html)

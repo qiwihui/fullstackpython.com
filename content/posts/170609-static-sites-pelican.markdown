@@ -1,12 +1,12 @@
-title: How to Create Your First Static Site with Pelican and Jinja2 
+title: 如何使用 Pelican 和 Jinja2 创建你的第一个静态站点
 slug: generating-static-websites-pelican-jinja2-markdown
-meta: Learn how to generate static websites with Python, the Pelican static site generator, Jinja2 and Markdown.
+meta: 了解如何使用 Python，Pelican 静态站点生成器，Jinja2 和 Markdown 生成静态网站。
 category: post
 date: 2017-06-09
 modified: 2017-06-09
 newsletter: False
 headerimage: /img/170609-static-sites-pelican/header.jpg
-headeralt: Pelican, Jinja2 and Markdown logos.
+headeralt: Pelican, Jinja2 和 Markdown logos。
 
 
 [Pelican](/pelican.html) is an incredibly well-built Python tool for 

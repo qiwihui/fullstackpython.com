@@ -1,12 +1,12 @@
-title: How to Become A Successful Self-Taught Software Developer
+title: 如何成为一名成功的自学软件开发者
 slug: become-successful-self-taught-software-developer
-meta: An answer to the question of the ideal path to becoming a self-taught developer.
+meta: 成为自学成才的开发者的理想道路问题的回答
 category: post
 date: 2017-05-14
 modified: 2017-05-14
 newsletter: False
 headerimage: /img/170514-self-taught-developer/header.jpg
-headeralt: Header image for the blog post.
+headeralt: 博客文章的标题图片。
 
 
 I received the following question via email from someone spending

@@ -1,12 +1,12 @@
-title: PyDev of the Week, Django 2.0 and Twilio Voices
+title: 本周 PyDev，Django 2.0 和 Twilio Voices
 slug: pydev-week-django-2-twilio-voices
-meta: Read about PyDev of the Week, the upcoming Django 2 release and Twilio Voices on Full Stack Python.
+meta: 阅读本周的PyDev，即将发布的 Django 2 版本以及全栈 Python 上的 Twilio Voices。
 category: post
 date: 2017-10-30
 modified: 2017-10-30
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。.
 
 
 [**PyDev of the Week**](https://www.blog.pythonlibrary.org/category/pydevoftheweek/) 

@@ -1,12 +1,12 @@
-title: How to Add Hosted Monitoring to Flask Web Applications
+title: 如何将托管监视添加到 Flask Web 应用程序
 slug: hosted-monitoring-flask-web-apps
-meta: Learn to add hosted monitoring to Flask web applications using Rollbar.
+meta: 学习使用Rollbar将托管监控添加到Flask Web应用程序。
 category: post
 date: 2017-07-23
 modified: 2017-07-23
 newsletter: False
 headerimage: /img/170723-monitor-flask-apps/header.jpg
-headeralt: Flask, Python and Rollbar logos, copyright their respective owners.
+headeralt: Flask, Python 和 Rollbar logos。版权归各自所有者所有。
 
 
 How do you know whether your application is running properly with minimal 

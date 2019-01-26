@@ -1,12 +1,12 @@
-title: Setting up Python 3, Django and Gunicorn on Ubuntu 16.04 LTS
+title: 在 Ubuntu 16.04 LTS 上设置 Python 3，Django 和 Gunicorn
 slug: python-3-django-gunicorn-ubuntu-1604-xenial-xerus
-meta: Step-by-step instructions for developing on Ubuntu 16.04 with Python 3, Django and Green Unicorn (Gunicorn).
+meta: 使用 Python 3，Django 和 Green Unicorn（Gunicorn） 在 Ubuntu 16.04 上进行开发的分步说明。
 category: post
 date: 2016-05-09
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/160509-ubuntu-django-gunicorn/header.jpg
-headeralt: Django, Green Unicorn and Ubuntu Linux logos. Copyright their respective owners.
+headeralt: Django, Green Unicorn 和 Ubuntu Linux logos，版权归各自所有者所有。
 
 
 [Ubuntu](/ubuntu.html) released the newest Long Term Support (LTS) 

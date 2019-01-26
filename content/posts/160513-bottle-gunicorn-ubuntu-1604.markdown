@@ -1,12 +1,12 @@
-title: Configuring Python 3, Bottle and Gunicorn for Development on Ubuntu 16.04 LTS
+title: 在 Ubuntu 16.04 LTS 上配置 Python 3，Bottle 和 Gunicorn 以进行开发
 slug: python-3-bottle-gunicorn-ubuntu-1604-xenial-xerus
-meta: Learn to develop Bottle web apps on Ubuntu 16.04 with Python 3 and Green Unicorn (Gunicorn).
+meta: 学习使用 Python 3 和 Green Unicorn（Gunicorn） 在 Ubuntu 16.04 上开发 Bottle Web 应用程序。
 category: post
 date: 2016-05-13
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/160513-ubuntu-bottle-gunicorn/header.jpg
-headeralt: Bottle, Green Unicorn and Ubuntu logos. Copyright their respective owners.
+headeralt: Bottle, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。
 
 
 The [Ubuntu 16.04 Long Term Support (LTS)](/ubuntu.html) Linux

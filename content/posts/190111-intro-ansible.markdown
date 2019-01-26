@@ -1,12 +1,12 @@
-title: Introduction to Ansible video course released!
+title: 《Ansible入门》视频课程发布！
 slug: introduction-ansible-videos-released
-meta: Take a look at the just-launched Introduction to Ansible video courses on Talk Python Training.
+meta: 瞧一瞧在 Talk Python Training 上最新发布的 《Ansible 入门》视频课程。
 category: post
 date: 2019-01-13
 modified: 2019-01-13
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。
 
 
 Check out the just-launched video course, 

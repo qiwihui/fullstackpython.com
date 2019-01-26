@@ -1,12 +1,12 @@
-title: How to Add Maps to Django Web App Projects with Mapbox
+title: 如何用 Mapbox 在 Django Web 应用程序中添加地图
 slug: maps-django-web-applications-projects-mapbox
-meta: Learn how to add maps and location-based data to your web applications using Mapbox.
+meta: 如何在你的应用中用 Mapbox 添加地图和基于位置的数据。
 category: post
 date: 2018-05-19
 modified: 2018-05-25
 newsletter: False
 headerimage: /img/180519-django-maps/header.jpg
-headeralt: Python, Django and Mapbox logos are copyright their respective owners.
+headeralt: Python, Django 和 Mapbox logos。版权归各自所有者所有。
 
 
 Building interactive maps into a [Django](/django.html) web application

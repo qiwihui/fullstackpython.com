@@ -1,12 +1,12 @@
-title: PyCon US 2018 CFP, Python Bytes and Pelican
+title: PyCon US 2018 CFP, Python Bytes 和 Pelican
 slug: pycon-us-2018-cfp-python-bytes-pelican
-meta: Read about PyCon US 2018's Call for Proposals, Python Bytes podcast and Pelican static site generator on Full Stack Python.
+meta: 在全栈 Python 上阅读 PyCon US 2018 的征集建议书，Python Bytes 播客和 Pelican 静态站点生成器。
 category: post
 date: 2017-10-09
 modified: 2017-10-09
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: PyCon US 2018 Call for Proposals now open, the awesome Python Bytes and using Pelican to generate static sites.
+headeralt: PyCon US 2018 Call for Proposals 现在开放了, 不错的 Python Bytes 和使用 Pelican 生成静态站点。
 
 
 [**PyCon US 2018**](https://us.pycon.org/2018/) is coming up in Cleveland, Ohio

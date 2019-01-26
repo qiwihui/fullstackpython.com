@@ -1,12 +1,12 @@
-title: ReportLab and Future Community Project Launches
+title: ReportLab 和未来社区项目启动
 slug: python-community-project-launches
-meta: Full Stack Python is here to lend a hand in spreading the word about great Python community projects.
+meta: 全栈 Python 可以帮助传播关于优秀 Python 社区项目的信息。
 category: post
 date: 2018-03-04
 modified: 2018-03-04
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。
 
 
 Congratulations to fellow Python developer 

@@ -1,12 +1,12 @@
-title: Creating SSH Keys on Ubuntu Linux 16.04 LTS
+title: 在Ubuntu Linux 16.04 LTS上创建SSH密钥
 slug: ssh-keys-ubuntu-linux
-meta: Learn how to quickly generate new SSH keys on Ubuntu Linux 16.04 LTS.
+meta: 了解如何在Ubuntu Linux 16.04 LTS上快速生成新的SSH密钥。
 category: post
 date: 2017-02-14
 modified: 2017-04-28
 newsletter: False
 headerimage: /img/170214-ssh-keys-ubuntu/header.jpg
-headeralt: Ubuntu Linux logo, copyright Canonical Ltd.
+headeralt: Ubuntu Linux logo，版权归属 Canonical Ltd.
 
 
 SSH keys are a necessity for Python development when you are working with

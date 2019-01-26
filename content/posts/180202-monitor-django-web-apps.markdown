@@ -1,12 +1,12 @@
-title: Monitoring Django Projects with Rollbar
+title: 使用 Rollbar 监控 Django 项目
 slug: monitor-django-projects-web-apps-rollbar
-meta: Add a monitoring service to Django-based web applications using a hosted service such as Rollbar.
+meta: 使用托管服务（如 Rollbar）向基于 Django 的 Web 应用程序添加监视服务。
 category: post
 date: 2018-02-02
 modified: 2018-05-20
 newsletter: False
 headerimage: /img/180202-monitor-django/header.jpg
-headeralt: Django and Rollbar logos, copyright their respective owners.
+headeralt: Django 和 Rollbar logos，版权归各自所有者所有。
 
 
 One fast way to scan for exceptions and errors in your

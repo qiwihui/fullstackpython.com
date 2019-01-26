@@ -1,12 +1,12 @@
-title: Configuring Python 3, Pyramid and Gunicorn on Ubuntu 16.04
+title: 在 Ubuntu 16.04 上配置 Python 3，Pyramid 和 Gunicorn
 slug: python-3-pyramid-gunicorn-ubuntu-1604-xenial-xerus
-meta: Instructions for developing Pyramid web apps on Ubuntu 16.04 with Python 3 and Green Unicorn (Gunicorn).
+meta: 使用 Python 3 和 Green Unicorn（Gunicorn） 在 Ubuntu 16.04 上开发 Pyramid Web 应用程序的说明。
 category: post
 date: 2016-06-19
 modified: 2016-08-10
 newsletter: False
 headerimage: /img/160619-ubuntu-pyramid-gunicorn/header.jpg
-headeralt: Pyramid, Green Unicorn and Ubuntu logos. Copyright their respective owners.
+headeralt: Pyramid, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。
 
 
 [Canonical's Ubuntu 16.04 Long Term Support (LTS)](/ubuntu.html) Linux

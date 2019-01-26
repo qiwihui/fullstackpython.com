@@ -1,12 +1,12 @@
-title: Fresh Tutorials on Full Stack Python
+title: 全栈 Python 最新教材
 slug: fresh-tutorials-october-2018
-meta: Check out all of the new content and tutorials on Full Stack Python from the last few months.
+meta: 查看过去几个月全栈 Python 发布的最新内容和教材。
 category: post
 date: 2018-10-22
 modified: 2018-10-22
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。
 
 
 There are a bunch of 

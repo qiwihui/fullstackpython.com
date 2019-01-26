@@ -1,12 +1,12 @@
-title: How to Create Your First Python 3.6 AWS Lambda Function
+title: 如何创建您的第一个 Python 3.6 AWS Lambda 函数
 slug: aws-lambda-python-3-6
-meta: Code, create and execute your first Amazon Web Services (AWS) Lambda function with Python 3.6.
+meta: 使用 Python 3.6 编写，创建和执行您的第一个 Amazon Web Services（AWS）Lambda 函数。
 category: post
 date: 2017-04-29
 modified: 2018-04-25
 newsletter: False
 headerimage: /img/170429-aws-lambda-python-3-6/header.jpg
-headeralt: AWS, AWS Lambda and Python logos are copyright their respective owners.
+headeralt: AWS, AWS Lambda 和 Python logos 版权归各自所有者所有。
 
 
 [Amazon Web Services (AWS) Lambda](/aws-lambda.html)

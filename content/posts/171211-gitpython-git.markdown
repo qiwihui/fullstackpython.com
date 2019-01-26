@@ -1,12 +1,12 @@
-title: GitPython and New Git Tutorials
+title: GitPython 和新的 Git 教程
 slug: gitpython-git-tutorials
-meta: Learn about the awesome GitPython project and take a look at a slew of great Git tutorials.
+meta: 了解 GitPython 项目，并了解一系列优秀的 Git 教程。
 category: post
 date: 2017-12-11
 modified: 2017-12-11
 newsletter: True
 headerimage: /img/visuals/email-post-header.jpg
-headeralt: Python programming language and Full Stack Python logos.
+headeralt: Python 编程语言和全栈 Python logos。
 
 
 [**First Steps with GitPython**](/blog/first-steps-gitpython.html)

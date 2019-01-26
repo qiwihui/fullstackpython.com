@@ -1,12 +1,12 @@
-title: How to Add User Authentication to Flask Apps with Okta
+title: 如何给 Flask 应用用户认证添加 Okta
 slug: add-user-authentication-flask-apps-okta
-meta: How to quickly add user authentication to Flask web applications using the Okta service.
+meta: 如何快速给 Flask Web 应用使用 Okta 服务添加用户认证
 category: post
 date: 2018-10-08
 modified: 2018-10-10
 newsletter: False
 headerimage: /img/181008-flask-okta/header.jpg
-headeralt: Flask and Okta logos. Copyright their respective owners.
+headeralt: Flask 和 Okta logos。版权归各自所有者所有。
 
 
 User authentication is a basic feature in 

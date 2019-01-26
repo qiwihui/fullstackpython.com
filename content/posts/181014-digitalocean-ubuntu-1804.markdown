@@ -1,12 +1,12 @@
-title: How to Provision Ubuntu 18.04 LTS Linux Servers on DigitalOcean
+title: 如何在 DigitalOcean 上部署 Ubuntu 18.04 LTS 服务器
 slug: provision-ubuntu-1804-linux-servers-digitalocean
-meta: Learn how to provision Ubuntu 18.04 LTS on DigitalOcean for deploying your web applications.
+meta: 学习如何在 DigitalOcean 上部署 Ubuntu 18.04 LTS 服务器来部署你的 Web 应用程序。
 category: post
 date: 2018-10-14
 modified: 2018-10-14
 newsletter: False
 headerimage: /img/181014-digitalocean-ubuntu/header.jpg
-headeralt: Flask, Green Unicorn and Ubuntu logos. Copyright their respective owners.
+headeralt: Flask, Green Unicorn 和 Ubuntu logos。版权归各自所有者所有。
 
 
 [Python web applications](/web-development.html) need to be 
