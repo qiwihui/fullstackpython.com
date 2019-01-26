@@ -13,12 +13,6 @@ Python 有丰富的软件库资源，包括开源数据分析工具、
 [Web 框架](/web-frameworks.html)、测试工具等，
 正是这些库资源使 Python 生态系统成长为最大的编程社区之一。
 
-Python is an accessible language for new programmers because the community
-provides many [introductory resources](/best-python-resources.html). The
-language is also widely taught in universities and used for working with 
-beginner-friendly devices such as the 
-[Raspberry Pi](http://www.raspberrypi.org/).
-
 Python 社区提供了丰富的[入门资料](/best-python-resources.html)，
 因此对于初学者来说，它是一门相当易学的语言。
 Python 在大学里也广泛被用于教学，并且也在像[树莓派](http://www.raspberrypi.org/)那样的
