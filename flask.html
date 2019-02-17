@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Flask is a popular, extensible web microframework for building web applications with Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Flask" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/flask.html" />
+<meta property="og:title" content="Flask" />
+<meta property="og:description" content="Flask is a popular, extensible web microframework for building web applications with Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/flask.html" />
+<title>Flask - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Flask</h1>
+<p><a href="http://flask.pocoo.org/">Flask</a> (<a href="https://github.com/pallets/flask">source code</a>)
+is a Python <a href="/web-frameworks.html">web framework</a> built with a 
+<a href="http://flask.pocoo.org/docs/design/">small core and easy-to-extend philosophy</a>. </p>
+<p><a href="http://flask.pocoo.org/" style="border: none;"><img src="/img/logos/flask.jpg" width="100%" alt="Official Flask logo. Flask Artwork License." class="technical-diagram"></a></p>
+<h3>Why is Flask a good web framework choice?</h3>
+<p>Flask is considered more 
+<a href="http://blog.startifact.com/posts/older/what-is-pythonic.html">Pythonic</a>
+than the <a href="/django.html">Django</a> web framework because in common situations the
+equivalent Flask web application is more explicit. Flask is also easy to get 
+started with as a beginner because there is little boilerplate code for getting a 
+simple app up and running. </p>
+<p>For example, here is a valid "Hello, world!" web application with Flask:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello, World!&#39;</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+
+<p>The above code shows "Hello, World!" on localhost port 5000 in a web browser 
+when run with the <code>python app.py</code> command and the Flask library installed.</p>
+<p>The equivalent "Hello, World!" web application using the <a href="/django.html">Django</a>
+<a href="/web-frameworks.html">web framework</a> would involve significantly more boilerplate
+code.</p>
+<p>Flask was also written several years after Django and therefore
+learned from the Python community's reactions as the framework evolved.
+Jökull Sólberg wrote a great piece articulating to this effect in his 
+<a href="http://web.archive.org/web/20160305145017/http://jokull.calepin.co/my-flask-to-django-experience.html">experience switching between Flask and Django</a>.</p>
+<div class="well see-also">Flask is an implementation of the <a href="/web-frameworks.html">web frameworks</a> concept. Learn how these parts fit together in the <a href="/web-development.html">web development</a> chapter or <a href="/table-of-contents.html">view all topics</a>.</div>
+
+<h3>How does Flask relate to the Pallets Projects?</h3>
+<p>Flask was originally designed and developed by Armin Ronacher as an 
+<a href="http://lucumr.pocoo.org/2010/4/3/april-1st-post-mortem/">April Fool's Day joke in 2010</a>.
+Despite the origin as a joke, the Flask framework became wildly popular as 
+an alternative to Django projects with their monolithic structure and 
+dependencies.</p>
+<p>Flask's success created a lot of additional work in issue tickets and pull 
+requests. Armin eventually created 
+<a href="https://www.palletsprojects.com/">The Pallets Projects</a> collection of open
+source code libraries after he had been managing Flask under his own GitHub 
+account for several years. The Pallets Project now serves as the 
+community-driven organization that handles Flask and other related Python
+libraries such as <a href="/lektor.html">Lektor</a>, <a href="/jinja2.html">Jinja</a> and
+several others.</p>
+<h3>Flask tutorials</h3>
+<p>The "Hello, World!" code for Flask is just seven lines of code but learning how
+to build full-featured web applications with any framework takes a lot of work.
+These resources listed below are the best up-to-date tutorials and references
+for getting started.</p>
+<ul>
+<li>
+<p>The Flask mega tutorial by 
+  <a href="https://twitter.com/miguelgrinberg">Miguel Grinberg</a> is a perfect 
+  starting resource for using this web framework. Each post focuses on a 
+  single topic and builds on previous posts. The series includes 18 parts:
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">#1 Hello World</a>, 
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ii-templates">#2 Templates</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms">#3 Web Forms</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database">#4 Database</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-v-user-logins">#5 User Logins</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-vi-profile-page-and-avatars">#6 Profile Page and Avatars</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-vii-unit-testing">#7 Unit Testing</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-viii-followers-contacts-and-friends">#8 Followers, Contacts, and Friends</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ix-pagination">#9 Pagination</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-x-full-text-search">#10 Full Text Search</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xi-email-support">#11 Email Support</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xii-facelift">#12 Facelift</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times">#13 Dates and Times</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiv-i18n-and-l10n">#14 I18n and L10n</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xv-ajax">#15 Ajax</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvi-debugging-testing-and-profiling">#16 Debugging, Testing and Profiling</a>,
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xvii-deployment-on-linux-even-on-the-raspberry-pi">#17 Deployment on Linux</a>
+  and 
+  <a href="http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xviii-deployment-on-the-heroku-cloud">#18 Deployment on the Heroku Cloud</a>. 
+  Miguel also wrote and recorded numerous
+  <a href="https://flaskbook.com/">Flask Web Development content including a great book and video</a>
+  book that are excellent resources worth the price, especially to support
+  his continuous revisions to the content. </p>
+</li>
+<li>
+<p>Armin Ronacher, the creator of Flask, presented the technical talk
+  <a href="https://www.youtube.com/watch?v=1ByQhAM5c1I">Flask for Fun and Profit</a>
+  at PyBay 2016 where he discusses using the framework to build web apps
+  and <a href="/application-programming-interfaces.html">APIs</a>.</p>
+</li>
+<li>
+<p><a href="http://exploreflask.com/">Explore Flask</a> is a public domain book that
+  was previously backed on Kickstarter and cost money for about a year before
+  being open sourced. The book explains best practices and patterns for 
+  building Flask apps.</p>
+</li>
+<li>
+<p><a href="https://buildasaasappwithflask.com/">Learn to Build Web Applications with Flask and Docker</a>
+  is a video course by <a href="https://github.com/nickjj">Nick Janetakis</a>
+  that shows how to build a Software-as-a-Service (SaaS) application that
+  he <a href="https://github.com/nickjj/build-a-saas-app-with-flask">open sourced</a>
+  which uses Flask for the <a href="/web-frameworks.html">web framework</a> and 
+  <a href="/docker.html">Docker</a> for the local 
+  <a href="/development-environment.html">development environment</a>.</p>
+</li>
+<li>
+<p><a href="http://www.realpython.com/blog/python/flask-by-example-part-1-project-setup/">Flask by Example: Part 1</a>
+  shows the basic first steps for setting up a Flask project. 
+  <a href="http://www.realpython.com/blog/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/">Part 2</a> 
+  explains how to use PostgreSQL, SQLAlchemy and Alembic. 
+  <a href="https://realpython.com/blog/python/flask-by-example-part-3-text-processing-with-requests-beautifulsoup-nltk/">Part 3</a>
+  describes text processing with BeautifulSoup and NLTK. 
+  <a href="https://realpython.com/blog/python/flask-by-example-implementing-a-redis-task-queue/">Part 4</a>
+  shows how to build a task queue with Flask and Redis.</p>
+</li>
+<li>
+<p>The blog post series "Things which aren't magic" covers how Flask's 
+  ubiquitous @app.route decorator works under the covers. There are two 
+  parts in the series,
+  <a href="https://ains.co/blog/things-which-arent-magic-flask-part-1.html">part 1</a>
+  and 
+  <a href="https://ains.co/blog/things-which-arent-magic-flask-part-2.html">part 2</a>.</p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/articles/how-to-structure-large-flask-applications">How to Structure Large Flask Applications</a>
+  covers a subject that comes up quickly once you begin adding significant
+  functionality to your Flask application.</p>
+</li>
+<li>
+<p><a href="http://fewstreet.com/2015/01/16/flask-blueprint-templates.html">Flask Blueprint templates</a>
+  shows a way of structuring your <code>__init__.py</code> file with 
+  <a href="http://flask.pocoo.org/docs/latest/blueprints/">blueprints</a> for expanding
+  projects into many files and modules.</p>
+</li>
+<li>
+<p>If you're not sure why <code>DEBUG</code> should be set to <code>False</code> in a production
+  <a href="/deployment.html">deployment</a>, be sure to read this article on 
+  <a href="http://labs.detectify.com/post/130332638391/how-patreon-got-hacked-publicly-exposed-werkzeug">how Patreon got hacked</a>.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/developing-a-single-page-app-with-flask-and-vuejs">Developing a Single Page App with Flask and Vue.js</a> step-by-step walkthrough of how to set up a basic CRUD app with Vue and Flask.</p>
+</li>
+</ul>
+<h3>Intermediate to advanced Flask resources</h3>
+<p>Once you move past the beginner tutorials and have created a few Flask
+projects you will want to learn how to use Flask extensions, 
+<a href="/deployment.html">deploy</a> your code and integrate 
+<a href="/application-programming-interfaces.html">web APIs</a> to build more
+extensive functionality. The following tutorials will guide you through
+more advanced topics and provide solid learning materials, especially when 
+combined with the example real-world projects listed in the next section.</p>
+<ul>
+<li>
+<p><a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">Microservices with Docker, Flask, and React</a>
+  is an awesome course for beyond-the-basics work with Flask. There are 
+  a couple of free chapters and the rest of the course is well worth paying
+  for to learn a bunch of valuable tools such as <a href="/docker.html">Docker</a>,
+  <a href="/react.html">React</a> and <a href="/microservices.html">microservices architectures</a>.</p>
+</li>
+<li>
+<p><a href="http://kazuar.github.io/visualize-trip-with-flask-and-mapbox/">Visualize your trip with Flask and Mapbox</a>
+  along with the 
+  <a href="https://github.com/kazuar/flask_mapbox">open source flask_mapbox GitHub repository</a>
+  provides a fantastic example visualization of a trip to Iceland with 
+  Flask as the backend web framework.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/">Microservices with Flask, Docker, and React</a> 
+  teaches how to spin up a reproducible Flask development environment with 
+  <a href="/docker.html">Docker</a>. It shows how to <a href="/deployment.html">deploy</a> it to an 
+  Amazon EC2 instance then scale the services on Amazon EC2 Container Service (ECS).</p>
+</li>
+<li>
+<p><a href="https://opensource.com/article/17/3/python-flask-exceptions">Why and how to handle exceptions in Python Flask</a>
+  has some great example code and reasons why you should code defensively
+  by anticipating and handling the unhappy path exceptions in your Flask
+  applications. The examples are relevant to any web framework you will use
+  and are easy to copy and paste to test in your own applications.</p>
+</li>
+<li>
+<p><a href="http://flask.pocoo.org/extensions/">The Flask Extensions Registry</a> is a
+  curated list of the best packages that extend Flask. It's the first location
+  to look through when you're wondering how to do something that's not in the
+  core framework.</p>
+</li>
+<li>
+<p><a href="http://mattupstate.com/blog/how-i-structure-my-flask-applications/">How I Structure My Flask Application</a>
+  walks through how this developer organizes the components and architecture
+  for his Flask applications.</p>
+</li>
+<li>
+<p><a href="https://www.twilio.com/docs/tutorials/walkthrough/browser-calls/python/flask">Adding phone calling to your web application</a>
+  is a killer Flask tutorial with all the code needed to create a
+  web app that can dial phones and receive inbound calls.</p>
+</li>
+<li>
+<p>Jeff Knupp provides some solid advice on how to 
+  <a href="http://www.jeffknupp.com/blog/2014/01/29/productionizing-a-flask-application/">productionize a Flask app</a>.</p>
+</li>
+<li>
+<p>If you're looking for a fun tutorial with Flask and WebSockets, check out
+  my blog post on creating 
+  <a href="https://www.twilio.com/blog/2014/11/choose-your-own-adventure-presentations-with-reveal-js-python-and-websockets.html">Choose Your Own Adventure Presentations with Reveal.js, Python and WebSockets</a>.
+  Follow up that tutorial by 
+  <a href="https://www.twilio.com/blog/2015/03/choose-your-own-adventures-presentations-wizard-mode-part-1-of-3.html">building an admin interface in part 1</a>,
+  <a href="https://www.twilio.com/blog/2015/05/choose-your-own-adventure-presentations-wizard-mode-part-2-of-3.html">part 2</a>
+  and <a href="https://www.twilio.com/blog/2015/07/choose-your-own-adventure-presentations-flask-reveal-js-websockets.html">part 3</a> 
+  that'll show you how to use forms and SQLAlchemy. There is also a 
+  companion open source 
+  <a href="https://github.com/mattmakai/choose-your-own-adventure-presentations">GitHub repository</a> 
+  for the app with 
+  <a href="https://github.com/mattmakai/choose-your-own-adventure-presentations/releases">tags for each step</a> 
+  in the blog posts.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@5hreyans/the-one-weird-trick-that-cut-our-flask-page-load-time-by-70-87145335f679">One line of code cut our Flask page load times by 60%</a>
+  is an important note about optimizing Flask template cache size to 
+  dramatically increase performance in some cases.</p>
+</li>
+<li>
+<p><a href="https://www.twilio.com/blog/2014/03/unit-testing-your-twilio-app-using-pythons-flask-and-nose.html">Unit Testing Your Twilio App Using Python’s Flask and Nose</a>
+  covers integrating the Twilio API into a Flask application and how to test 
+  that functionality with <a href="https://nose.readthedocs.org/en/latest/">nose</a>.</p>
+</li>
+<li>
+<p>The Flask documentation has some quick examples for how to deploy Flask
+  with 
+  <a href="http://flask.pocoo.org/docs/deploying/wsgi-standalone/">standalone WSGI containers</a>.</p>
+</li>
+<li>
+<p><a href="https://spiegelmock.com/2018/09/06/serverless-python-web-applications-with-aws-lambda-and-flask/">Serverless Python Web Applications With AWS Lambda and Flask</a>
+  is a spectacular post that walks through how to run Flask applications
+  on AWS Lambda's <a href="/serverless.html">serverless</a> offering. The tutorial
+  has instructions on how to include 
+  <a href="/application-dependencies.html">application dependencies</a> and handle 
+  your <a href="/deployment.html">deployment</a> workflow.</p>
+</li>
+<li>
+<p><a href="http://zabana.me/notes/upload-files-amazon-s3-flask.html">How to use Flask to upload files to Amazon S3</a>
+  provides all the code with detailed explanations on how to store files 
+  using <a href="https://boto3.readthedocs.io/en/latest/">boto</a> and 
+  <a href="https://aws.amazon.com/s3/">Amazon Web Services' S3</a> with a Flask 
+  application.</p>
+</li>
+<li>
+<p><a href="http://kazuar.github.io/visualize-trip-with-flask-and-mapbox/">Visualize your trip with Flask and Mapbox</a>
+  uses geographic GeoJSON data and presents it in a Flask application
+  that uses <a href="https://www.mapbox.com/">Mapbox</a>.</p>
+</li>
+<li>
+<p><a href="https://realpython.com/blog/python/handling-email-confirmation-in-flask/">Handling Email Confirmation in Flask</a>
+  is a great walkthrough for a common use case of ensuring an email address
+  matches with the user's login information.</p>
+</li>
+<li>
+<p><a href="http://www.dougalmatthews.com/2017/Jan/13/static-websites-with-flask/">Static websites with Flask</a> 
+  shows how to use Flask with 
+  <a href="http://pythonhosted.org/Frozen-Flask/">Frozen-Flask</a> to generate a
+  static website from a backend data source.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/running-flask-on-docker-swarm">Running Flask on Docker Swarm</a> details how to run a Flask app on Docker Swarm.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/running-flask-on-kubernetes">Running Flask on Kubernetes</a> step-by-step walkthrough of how to deploy a Flask-based microservice (along with Postgres and Vue.js) to a Kubernetes cluster.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/dynamic-secret-generation-with-vault-and-flask">Dynamic Secret Generation with Vault and Flask</a> looks at how to use Hashicorp's Vault and Consul to create dynamic Postgres credentials for a Flask web app.</p>
+</li>
+</ul>
+<h3>Open source Flask example projects</h3>
+<p>Flask's lack of standard boilerplate via a commandline interface for
+setting up your project structure is a double edged sword. When you
+get started with Flask you will have to figure out how to scale the 
+files and modules for the code in your application. The following open 
+source projects range from simple to complex and can give you ideas 
+about how to working on your codebase.</p>
+<ul>
+<li>
+<p><a href="https://github.com/skylines-project/skylines">Skylines</a> is an open source 
+  flight tracking web application built with Flask. You can check out a 
+  <a href="https://skylines.aero/">running version of the application</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/christabor/flask_jsondash">Flask JSONDash</a> is a Flask
+  blueprint that creates JavaScript Object Notiation (JSON) 
+  <a href="/application-programming-interfaces.html">APIs</a> for <a href="/data.html">data</a>
+  dashboards.</p>
+</li>
+<li>
+<p><a href="https://github.com/miguelgrinberg/microblog">Microblog</a> is the companion
+  open source project that goes along with Miguel Grinberg's O'Reilly Flask
+  book.</p>
+</li>
+<li>
+<p><a href="https://github.com/mjhea0/flaskr-tdd">Flaskr TDD</a> takes the official Flask
+  tutorial and adds test driven development and JQuery to the project. </p>
+</li>
+<li>
+<p>Charles Leifer (author of <a href="/peewee.html">Peewee</a> and <a href="/pony-orm.html">Pony ORM</a>) 
+  built a 
+  <a href="http://charlesleifer.com/blog/saturday-morning-hack-a-little-note-taking-app-with-flask/">note-taking app</a>
+  along with the 
+  <a href="https://gist.github.com/coleifer/632d3c9aa6b2ea519384">source code in Gists</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/anis-coding/Reddit-Job-Search">Reddit Job Search</a>
+  uses the <a href="https://www.reddit.com/dev/api/">Reddit API</a> for a jobs data set
+  and presents them via a Flask web app.</p>
+</li>
+<li>
+<p><a href="https://github.com/BouncyNudibranch/bean-counter">Bean Counter</a> is an
+  open source Flask app for tracking coffee.</p>
+</li>
+<li>
+<p><a href="http://flaskbb.org/">FlaskBB</a> is a Flask app for a discussion forum.</p>
+</li>
+<li>
+<p><a href="https://github.com/Jahaja/psdash">psdash</a> is an app built with Flask and
+  psutils to display information about the computer it is running on.</p>
+</li>
+</ul>
+<h3>Flask project templates</h3>
+<p>Flask's wide array of extension libraries comes at the cost of having a more
+complicated project setup. The following project templates provide a starter
+base that you can either use for your own applications or just learn various
+ways to structure your code.</p>
+<ul>
+<li>
+<p>Use the 
+  <a href="https://github.com/kamalgill/flask-appengine-template">Flask App Engine Template</a>
+  for getting set up on Google App Engine with Flask.</p>
+</li>
+<li>
+<p><a href="https://github.com/JackStouffer/Flask-Foundation">Flask Foundation</a> is a
+  starting point for new Flask projects. There's also a 
+  <a href="https://jackstouffer.github.io/Flask-Foundation/">companion website</a> for
+  the project that explains what extensions the base project includes.</p>
+</li>
+<li>
+<p><a href="https://github.com/sloria/cookiecutter-flask">Cookiecutter Flask</a> is a 
+  project template for use with 
+  <a href="https://github.com/audreyr/cookiecutter">Cookiecutter</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/MaxHalford/Flask-Boilerplate">Flask-Boilerplate</a> 
+  provides another starting project with sign up, log in and password
+  reset.</p>
+</li>
+<li>
+<p>The company Sunscrapers provides this 
+  <a href="https://github.com/sunscrapers/flask-boilerplate">Flask boilerplate project with SQLAlchemy, py.test and Celery</a>
+  baked into the Flask project structure.</p>
+</li>
+<li>
+<p><a href="https://github.com/mattfinnell/flask-webpack-cookiecutter/">flask-webpack-cookiecutter</a>
+  combines a Flask framework project structure with 
+  <a href="https://webpack.js.org/">Webpack</a>, a module bundler frequently used
+  in the JavaScript world.</p>
+</li>
+</ul>
+<h3>Flask framework learning checklist</h3>
+<ol>
+<li>
+<p><a href="http://flask.pocoo.org/docs/installation/">Install Flask</a> on
+   your local development machine.</p>
+</li>
+<li>
+<p>Work through the 18-part Flask tutorial listed first under "Flask 
+   resources" above.</p>
+</li>
+<li>
+<p>Read through 
+   <a href="http://flask.pocoo.org/extensions/">Flask Extensions Registry</a> to find 
+   out what extensions you'll need to build your project.</p>
+</li>
+<li>
+<p>Start coding your Flask app based on what you learned from the 18 part
+   Flask tutorial plus open source example applications found below. </p>
+</li>
+<li>
+<p>Move on to the <a href="/deployment.html">deployment section</a> to get your initial 
+   Flask project on the web.</p>
+</li>
+</ol>
+<h3>您接下来要学习哪些 Web 开发主题？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/other-web-frameworks.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1088 1256v240q0 16-12 28t-28 12h-240q-16 0-28-12t-12-28v-240q0-16 12-28t28-12h240q16 0 28 12t12 28zm316-600q0 54-15.5 101t-35 76.5-55 59.5-57.5 43.5-61 35.5q-41 23-68.5 65t-27.5 67q0 17-12 32.5t-28 15.5h-240q-15 0-25.5-18.5t-10.5-37.5v-45q0-83 65-156.5t143-108.5q59-27 84-56t25-76q0-42-46.5-74t-107.5-32q-65 0-108 29-35 25-107 115-13 16-31 16-12 0-25-8l-164-125q-13-10-15.5-25t5.5-28q160-266 464-266 80 0 161 31t146 83 106 127.5 41 158.5z" fill="#fff"/></svg></a>
+<p class="under-btn">还有哪些其他 Python Web 框架？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/source-control.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M672 1472q0-40-28-68t-68-28-68 28-28 68 28 68 68 28 68-28 28-68zm0-1152q0-40-28-68t-68-28-68 28-28 68 28 68 68 28 68-28 28-68zm640 128q0-40-28-68t-68-28-68 28-28 68 28 68 68 28 68-28 28-68zm96 0q0 52-26 96.5t-70 69.5q-2 287-226 414-68 38-203 81-128 40-169.5 71t-41.5 100v26q44 25 70 69.5t26 96.5q0 80-56 136t-136 56-136-56-56-136q0-52 26-96.5t70-69.5v-820q-44-25-70-69.5t-26-96.5q0-80 56-136t136-56 136 56 56 136q0 52-26 96.5t-70 69.5v497q54-26 154-57 55-17 87.5-29.5t70.5-31 59-39.5 40.5-51 28-69.5 8.5-91.5q-44-25-70-69.5t-26-96.5q0-80 56-136t136-56 136 56 56 136z" fill="#fff"/></svg></a>
+<p class="under-btn">如何进行版本控制和存储我的源代码？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/web-frameworks.html" class="lgi sbc">Web Frameworks</a>
+<a href="/django.html" class="lgi sbc">Django</a>
+<a href="/flask.html" class="lgi active sbc">Flask</a>
+<a href="/bottle.html" class="lgi sbc">Bottle</a>
+<a href="/pyramid.html" class="lgi sbc">Pyramid</a>
+<a href="/turbogears.html" class="lgi sbc">TurboGears</a>
+<a href="/falcon.html" class="lgi sbc">Falcon</a>
+<a href="/morepath.html" class="lgi sbc">Morepath</a>
+<a href="/sanic.html" class="lgi sbc">Sanic</a>
+<a href="/other-web-frameworks.html" class="lgi sbc">Other Web Frameworks</a>
+<a href="/template-engines.html" class="lgi sbc">Template Engines</a>
+<a href="/jinja2.html" class="lgi sbc">Jinja2</a>
+<a href="/mako.html" class="lgi sbc">Mako</a>
+<a href="/django-templates.html" class="lgi sbc">Django Templates</a>
+<a href="/web-design.html" class="lgi sbc">Web Design</a>
+<a href="/hypertext-markup-language-html.html" class="lgi sbc">HTML</a>
+<a href="/cascading-style-sheets.html" class="lgi sbc">Cascading Style Sheets (CSS)</a>
+<a href="/responsive-design.html" class="lgi sbc">Responsive Design</a>
+<a href="/minification.html" class="lgi sbc">Minification</a>
+<a href="/css-frameworks.html" class="lgi sbc">CSS Frameworks</a>
+<a href="/bootstrap-css.html" class="lgi sbc">Bootstrap</a>
+<a href="/foundation-css.html" class="lgi sbc">Foundation</a>
+<a href="/javascript.html" class="lgi sbc">JavaScript</a>
+<a href="/react.html" class="lgi sbc">React</a>
+<a href="/vuejs.html" class="lgi sbc">Vue.js</a>
+<a href="/angular.html" class="lgi sbc">Angular</a>
+<a href="/task-queues.html" class="lgi sbc">Task Queues</a>
+<a href="/celery.html" class="lgi sbc">Celery</a>
+<a href="/redis-queue-rq.html" class="lgi sbc">Redis Queue (RQ)</a>
+<a href="/dramatiq.html" class="lgi sbc">Dramatiq</a>
+<a href="/static-site-generator.html" class="lgi sbc">Static Site Generators</a>
+<a href="/pelican.html" class="lgi sbc">Pelican</a>
+<a href="/lektor.html" class="lgi sbc">Lektor</a>
+<a href="/mkdocs.html" class="lgi sbc">MkDocs</a>
+<a href="/testing.html" class="lgi sbc">Testing</a>
+<a href="/unit-testing.html" class="lgi sbc">Unit Testing</a>
+<a href="/integration-testing.html" class="lgi sbc">Integration Testing</a>
+<a href="/debugging.html" class="lgi sbc">Debugging</a>
+<a href="/code-metrics.html" class="lgi sbc">Code Metrics</a>
+<a href="/networking.html" class="lgi sbc">Networking</a>
+<a href="/https.html" class="lgi sbc">HTTPS</a>
+<a href="/websockets.html" class="lgi sbc">WebSockets</a>
+<a href="/webrtc.html" class="lgi sbc">WebRTC</a>
+<a href="/application-programming-interfaces.html" class="lgi sbc">Web APIs</a>
+<a href="/microservices.html" class="lgi sbc">Microservices</a>
+<a href="/webhooks.html" class="lgi sbc">Webhooks</a>
+<a href="/bots.html" class="lgi sbc">Bots</a>
+<a href="/api-creation.html" class="lgi sbc">API Creation</a>
+<a href="/api-frameworks.html" class="lgi sbc">API Frameworks</a>
+<a href="/django-rest-framework-drf.html" class="lgi sbc">Django REST Framework</a>
+<a href="/api-integration.html" class="lgi sbc">API Integration</a>
+<a href="/twilio.html" class="lgi sbc">Twilio</a>
+<a href="/stripe.html" class="lgi sbc">Stripe</a>
+<a href="/slack.html" class="lgi sbc">Slack</a>
+<a href="/okta.html" class="lgi sbc">Okta</a>
+<a href="/web-application-security.html" class="lgi sbc">Security</a>
+<a href="/sql-injection.html" class="lgi sbc">SQL Injection</a>
+<a href="/cross-site-request-forgery-csrf.html" class="lgi sbc">CSRF</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+ <a href="/flask.html" class="lgi active">&raquo; Flask</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

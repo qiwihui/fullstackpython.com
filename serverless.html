@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Serverless is an deployment architecture where servers are not explicitly provisioned and code is run based on pre-defined events.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Serverless" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/serverless.html" />
+<meta property="og:title" content="Serverless" />
+<meta property="og:description" content="Serverless is an deployment architecture where servers are not explicitly provisioned and code is run based on pre-defined events." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/serverless.html" />
+<title>Serverless - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Serverless</h1>
+<p>Serverless is a <a href="/deployment.html">deployment</a> architecture where 
+<a href="/servers.html">servers</a> are not explicitly provisioned by the deployer. 
+Code is instead executed based on developer-defined events that are 
+triggered, for example when an HTTP POST request is sent to an 
+<a href="/application-programming-interfaces.html">API</a> a new line written to a file.</p>
+<h2>How can code be executed "without" servers?</h2>
+<p>Servers still exist to execute the code but they are abstracted away from 
+the developer and handled by a compute platform such as 
+<a href="/aws-lambda.html">Amazon Web Services Lambda</a> or 
+<a href="/google-cloud-functions.html">Google Cloud Functions</a>.</p>
+<p><img src="/img/visuals/serverless.png" width="100%" alt="Serverless compute spectrum." class="technical-diagram"> </p>
+<p>Think about deploying code as a spectrum, where on one side you build your
+own server from components, hook it up to the internet with a static IP
+address, connect the IP address to DNS and start serving requests. The 
+hardware, operating system, web server, WSGI server, etc are all completely 
+controlled by you. On the opposite side of the spectrum are serverless 
+compute platforms that take Python code and execute it without you ever
+touching hardware or even knowing what operating system it runs on. </p>
+<p>In between those extremes are levels that remove the need to worry about
+hardware (virtual private servers), up through removing concerns about
+web servers (platforms-as-a-service). Where you fall on the spectrum for
+your deployment will depend on your own situation. Serverless is simply
+the newest and most extreme of these deployment models so it is up to you
+as to how much complexity you want to take on with the deployment versus
+your control over each aspect of the hardware and software.</p>
+<h3>Serverless implementations</h3>
+<p>Each major cloud vendor has a serverless compute implementation.
+These implementations are under significant active developer
+and not all of them have Python support.</p>
+<ul>
+<li>
+<p><a href="/aws-lambda.html">AWS Lambda</a> is the current leader among serverless
+  compute implementations. It has support for both 
+  <a href="/blog/aws-lambda-python-2-7.html">Python 2.7</a> and 
+  <a href="/blog/aws-lambda-python-3-6.html">Python 3.6/3.7</a>.</p>
+</li>
+<li>
+<p>Azure Functions has second-class citizen support for Python. It's
+  supposed to be possible but 
+  <a href="https://github.com/Azure/azure-webjobs-sdk-script/issues/335">kind of hacky at the moment</a>.
+  Polyglot support should be quickly coming to Azure to better
+  compete with AWS Lambda.</p>
+</li>
+<li>
+<p>IBM Bluemix OpenWhisk is based on the 
+  <a href="https://github.com/openwhisk/openwhisk">Apache OpenWhisk</a>
+  open source project.</p>
+</li>
+<li>
+<p><a href="/google-cloud-functions.html">Google Cloud Functions</a> currently
+  only supports JavaScript code execution.</p>
+</li>
+<li>
+<p>Webtask.io also only supports JavaScript but there is a cool
+  <em>prototype</em> project named <a href="https://github.com/tehsis/webtask-pytask">webtask-pytask</a> 
+  to run Python code in the browser via webtask. This demo is definitely not 
+  for production code use but awesome to see what the programming community
+  can put together using existing code and services.</p>
+</li>
+</ul>
+<h3>Serverless frameworks</h3>
+<p>Serverless libraries and frameworks aim to provide reusable code that 
+handles common or tedious tasks, similar to how 
+<a href="/web-frameworks.html">web frameworks</a> deal with common web development tasks.
+Some of these frameworks are built for a single service like AWS Lambda,
+while others attempt to make cross-serverless operations more palatable.</p>
+<p>Frameworks for building Python-based applications on serverless services 
+include:</p>
+<ul>
+<li>
+<p><a href="https://serverless.com/">Serverless</a> (<a href="https://github.com/serverless/serverless">source code</a>), 
+  which is a useful but generically-named library that focuses on deployment 
+  and operations for serverless applications.</p>
+</li>
+<li>
+<p><a href="https://www.zappa.io/">Zappa</a> 
+  (<a href="https://github.com/Miserlou/Zappa">source code</a>) 
+  provides code and tools to make it much easier to build on AWS Lambda
+  and AWS API Gateway than rolling your own on the bare services.</p>
+</li>
+<li>
+<p><a href="https://chalice.readthedocs.io/en/latest/">Chalice</a> 
+  (<a href="https://github.com/aws/chalice">source code</a>) is built by the AWS team
+  specifically for Python applications.</p>
+</li>
+<li>
+<p><a href="http://apex.run/">Apex</a> (<a href="https://github.com/apex/apex">source code</a>)</p>
+</li>
+</ul>
+<h3>General serverless resources</h3>
+<p>Serverless concepts and implementations are still in their early
+iterations so there are many ideas and good practices yet to be
+discovered. These resources are the first attempts at figuring
+out how to structure and operate serverless applications.</p>
+<ul>
+<li>
+<p><a href="https://talkpython.fm/episodes/show/118/serverless-software">Serverless software</a>
+  covers a range of topics under serverless and how deployments have
+  changed as new options such as <a href="/platform-as-a-service.html">PaaS</a> 
+  have become widespread.</p>
+</li>
+<li>
+<p><a href="https://hackernoon.com/lessons-learned-a-year-of-going-fully-serverless-in-production-3d7e0d72213f">Lessons Learned — A Year Of Going “Fully Serverless” In Production</a>
+  is a retrospective from a small development team that combines a static 
+  site with serverless backend code to easily scale their site without an 
+  operations staff. They discuss the good and the bad of working in this
+  fashion while generally coming away with a positive experience.</p>
+</li>
+<li>
+<p><a href="https://loige.co/from-bare-metal-to-serverless/">From bare metal to Serverless</a>
+  gives some historical detail and background context for how various
+  execution architectures have evolved, from the invention of the web to
+  software-as-a-service, infrastructure-as-a-service to today's newer 
+  serverless platforms.</p>
+</li>
+<li>
+<p><a href="https://news.ycombinator.com/item?id=17378749">Have you shipped anything serious with a “serverless” architecture?</a>
+  provides some great answers by Hacker News developers who are using
+  serverless for large production applications and how they deal with
+  the limitations of the platforms.</p>
+</li>
+<li>
+<p><a href="https://mikhail.io/2018/08/serverless-cold-start-war/">Serverless cold start war</a>
+  compares startup times of serverless function instances across Google 
+  Cloud, AWS and Azure. This is only one way to measure the results the
+  author did a great job presenting the data and elaborating on potential
+  reasons why the results appeared as shown.</p>
+</li>
+<li>
+<p><a href="https://blog.miguelgrinberg.com/post/serverless-deployments-of-python-apis">Serverless Deployments of Python APIs</a>
+  is a wonderful Python-specific article on how to use AWS Lambda, API
+  Gateway and DynamoDB to create and deploy a Python 
+  <a href="/application-programming-interfaces.html">API</a>.</p>
+</li>
+<li>
+<p><a href="https://read.acloud.guru/whats-this-serverless-thing-anyway-b101cb72c7e6">What's this serverless thing, anyway?</a></p>
+</li>
+<li>
+<p><a href="https://codeahoy.com/2016/06/25/serverless-architectures-lets-ditch-the-servers/">Serverless architectures - let's ditch the servers?</a></p>
+</li>
+<li>
+<p><a href="http://martinfowler.com/articles/serverless.html">Serverless architectures</a>
+  provides a fantastic overview of the subject with a balanced approach
+  that includes the drawbacks seen in current serverless platforms.</p>
+</li>
+<li>
+<p><a href="https://hackernoon.com/why-the-fuss-about-serverless-4370b1596da0">Why the fuss about serverless?</a>
+  is a wide-ranging post about the history of application development and 
+  infrastructure. The timeline is a bit hard to follow but otherwise it's
+  a unique look at why software deployments are moving to serverless-based
+  architectures and the advantages that can provide.</p>
+</li>
+<li>
+<p><a href="https://specify.io/concepts/serverless-architecture">Serverless architectures in short</a>
+  lays out some of the initial thoughts behind what the advantages
+  and disadvantages of serverless may be. However, it's early days for
+  serverless so these strengths and weaknesses may change as the
+  architectures and good practices evolve.</p>
+</li>
+<li>
+<p><a href="https://www.smashingmagazine.com/2018/05/building-serverless-contact-form-static-website/">Building A Serverless Contact Form For Your Static Site</a>
+  uses <a href="/aws-lambda.html">AWS Lambda</a>, some 
+  <a href="/hypertext-markup-language-html.html">HTML</a> and 
+  <a href="/javascript.html">JavaScript</a> to add an input form to a static
+  <a href="/static-site-generator.html">website created by a static site generator</a>.</p>
+</li>
+<li>
+<p><a href="https://thenewstack.io/serverless-architecture-five-design-patterns/">Serverless architectures, five design patterns</a>
+  goes over the four main principles of serverless infrastructure and the
+  five major usage patterns the AWS Lambda team is seeing from initial
+  serverless deployments.</p>
+</li>
+<li>
+<p><a href="http://serverlesscalc.com/">Serverless Cost Calculator</a> estimates
+  the amount each serverless platform would charge based on executions,
+  average execution time and memory needed per execution. 
+  <a href="/aws-lambda.html">AWS Lambda</a>, 
+  <a href="/google-cloud-functions.html">Google Cloud Functions</a>,
+  Azure Functions and IBM OpenWhisk are all included in the results.</p>
+</li>
+</ul>
+<h3>Serverless environment comparsions</h3>
+<p>The "big 3" serverless platforms, 
+<a href="https://docs.aws.amazon.com/lambda/latest/dg/python-programming-model.html">AWS Lambda</a>, 
+<a href="https://azure.microsoft.com/en-us/updates/azure-functions-python-support-public-preview-2/">Azure Functions</a>
+and 
+<a href="https://cloud.google.com/functions/docs/concepts/python-runtime">Google Cloud Functions</a>
+have varying degrees of support for Python. AWS Lambda has
+production-ready support for Python 2 and 3.7, while Azure and Google Cloud
+have "beta" support with unclear production-worthiness. The following
+resources are some comparison articles to help you in your decision-making
+process for which platform to learn.</p>
+<ul>
+<li>
+<p><a href="https://headmelted.com/serverless-showdown-4a771ca561d2">Serverless hosting comparison</a>
+  is a broad overview of documentation, community, pricing and other
+  notes for the major platforms as well as IBM OpenWhisk and 
+  the <a href="https://fission.io/">Fission.io</a> project.</p>
+</li>
+<li>
+<p><a href="https://cloudacademy.com/blog/microsoft-azure-functions-vs-google-cloud-functions-fight-for-serverless-cloud-domination-continues/">Microsoft Azure Functions vs. Google Cloud Functions vs. AWS Lambda</a>
+  presents an overview of Azure Functions and how they compare to
+  Google Cloud Functions and AWS Lambda.</p>
+</li>
+</ul>
+<h3>Serverless vendor lock-in?</h3>
+<p>There is some concern by organizations and developers about vendor lock-in
+on serverless platforms. It is unclear if portability is worse for
+serverless than other infrastructure-as-a-service pieces, but still worth
+thinking about ahead of time. These resources provide additional 
+perspectives on lock-in and using multiple cloud providers.</p>
+<ul>
+<li>
+<p><a href="https://blog.symphonia.io/on-serverless-multi-cloud-and-vendor-lock-in-da930b3993f">On Serverless, Multi-Cloud, and Vendor Lock In</a>
+  is an opinion piece that for <em>most</em> cases the additional work of
+  going multi-cloud is not worth the tradeoffs, therefore at this time
+  it's better to go for a single vendor such as AWS or Azure and optimize
+  on that platform.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@PaulDJohnston/why-vendor-lock-in-with-serverless-isnt-what-you-think-it-is-d6be40fa9ca9">Why vendor lock-in with serverless isn’t what you think it is</a>
+  recommends using a single vendor for now and stop worrying about 
+  hedging your bets because it typically makes your infrastructure 
+  significantly more complex.</p>
+</li>
+</ul>
+<h3>您还想了解有关微服务器和部署的其他信息？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/docker.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M512 1248v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm0-512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm-640-1024v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm-640-1024v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm0-512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68z" fill="#fff"/></svg></a>
+<p class="under-btn">什么是 Docker 以及它如何适合 Python 部署？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/databases.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1168 1216q0 33-23.5 56.5t-56.5 23.5-56.5-23.5-23.5-56.5 23.5-56.5 56.5-23.5 56.5 23.5 23.5 56.5zm256 0q0 33-23.5 56.5t-56.5 23.5-56.5-23.5-23.5-56.5 23.5-56.5 56.5-23.5 56.5 23.5 23.5 56.5zm112 160v-320q0-13-9.5-22.5t-22.5-9.5h-1216q-13 0-22.5 9.5t-9.5 22.5v320q0 13 9.5 22.5t22.5 9.5h1216q13 0 22.5-9.5t9.5-22.5zm-1230-480h1180l-157-482q-4-13-16-21.5t-26-8.5h-782q-14 0-26 8.5t-16 21.5zm1358 160v320q0 66-47 113t-113 47h-1216q-66 0-113-47t-47-113v-320q0-25 16-75l197-606q17-53 63-86t101-33h782q55 0 101 33t63 86l197 606q16 50 16 75z" fill="#fff"/></svg></a>
+<p class="under-btn">告诉我有关标准关系数据库的信息。</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/hosting.html" class="lgi sbc">Hosting</a>
+<a href="/servers.html" class="lgi sbc">Servers</a>
+<a href="/static-content.html" class="lgi sbc">Static Content</a>
+<a href="/content-delivery-networks-cdns.html" class="lgi sbc">CDNs</a>
+<a href="/virtual-private-servers-vps.html" class="lgi sbc">Virtual Private Servers</a>
+<a href="/linode.html" class="lgi sbc">Linode</a>
+<a href="/digitalocean.html" class="lgi sbc">DigitalOcean</a>
+<a href="/lightsail.html" class="lgi sbc">Lightsail</a>
+<a href="/platform-as-a-service.html" class="lgi sbc">Platform-as-a-Service</a>
+<a href="/heroku.html" class="lgi sbc">Heroku</a>
+<a href="/pythonanywhere.html" class="lgi sbc">PythonAnywhere</a>
+<a href="/operating-systems.html" class="lgi sbc">Operating Systems</a>
+<a href="/ubuntu.html" class="lgi sbc">Ubuntu</a>
+<a href="/web-servers.html" class="lgi sbc">Web Servers</a>
+<a href="/apache-http-server.html" class="lgi sbc">Apache HTTP Server</a>
+<a href="/nginx.html" class="lgi sbc">Nginx</a>
+<a href="/caddy.html" class="lgi sbc">Caddy</a>
+<a href="/wsgi-servers.html" class="lgi sbc">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi sbc">Green Unicorn (Gunicorn)</a>
+<a href="/continuous-integration.html" class="lgi sbc">Continuous Integration</a>
+<a href="/jenkins.html" class="lgi sbc">Jenkins</a>
+<a href="/configuration-management.html" class="lgi sbc">Configuration Management</a>
+<a href="/ansible.html" class="lgi sbc">Ansible</a>
+<a href="/docker.html" class="lgi sbc">Docker</a>
+<a href="/serverless.html" class="lgi active sbc">Serverless</a>
+<a href="/aws-lambda.html" class="lgi sbc">AWS Lambda</a>
+<a href="/google-cloud-functions.html" class="lgi sbc">Google Cloud Functions</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+ <a href="/serverless.html" class="lgi active">&raquo; Serverless</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="了解如何使用 Python，Pelican 静态站点生成器，Jinja2 和 Markdown 生成静态网站。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何使用 Pelican 和 Jinja2 创建你的第一个静态站点" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/170609-static-sites-pelican/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/generating-static-websites-pelican-jinja2-markdown.html" />
+<meta property="og:title" content="如何使用 Pelican 和 Jinja2 创建你的第一个静态站点" />
+<meta property="og:description" content="了解如何使用 Python，Pelican 静态站点生成器，Jinja2 和 Markdown 生成静态网站。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/170609-static-sites-pelican/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/generating-static-websites-pelican-jinja2-markdown.html" />
+<title>如何使用 Pelican 和 Jinja2 创建你的第一个静态站点 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何使用 Pelican 和 Jinja2 创建你的第一个静态站点</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+     Posted by <a href="/about-author.html">Matt Makai</a> on 
+     June 09, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/pelican.html">Pelican</a> is an incredibly well-built Python tool for 
+<a href="/static-site-generator.html">creating static sites</a>. </p>
+<p><a href="https://www.fullstackpython.com/">Full Stack Python</a> is generated with 
+Pelican, <a href="/jinja2.html">Jinja2 templates</a> and <a href="/markdown.html">Markdown</a>.
+This site is deployed to Amazon S3 and currently handles over one hundred 
+thousand readers per month. There are never scaling concerns because a static
+site is pre-generated before deployment and a web server simply responds
+with existing files rather than executing any code on the server during
+the HTTP request-response cycle.</p>
+<p>In this tutorial you will learn how to create your own
+<a href="/static-site-generator.html">static website</a> from scratch using 
+<a href="/pelican.html">Pelican</a>.</p>
+<p><img src="/img/170609-static-sites-pelican/gunship-bootstrap-css.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Articles page after Bootstrap CSS has been added."></p>
+<p>Our simple static site will have pages that look like the above screenshot
+but the entire site can be easily customized and expanded with your own design 
+and content.</p>
+<h2>Our Tools</h2>
+<p>This tutorial should work with either <a href="/python-2-or-3.html">Python 2 or 3</a>, 
+but Python 3 is strongly recommended for all new applications. I used
+<a href="https://www.python.org/downloads/release/python-361/">Python 3.6.1</a> to 
+write this post. In addition to Python, throughout this tutorial we 
+will also use the following 
+<a href="/application-dependencies.html">application dependencies</a>: </p>
+<ul>
+<li><a href="/pelican.html">Pelican</a> 
+  <a href="/static-site-generator.html">static site generator</a>, 
+  <a href="https://github.com/getpelican/pelican/releases/tag/3.7.1">version 3.7.1</a></li>
+<li><a href="/markdown.html">Markdown</a> parsing library to handle Markdown as a content 
+  input format, version 
+  <a href="https://github.com/waylan/Python-Markdown/releases/tag/2.6.8-final">2.6.8</a></li>
+<li><a href="/jinja2.html">Jinja2</a>, a Python <a href="/template-engines.html">template engine</a>, 
+  version <a href="https://github.com/pallets/jinja/releases/tag/2.9.6">2.9.6</a></li>
+<li><a href="https://pip.pypa.io/en/stable/">pip</a> and 
+  <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>, which come
+  packaged with Python 3, to install and isolate the Pelican, Markdown,
+  and Jinja2 libraries from any of your other Python projects</li>
+</ul>
+<p>If you need help getting your 
+<a href="/development-environments.html">development environment</a> configured, take a 
+look at
+<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">this guide for setting up Python 3 and Flask on Ubuntu 16.04 LTS</a></p>
+<p>All code in this blog post is available open source under the MIT license 
+on GitHub under the 
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/generating-static-websites-pelican-jinja2-markdown">generating-static-websites-pelican-jinja2-markdown directory of the blog-code-examples repository</a>.
+Use and abuse the source code as you like for your own applications.</p>
+<h2>Install the Pelican and Markdown libraries</h2>
+<p>Start by creating a new virtual environment for your project. My virtualenv
+is named <code>staticsite</code> but you can name yours whatever matches the project 
+you are creating.</p>
+<div class="highlight"><pre><span></span>python3 -m venv staticsite
+</pre></div>
+
+
+<p>Activate the virtualenv.</p>
+<div class="highlight"><pre><span></span>source staticsite/bin/activate
+</pre></div>
+
+
+<p>The virtualenv will prepend its name to your command prompt when it is
+activated.</p>
+<p><img src="/img/170609-static-sites-pelican/activate-virtualenv.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Create and activate the Python virtual environment."></p>
+<p>Install the appropriate dependencies after your virtualenv is activated. 
+Use the <code>pip</code> command to install Pelican and Markdown, which will also 
+install Jinja2 because Pelican specifies it as a dependency.</p>
+<div class="highlight"><pre><span></span>pip install <span class="nv">pelican</span><span class="o">==</span><span class="m">3</span>.7.1 <span class="nv">markdown</span><span class="o">==</span><span class="m">2</span>.6.8
+</pre></div>
+
+
+<p>Run the <code>pip</code> command and after everything is installed you should see output
+similar to the following "Successfully installed" message.</p>
+<div class="highlight"><pre><span></span>Installing collected packages: pygments, pytz, six, feedgenerator, blinker, unidecode, MarkupSafe, jinja2, python-dateutil, docutils, pelican, markdown
+  Running setup.py install <span class="k">for</span> feedgenerator ... <span class="k">done</span>
+  Running setup.py install <span class="k">for</span> blinker ... <span class="k">done</span>
+  Running setup.py install <span class="k">for</span> MarkupSafe ... <span class="k">done</span>
+  Running setup.py install <span class="k">for</span> markdown ... <span class="k">done</span>
+Successfully installed MarkupSafe-1.0 blinker-1.4 docutils-0.13.1 feedgenerator-1.9 jinja2-2.9.6 markdown-2.6.8 pelican-3.7.1 pygments-2.2.0 python-dateutil-2.6.0 pytz-2017.2 six-1.10.0 unidecode-0.4.20
+</pre></div>
+
+
+<p>Now that our dependencies are installed into the virtualenv we can start 
+building our static site.</p>
+<h2>Generate a Basic Site</h2>
+<p>Create a new directory to store your project. My site will contain some of 
+my favorite <a href="https://www.youtube.com/watch?v=uYRZV8dV10w">retro synthwave</a> 
+artists as examples, but of course your site can contain whatever subjects 
+that you want.</p>
+<p>Change into the project directory after creating it.</p>
+<div class="highlight"><pre><span></span>mkdir retrosynth
+cd retrosynth
+</pre></div>
+
+
+<p>Run the <code>pelican-quickstart</code> command within the new project directory.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>staticsite<span class="o">)</span> $ pelican-quickstart
+</pre></div>
+
+
+<p>The quickstart script will rattle off a bunch of questions. Follow
+along with the answers below or modify them for your own site name and
+desired configuration.</p>
+<div class="highlight"><pre><span></span>Welcome to pelican-quickstart v3.7.1.
+
+This script will <span class="nb">help</span> you create a new Pelican-based website.
+
+Please answer the following questions so this script can generate the files
+needed by Pelican.
+
+
+&gt; Where <span class="k">do</span> you want to create your new web site? <span class="o">[</span>.<span class="o">]</span>  
+&gt; What will be the title of this web site? RetroSynthwave
+&gt; Who will be the author of this web site? Matt Makai
+&gt; What will be the default language of this web site? <span class="o">[</span>en<span class="o">]</span> 
+&gt; Do you want to specify a URL prefix? e.g., http://example.com   <span class="o">(</span>Y/n<span class="o">)</span> n
+&gt; Do you want to <span class="nb">enable</span> article pagination? <span class="o">(</span>Y/n<span class="o">)</span> n
+&gt; What is your <span class="nb">time</span> zone? <span class="o">[</span>Europe/Paris<span class="o">]</span> America/New_York
+&gt; Do you want to generate a Fabfile/Makefile to automate generation and publishing? <span class="o">(</span>Y/n<span class="o">)</span>y
+&gt; Do you want an auto-reload <span class="p">&amp;</span> simpleHTTP script to assist with theme and site development? <span class="o">(</span>Y/n<span class="o">)</span> y
+&gt; Do you want to upload your website using FTP? <span class="o">(</span>y/N<span class="o">)</span> n
+&gt; Do you want to upload your website using SSH? <span class="o">(</span>y/N<span class="o">)</span> n
+&gt; Do you want to upload your website using Dropbox? <span class="o">(</span>y/N<span class="o">)</span> n
+&gt; Do you want to upload your website using S3? <span class="o">(</span>y/N<span class="o">)</span> y
+&gt; What is the name of your S3 bucket? <span class="o">[</span>my_s3_bucket<span class="o">]</span> 
+&gt; Do you want to upload your website using Rackspace Cloud Files? <span class="o">(</span>y/N<span class="o">)</span> n
+&gt; Do you want to upload your website using GitHub Pages? <span class="o">(</span>y/N<span class="o">)</span> n
+Done. Your new project is available at /Users/matt/devel/py/retrosynth
+<span class="o">(</span>staticsite<span class="o">)</span> $ 
+</pre></div>
+
+
+<p>What did we just create using Pelican's quickstart script? Check out
+the new files in the directory.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>staticsite<span class="o">)</span> $ ls
+Makefile        develop_server.sh   pelicanconf.py
+content         fabfile.py          publishconf.py
+</pre></div>
+
+
+<p>The quickstart created five files and one new directory:</p>
+<ul>
+<li><code>Makefile</code>: <code>make</code> command convenience tasks for common operations such as 
+  running a development server, building a site and cleaning extraneous 
+  build files</li>
+<li><code>fabfile.py</code>: A <a href="http://www.fabfile.org/">Fabric</a> file that has some of 
+  the same types of commands as the <code>Makefile</code>. Fabric is a wonderful code 
+  library but for now I recommend skipping the Fabric file because 
+  unfortunately Fabric does not yet support Python 3.</li>
+<li><code>develop_server.sh</code>: shell script for running the development server</li>
+<li><code>pelicanconf.py</code>: settings file for your Pelican project. If you are used
+  to earlier versions of Pelican this file was instead named <code>settings.py</code></li>
+<li><code>publishconf.py</code>: another (optional) settings file that can be considered 
+  as a "production" settings file when you move past the development phase
+  and want to deploy your site</li>
+<li><code>content</code>: location for your markup files, which should be stored under
+  <code>pages</code> and <code>posts</code> directories</li>
+</ul>
+<p>We can use these files as the base for our new static site. Let's see what
+it looks like by default by running it via the <code>devserver</code> task in the 
+Makefile.</p>
+<div class="highlight"><pre><span></span>make devserver
+</pre></div>
+
+
+<p>The Pelican development server will start serving up your site with a 
+daemon process. Go to <a href="http://localhost:8000">localhost:8000</a> in your web 
+browser and you will see the first version of your static site.</p>
+<p><img src="/img/170609-static-sites-pelican/default-style.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Default styling on the Pelican static site."></p>
+<p>What if you don't have <code>make</code> installed on your system? Change into the
+<code>output</code> directory and use the <code>python -m http.server</code> command to use the
+built-in Python 3 HTTP server for your generated files.</p>
+<p>When you want to kill the development server look for a file named 
+<code>pelican.pid</code>under your project directory. The <code>pelican.pid</code> file is created
+by Pelican and contains the process ID for your development server.</p>
+<div class="highlight"><pre><span></span>(staticsite) $ cat pelican.pid 
+1365
+</pre></div>
+
+
+<p>Use the <code>ps</code> and <code>grep</code> commands to view the process then stop the process
+with the <code>kill</code> command as follows. Remember that your process ID will almost
+definitely be different from the <code>1365</code> ID for my process.</p>
+<p>Kill the development server now so that we can use different commands to 
+serve our site after we create our initial content.</p>
+<div class="highlight"><pre><span></span>(staticsite) $ ps -A | grep 1365
+ 1365 ttys003    0:01.43 /Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python /Users/matt/Envs/staticsite/bin/pelican --debug --autoreload -r /Users/matt/devel/py/retrosynth/content -o /Users/matt/devel/py/retrosynth/output -s /Users/matt/devel/py/retrosynth/pelicanconf.py
+ 1411 ttys003    0:00.00 grep 1365
+(staticsite) $ kill 1365
+(staticsite) $ ps -A | grep 1365
+ 1413 ttys003    0:00.00 grep 1365
+</pre></div>
+
+
+<p>It is up to you whether you want to use the development server or not
+while creating your site. Every time I want to view my changes for 
+Full Stack Python I regenerate the site using my own Makefile that 
+wraps the <code>pelican</code> command. The <code>python -m http.server</code> command constantly 
+serves up each build's changes.</p>
+<p>Alright, now that we have our starter files we can get to work creating
+some initial content.</p>
+<h2>Write Some Content</h2>
+<p>Pelican can accept both <a href="/markdown.html">Markdown</a> and reStructureText
+markup files as input.</p>
+<p>Make a new subdirectory under the <code>content</code> named <code>posts</code>. Change into
+the <code>posts</code> directory. Create a new file named <code>gunship.markdown</code> with
+the following content.</p>
+<div class="highlight"><pre><span></span><span class="nl">title</span><span class="p">:</span> <span class="n">Gunship</span>
+<span class="nl">slug</span><span class="p">:</span> <span class="n">gunship</span>
+<span class="nl">category</span><span class="p">:</span> <span class="n">bands</span>
+<span class="nl">date</span><span class="p">:</span> <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">09</span>
+<span class="nl">modified</span><span class="p">:</span> <span class="mi">2017</span><span class="o">-</span><span class="mo">06</span><span class="o">-</span><span class="mi">09</span>
+
+
+<span class="p">[</span><span class="n">Gunship</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//www.gunshipmusic.com/) is a *retro synthwave* artist out of the UK.</span>
+
+<span class="p">[</span><span class="n">Revel</span> <span class="k">in</span> <span class="n">Your</span> <span class="n">Time</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//www.youtube.com/watch?v=uYRZV8dV10w), </span>
+<span class="p">[</span><span class="n">Tech</span> <span class="n">Noir</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//www.youtube.com/watch?v=-nC5TBv3sfU), </span>
+<span class="p">[</span><span class="n">Fly</span> <span class="k">for</span> <span class="n">Your</span> <span class="n">Life</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//www.youtube.com/watch?v=Jv1ZN8c4_Gs) </span>
+<span class="n">and</span> 
+<span class="p">[</span><span class="n">The</span> <span class="n">Mountain</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//www.youtube.com/watch?v=-HYRTJr8EyA) </span>
+<span class="n">are</span> <span class="n">all</span> <span class="n">quality</span> <span class="n">songs</span> <span class="n">by</span> <span class="n">Gunship</span><span class="p">.</span> <span class="n">Check</span> <span class="k">out</span> <span class="n">those</span> <span class="n">amazing</span> <span class="n">music</span> <span class="n">videos</span><span class="o">!</span>
+
+<span class="n">Also</span> <span class="n">take</span> <span class="n">a</span> <span class="n">look</span> <span class="n">at</span> <span class="n">other</span> <span class="n">retro</span> <span class="n">synthwave</span> <span class="n">artists</span> <span class="n">such</span> <span class="n">as</span>
+<span class="p">[</span><span class="n">Trevor</span> <span class="n">Something</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//trevorsomething.bandcamp.com/), </span>
+<span class="p">[</span><span class="n">Droid</span> <span class="n">Bishop</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//droidbishop.bandcamp.com/),</span>
+<span class="p">[</span><span class="n">FM</span><span class="o">-</span><span class="mi">84</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//fm84.bandcamp.com/)</span>
+<span class="n">and</span> 
+<span class="p">[</span><span class="n">Daniel</span> <span class="n">Deluxe</span><span class="p">](</span><span class="nl">https</span><span class="p">:</span><span class="c1">//danieldeluxe.bandcamp.com/).</span>
+</pre></div>
+
+
+<p>Our <code>make</code> file can also help us regenerate the site when changes occur
+if we choose to not use the development server.</p>
+<p>We used the <code>devserver</code> task earlier, but what other task are available 
+to us via the <code>Makefile</code>?</p>
+<div class="highlight"><pre><span></span>make
+</pre></div>
+
+
+<p><code>make</code> should show us all of the following tasks we can run.</p>
+<div class="highlight"><pre><span></span>Makefile for a pelican Web site                                           
+
+Usage:                                                                    
+   make html                           (re)generate the web site          
+   make clean                          remove the generated files         
+   make regenerate                     regenerate files upon modification 
+   make publish                        generate using production settings 
+   make serve [PORT=8000]              serve site at http://localhost:8000
+   make serve-global [SERVER=0.0.0.0]  serve (as root) to :80    
+   make devserver [PORT=8000]          start/restart develop_server.sh    
+   make stopserver                     stop local server                  
+   make ssh_upload                     upload the web site via SSH        
+   make rsync_upload                   upload the web site via rsync+ssh  
+   make dropbox_upload                 upload the web site via Dropbox    
+   make ftp_upload                     upload the web site via FTP        
+   make s3_upload                      upload the web site via S3         
+   make cf_upload                      upload the web site via Cloud Files
+   make github                         upload the web site via gh-pages   
+
+Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   
+Set the RELATIVE variable to 1 to enable relative urls
+</pre></div>
+
+
+<p>The <code>html</code> task is what we are looking for to invoke the <code>pelican</code> command 
+using our <code>pelicanconf.py</code> settings file.</p>
+<div class="highlight"><pre><span></span>(staticsite) $ make html
+pelican /Users/matt/devel/py/retrosynth/content -o /Users/matt/devel/py/retrosynth/output -s /Users/matt/devel/py/retrosynth/pelicanconf.py 
+Done: Processed 1 article, 0 drafts, 0 pages and 0 hidden pages in 0.14 seconds.
+</pre></div>
+
+
+<p>Our site has been regenerated and placed in the <code>output</code> directory.</p>
+<p>If you used the <code>make devserver</code> command earlier then change into the <code>output</code>
+directory and give Python's built-in HTTP server a shot with the following 
+command.</p>
+<div class="highlight"><pre><span></span>cd output
+python -m http.server
+</pre></div>
+
+
+<p>Our first post in all its glory...</p>
+<p><img src="/img/170609-static-sites-pelican/gunship-first-post.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Gunship as our first band post on retro synthwave static site."></p>
+<p>You can change the HTTP server port binding by adding a number after the 
+command, if you want to serve more than one static site at a time or you 
+already have an application bound to port 8000.</p>
+<div class="highlight"><pre><span></span>python -m http.server 8005
+</pre></div>
+
+
+<p>Note that if you are using Python 2 the equivalent HTTP server command is
+<code>python -m SimpleHTTPServer</code>.</p>
+<p>Our site now has some very basic content. We could expand this start into 
+many more posts and pages but let's learn how to modify the site 
+configuration.</p>
+<h2>Edit Site Configuration</h2>
+<p>Pelican's quickstart assumed a bunch of defaults that may or may not be
+applicable to your site. Open up the <code>pelicanconf.py</code> file to change some
+of the defaults.</p>
+<p>Look for the <code>TIMEZONE</code> variable. If it's not right for your location
+then modify it to your zone. Wikipedia has a handy
+<a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">table of valid time zones values</a>.</p>
+<p>Also modify the <code>LINKS</code> tuple to include your site (or Full Stack Python!)
+instead of including the "you can modify those links" link. Change the
+last line of <code>LINKS</code> so it looks like the following tuple of tuples.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Blogroll</span>
+<span class="n">LINKS</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;Pelican&#39;</span><span class="p">,</span> <span class="s1">&#39;http://getpelican.com/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;Python.org&#39;</span><span class="p">,</span> <span class="s1">&#39;http://python.org/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;Jinja2&#39;</span><span class="p">,</span> <span class="s1">&#39;http://jinja.pocoo.org/&#39;</span><span class="p">),</span>
+         <span class="p">(</span><span class="s1">&#39;Full Stack Python&#39;</span><span class="p">,</span> <span class="s1">&#39;https://www.fullstackpython.com/&#39;</span><span class="p">),)</span>
+</pre></div>
+
+
+<p>Instead of using the <code>make html</code> file, this time we will invoke the
+<code>pelican</code> command directly from the command line. There is nothing wrong
+with the <code>Makefile</code>, but it is a good idea to get comfortable with Pelican
+directly instead of only through build files.</p>
+<div class="highlight"><pre><span></span>pelican -s pelicanconf.py -o output content
+</pre></div>
+
+
+<p>Now run the HTTP server if you do not already have it running in another
+terminal window.</p>
+<div class="highlight"><pre><span></span>cd output
+python -m http.server
+</pre></div>
+
+
+<p>Head back to the browser and refresh to view the updated configuration.</p>
+<p><img src="/img/170609-static-sites-pelican/updated-configuration.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="New links created by the pelicanconf.py configuration settings file."></p>
+<p>What happens when we click on the blog post title? It takes us to a 
+very similar-looking page with the
+<a href="http://localhost:8000/gunship.html">localhost:8000/gunship.html</a> URL.</p>
+<p><img src="/img/170609-static-sites-pelican/gunship-post.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Gunship subpage for the site."></p>
+<p>Alright, we updated some basic site-wide data, but our site really could 
+use a change of paint.</p>
+<h2>Modify Site Theme</h2>
+<p>Changing the site theme is really where you can turn a standard blog into
+whatever type of site you want to build. While the default Pelican 
+configuration creates a blog template, you do not need to have a 
+chronological structure if it is not right for your website.</p>
+<p>Create a new directory under your project directory that is named
+<code>theme</code>. Within <code>theme</code> create another directory named <code>templates</code>.
+<code>templates</code> is where our <a href="/jinja2.html">Jinja2</a> templates will be stored and
+can override the default theme.</p>
+<p>Start by creating a file named <code>base.html</code> which will store the boilerplate
+used by templates across the site. </p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+ <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+  <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+ <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span> 
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>Within <code>theme/templates</code> create a file named <code>article.html</code> that will have a
+different theme for blog posts than the rest of the site. Fill <code>article.html</code>
+with the following Jinja2 markup.</p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nv">article.title</span> <span class="cp">}}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-md-8&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">article.title</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;label&gt;</span>Posted on <span class="nt">&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">article.date</span> <span class="cp">}}</span><span class="nt">&lt;/strong&gt;&lt;/label&gt;</span>
+  <span class="cp">{{</span> <span class="nv">article.content</span> <span class="cp">}}</span>
+ <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>Next we will use a Jinja2 template to override the default <code>index.html</code> main
+page. Again within the <code>theme/templates</code> directory, create a file named
+<code>index.html</code> with the following markup.</p>
+<div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.html&quot;</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}{{</span> <span class="nv">SITENAME</span> <span class="cp">}}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;row&quot;</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;col-md-8&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span><span class="cp">{{</span> <span class="nv">SITENAME</span> <span class="cp">}}</span><span class="nt">&lt;/h1&gt;</span>
+  <span class="cp">{%</span> <span class="k">for</span> <span class="nv">article</span> <span class="k">in</span> <span class="nv">articles</span> <span class="cp">%}</span>
+   <span class="nt">&lt;h2&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/</span><span class="cp">{{</span> <span class="nv">article.slug</span> <span class="cp">}}</span><span class="s">.html&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">article.title</span> <span class="cp">}}</span><span class="nt">&lt;/a&gt;&lt;/h2&gt;</span>
+   <span class="nt">&lt;label&gt;</span>Posted on <span class="nt">&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">article.date</span> <span class="cp">}}</span><span class="nt">&lt;/strong&gt;&lt;/label&gt;</span>
+   <span class="cp">{{</span> <span class="nv">article.content</span><span class="o">|</span><span class="nf">truncate</span><span class="o">(</span><span class="m">110</span><span class="o">)</span> <span class="cp">}}</span>
+  <span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
+   No posts yet!
+  <span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+ <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</pre></div>
+
+
+<p>Regenerate the site and make sure you are serving it with the development
+server or the <code>python -m http.server</code> command.</p>
+<p>Make sure to use the new <code>-t theme</code> flag to specify that the Jinja2 
+templates within the <code>theme</code> directory should be applied to the site.</p>
+<div class="highlight"><pre><span></span>pelican -s pelicanconf.py -o output -t theme content
+</pre></div>
+
+
+<p>Go to <a href="http://localhost:8000">localhost:8000</a> and refresh the page.
+The styling on the main page is now different because it uses the <code>index.html</code>
+theme.</p>
+<p><img src="/img/170609-static-sites-pelican/index-no-styling.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="The index.html page without any styling applied."></p>
+<p>Click on the title of the Gunship post. This page uses the <code>article.html</code> 
+template, although it's hard to tell because there is no 
+<a href="/cascading-style-sheets.html">CSS</a> applied to the page.</p>
+<p><img src="/img/170609-static-sites-pelican/gunship-no-styling.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Articles have an entirely different theme based on article.html markup."></p>
+<p>Pretty sparse! We can at least add the Bootstrap CSS to the HTML to 
+align our content.</p>
+<p>Within <code>base.html</code>, add the following line for Bootstrap under 
+<code>&lt;title&gt;{% block title %}{% endblock %}&lt;/title&gt;</code> and above <code>&lt;/head&gt;</code>.</p>
+<div class="highlight"><pre><span></span>&lt;!-- Latest compiled and minified Bootstrap CSS --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot; integrity=&quot;sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u&quot; crossorigin=&quot;anonymous&quot;&gt;
+</pre></div>
+
+
+<p>Regenerate the site and refresh the Gunship page.</p>
+<p><img src="/img/170609-static-sites-pelican/gunship-bootstrap-css.png" width="100%" class="technical-diagram img-rounded" style="border:1px solid #ccc" alt="Articles page after Bootstrap CSS has been added."></p>
+<p>Well at least our design has moved from 1996 to 2001. I am sure you can 
+do a whole lot more to improve your own site's design.</p>
+<p>The new <code>base.html</code> does not provide much of a theme yet but it at least 
+provides a fresh start for completely customized sites.</p>
+<h2>What's next?</h2>
+<p>You generated your first <a href="/pelican.html">Pelican</a> static website using
+<a href="/markdown.html">Markdown</a> and <a href="/jinja2.html">Jinja2</a>. Additional modifications
+can be made to the Jinja2 templates and the content contained in the Markdown
+files. </p>
+<p>Do you want to deploy your new static website to GitHub Pages or an S3 bucket?
+Well, that's a story for another <a href="/blog.html">Full Stack Python tutorial</a>...</p>
+<p>Questions? Let me know via 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">a GitHub issue ticket on the Full Stack Python repository</a>, 
+on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>.  </p>
+<p>See something wrong in this blog post? Fork
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/170609-static-sites-pelican.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/170609-static-sites-pelican/header.jpg" alt="Pelican, Jinja2 和 Markdown logos。" width="100%"> 
+ <div class="lg">
+<a href="/static-site-generator.html" class="lgi">Static Site Generators</a>
+<a href="/pelican.html" class="lgi">Pelican</a>
+<a href="/lektor.html" class="lgi">Lektor</a>
+<a href="/deployment.html" class="lgi">Deployment</a>
+<a href="http://docs.getpelican.com/en/stable/" class="lgi">Official Pelican Docs <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/generating-static-websites-pelican-jinja2-markdown" class="lgi">Code for this post <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

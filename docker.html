@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Docker is a container management system often used for deploying web applications. Learn more about Docker on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Docker" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/docker.html" />
+<meta property="og:title" content="Docker" />
+<meta property="og:description" content="Docker is a container management system often used for deploying web applications. Learn more about Docker on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/docker.html" />
+<title>Docker - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Docker</h1>
+<p><a href="https://docs.docker.com/">Docker</a> 
+(<a href="https://github.com/docker/docker">source code for core Docker project</a>)
+is an infrastructure management platform for running and deploying software. 
+The Docker platform is evolving so an exact definition is currently
+a moving target, but the core idea behind Docker is that operating 
+system-level containers are used as an abstraction layer on top of regular
+servers for deployment and application operations.</p>
+<p><a href="https://docs.docker.com/" style="border: none;"><img src="/img/logos/docker-wide.png" width="100%" alt="Official Docker logo. Copyright Docker." class="shot"></a></p>
+<h2>Why is Docker important?</h2>
+<p>Docker can package up applications along with their necessary operating system
+dependencies for easier deployment across environments. In the long run it
+has the potential to be the abstraction layer that easily manages containers
+running on top of any type of server, regardless of whether that server is
+on Amazon Web Services, Google Compute Engine, Linode, Rackspace or elsewhere.</p>
+<h2>Python projects within Docker images</h2>
+<ul>
+<li>
+<p>This Docker image contains 
+  <a href="https://github.com/tiangolo/uwsgi-nginx-flask-docker">a Flask application configured to run with uWSGI and Nginx</a>.
+  You can also see the <a href="https://hub.docker.com/r/tiangolo/uwsgi-nginx-flask/">image on Docker hub</a>.</p>
+</li>
+<li>
+<p><a href="https://github.com/OrangeTux/minimal-docker-python-setup">minimal-docker-python-setup</a> 
+  contains an image with Nginx, uWSGI, Redis and Flask.</p>
+</li>
+</ul>
+<h2>Docker resources</h2>
+<ul>
+<li>
+<p><a href="https://www.ctl.io/developers/blog/post/what-is-docker-and-when-to-use-it/">What is Docker and When to Use It</a>
+  clearly delineates what Docker is and what it isn't. This is a good article
+  for when you're first wrapping your head around Docker conceptually.</p>
+</li>
+<li>
+<p><a href="https://github.com/atbaker">Andrew Baker</a> presented a fantastic tutorial 
+  at <a href="http://andrewtorkbaker.com/pyohio-docker-101-tutorial">PyOhio</a> on 
+  <a href="https://github.com/atbaker/docker-tutorial">beginner and advanced Docker usage</a>.
+  Andrew also wrote the article 
+  <a href="http://radar.oreilly.com/2015/01/what-containers-can-do-for-you.html">what containers can do for you</a>.</p>
+</li>
+<li>
+<p><a href="http://prakhar.me/docker-curriculum/">Docker curriculum</a> is a detailed
+  tutorial created by a developer to show the exact steps for deploying an 
+  application that relies on <a href="https://www.elastic.co/">Elasticsearch</a>. </p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">How To Install and Use Docker on Ubuntu 16.04</a>
+  provides a walkthrough for Ubuntu 16.04 for installing and beginning to
+  use Docker for development.</p>
+</li>
+<li>
+<p><a href="http://blog.circleci.com/it-really-is-the-future/">It Really is the Future</a>
+  discusses Docker and containers in the context of whether it's all just a
+  bunch of hype or if this is a real trend for infrastructure automation.
+  This is a great read to set the context for why these tools are important.</p>
+</li>
+<li>
+<p><a href="https://github.com/odewahn/docker-jumpstart/">Docker Jumpstart</a> is a 
+  comprehensive introduction to what Docker is and how to get started with
+  using the tool.</p>
+</li>
+<li>
+<p>If you want to quickly use Docker on Mac OS X, check out these concise
+  instructions 
+  <a href="https://www.twilio.com/blog/2015/07/docker-workflow-on-osx-in-60-seconds.html">for setting up your Docker workflow on OS X in 60 seconds</a>.</p>
+</li>
+<li>
+<p><a href="http://pythonforengineers.com/what-the-bleep-is-docker/">What the Bleep is Docker?</a>
+  is a plain English explanation with examples of what Docker provides and
+  what it can be used for in your environment.</p>
+</li>
+<li>
+<p><a href="https://zwischenzugs.wordpress.com/2015/03/14/docker-in-practice-a-guide-for-engineers/">Docker in Practice - A Guide for Engineers</a>
+  is an explanation of the concepts and philosophy by the authors of the 
+  new Manning Docker book in early access format.</p>
+</li>
+<li>
+<p><a href="http://www.hokstad.com/docker/patterns">Eight Docker Development Patterns</a>
+  shares lessons learned and explains how to work with the containers so you 
+  get more use out of them during development.</p>
+</li>
+<li>
+<p><a href="http://datakurre.pandala.org/2015/07/building-docker-containers-from-scratch.html">Building Docker containers from scratch</a>
+  is a short tutorial for creating a Docker container with a specific
+  configuration.</p>
+</li>
+<li>
+<p><a href="http://developerblog.redhat.com/2016/02/24/10-things-to-avoid-in-docker-containers/">10 things to avoid in Docker containers</a>
+  provides a lot of "don'ts" that you'll want to consider before bumping
+  up against the limitations of how containers should be used.</p>
+</li>
+<li>
+<p><a href="http://docker-saigon.github.io/post/Docker-Internals/">Docker Internals</a> presents
+  Linux containers and how Docker uses them as its base for how the project works.
+  This article is a great way to bridge what you know about Docker with a more
+  traditional Linux operating system architecture understanding.</p>
+</li>
+<li>
+<p>This post gives an overview and 
+  <a href="https://blog.codeship.com/docker-guis/">comparison of Docker GUIs</a> which can be
+  handy for monitoring your Docker containers.</p>
+</li>
+</ul>
+<h2>Python-specific Docker resources</h2>
+<ul>
+<li>
+<p><a href="https://www.eidel.io/2017/07/10/dockerizing-django-uwsgi-postgres/">Dockering Django, uWSGI and PostgreSQL the serious way</a>
+  walks through both the code and the error messages that will likely crop
+  up as you attempt to container-ize a <a href="/django.html">Django</a> project that
+  uses a <a href="/postgresql.html">PostgreSQL</a> database on the backend.</p>
+</li>
+<li>
+<p><a href="https://www.stavros.io/posts/how-deploy-django-docker/">How to deploy Django using Docker</a>
+  assumes you already have the basic grasp of working with Docker and
+  jumps right into a Django deployment. The post shows you how to set up
+  your <code>Dockerfile</code> and explains that <a href="https://about.gitlab.com/">GitLab CI</a> 
+  can be used to to build this Docker image.</p>
+</li>
+<li>
+<p><a href="http://blog.dscpl.com.au/2014/12/hosting-python-wsgi-applications-using.html">Hosting Python WSGI applications using Docker</a>
+  shows how to use Docker in WSGI application deployments specifically using
+  mod_wsgi.</p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-python-web-applications">How to Containerize Python Web Applications</a>
+  is an extensive tutorial that uses a Flask application and deploys it
+  using a Docker container.</p>
+</li>
+<li>
+<p><a href="https://wsvincent.com/django-docker-postgresql/">How to use Django, PostgreSQL, and Docker</a>
+  shows how to get a <a href="/django.html">Django</a> project that uses <a href="/postgresql.html">PostgreSQL</a>
+  as its back end running in Docker.</p>
+</li>
+<li>
+<p><a href="https://realpython.com/blog/python/docker-in-action-fitter-happier-more-productive/">Docker in Action - Fitter, Happier, More Productive </a>
+  is a killer tutorial that shows how to combine Docker with CircleCI to
+  continuously deploy a Flask application.</p>
+</li>
+<li>
+<p><a href="https://simonwillison.net/2018/Nov/19/smaller-python-docker-images/">Building smaller Python Docker images</a>
+  examines how to inspect layers in Dockerfiles and minimize the
+  overhead of what images contain for better performance.</p>
+</li>
+<li>
+<p><a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xix-deployment-on-docker-containers">The Flask Mega-Tutorial Part XIX: Deployment on Docker Containers</a>
+  is one post in <a href="https://github.com/miguelgrinberg">Miguel Grinberg</a>'s absolutely
+  spectacular <a href="/flask.html">Flask</a> application series.</p>
+</li>
+<li>
+<p><a href="http://handlebarcreative.tumblr.com/post/104881545637/deploying-django-applications-in-docker">Deploying Django Applications in Docker</a>
+  explains some of the concepts behind using Docker for Python deployments and
+  shows how to specifically use it for deploying Django. </p>
+</li>
+<li>
+<p><a href="https://ochronus.com/docker-primer-django/">A Docker primer – from zero to a running Django app</a>
+  provides specific commands and expected output for running Django apps
+  with Docker and Vagrant.</p>
+</li>
+<li>
+<p><a href="https://www.calazan.com/using-docker-and-docker-compose-for-local-django-development-replacing-virtualenv/">Using Docker and Docker Compose to replace virtualenv</a>
+  is a tutorial for using Docker instead of virtualenv for dependency
+  isolation.</p>
+</li>
+<li>
+<p>Lincoln Loop wrote up 
+  <a href="https://lincolnloop.com/blog/closer-look-docker/">a closer look at Docker</a>
+  from the perspective of Python developers handling deployments.</p>
+</li>
+<li>
+<p>Curious how pip and Docker can be used together? Read this article on 
+  <a href="https://jpetazzo.github.io/2013/12/01/docker-python-pip-requirements/">Efficient management Python projects dependencies with Docker</a>.</p>
+</li>
+<li>
+<p><a href="http://blog.dscpl.com.au/2016/01/python-virtual-environments-and-docker.html">Python virtual environments and Docker</a>
+  goes into detail on whether virtual environments should be used with Docker
+  and how system packages can generally be a safer route to go.</p>
+</li>
+<li>
+<p><a href="https://testdriven.io/dockerizing-django-with-postgres-gunicorn-and-nginx">Dockerizing Django with Postgres, Gunicorn, and Nginx</a>
+  details how to configure Django to run on Docker along with Postgres, Nginx
+  and Gunicorn.</p>
+</li>
+<li>
+<p><a href="https://semaphoreci.com/community/tutorials/dockerizing-a-python-django-web-application">Dockerizing a Python Django Web Application</a>
+  is another in-depth tutorial on combining Docker with <a href="/django.html">Django</a>.</p>
+</li>
+</ul>
+<h3>接下来您想要了解有关部署的内容？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/continuous-integration.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1639 1056q0 5-1 7-64 268-268 434.5t-478 166.5q-146 0-282.5-55t-243.5-157l-129 129q-19 19-45 19t-45-19-19-45v-448q0-26 19-45t45-19h448q26 0 45 19t19 45-19 45l-137 137q71 66 161 102t187 36q134 0 250-65t186-179q11-17 53-117 8-23 30-23h192q13 0 22.5 9.5t9.5 22.5zm25-800v448q0 26-19 45t-45 19h-448q-26 0-45-19t-19-45 19-45l138-138q-148-137-349-137-134 0-250 65t-186 179q-11 17-53 117-8 23-30 23h-199q-13 0-22.5-9.5t-9.5-22.5v-7q65-268 270-434.5t480-166.5q146 0 284 55.5t245 156.5l130-129q19-19 45-19t45 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我可以自动为我的应用程序进行测试和部署吗？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/logging.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">如何记录应用程序中发生的错误？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/hosting.html" class="lgi sbc">Hosting</a>
+<a href="/servers.html" class="lgi sbc">Servers</a>
+<a href="/static-content.html" class="lgi sbc">Static Content</a>
+<a href="/content-delivery-networks-cdns.html" class="lgi sbc">CDNs</a>
+<a href="/virtual-private-servers-vps.html" class="lgi sbc">Virtual Private Servers</a>
+<a href="/linode.html" class="lgi sbc">Linode</a>
+<a href="/digitalocean.html" class="lgi sbc">DigitalOcean</a>
+<a href="/lightsail.html" class="lgi sbc">Lightsail</a>
+<a href="/platform-as-a-service.html" class="lgi sbc">Platform-as-a-Service</a>
+<a href="/heroku.html" class="lgi sbc">Heroku</a>
+<a href="/pythonanywhere.html" class="lgi sbc">PythonAnywhere</a>
+<a href="/operating-systems.html" class="lgi sbc">Operating Systems</a>
+<a href="/ubuntu.html" class="lgi sbc">Ubuntu</a>
+<a href="/web-servers.html" class="lgi sbc">Web Servers</a>
+<a href="/apache-http-server.html" class="lgi sbc">Apache HTTP Server</a>
+<a href="/nginx.html" class="lgi sbc">Nginx</a>
+<a href="/caddy.html" class="lgi sbc">Caddy</a>
+<a href="/wsgi-servers.html" class="lgi sbc">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi sbc">Green Unicorn (Gunicorn)</a>
+<a href="/continuous-integration.html" class="lgi sbc">Continuous Integration</a>
+<a href="/jenkins.html" class="lgi sbc">Jenkins</a>
+<a href="/configuration-management.html" class="lgi sbc">Configuration Management</a>
+<a href="/ansible.html" class="lgi sbc">Ansible</a>
+<a href="/docker.html" class="lgi active sbc">Docker</a>
+<a href="/serverless.html" class="lgi sbc">Serverless</a>
+<a href="/aws-lambda.html" class="lgi sbc">AWS Lambda</a>
+<a href="/google-cloud-functions.html" class="lgi sbc">Google Cloud Functions</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+ <a href="/docker.html" class="lgi active">&raquo; Docker</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

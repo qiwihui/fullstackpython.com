@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="使用 Python 3.6 编写，创建和执行您的第一个 Amazon Web Services（AWS）Lambda 函数。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何创建您的第一个 Python 3.6 AWS Lambda 函数" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/170429-aws-lambda-python-3-6/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/aws-lambda-python-3-6.html" />
+<meta property="og:title" content="如何创建您的第一个 Python 3.6 AWS Lambda 函数" />
+<meta property="og:description" content="使用 Python 3.6 编写，创建和执行您的第一个 Amazon Web Services（AWS）Lambda 函数。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/170429-aws-lambda-python-3-6/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/aws-lambda-python-3-6.html" />
+<title>如何创建您的第一个 Python 3.6 AWS Lambda 函数 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何创建您的第一个 Python 3.6 AWS Lambda 函数</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     April 25, 2018. Originally posted
+     on April 29, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a>
+provides a usage-based compute service for running Python code in response 
+to developer-defined events. For example, if an inbound HTTP POST
+comes in to API Gateway or a new file is uploaded to 
+<a href="https://aws.amazon.com/s3/">AWS S3</a> then AWS Lambda can execute a function
+to respond to that API call or manipulate the file on S3.</p>
+<p>AWS Lambdas are not related to the Python languages' <code>lambda</code> expressions,
+which are used to create anonymous functions. The AWS Lambda name just 
+happens to collide with the the <code>lambda</code> keyword's name.</p>
+<p>Let's learn how to quickly write and run a Lambda function to execute 
+basic Python 3.6 code which uses environment variables as input.
+This code, which is also <a href="https://github.com/fullstackpython/blog-code-examples">available on GitHub under the blog-post-examples repository</a> can be 
+changed so that you can build much more complicated Python programs.</p>
+<h2>Our Tools</h2>
+<p>No local <a href="/development-environments.html">development environment</a> tools 
+are required for this tutorial, other than a web browser. All the work will
+happen on AWS via their Console. </p>
+<p>These steps can also be completed from the command line via the 
+<a href="https://boto3.readthedocs.io/en/latest/">boto3</a> library, but we won't 
+cover that in this post.</p>
+<p>If using Python 2 is still your jam rather than Python 3, take a look at
+<a href="/blog/aws-lambda-python-2-7.html">this other post which shows how to execute Python 2.7 code on AWS Lambda</a>.</p>
+<h2>First Steps with AWS Lambda</h2>
+<p>Sign up for a new <a href="https://aws.amazon.com/">Amazon Web Services account</a>,
+which provides a generous free tier, or use your existing AWS account.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/aws-amazon-com.jpg" width="100%" class="shot outl rnd" alt="AWS Lambda landing and sign in screen."></p>
+<p>After signing up a few tutorials may pop up, but skip past them and
+go to the main Console. AWS has tons of services, with more being added
+every month, so using the search box is the best way to get around. 
+Select the search text box, enter "lambda" and select "Lambda" to get to
+the Lambda starting page.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/search-for-lambda.jpg" width="100%" class="shot rnd outl" alt="Search for lambda in the dashboard text box."></p>
+<p>Click the "Create a Lambda function" button. The "Select Blueprint" page
+will appear.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/select-blueprint.jpg" width="100%" class="shot rnd outl" alt="The Select Blueprint Lambda screen."></p>
+<p>Select "Blank Function" and the "Configure triggers" page will come up. 
+It was non-obvious to me at first, but you don't actually need to configure a 
+trigger to move on. A trigger is how the Lambda function typically knows 
+when to execute based on an event from another AWS service such as 
+<a href="https://aws.amazon.com/api-gateway/">API Gateway</a> or 
+<a href="https://aws.amazon.com/cloudwatch/">Cloudwatch</a>.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/configure-triggers.jpg" width="100%" class="shot rnd outl" alt="Configure Lambda trigger screen."></p>
+<p>We won't configure a trigger for this function because we can manually 
+kick off the Lambda to test it when we are finished configuring it. Leave 
+the trigger icon blank and click the "Next" button to move along. </p>
+<p><img src="/img/170429-aws-lambda-python-3-6/blank-lambda.jpg" width="100%" class="shot outl rnd" alt="The Lambda configuration screen."></p>
+<p>Next we get to the "Configure function" screen where we can finally write
+some code!</p>
+<h2>Python Code for Our Lambda Function</h2>
+<p>Enter a name for the Lambda function, such as "python_3_6_lambda_test",
+as well as a description. A description is optional but it is useful
+when you have a dozens or hundreds of different Lambda functions and
+need to keep them straight. In the Runtime drop-down, select Python 3.6 for 
+the programming language.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/python-3-6-lambda.jpg" width="100%" class="shot outl rnd" alt="Enter a name, description and use Python 3.6 for the Lambda."></p>
+<p>Beneath the Runtime drop-down there is a large text box for code, 
+prepopulated with a <code>lambda_handler</code> function definition. The 
+"Code entry type" drop-down can also be changed to allow uploading a ZIP
+file or inputing a file from an S3 bucket. For our simple first
+Lambda function we will stick to the "Edit code inline" option. Copy or type 
+in the following code, replacing what is already in the text box. This
+code is also available on <a href="https://github.com/fullstackpython/blog-code-examples/blob/master/aws-lambda-python-3-6/">this open source GitHub repository</a>.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">what_to_print</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;what_to_print&quot;</span><span class="p">)</span>
+    <span class="n">how_many_times</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;how_many_times&quot;</span><span class="p">))</span>
+
+    <span class="c1"># make sure what_to_print and how_many_times values exist</span>
+    <span class="k">if</span> <span class="n">what_to_print</span> <span class="ow">and</span> <span class="n">how_many_times</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">how_many_times</span><span class="p">):</span>
+            <span class="c1"># formatted string literals are new in Python 3.6</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;what_to_print: {what_to_print}.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">what_to_print</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+
+<p>The code above contains a required <code>lambda_handler</code> function, which is 
+AWS Lambda's defined hook so it knows where to begin execution. Think of 
+<code>lambda_handler</code> as a <code>main</code> function, like the<br />
+<code>if __name__ == "__main__":</code> conditional line commonly used in Python files 
+to ensure a block of code is executed when a script is run from the 
+command line.</p>
+<p>The Python code expects two environment variables that are read by the
+<code>os</code> module with the <code>environ.get</code> function. With the <code>what_to_print</code> and
+<code>how_many_times</code> variables set by the environment variables, our code then
+prints a message zero or more times, based on the amount defined in 
+the <code>how_many_times</code> variable. If a message is printed at least once then 
+the function returns the <code>what_to_print</code> string, if nothing is printed 
+then <code>None</code> is returned.</p>
+<p>Below the code input text box on this function configuration screen there 
+is a section to set environment variable key-value pairs.</p>
+<p>Enter the keys named <code>what_to_print</code> and <code>how_many_times</code> then enter their 
+values. Use a string message for <code>what_to_print</code>'s value and an integer 
+whole number above 0 for <code>how_many_times</code>. Our Python code's error handling
+is not very robust so a value other than a number in the <code>how_many_times</code>
+variable will cause the script to throw an error when it is executed due
+to the forced casting of <code>how_many_times</code> via the <code>int()</code> function.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/environment-variables.jpg" width="100%" class="shot rnd outl" alt="Section to set environment variables for the Lambda function."></p>
+<p>The Python 3.6 code and the environment variables are now in place. We 
+just need to handle a few more AWS-specific settings before we can test the 
+Lambda function.</p>
+<h2>Executing our Lambda Function</h2>
+<p>Scroll past the environment variables to the 
+"Lambda function handler and role" section, which contains a few more 
+required function configuration items. </p>
+<p>Keep the default handler set to <code>lambda_function.lambda_handler</code>. Select 
+"Create a new Role from template(s)" from the drop-down then for the
+"Role name" field enter "dynamodb_access". Under "Policy templates" 
+select the "Simple Microservice permissions". </p>
+<p>The "Simple Microservice permissions" allows our Lambda to access
+<a href="https://aws.amazon.com/dynamodb/">AWS DynamoDB</a>. We will not use DynamoDB in 
+this tutorial but the service is commonly used either as permanent or 
+temporary storage for Lambda functions.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/lambda-handler-and-role.jpg" width="100%" class="shot rnd outl" alt="For the final configuration, keep the default handler, create a new role from a template for Simple Microservice permissions and save it with a unique name."></p>
+<p>Our code and configuration is in place so click the "Next" button
+at the bottom right corner of the page.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/review-lambda.jpg" width="100%" class="shot rnd outl" alt="Review Lambda configuration."></p>
+<p>The review screen shows us our configuration settings to make sure we 
+selected the appropriate values for our new Lambda function. Scroll down
+press "Create function".</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/create-function.jpg" width="100%" class="shot rnd outl" alt="Click the create function button to continue."></p>
+<p>Success message should appear on the next page below the "Test" button.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/test.jpg" width="100%" class="shot outl rnd" alt="Test button on the execution screen."></p>
+<p>Click the "Test" button to execute the Lambda. Lambda will prompt us for
+some data to simulate an event that would kick off our function. Select
+the "Hello World" sample event template, which contains some keys but our
+Lambda will not use that in its execution. Click the "Save and test" button
+at the bottom of the modal.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/sample-event-template.jpg" width="100%" class="shot outl rnd" alt="Sample event template for Lambda execution."></p>
+<p>Scroll down to the "Execution result" section where we can see our output.</p>
+<p><img src="/img/170429-aws-lambda-python-3-6/execution-results.jpg" width="100%" class="shot outl rnd" alt="Results from executing our new Lambda function."></p>
+<p>The log output shows us the return value of our function, which in this 
+execution was the string message from <code>what_to_print</code>. We can also see
+our print function produced output five times as expected based on the
+amount set in the <code>how_many_times</code> environment variable.</p>
+<h2>Next Steps</h2>
+<p>You just configured, coded and executed your first Python 3.6 AWS Lambda
+function! The real power of Lambda comes in when you use triggers to
+your Lambda function so it executes based on events that happen.
+We will take a look at that in the next tutorial.</p>
+<p>View the <a href="/aws-lambda.html">AWS Lambda Full Stack Python page</a> for additional 
+examples and tutorials that other folks have shared for Lambda with Python.</p>
+<p>Questions? Contact me via Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I am also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>Something wrong with this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/170429-python-3-6-aws-lambda.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/170429-aws-lambda-python-3-6/header.jpg" alt="AWS, AWS Lambda 和 Python logos 版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/aws-lambda.html" class="lgi">AWS Lambda</a>
+<a href="/devops.html" class="lgi">DevOps</a>
+<a href="/learning-programming.html" class="lgi">Learning Programming</a>
+<a href="/why-use-python.html" class="lgi">Why Use Python?</a>
+<a href="/python-2-or-3.html" class="lgi">Python 2 or 3?</a>
+  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="了解如何使用 Python 2.7 创建和部署您的第一个 Amazon Web Services（AWS）Lambda 函数。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="AWS Lambda 和 Python 2.7 入门" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/170428-aws-lambda-python-2-7/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/aws-lambda-python-2-7.html" />
+<meta property="og:title" content="AWS Lambda 和 Python 2.7 入门" />
+<meta property="og:description" content="了解如何使用 Python 2.7 创建和部署您的第一个 Amazon Web Services（AWS）Lambda 函数。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/170428-aws-lambda-python-2-7/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/aws-lambda-python-2-7.html" />
+<title>AWS Lambda 和 Python 2.7 入门 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">AWS Lambda 和 Python 2.7 入门</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     April 29, 2017. Originally posted
+     on April 28, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a>
+is a "serverless" compute service that executes arbitrary Python code in 
+response to developer-defined events, such as inbound API calls or file 
+uploads to <a href="https://aws.amazon.com/s3/">AWS S3</a>. Note that AWS Lambda has 
+nothing to do with the <code>lambda</code> keyword in Python that is used to create 
+anonymous functions, it's just the product name that happens to collide 
+with an existing Python language feature name.</p>
+<p>In this tutorial we'll learn how to quickly write and run a Lambda 
+function that executes some simple Python 2.7 code and handles environment
+variables. The code can then be modified to build far more complicated 
+Python applications.</p>
+<h2>Tools We Need</h2>
+<p>We do not need any local development environment tools to get through
+this walkthrough other than a web browser because all the work will
+happen on AWS.</p>
+<p>Grab a new free tier <a href="https://aws.amazon.com/">Amazon Web Services account</a> 
+or use your existing AWS account.</p>
+<h2>First Steps with Lambda</h2>
+<p>Head to the 
+<a href="https://aws.amazon.com/lambda/">AWS Lambda landing page</a> in your 
+web browser. Sign into your account, or sign up for a new account which
+comes with a free tier so you don't have to pay.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/aws-amazon-com.jpg" width="100%" class="shot rnd outl" alt="AWS Lambda landing page."></p>
+<p>If you're not taken directly to the 
+<a href="https://console.aws.amazon.com/lambda/home">Lambda Console page</a> after
+logging in you'll see the main Console. AWS has a ridiculous number of
+services (that seems to expand every week) so the best way to get around 
+is to select the search text box and search for "lambda" as shown in the 
+following screenshot.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/search-for-lambda.jpg" width="100%" class="shot rnd outl" alt="Search for lambda in the dashboard text box."></p>
+<p>Press the "Create a Lambda function" button and you'll see the 
+"Select Blueprint" page.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/select-blueprint.jpg" width="100%" class="shot rnd outl" alt="The select blueprint Lambda screen, where you should select Blank Function."></p>
+<p>Choose "Blank Function". The next screen gives the option to select a
+"trigger", which is how the Lambda function gets executed. A trigger is
+some event that is integrated with other AWS services and can be exposed
+externally via an API or device such as Alexa.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/configure-triggers.jpg" width="100%" class="shot rnd outl" alt="Configure trigger screen, which we will not use for now because we will manually kick off our Lambda."></p>
+<p>However, we aren't going to set up a trigger for this function because 
+we can manually test the Lambda later before connecting it to a trigger.
+Leave the trigger icon blank and click the "Next" button to move along 
+to the next screen.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/blank-lambda.jpg" width="100%" class="shot rnd outl" alt="Blank Lambda configuration screen."></p>
+<p>Now we're on the screen where we can enter our specific configuration
+and code for our new Lambda.</p>
+<h2>Writing Our Python Code</h2>
+<p>Start by entering a name for your Lambda function, such as "my_first_python_lambda" and a description. The description field is optional but it's handy
+when you start using Lambda regularly to keep all your functions straight. 
+In the Runtime drop-down, select Python 2.7 as the execution language.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/first-python-lambda.jpg" width="100%" class="shot rnd outl" alt="Enter a name, description and select Python 2.7 on the Lambda configuration screen."></p>
+<p>Below the Runtime drop-down you'll see a large text box for writing code.
+We can also choose to upload a ZIP file with our Python application which
+is handy for more than simple test Lambdas. However, for our simple starter
+Lambda application you can copy or type in the following code 
+(<a href="https://github.com/fullstackpython/blog-code-examples/blob/master/aws-lambda-python-2-7/lambda.py">or copy it from this GitHub repo</a>). 
+Make sure to replace what's already in the text box.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">what_to_print</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;what_to_print&quot;</span><span class="p">)</span>
+    <span class="n">how_many_times</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;how_many_times&quot;</span><span class="p">))</span>
+
+    <span class="c1"># make sure what_to_print and how_many_times values exist</span>
+    <span class="k">if</span> <span class="n">what_to_print</span> <span class="ow">and</span> <span class="n">how_many_times</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">how_many_times</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">what_to_print</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">what_to_print</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+
+<p>The above code has the required <code>lambda_handler</code> function definition
+that provides a hook for the Lambda service to know where to begin executing
+the Python code. Think of <code>lambda_handler</code> as a <code>main</code> function when you're
+using this service.</p>
+<p>Our Python code expects and reads two environment variables and then the
+code prints a message zero to many times, based on the amount defined in 
+the <code>how_many_times</code> variable. If a message is printed then the function 
+returns the <code>what_to_print</code> string, if nothing is printed then <code>None</code> is 
+returned.</p>
+<p>Just below the code input text box there are environment variable key-value
+pairs that can be set. Our code will use two environment variables, named
+<code>what_to_print</code> and <code>how_many_times</code>. </p>
+<p>Enter the keys named <code>what_to_print</code> and <code>how_many_times</code> then enter their 
+values. Use a string message for <code>what_to_print</code>'s value and an integer 
+whole number above 0 for <code>how_many_times</code>. Our Python code's error handling
+is not very robust so a value other than a number in the <code>how_many_times</code>
+variable will cause the script to throw an error when it is executed.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/environment-variables.jpg" width="100%" class="shot rnd outl" alt="Enter the exact keys of what_to_print and how_many_times along with corresponding values as environment variables."></p>
+<p>Our code and environment variables are in place and we just need to set
+a few more AWS-specific settings before we can test the Lambda function.</p>
+<h2>Executing the Lambda</h2>
+<p>Scroll down below the environment variables to the 
+"Lambda function handler and role" section. This section contains the last 
+few required configuration items. Keep the default handler, which should 
+be <code>lambda_function.lambda_handler</code>. Select 
+"Create a new Role from template(s)" from the drop-down then for the
+"Role name" field enter "dynamodb_permissions". Under "Policy templates" 
+select the "Simple Microservice permissions". </p>
+<p><img src="/img/170428-aws-lambda-python-2-7/lambda-handler-and-role.jpg" width="100%" class="shot rnd outl" alt="For the final configuration, keep the default handler, create a new role from a template for Simple Microservice permissions and save it with a unique name."></p>
+<p>The "Simple Microservice permissions" gives our Lambda access to 
+<a href="https://aws.amazon.com/dynamodb/">AWS DynamoDB</a>. We won't use DynamoDB in 
+this tutorial but it's super useful as either permanent or temporary 
+storage when working with Lambda.</p>
+<p>Now that our code and configuration is in place, click the "Next" button
+at the bottom right corner of the page.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/review-lambda.jpg" width="100%" class="shot rnd outl" alt="We can review the values set during our configuration."></p>
+<p>The review screen will show us our configuration settings. Scroll down
+to the bottom and click the "Create function" button to continue.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/create-function.jpg" width="100%" class="shot rnd outl" alt="Click the create function button to continue."></p>
+<p>We should see a success message on the next page just below the 
+"Save and test" button.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/save-and-test.jpg" width="100%" class="shot rnd outl" alt="Save and test button."></p>
+<p>Press the "Test" button to execute the Lambda. Lambda prompts us for
+some data to simulate an event that would trigger our function. Select
+the "Hello World" sample event template, which contains some example keys. 
+Our Lambda will not those keys in its execution so it does not matter what
+they are. Click the "Save and test" button at the bottom of the modal.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/sample-event-template.jpg" width="100%" class="shot rnd outl" alt="Sample event template for our Lambda execution."></p>
+<p>Scroll down to the "Execution result" section where we can see our output.</p>
+<p><img src="/img/170428-aws-lambda-python-2-7/execution-results.jpg" width="100%" class="" alt="Execution results from running our Lambda function."></p>
+<p>We get the log output that shows us the return value of our function. In
+this case it is the string message from <code>what_to_print</code>. We can also see
+down below that our print function produced output five times. </p>
+<h2>What's Next?</h2>
+<p>Awesome, you just configured, wrote and executed your first Python 2.7
+code on AWS Lambda! The real power of Lambda comes in when you connect a
+trigger to it so your code executes based on events. We'll take a look
+at that in the next tutorial.</p>
+<p>What else can you do with Python and Lambda? Take a look at the 
+<a href="/aws-lambda.html">AWS Lambda</a> page for more examples and tutorials. </p>
+<p>Questions? Contact me via Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I am also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>Something wrong with this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/170428-python-2-7-aws-lambda.markdown">this page's source on GitHub</a>.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/170428-aws-lambda-python-2-7/header.jpg" alt="AWS, AWS Lambda 和 Python logos。版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/aws-lambda.html" class="lgi">AWS Lambda</a>
+<a href="/devops.html" class="lgi">DevOps</a>
+<a href="/why-use-python.html" class="lgi">Why Use Python?</a>
+<a href="/python-2-or-3.html" class="lgi">Python 2 or3?</a>
+<a href="/source-control.html" class="lgi">Source Control</a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

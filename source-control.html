@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Source control versions and backs up code for when programming problems occur. Learn more about source control on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Source Control" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/source-control.html" />
+<meta property="og:title" content="Source Control" />
+<meta property="og:description" content="Source control versions and backs up code for when programming problems occur. Learn more about source control on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/source-control.html" />
+<title>Source Control - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Source control</h1>
+<p>Source control, also known as <em>version control</em>, stores software code files
+with a detailed history of every modification made to those files.</p>
+<h2>Why is source control necessary?</h2>
+<p>Version control systems allow developers to modify code without worrying 
+about permanently screwing something up. Unwanted changes can be easily rolled
+back to previous working versions of the code. </p>
+<p>Source control also makes team software development easier. One developer 
+can combine her code modifications with other developers' code through 
+<a href="http://en.wikipedia.org/wiki/Diff">diff</a> views that show line-by-line 
+changes then merge the appropriate code into the main code branch.</p>
+<p>Version control is a necessity on all software projects regardless of 
+development time, codebase size or the programming language used. Every
+project should immediately begin by using a version control system such
+as Git or Mercurial.</p>
+<h2>Monorepo vs Multirepo</h2>
+<p>There is a spectrum of philosophies for how to store projects within
+source code repositories. </p>
+<p>On one extreme end of the spectrum, every line of code for every project 
+within an organization is stored <strong>in a single repository</strong>. That approach 
+is called <em>monorepo</em> and it is used by companies like Google. On the other 
+end of the spectrum, there are potentially tens of thousands or more 
+repositories that store parts of projects. That approach is known as
+<em>multirepo</em> or <em>manyrepo</em>. </p>
+<p>For example, in a <a href="/microservices.html">microservices</a> architecture, there
+could be thousands of microservices and each one is stored within its own
+repository. No one repository contains the code for the entire application
+created by the interaction of the microservices.</p>
+<p>There are many hybrid strategies for how to store source code that fall
+between these opposite approaches. What to choose will depend on your
+organization's needs, resources and culture.</p>
+<h2>Source control during deployment</h2>
+<p>Pulling code during a deployment is a potential way source control systems fit
+into the deployment process. </p>
+<p><img src="/img/visuals/app-source-control.png" width="100%" class="shot" alt="App deployment uses a server to pull from the source control system."></p>
+<p>Note that some developers recommend deployment pipelines package the source 
+code to deploy it and never have a production environment touch a source 
+control system directly. However, for small scale deployments it's often
+easiest to pull from source code when you're getting started instead of 
+figuring out how to wrap the Python code in a system installation package.</p>
+<h2>Source control projects</h2>
+<p>Numerous source control systems have been created over the past several
+decades. In the past, proprietary source control software offered features
+tailored to large development teams and specific project workflows. However,
+open source systems are now used for version control on the largest and most
+complicated software projects in existence. There's no reason why your project
+should use anything other than an open source version control system in
+today's Python development world. The two primary choices are:</p>
+<ul>
+<li>
+<p><a href="/git.html">Git</a> is a free and open source distributed version
+  control system.</p>
+</li>
+<li>
+<p><a href="/mercurial.html">Mercurial</a> is similar to Git, also a free
+  and open source distributed version control system.</p>
+</li>
+<li>
+<p><a href="/apache-subversion.html">Subversion</a> is a centralized system where
+  developers must check files in and out of the hosted repository to minimize
+  merge conflicts.</p>
+</li>
+</ul>
+<h2>Hosted version control services</h2>
+<p>Git and Mercurial can be downloaded and run on your own server. However,
+it's easy and cheap to get started with a 
+<a href="/hosted-source-control-services.html">hosted version control service</a>.
+You can transition away from the service at a later time by moving your 
+repositories if your needs change. A couple of recommended hosted version
+control services are:</p>
+<ul>
+<li>
+<p><a href="https://about.gitlab.com/">GitLab</a> has both a self-hosted version of its
+  open source software as well as their hosted version with 
+  <a href="https://about.gitlab.com/pricing/">pricing</a> for businesses that need
+  additional hosting support.</p>
+</li>
+<li>
+<p><a href="https://github.com">GitHub</a> is a software-as-a-service platform that 
+  provides a user interface, tools and backup for developers to use with their 
+  <a href="/git.html">Git</a> repositories. Accounts are free for public open source 
+  development and private Git repositories can also be hosted for 
+  <a href="https://github.com/pricing">$7 per month</a>.</p>
+</li>
+<li>
+<p><a href="https://bitbucket.org/">BitBucket</a> is 
+  <a href="https://www.atlassian.com/">Atlassian</a>'s software-as-a-service tool that 
+  with a user interface, comparison tools and backup for Git projects. There 
+  are many features in BitBucket focused on making it easier for groups of 
+  developers to work on projects together. BitBucket also has private 
+  repositories for up to five users. Users pay for hosting private 
+  repositories with more than five users.</p>
+</li>
+</ul>
+<h2>General source control resources</h2>
+<ul>
+<li>
+<p><a href="http://www.kalzumeus.com/2010/12/12/staging-servers-source-control-deploy-workflows-and-other-stuff-nobody-teaches-you/">Staging Servers, Source Control &amp; Deploy Workflows, And Other Stuff Nobody Teaches You</a> 
+  is a comprehensive overview by Patrick McKenzie of why you need source 
+  control.</p>
+</li>
+<li>
+<p><a href="https://blog.rainforestqa.com/2014-05-28-version-control-best-practices/">Version control best practices</a>
+  is a good write up of how to work with version control systems. The post is 
+  part of an ongoing deployment guide written by the folks at 
+  <a href="https://www.rainforestqa.com/">Rainforest</a>.</p>
+</li>
+<li>
+<p>This lighthearted guide to the 
+  <a href="http://www.flourish.org/2011/12/astonishments-ten-in-the-history-of-version-control/">ten astonishments in version control history</a> 
+  is a fun way to learn how systems developed over the past several decades.</p>
+</li>
+<li>
+<p><a href="http://betterexplained.com/articles/a-visual-guide-to-version-control/">A visual guide to version control</a> 
+  is a detailed article with real-life examples for why version control is
+  necessary in software development.</p>
+</li>
+<li>
+<p><a href="http://guides.beanstalkapp.com/version-control/intro-to-version-control.html">An introduction to version control</a> 
+  shows the basic concepts behind version control systems.</p>
+</li>
+<li>
+<p><a href="http://oss-watch.ac.uk/resources/versioncontrol">What Is Version Control? Why Is It Important For Due Diligence?</a> 
+  explains the benefits and necessity of version control systems.</p>
+</li>
+<li>
+<p><a href="https://twobithistory.org/2018/07/07/cvs.html">Version control before Git with CVS</a>
+  goes into the history of version control systems and defines three 
+  generations, of which CVS and SVN were part of the second generation
+  while Git and Mercurial are third-generation version control systems.</p>
+</li>
+<li>
+<p><a href="http://git-scm.com/book/en/Getting-Started-About-Version-Control">About version control</a> 
+reviews the basics of distributed version control systems.</p>
+</li>
+<li>
+<p><a href="https://sqlite.org/whynotgit.html">Why not Git?</a> covers 
+  <a href="/sqlite.html">SQLite</a>'s development workflow and why they do not
+  use <a href="/git.html">Git</a> as their version control system.</p>
+</li>
+</ul>
+<h3>Monorepo vs multirepo resources</h3>
+<p>Monorepo versus multirepo version control strategies are a weirdly 
+contentious topic in software development, likely because once a policy
+is set for an organization it is exceptionally difficult to change
+your approach. The following resources give more insight into the debate
+on how to structure your repositories.</p>
+<ul>
+<li>
+<p><a href="http://notes.burke.libbey.me/metarepo/">Monorepo, Manyrepo, Metarepo</a>
+  is an awesome guide to varying ways of structuring your source repositories
+  that contain more than one project. The guide covers advantages and
+  disadvantages of common approaches used in both small and large 
+  organizations.</p>
+</li>
+<li>
+<p><a href="http://www.gigamonkeys.com/mono-vs-multi/">Repo Style Wars: Mono vs Multi</a>
+  goes into the implications of using one side or the other and why it is
+  unlikely you can create a combination solution that will give you the
+  advantages of both without the disadvantages.</p>
+</li>
+<li>
+<p><a href="https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext">Why Google Stores Billions of Lines of Code in a Single Repository</a></p>
+</li>
+<li>
+<p><a href="http://danluu.com/monorepo/">Advantages of monorepos</a> goes into the
+  advantages of using a monorepo and does not discuss the downsides but
+  admits there are many so the decision is not clear-cut on using either
+  strategy.</p>
+</li>
+</ul>
+<h3>Git distributed source control system</h3>
+<p><a href="/git.html">Git</a> is the most widely-used source control system currently
+in use. Its distributed design eliminates the need to check files in
+and out of a centralized repository, which is a problem when using
+<a href="/apache-subversion.html">Subversion</a> without a network connection. There is
+<a href="/git.html">a full page on Git</a> with further details and resources.</p>
+<h3>Subversion resources</h3>
+<p><a href="https://subversion.apache.org/">Apache Subversion</a>
+(<a href="https://subversion.apache.org/source-code.html">source code</a>), 
+often just called "Subversion" or "SVN", is a source control system 
+implementation.</p>
+<ul>
+<li>
+<p>The <a href="http://svnbook.red-bean.com/en/1.7/index.html">SVN book</a> is the
+  free online version of the O'Reilly 
+  <a href="https://www.amazon.com/dp/B002SR2QIW/">Version Control with Subversion</a> book.</p>
+</li>
+<li>
+<p><a href="https://deveo.com/svn-tutorial/">How to use Subversion (SVN)</a> lays out
+  the basic concepts and provides the first few steps for getting started
+  tracking files.</p>
+</li>
+<li>
+<p><a href="http://www.thegeekstuff.com/2011/04/svn-command-examples/">10 Most Used SVN Commands with Examples</a>
+  is a good refresher list if you've used SVN in the past but it has been 
+  awhile since you worked with all the commands.</p>
+</li>
+</ul>
+<h3>Source control learning checklist</h3>
+<ol>
+<li>
+<p>Pick a version control system. Git is recommended because on the web there
+   are a significant number of tutorials to help both new and advanced users.</p>
+</li>
+<li>
+<p>Learn basic use cases for version control such as committing changes, 
+   rolling back to earlier file versions and searching for when lines of code 
+   were modified during development history.</p>
+</li>
+<li>
+<p>Ensure your source code is backed up in a central repository. A central
+   repository is critical not only if your local development version is 
+   corrupted but also for the deployment process.</p>
+</li>
+<li>
+<p>Integrate source control into your deployment process in three ways. First,
+   pull the project source code from version control during deployments. 
+   Second, kick off deployments when code is modified by using webhooks or 
+   polling on the repository. Third, ensure you can roll back to a previous 
+   version if a code deployment goes wrong.</p>
+</li>
+</ol>
+<h3>在源代码管理之后你想了解什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/web-analytics.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1152q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm192-448q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm428 481l101-382q6-26-7.5-48.5t-38.5-29.5-48 6.5-30 39.5l-101 382q-60 5-107 43.5t-63 98.5q-20 77 20 146t117 89 146-20 89-117q16-60-6-117t-72-91zm660-33q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm-640-640q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm448 192q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm320 448q0 261-141 483-19 29-54 29h-1402q-35 0-54-29-141-221-141-483 0-182 71-348t191-286 286-191 348-71 348 71 286 191 191 286 71 348z" fill="#fff"/></svg></a>
+<p class="under-btn">我想通过网络分析了解有关应用用户的更多信息。</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/logging.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">如何记录应用程序中发生的错误？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/text-editors-ides.html" class="lgi sbc">Text Editors & IDEs</a>
+<a href="/vim.html" class="lgi sbc">Vim</a>
+<a href="/emacs.html" class="lgi sbc">Emacs</a>
+<a href="/sublime-text.html" class="lgi sbc">Sublime Text</a>
+<a href="/pycharm.html" class="lgi sbc">PyCharm</a>
+<a href="/jupyter-notebook.html" class="lgi sbc">Jupyter Notebook</a>
+<a href="/shells.html" class="lgi sbc">Shells</a>
+<a href="/bourne-again-shell-bash.html" class="lgi sbc">Bash shell</a>
+<a href="/zsh-shell.html" class="lgi sbc">Zsh</a>
+<a href="/powershell.html" class="lgi sbc">PowerShell</a>
+<a href="/terminal-multiplexers.html" class="lgi sbc">Terminal Multiplexers</a>
+<a href="/tmux.html" class="lgi sbc">tmux</a>
+<a href="/screen.html" class="lgi sbc">Screen</a>
+<a href="/environment-configuration.html" class="lgi sbc">Environment configuration</a>
+<a href="/application-dependencies.html" class="lgi sbc">Application Dependencies</a>
+<a href="/virtual-environments-virtualenvs-venvs.html" class="lgi sbc">Virtualenvs</a>
+<a href="/localhost-tunnels.html" class="lgi sbc">Localhost tunnels</a>
+<a href="/source-control.html" class="lgi active sbc">Source Control</a>
+<a href="/git.html" class="lgi sbc">Git</a>
+<a href="/mercurial.html" class="lgi sbc">Mercurial</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+ <a href="/source-control.html" class="lgi active">&raquo; Source Control</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

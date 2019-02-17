@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Code metrics provide insight into the quality of a code base via analysis tools. Learn more about code metrics on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Code Metrics" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/code-metrics.html" />
+<meta property="og:title" content="Code Metrics" />
+<meta property="og:description" content="Code metrics provide insight into the quality of a code base via analysis tools. Learn more about code metrics on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/code-metrics.html" />
+<title>Code Metrics - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Code Metrics</h1>
+<p>Code metrics can be produced by static code analysis tools to determine 
+complexity and non-standard practices.</p>
+<h2>Why are code metrics important?</h2>
+<p>Code metrics allow developers to find problematic codebase areas that may
+need refactoring. In addition, some metrics such as technical debt assist 
+developers in communicating to non-technical audiences why issues with a
+system are occurring.</p>
+<h2>Open source code metrics projects</h2>
+<ul>
+<li>
+<p><a href="http://radon.readthedocs.org/en/latest/index.html">Radon</a> is a tool for
+  obtaining raw metrics on line counts, Cyclomatic Complexity, Halstead
+  metrics and maintainability metrics.</p>
+</li>
+<li>
+<p><a href="https://pypi.org/project/pylint/">Pylint</a> contains checkers for PEP8 code 
+  style compliance, design, exceptions and many other source code analysis
+  tools.</p>
+</li>
+<li>
+<p><a href="https://pypi.org/project/pyflakes/">PyFlakes</a> parses source files for
+  errors and reports on them.</p>
+</li>
+<li>
+<p><a href="http://www.unixuser.org/~euske/python/pyntch/index.html">Pyntch</a> is a
+  static code analyzer that attempts to detect runtime errors. It does not
+  perform code style checking.</p>
+</li>
+<li>
+<p><a href="https://github.com/PyCQA/prospector">Prospector</a> inspects Python source 
+  code files to give data on type and location of classes, methods and 
+  other related source information.</p>
+</li>
+<li>
+<p><a href="http://flake8.pycqa.org/en/latest/">Flake8</a> is a code format style
+  guideline enforcer. Its goal is not to gather metrics but ensure 
+  a consistent style in all of your Python programs for maximum readability.
+  The rules for Flask8 are all defined in 
+  <a href="https://lintlyci.github.io/Flake8Rules/">this list</a>, which rolls up
+  the Flake8 dependencies of pycodestyle, pyflakes and McCabe.</p>
+</li>
+<li>
+<p><a href="https://github.com/ambv/black">Black</a> is a Python code formatter with
+  strong, uncompromising assumptions about how your code must be formatted.</p>
+</li>
+<li>
+<p><a href="https://github.com/nedbat/pylintdb">pylintdb</a> puts pylint results into
+  a <a href="/sqlite.html">SQLite</a> database for programmatic access and searching.
+  Ned Batchelder coded it and wrote about how he uses the program in this 
+  <a href="https://nedbatchelder.com//blog/201712/bitesized_command_line_tools_pylintdb.html">bite-sized command line tools: pylintdb</a>
+  post.</p>
+</li>
+<li>
+<p><a href="https://pypi.org/project/flake8-eradicate/">Flask8-eradicate</a>
+  (<a href="https://github.com/sobolevn/flake8-eradicate">source code</a>) is a Flask8
+  plugin for identifying dead code.</p>
+</li>
+</ul>
+<h2>Hosted code metrics services</h2>
+<p>The following tools are ready to use by going to the service, punching in
+the URL to your site, letting them perform their analysis and then reading
+the results.</p>
+<ul>
+<li>
+<p><a href="https://coveralls.io">Coveralls</a> shows code coverage from test suites 
+  and other metrics to help developers improve the quality of their code.</p>
+</li>
+<li>
+<p><a href="https://webhint.io/">webhint</a>, formerly 
+  <a href="https://24ways.org/2017/lint-the-web-forward-with-sonarwhal/">Sonarwhal</a>
+  scans your website for accessibility, speed and security. There is both
+  an online version that you can point at an arbitrary URL as well as
+  a command-line version for running yourself.</p>
+</li>
+<li>
+<p><a href="https://codecov.io/">Codecov</a> hooks into GitHub, BitBucket or GitLab
+  and reports code coverage on your code repositories.</p>
+</li>
+</ul>
+<h2>Code metrics resources</h2>
+<p>Code metrics are really useful when you have a team working on a project
+for awhile and want to keep the code quality from degrading. However, you 
+can easily go overboard instrumenting everything and overanalyzing the
+results. The following resources will introduce code metrics topics to
+you as well as give perspective when metrics are useful to the point of
+diminishing returns.</p>
+<ul>
+<li>
+<p><a href="https://jvns.ca/blog/2017/12/17/how-do-ruby---python-profilers-work-/">How do Ruby &amp; Python profilers work?</a>
+  explains the difference between sampling and tracing profilers then
+  digs into how they work and their advantages and disadvantages.</p>
+</li>
+<li>
+<p><a href="https://engineering.quora.com/Moving-Fast-With-High-Code-Quality">Moving Fast With High Code Quality</a>
+  provides Quora's code quality goals and how they handle code reviews
+  with their internal tools.</p>
+</li>
+<li>
+<p><a href="https://cacm.acm.org/magazines/2018/4/226371-lessons-from-building-static-analysis-tools-at-google/fulltext">Lessons from Building Static Analysis Tools at Google</a>
+  is a fantastic in-depth read that explains why workflow integration
+  and adapting to developer feedback are critical for static analysis
+  tools adoption in development environments.</p>
+</li>
+<li>
+<p><a href="http://doughellmann.com/2008/03/01/static-code-analizers-for-python.html">Static Code Analizers for Python</a>
+  is an older article but goes over the basics of what Python static code
+  analyzers do.</p>
+</li>
+<li>
+<p><a href="http://jbisbee.blogspot.ca/2014/04/getting-started-with-pylint.html">Getting Started with Pylint</a>
+  goes over setting up Pylint, generating the .pylintrc file and what's
+  in the configuration.</p>
+</li>
+<li>
+<p><a href="https://dev.to/sethmichaellarson/linting-as-lightweight-defect-detection-for-python">Linting as Lightweight Defect Detection for Python</a>
+  presents a straightforward code example of how linters can detect certain
+  classes of errors in code that especially in dynamically-typed languages
+  are not caught at compile time. The post then shows how to use Flake8 in
+  your own code reviews.</p>
+</li>
+<li>
+<p>This /r/Python 
+  <a href="https://www.reddit.com/r/Python/comments/3oyjva/what_python_linter_do_you_use_poll/">poll on what linters the community uses</a>
+  provides some input on using PyCharm just for its linting features as
+  well as some other approaches.</p>
+</li>
+<li>
+<p><a href="https://avilpage.com/2015/05/automatically-pep8-your-python-code.html">Automatically PEP8 &amp; Format Your Python Code</a>
+  shows how to use the <code>autopep8</code> library, including an <a href="/emacs.html">Emacs</a>
+  plugin that lints your code for PEP8 compliance as you work.</p>
+</li>
+<li>
+<p><a href="https://simpleisbetterthancomplex.com/packages/2016/08/05/flake8.html">How to use Flask8</a>
+  explains what Flask8 is, its usage and expected output.</p>
+</li>
+<li>
+<p><a href="https://medium.com/python-pandemonium/what-is-flake8-and-why-we-should-use-it-b89bd78073f2">What is Flake8 and why we should use it?</a>
+  covers why using a linting tool like Flake8 can improve the quality of 
+  your Python code and how to install and configure it for your
+  environment.</p>
+</li>
+<li>
+<p><a href="https://www.codacy.com/blog/which-python-static-analysis-tools-should-i-use/">Which Python static analysis tools should I use?</a>
+  covers Pylint, PyFlakes and mypy with a short description of the 
+  advantages and disadvantage for each one.</p>
+</li>
+<li>
+<p><a href="https://blog.wallaroolabs.com/2017/12/dynamic-tracing-a-pony---python-program-with-dtrace/">Dynamic tracing a Pony + Python program with DTrace</a>
+  shows how to use dynamic tracing programs to analyze code
+  at runtime.</p>
+</li>
+<li>
+<p>This <a href="http://stackoverflow.com/questions/1428872/pylint-pychecker-or-pyflakes">Stack Overflow question on Python static code analysis tools</a>
+  contains comparison discussions of PyLint, PyChecker and PyFlakes.</p>
+</li>
+<li>
+<p><a href="https://www.mattlayman.com/blog/2018/python-code-black/">Consistent Python code with Black</a>
+  covers how to use Black and add it as a pre-commit hook in Git to
+  ensure consistency in repository updates.</p>
+</li>
+</ul>
+<h3>获取代码度量后的下一步是什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/continuous-integration.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1639 1056q0 5-1 7-64 268-268 434.5t-478 166.5q-146 0-282.5-55t-243.5-157l-129 129q-19 19-45 19t-45-19-19-45v-448q0-26 19-45t45-19h448q26 0 45 19t19 45-19 45l-137 137q71 66 161 102t187 36q134 0 250-65t186-179q11-17 53-117 8-23 30-23h192q13 0 22.5 9.5t9.5 22.5zm25-800v448q0 26-19 45t-45 19h-448q-26 0-45-19t-19-45 19-45l138-138q-148-137-349-137-134 0-250 65t-186 179q-11 17-53 117-8 23-30 23h-199q-13 0-22.5-9.5t-9.5-22.5v-7q65-268 270-434.5t480-166.5q146 0 284 55.5t245 156.5l130-129q19-19 45-19t45 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我可以自动为我的应用程序进行测试和部署吗？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/web-analytics.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1152q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm192-448q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm428 481l101-382q6-26-7.5-48.5t-38.5-29.5-48 6.5-30 39.5l-101 382q-60 5-107 43.5t-63 98.5q-20 77 20 146t117 89 146-20 89-117q16-60-6-117t-72-91zm660-33q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm-640-640q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm448 192q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm320 448q0 261-141 483-19 29-54 29h-1402q-35 0-54-29-141-221-141-483 0-182 71-348t191-286 286-191 348-71 348 71 286 191 191 286 71 348z" fill="#fff"/></svg></a>
+<p class="under-btn">我想通过网络分析了解有关应用用户的更多信息。</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/web-frameworks.html" class="lgi sbc">Web Frameworks</a>
+<a href="/django.html" class="lgi sbc">Django</a>
+<a href="/flask.html" class="lgi sbc">Flask</a>
+<a href="/bottle.html" class="lgi sbc">Bottle</a>
+<a href="/pyramid.html" class="lgi sbc">Pyramid</a>
+<a href="/turbogears.html" class="lgi sbc">TurboGears</a>
+<a href="/falcon.html" class="lgi sbc">Falcon</a>
+<a href="/morepath.html" class="lgi sbc">Morepath</a>
+<a href="/sanic.html" class="lgi sbc">Sanic</a>
+<a href="/other-web-frameworks.html" class="lgi sbc">Other Web Frameworks</a>
+<a href="/template-engines.html" class="lgi sbc">Template Engines</a>
+<a href="/jinja2.html" class="lgi sbc">Jinja2</a>
+<a href="/mako.html" class="lgi sbc">Mako</a>
+<a href="/django-templates.html" class="lgi sbc">Django Templates</a>
+<a href="/web-design.html" class="lgi sbc">Web Design</a>
+<a href="/hypertext-markup-language-html.html" class="lgi sbc">HTML</a>
+<a href="/cascading-style-sheets.html" class="lgi sbc">Cascading Style Sheets (CSS)</a>
+<a href="/responsive-design.html" class="lgi sbc">Responsive Design</a>
+<a href="/minification.html" class="lgi sbc">Minification</a>
+<a href="/css-frameworks.html" class="lgi sbc">CSS Frameworks</a>
+<a href="/bootstrap-css.html" class="lgi sbc">Bootstrap</a>
+<a href="/foundation-css.html" class="lgi sbc">Foundation</a>
+<a href="/javascript.html" class="lgi sbc">JavaScript</a>
+<a href="/react.html" class="lgi sbc">React</a>
+<a href="/vuejs.html" class="lgi sbc">Vue.js</a>
+<a href="/angular.html" class="lgi sbc">Angular</a>
+<a href="/task-queues.html" class="lgi sbc">Task Queues</a>
+<a href="/celery.html" class="lgi sbc">Celery</a>
+<a href="/redis-queue-rq.html" class="lgi sbc">Redis Queue (RQ)</a>
+<a href="/dramatiq.html" class="lgi sbc">Dramatiq</a>
+<a href="/static-site-generator.html" class="lgi sbc">Static Site Generators</a>
+<a href="/pelican.html" class="lgi sbc">Pelican</a>
+<a href="/lektor.html" class="lgi sbc">Lektor</a>
+<a href="/mkdocs.html" class="lgi sbc">MkDocs</a>
+<a href="/testing.html" class="lgi sbc">Testing</a>
+<a href="/unit-testing.html" class="lgi sbc">Unit Testing</a>
+<a href="/integration-testing.html" class="lgi sbc">Integration Testing</a>
+<a href="/debugging.html" class="lgi sbc">Debugging</a>
+<a href="/code-metrics.html" class="lgi active sbc">Code Metrics</a>
+<a href="/networking.html" class="lgi sbc">Networking</a>
+<a href="/https.html" class="lgi sbc">HTTPS</a>
+<a href="/websockets.html" class="lgi sbc">WebSockets</a>
+<a href="/webrtc.html" class="lgi sbc">WebRTC</a>
+<a href="/application-programming-interfaces.html" class="lgi sbc">Web APIs</a>
+<a href="/microservices.html" class="lgi sbc">Microservices</a>
+<a href="/webhooks.html" class="lgi sbc">Webhooks</a>
+<a href="/bots.html" class="lgi sbc">Bots</a>
+<a href="/api-creation.html" class="lgi sbc">API Creation</a>
+<a href="/api-frameworks.html" class="lgi sbc">API Frameworks</a>
+<a href="/django-rest-framework-drf.html" class="lgi sbc">Django REST Framework</a>
+<a href="/api-integration.html" class="lgi sbc">API Integration</a>
+<a href="/twilio.html" class="lgi sbc">Twilio</a>
+<a href="/stripe.html" class="lgi sbc">Stripe</a>
+<a href="/slack.html" class="lgi sbc">Slack</a>
+<a href="/okta.html" class="lgi sbc">Okta</a>
+<a href="/web-application-security.html" class="lgi sbc">Security</a>
+<a href="/sql-injection.html" class="lgi sbc">SQL Injection</a>
+<a href="/cross-site-request-forgery-csrf.html" class="lgi sbc">CSRF</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+ <a href="/code-metrics.html" class="lgi active">&raquo; Code Metrics</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在 Ubuntu 16.04 Xenial Xerus 上安装和使用 MySQL 的快速教程。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何在 Ubuntu 16.04 上安装和使用 MySQL" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/160528-mysql-ubuntu-1604/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/install-mysql-ubuntu-1604.html" />
+<meta property="og:title" content="如何在 Ubuntu 16.04 上安装和使用 MySQL" />
+<meta property="og:description" content="在 Ubuntu 16.04 Xenial Xerus 上安装和使用 MySQL 的快速教程。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/160528-mysql-ubuntu-1604/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/install-mysql-ubuntu-1604.html" />
+<title>如何在 Ubuntu 16.04 上安装和使用 MySQL - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何在 Ubuntu 16.04 上安装和使用 MySQL</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     December 22, 2017. Originally posted
+     on May 28, 2016.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/mysql.html">MySQL</a> is a common open source 
+<a href="/databases.html">relational database</a> for creating, reading, updating 
+and deleting data in <a href="/web-frameworks.html">Python web applications</a>.
+Let's learn how to install MySQL on <a href="/ubuntu.html">Ubuntu 16.04</a> and then 
+run a few SQL queries within the command line client.</p>
+<p>We will not go over connecting via Python applications using
+<a href="/object-relational-mappers-orms.html">object-relational mappers (ORMs)</a> 
+but these steps can be used as a prerequisite to working with an ORM such 
+as SQLAlchemy or Peewee.</p>
+<h2>Tools We Need</h2>
+<p>In this tutorial we'll use the following components:</p>
+<ul>
+<li><a href="http://releases.ubuntu.com/16.04/">Ubuntu 16.04.2</a> (this tutorial 
+  should also work on other Ubuntu versions)</li>
+<li><a href="http://dev.mysql.com/doc/">MySQL</a></li>
+</ul>
+<h2>Install MySQL</h2>
+<p>We can install MySQL by using the <code>apt</code> package manager. First make sure
+your packages list are up to date. Open the terminal and run this <code>apt</code>
+command.</p>
+<div class="highlight"><pre><span></span>sudo apt-get update
+</pre></div>
+
+
+<p>We need to install the <code>mysql-server</code> package, which downloads the required
+files, configures the initial database set up and handles running MySQL
+as a system service. Run this <code>apt</code> command to get the process started.</p>
+<div class="highlight"><pre><span></span>sudo apt-get install mysql-server
+</pre></div>
+
+
+<p>Enter 'y' when prompted with whether or not you want to install the
+new package.</p>
+<p><img src="/img/160528-mysql-ubuntu-1604/apt-install-prompt.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>An administrative screen asking for a new root password will appear in the 
+middle of the package installation process. Enter your chosen new password 
+twice and the installation will continue.</p>
+<p><img src="/img/160528-mysql-ubuntu-1604/new-root-password.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>In a moment the installation will finish and you'll be back at the command
+prompt.</p>
+<p><img src="/img/160528-mysql-ubuntu-1604/apt-finished.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>MySQL is now installed with a root user. However, we do not want to have our
+applications connect to the database with that user, so next we will 
+create a new non-root user.</p>
+<h2>Securing MySQL</h2>
+<p>MySQL is installed with a basic configuration meant for development and testing
+purposes. However, the configuration is not secure for production enviroments,
+therefore it comes with a utility to handle basic security. Run the
+following command and answer the questions based on your environment 
+requirements.</p>
+<div class="highlight"><pre><span></span>sudo mysql_secure_installation
+</pre></div>
+
+
+<p>When you finish running the script you should see the following output and
+be back at the command prompt.</p>
+<p><img src="/img/160528-mysql-ubuntu-1604/mysql-secure-installation.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>Our MySQL instance has basic security in place but we need to create a 
+non-root user for applications to interact with the database.</p>
+<h2>Creating MySQL Users</h2>
+<p>To create a non-root user, connect to the MySQL instance with the 
+<code>mysql</code> command line client.</p>
+<div class="highlight"><pre><span></span>mysql -u root -p
+</pre></div>
+
+
+<p>Now use the <code>CREATE USER</code> command to generate a new user. Make sure to
+change "mynewuser" and "goodPassword" with your own values.</p>
+<div class="highlight"><pre><span></span>CREATE USER &#39;mynewuser&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;goodPassword&#39;;
+</pre></div>
+
+
+<p>No output after the command is good - that means the command succeeded.</p>
+<p><img src="/img/160528-mysql-ubuntu-1604/create-user.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>We need to apply privileges to the new user so it can handle basic database
+operations. Again, make sure to replace the default username in this command
+with your new username.</p>
+<div class="highlight"><pre><span></span>GRANT ALL PRIVILEGES ON * . * TO &#39;mynewuser&#39;@&#39;localhost&#39;;
+</pre></div>
+
+
+<p><img src="/img/160528-mysql-ubuntu-1604/grant-all.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>It's a good idea to reload the privileges to make sure our new user's
+permissions are in place.</p>
+<div class="highlight"><pre><span></span>FLUSH PRIVILEGES;
+</pre></div>
+
+
+<p>Now that our permissions are reloaded we can connect with the new user.</p>
+<h2>New User Connection</h2>
+<p>We're set to connect to the database with our new user. Exit the MySQL
+client with "Ctrl-d". Reconnect using a slightly different command than
+we used earlier.</p>
+<div class="highlight"><pre><span></span>mysql -u mynewuser -p
+</pre></div>
+
+
+<p><img src="/img/160528-mysql-ubuntu-1604/mysql-new-user.png" width="100%" class="technical-diagram img-rounded" alt="Connect to MySQL as the new user we just created."></p>
+<p>Create a new database with the <code>CREATE DATABASE</code> command.</p>
+<div class="highlight"><pre><span></span>CREATE DATABASE fullstackpython;
+</pre></div>
+
+
+<p><img src="/img/160528-mysql-ubuntu-1604/create-database.png" width="100%" class="technical-diagram img-rounded" alt="Create a new MySQL database with our new user."></p>
+<p>Connect to the new database with the <code>USE</code> command.</p>
+<div class="highlight"><pre><span></span>use fullstackpython;
+</pre></div>
+
+
+<p><img src="/img/160528-mysql-ubuntu-1604/use-command.png" width="100%" class="technical-diagram img-rounded" alt="Connect to the newly-created database with the USE command."></p>
+<p>Create a simple new table with the <code>CREATE TABLE</code> command.</p>
+<div class="highlight"><pre><span></span>CREATE TABLE pages (name VARCHAR(50), url VARCHAR(1024));
+</pre></div>
+
+
+<p>Our table is ready to go - we can interact with it using the 
+<code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> and <code>DELETE</code> SQL commands.</p>
+<h2>What's next?</h2>
+<p>We now have our MySQL instance installed and ready for interaction.
+Take a look at the <a href="/mysql.html">MySQL</a>, 
+<a href="/databases.html">relational databases</a> and 
+<a href="/object-relational-mappers-orms.html">object-relational mappers (ORMs)</a>
+pages for more tutorials.</p>
+<p>Questions? Tweet <a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or post a message on the 
+<a href="https://www.facebook.com/fullstackpython">Full Stack Python Facebook page</a>. </p>
+<p>See something wrong in this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/160528-install-mysql-ubuntu-1604.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/160528-mysql-ubuntu-1604/header.jpg" alt="MySQL 和 Ubuntu logos，版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/operating-systems.html" class="lgi">Operating Systems</a>
+<a href="/ubuntu.html" class="lgi">Ubuntu</a>
+<a href="/databases.html" class="lgi">Relational Databases</a>
+<a href="/mysql.html" class="lgi">MySQL</a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

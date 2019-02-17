@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="了解是否应使用Python版本2或3来构建应用程序。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Python 2 还是 3?" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/python-2-or-3.html" />
+<meta property="og:title" content="Python 2 还是 3?" />
+<meta property="og:description" content="了解是否应使用Python版本2或3来构建应用程序。" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/python-2-or-3.html" />
+<title>Python 2 还是 3? - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Python 2 还是 3?</h1>
+<p>Python 编程语言几乎完成了从版本 2 升级到版本 3 的长期过渡。初学者通常会有到底该学哪个版本的问题。
+Python 3 最初是在 2008 年发布的，但目前仍不是作为默认版本安装在很多操作系统，比如 macOS 上，
+听到这些很令人困惑。然而，随着最终的第 2 版 Python 2.7 正在接近其定于<a href="https://mail.python.org/pipermail/python-dev/2018-March/152348.html">2020年1月1日</a>的生命周期结束，这种情况正在迅速发生变化。</p>
+<p>现在简单的答案是：学习Python 3，特别是截至2018年5月的最新版本是 <a href="https://www.python.org/downloads/">Python 3.6.5</a>。 
+如果由于某种原因你绝对必须学习 Python 2，例如因为你的雇主正在研究一堆遗留代码，
+你将能够将你的大部分知识从 Python 2 转移到 Python 3 中。同样，你如果从 Python 3 开始，
+你仍然能够阅读和编写 Python 2 代码。</p>
+<p>有足够的<a href="/best-python-resources.html">很棒的资源</a>可以教你在没有任何先前版本2经验的版本3中编写代码。
+Python 3 是未来，你不会后悔从最新版本的<a href="/learning-programming.html">编程语言</a>开始。</p>
+<p>关于完全使用 Python 3 的建议的一个警告。如果您对使用<a href="/configuration-management.html">配置管理工具</a>的 DevOps 类型工作感兴趣，
+例如 <a href="http://www.fabfile.org/">Fabric</a> 或 <a href="/ansible.html">Ansible</a>，
+那么你可能不得不同时使用 Python 2 和 3，因为这些库的部分落后于完整的Python 3支持。</p>
+<h2>可视化和项目</h2>
+<p>由于从 Python 2 升级到3在社区内是如此巨大的事业，许多项目如雨后春笋般涌现，使转换更加容易。</p>
+<ul>
+<li>
+<p><a href="https://pythonhosted.org/six/">six</a> 是一个2/3兼容性库，它是许多流行的 Python 项目
+  的依赖项，可以更容易同时支持 Python 2 和 3。</p>
+</li>
+<li>
+<p><a href="http://py3readiness.org/">Python 3 Readiness</a> 是一个可视化库，
+  其中最流行的360个库（通过下载）已准备好与 Python 3 一起使用。</p>
+</li>
+<li>
+<p><a href="https://pythonclock.org/">Python 时钟</a> 倒计时直到P ython 2.x 不再维护。
+  虽然 Python 2 的退役可能还需要很长时间，但是将现有应用程序迁移到 3.x 中的修改语法
+  可能需要花费大量的时间和精力。</p>
+</li>
+</ul>
+<h3>转到 3 的相关资源</h3>
+<p>将现有的代码库从2移动到Python 3可能是一项艰巨的任务。这些资源是由以前经历过这个过程的开发人员
+创建的，并且提供了减少痛苦的建议。</p>
+<ul>
+<li>
+<p><a href="http://python3porting.com/">Python 3 迁移</a> 是一本完整的书，其中详细介绍了如何
+  将现有项目和库升级到Python 3.x。</p>
+</li>
+<li>
+<p><a href="http://ptgmedia.pearsoncmg.com/imprint_downloads/informit/promotions/python/python2python3.pdf">从 Python 2 转到 Python 3</a>
+  是一份如何移植 Python 代码的 PDF 小抄</p>
+</li>
+<li>
+<p>官方<a href="https://wiki.python.org/moin/PortingToPy3k/">将代码移植到 Python 3</a> 页面
+  包含有关移植 Python 代码以及底层 C 实现的资源。还有一个<a href="https://wiki.python.org/moin/PortingToPy3k/BilingualQuickRef">使用Python 2和3兼容性编写代码的快速参考</a>。</p>
+</li>
+<li>
+<p><a href="https://godjango.com/96-django-and-python-3-how-to-setup-pyenv-for-multiple-pythons/">Django 和 Python 3 如何设置 pyenv 来支持多个 Python 版本</a>，
+  是一部讲述如何用 pyenv 来实现同时运行 Python 2 和 3 以支持不同的项目的视频。</p>
+</li>
+<li>
+<p><a href="https://tech.yplanapp.com/2016/08/24/upgrading-to-python-3-with-zero-downtime/">通过零停机升级到 Python 3</a> 
+  提供有关将大型 Web 应用程序从现有 Python 2 转移到 Python 3 的建议。
+  他们的过程涉及升级依赖关系，测试和部署新版本，然后返回清理过渡创建的不必要的代码。</p>
+</li>
+<li>
+<p><a href="https://github.com/arogozhnikov/python3_with_pleasure">愉快地迁移到 Python 3</a> 
+  是一个移植指南，侧重于数据科学家通常在其程序中使用的代码。</p>
+</li>
+<li>
+<p><a href="https://thenewstack.io/instagram-makes-smooth-move-python-3/">Instagram 顺利移植到 Python 3</a> 
+  解释了他们在大约一年内将所有代码转换为 Python 3 的升级过程。</p>
+</li>
+<li>
+<p><a href="https://talkpython.fm/episodes/show/155/practical-steps-for-moving-to-python-3">转移到 Python 3 的实践步骤</a> 
+  是一个播客，它将迁移大型现有应用程序代码库从 Python 2 到 Python 3。</p>
+</li>
+<li>
+<p><a href="https://able.bio/rhett/lessons-learned-from-migrating-to-python-3--27jsj82">迁移到 Python 3 的经验教训</a> 
+  介绍了开发团队如何升级基于 <a href="/django.html">Django</a> 的大型电子商务网站。</p>
+</li>
+</ul>
+<h3>从 Python 2 转到 3 的相关资源</h3>
+<p>以下资源将为您提供有关社区如何感受从 Python 2 到 3 的过渡的更多背景信息，以及您应该尽快升级的原因。</p>
+<ul>
+<li>
+<p><a href="https://eev.ee/blog/2016/07/31/python-faq-why-should-i-use-python-3/">我为什么要使用 Python 3？</a> 
+  是关于重要主题的详细常见问题解答，例如 3.x 提供的 unicode 支持，迭代改进和异步升级。
+  作者还有一篇很棒的后续帖子，题为<a href="https://eev.ee/blog/2016/11/23/a-rebuttal-for-python-3/">针对 Python 3 的反驳</a> ，
+  反驳其他社区成员对 Python 3 中的各种功能感到不满的论点。</p>
+</li>
+<li>
+<p>想知道 Python 3 与 Python 2 相比都有什么改动以及 Python 3 的所有优势吗？你需要看下 
+  <a href="https://docs.python.org/3/whatsnew/index.html">Python 3 修改情况的官方文档</a>。</p>
+</li>
+<li>
+<p><a href="https://blogs.msdn.microsoft.com/pythonengineering/2016/03/08/python-3-is-winning/">Python 3 是赢家</a> 
+  上的数据和图表来自 PyPI，可以看出如果以当前速度发展，到 2016 年中期，支持 Python 3 的库总量将超过 支持 Python 2 的库。</p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=Oiw23yfqQy8">来自仁慈的独裁者的 Python 3 回顾</a> 
+  是 Guido van Rossum 关于什么可行，什么不可行以及仍需要在转变被认为完成前需要做的视频。</p>
+</li>
+<li>
+<p><a href="http://www.snarky.ca/the-stages-of-the-python-3-transition">Python 3 过渡的各个阶段</a> 
+  提供了一个核心 Python 开发人员关于截止到2015年底从 Python 2 到 3 的过渡进展。</p>
+</li>
+<li>
+<p><a href="https://blogs.dropbox.com/tech/2018/09/how-we-rolled-out-one-of-the-largest-python-3-migrations-ever/">Dropbox 如何推进有史以来最大的 Python 3 迁移之一</a> 
+  解释了他们的转型是如何在2015年开始的，并在2018年成功完成。</p>
+</li>
+<li>
+<p><a href="http://whypy3.com/">为什么使用Python 3？</a> 随机输出使用 Python 3 而不是 2.x 的合理理由。</p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=nRtp9NgtXiA">激进的规则：在 Facebook 改变 Python 文化</a> 
+  是一个引人入胜的关于 Facebook 如何在公司内部一群热情的开发人员的努力下从主要用 Python 2 转移到 Python 3。
+  关于如何在大公司中迁移已建立的代码库这篇绝对值得阅读。</p>
+</li>
+<li>
+<p><a href="http://nothingbutsnark.svbtle.com/porting-to-python-3-is-like-eating-your-vegetables">移植到 Python 3 就像要求你吃蔬菜</a>，
+  阐述了 Python 3 有些特性值得我们将代码移植过去，同时还提供了一些怎样移植更省力的小建议。</p>
+</li>
+<li>
+<p><a href="http://blog.scrapinghub.com/2015/08/19/scrapy-on-the-road-to-python-3-support/">Scrapy 的 Python 3 支持之路</a>，
+  以一个广为使用的 Python 项目的角度阐述了它的 Python 3 支持计划，以及为何实施起来花了这么长时间的原因。</p>
+</li>
+<li>
+<p>所有主要的科研型 Python 类库都承诺不晚于 2020 年，即当 Python 2 维护期结束时，
+  <a href="https://python3statement.github.io/">放弃支持 Python 2</a>。
+  该承诺通过公开声明它们的意图来大力鼓励对 Python 3 的使用。</p>
+</li>
+<li>
+<p><a href="http://www.asmeurer.com/python3-presentation/slides.html">10个很棒的 Python 功能，因为你拒绝升级到 Python 3 而无法使用</a>，
+  是一个很棒的幻灯片，带有 Python 3 有的，2.x 中没有的新功能的有用代码片段，
+  例如仅关键字参数，链式异常和 <code>yield from</code> 关键字。</p>
+</li>
+</ul>
+<h3>你现在知道Python版本了，下一步是什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/development-environments.html" class="btn btn-success btn-full"><svg width="34" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1728 992v-832q0-13-9.5-22.5t-22.5-9.5h-1600q-13 0-22.5 9.5t-9.5 22.5v832q0 13 9.5 22.5t22.5 9.5h1600q13 0 22.5-9.5t9.5-22.5zm128-832v1088q0 66-47 113t-113 47h-544q0 37 16 77.5t32 71 16 43.5q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45q0-14 16-44t32-70 16-78h-544q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1600q66 0 113 47t47 113z" fill="#fff"/></svg></a>
+<p class="under-btn">我应该使用什么编辑器来编写我的 Python 应用程序？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/web-frameworks.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M553 1399l-50 50q-10 10-23 10t-23-10l-466-466q-10-10-10-23t10-23l466-466q10-10 23-10t23 10l50 50q10 10 10 23t-10 23l-393 393 393 393q10 10 10 23t-10 23zm591-1067l-373 1291q-4 13-15.5 19.5t-23.5 2.5l-62-17q-13-4-19.5-15.5t-2.5-24.5l373-1291q4-13 15.5-19.5t23.5-2.5l62 17q13 4 19.5 15.5t2.5 24.5zm657 651l-466 466q-10 10-23 10t-23-10l-50-50q-10-10-10-23t10-23l393-393-393-393q-10-10-10-23t10-23l50-50q10-10 23-10t23 10l466 466q10 10 10 23t-10 23z" fill="#fff"/></svg></a>
+<p class="under-btn">我想学习如何用框架创建 Python Web 应用。</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/best-python-resources.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1703 478q40 57 18 129l-275 906q-19 64-76.5 107.5t-122.5 43.5h-923q-77 0-148.5-53.5t-99.5-131.5q-24-67-2-127 0-4 3-27t4-37q1-8-3-21.5t-3-19.5q2-11 8-21t16.5-23.5 16.5-23.5q23-38 45-91.5t30-91.5q3-10 .5-30t-.5-28q3-11 17-28t17-23q21-36 42-92t25-90q1-9-2.5-32t.5-28q4-13 22-30.5t22-22.5q19-26 42.5-84.5t27.5-96.5q1-8-3-25.5t-2-26.5q2-8 9-18t18-23 17-21q8-12 16.5-30.5t15-35 16-36 19.5-32 26.5-23.5 36-11.5 47.5 5.5l-1 3q38-9 51-9h761q74 0 114 56t18 130l-274 906q-36 119-71.5 153.5t-128.5 34.5h-869q-27 0-38 15-11 16-1 43 24 70 144 70h923q29 0 56-15.5t35-41.5l300-987q7-22 5-57 38 15 59 43zm-1064 2q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5zm-83 256q-4 13 2 22.5t20 9.5h608q13 0 25.5-9.5t16.5-22.5l21-64q4-13-2-22.5t-20-9.5h-608q-13 0-25.5 9.5t-16.5 22.5z" fill="#fff"/></svg></a>
+<p class="under-btn">给我一个最好的Python学习资源列表。</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/learning-programming.html" class="lgi sbc">学习编程</a>
+<a href="/python-programming-language.html" class="lgi sbc">核心语言</a>
+<a href="/why-use-python.html" class="lgi sbc">为什么用 Python？</a>
+<a href="/python-2-or-3.html" class="lgi active sbc">Python 2 还是 3?</a>
+<a href="/enterprise-python.html" class="lgi sbc">企业 Python</a>
+<a href="/python-community.html" class="lgi sbc">Python Community</a>
+<a href="/companies-using-python.html" class="lgi sbc">Companies using Python</a>
+<a href="/best-python-resources.html" class="lgi sbc">Best Python Resources</a>
+<a href="/best-python-videos.html" class="lgi sbc">Best Python Videos</a>
+<a href="/best-python-podcasts.html" class="lgi sbc">Best Python Podcasts</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+ <a href="/python-2-or-3.html" class="lgi active">&raquo; Python 2 还是 3?</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

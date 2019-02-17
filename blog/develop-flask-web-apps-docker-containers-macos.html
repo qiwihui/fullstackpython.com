@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="用 Docker 容器设置和开发 Flask 应用程序">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="在 macOS 上用 Docker 容器开发 Flask 应用程序" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/180309-flask-docker/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/develop-flask-web-apps-docker-containers-macos.html" />
+<meta property="og:title" content="在 macOS 上用 Docker 容器开发 Flask 应用程序" />
+<meta property="og:description" content="用 Docker 容器设置和开发 Flask 应用程序 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/180309-flask-docker/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/develop-flask-web-apps-docker-containers-macos.html" />
+<title>在 macOS 上用 Docker 容器开发 Flask 应用程序 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">在 macOS 上用 Docker 容器开发 Flask 应用程序</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     June 05, 2018. Originally posted
+     on March 09, 2018.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>Adding <a href="/docker.html">Docker</a> to your <a href="/why-use-python.html">Python</a> and 
+<a href="/flask.html">Flask</a> <a href="/development-environments.html">development environment</a> 
+can be confusing when you are just getting started with containers. Let's 
+quickly get Docker installed and configured for developing Flask web 
+applications on your local system.</p>
+<h2>Our Tools</h2>
+<p>This tutorial is written for <a href="/python-2-or-3.html">Python 3</a>. It will work with
+Python 2 but I have not tested it with the 
+<a href="https://pythonclock.org/">soon-to-be deprecated 2.7 version</a>. </p>
+<p><a href="https://docs.docker.com/docker-for-mac/install/">Docker for Mac</a> is necessary.
+I recommend the stable release unless you have an explicit purpose for the edge 
+channel.</p>
+<p>Within the Docker container we will use:</p>
+<ul>
+<li>Python 3, specifically the
+  <a href="https://hub.docker.com/r/library/python/tags/">slim-3.6.5 version</a>
+  from Docker Hub</li>
+<li><a href="/flask.html">Flask</a> version 1.0.2</li>
+</ul>
+<p>All of the code for the Dockerfile and the Flask app are available open source
+under the MIT license on GitHub under the 
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/docker-flask-mac">docker-flask-mac directory</a>
+of the
+<a href="https://github.com/fullstackpython/blog-code-examples">blog-code-examples</a>
+repository. Use the code for your own purposes as much as you like.</p>
+<h2>Installing Docker on macOS</h2>
+<p>We need to install Docker before we can spin up our Docker containers. If you
+already have Docker for Mac installed and working, feel free to jump to the
+next section.</p>
+<p>On your Mac, 
+<a href="https://www.docker.com/community-edition#/download">download the Docker Community Edition (CE) for Mac</a>
+installer.</p>
+<p><img src="/img/180309-flask-docker/docker-ce.jpg" width="100%" 
+ class="shot rnd" alt="Download the Docker Community Edition for Mac."></p>
+<p>Find the newly-downloaded install within Finder and double click on the file.
+Follow the installation process, which includes granting administrative privileges
+to the installer.</p>
+<p>Open Terminal when the installer is done. Test your Docker installation with the 
+<code>--version</code> flag:</p>
+<div class="highlight"><pre><span></span>docker --version
+</pre></div>
+
+
+<p>If Docker is installed correctly you should see the following output:</p>
+<div class="highlight"><pre><span></span>Docker version 18.03.1-ce, build 9ee9f40
+</pre></div>
+
+
+<p>Note that Docker runs through a system agent you can find in the menu bar.</p>
+<p><img src="/img/180309-flask-docker/docker-agent.png" width="100%" 
+ class="shot rnd" alt="Docker agent in the menu bar."></p>
+<p>I have found the Docker agent to take up some precious battery life
+on my Macbook Pro. If I am not developing and need to max battery time I will
+close down the agent and start it back up again when I am ready to code. </p>
+<p>Now that Docker is installed let's get to running a container and writing
+our Flask application.</p>
+<h2>Dockerfile</h2>
+<p>Docker needs to know what we want in a container, which is where the 
+<code>Dockerfile</code> comes in. </p>
+<div class="highlight"><pre><span></span># this is an official Python runtime, used as the parent image
+FROM python:3.6.5-slim
+
+# set the working directory in the container to /app
+WORKDIR /app
+
+# add the current directory to the container as /app
+ADD . /app
+
+# execute everyone&#39;s favorite pip command, pip install -r
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# unblock port 80 for the Flask app to run on
+EXPOSE 80
+
+# execute the Flask app
+CMD [&quot;python&quot;, &quot;app.py&quot;]
+</pre></div>
+
+
+<p>Save the Dockerfile so that we can run our next command with the completed
+contents of the file. On the commandline run:</p>
+<div class="highlight"><pre><span></span>docker build -t flaskdock .
+</pre></div>
+
+
+<p>The above <code>docker build</code> file uses the <code>-t</code> flag to tag the image with
+the name of <code>flaskdock</code>.</p>
+<p>If the build worked successfully we can see the image in with the 
+<code>docker image ls</code> command. Give that a try now:</p>
+<div class="highlight"><pre><span></span>docker image ls
+</pre></div>
+
+
+<p>We should then see our tag name in the images list:</p>
+<div class="highlight"><pre><span></span>REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+flaskdock           latest              24045e0464af        2 minutes ago       165MB
+</pre></div>
+
+
+<p>Our image is ready to load up as a container so we can write a quick
+Flask app that we will use to test our environment by running it within
+the container.</p>
+<h2>Coding A Simple Flask app</h2>
+<p>Time to put together a super simple "Hello, World!" Flask web app to test
+running Python code within our Docker container. Within the current
+project directory, create a file named <code>app.py</code> with the following contents:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Hi from your Flask app running in your Docker container!&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The above 7 lines of code (not counting blank PEP8-compliant lines) in 
+<a href="https://github.com/fullstackpython/blog-code-examples/blob/master/docker-flask-mac/app.py">app.py</a> 
+allow our application to return a simple message when run with the 
+Flask development server.</p>
+<p>We need just one more file to specify our <code>Flask</code> dependency. Create 
+a <code>requirements.txt</code> file within the same directory as <code>app.py</code>:</p>
+<div class="highlight"><pre><span></span>flask==1.0.2
+</pre></div>
+
+
+<p>Make sure both the <code>app.py</code> and <code>requirements.txt</code> file are saved then
+we can give the code a try.</p>
+<h2>Running the Container</h2>
+<p>Now that we have our image in hand along with the Python code in a file 
+we can run the image as a container with the <code>docker run</code> command. Execute 
+the following command, making sure to replace the absolute path for the 
+volume to your own directory.</p>
+<div class="highlight"><pre><span></span>docker run -p 5000:80 --volume=/Users/matt/devel/py/flaskdocker:/app flaskdock
+</pre></div>
+
+
+<p>If you receive the error 
+<code>python: can't open file 'app.py': [Errno 2] No such file or directory</code> then
+you likely forgot to chance <code>/Users/matt/devel/py/flaskdocker</code> to the 
+directory where your project files, especially <code>app.py</code>, are located.</p>
+<p><img src="/img/180309-flask-docker/flask-app-response.png" width="100%" 
+ class="shot rnd" alt="Flask app responding to requests from within a Docker container."></p>
+<p>Everything worked when you see a simple text-based HTTP response like what
+is shown above in the screenshot of my Chrome browser.</p>
+<h2>What's Next?</h2>
+<p>We just installed Docker and configured a Flask application to run inside a 
+container. That is just the beginning of how you can integrate Docker into 
+your workflow. I strongly recommend reading the 
+<a href="https://docs.docker.com/compose/django/">Django with PostgreSQL quickstart</a>
+that will introduce you to Docker Swarm as well as the core Docker container
+service.</p>
+<p>Next up take a look at the <a href="/docker.html">Docker</a> and 
+<a href="/deployment.html">deployment</a> pages for more related tutorials.</p>
+<p>Questions? Let me know via a GitHub
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">issue ticket on the Full Stack Python repository</a>, 
+on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>.</p>
+<p>Do you see a typo, syntax issue or just something that's confusing in this 
+blog post? Fork
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/180309-flask-docker-macos.markdown">this page's source on GitHub</a>
+and submit a pull request with a fix or 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">file an issue ticket on GitHub</a>.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/180309-flask-docker/header.jpg" alt="Flask, Docker 和 Apple logos，版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/flask.html" class="lgi">Flask</a>
+<a href="/docker.html" class="lgi">Docker</a>
+<a href="/operating-systems.html" class="lgi">Operating Systems</a>
+<a href="/development-environments.html" class="lgi">Development Environments</a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

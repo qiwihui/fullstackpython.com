@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="谈论幻灯片，笔记和更多资源，以便选择适当的 DevOps 工具进行技术讨论，由 Matt Makai 撰写。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何为你和你的团队选择合适的 DevOps 工具" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/170227-choose-devops-tools/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/choose-right-devops-tools.html" />
+<meta property="og:title" content="如何为你和你的团队选择合适的 DevOps 工具" />
+<meta property="og:description" content="谈论幻灯片，笔记和更多资源，以便选择适当的 DevOps 工具进行技术讨论，由 Matt Makai 撰写。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/170227-choose-devops-tools/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/choose-right-devops-tools.html" />
+<title>如何为你和你的团队选择合适的 DevOps 工具 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何为你和你的团队选择合适的 DevOps 工具</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     March 01, 2017. Originally posted
+     on February 27, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>This blog post contains a loose transcript along with the slides and 
+additional resources from my technical talk that will be given at 
+<a href="https://developer.oracle.com/code/sanfrancisco">Oracle Code SF 2017</a>
+and <a href="https://www.meetup.com/DC-continuous-delivery/">DC Continuous Delivery</a> 
+within the next couple of months.</p>
+<p>Additional resources to learn more about <a href="/deployments.html">deployments</a>,
+<a href="/configuration-management.html">configuration management</a> and 
+<a href="/devops.html">DevOps</a> are listed at the end of the post.</p>
+<hr />
+<p><img src="/img/170227-choose-devops-tools/title-slide.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Title slide for technical talk."></p>
+<p>Hey folks, my name is Matt Makai. I'm a 
+<a href="https://www.twilio.com/blog/2014/02/introducing-developer-evangelist-matt-makai.html">Developer Evangelist with Twilio</a>
+and the creator of <a href="https://www.fullstackpython.com/">Full Stack Python</a>.</p>
+<p><img src="/img/170227-choose-devops-tools/python-swift-love.jpg" width="100%" class="technical-diagram img-rounded" alt="Python and Swift logos with the heart eyes emoji."></p>
+<p>Over the past couple of years I've been coding mostly in Python and Swift. 
+I bring that up because the way we build, deploy and operate applications in 
+either ecosystem is different. It would not make sense to forcefully recommend 
+a single way to work in your own ecosystem if it is different than the ones I 
+work in.</p>
+<p><img src="/img/170227-choose-devops-tools/java-only.jpg" width="100%" class="technical-diagram img-rounded" alt="Java programming language logo."></p>
+<p>I used to do a ton of Java development. That's how I started my professional
+career before I moved mostly into Python and Swift.</p>
+<p><img src="/img/170227-choose-devops-tools/dark-ages.jpg" width="100%" class="technical-diagram img-rounded" alt="2004, the dark ages of software development?"></p>
+<p>Back in my own software development dark ages of 2004, I learned about a
+concept that got me interested in DevOps before it was called DevOps: 
+<a href="/source-control.html">source control</a>, also known as version control. We don't 
+talk much about source control being a DevOps tool, but it really
+is the foundational layer for everything you want to automate with code.</p>
+<p><img src="/img/170227-choose-devops-tools/different-versions.jpg" width="100%" class="technical-diagram img-rounded" alt="Diff two commits on GitHub."></p>
+<p>Nowadays we have amazing open source distributed version control systems
+and beautiful web application front ends to visualize our code changes over
+time. Yet there is still a small percentage of developers who don't use source
+control.</p>
+<p>It might seem crazy but I know developers at Fortune 500 companies that still
+do not use source control! How do you automate building, deploying, testing
+and operating your application if you don't even have your files versioned?</p>
+<p><img src="/img/170227-choose-devops-tools/pat-on-back.jpg" width="100%" class="technical-diagram img-rounded" alt="Give yourself a pat on the back."></p>
+<p>Let's start off this discussion of DevOps tools with a pat on your own back
+if you already use source control. Nice work! We've come a long way as an
+industry in the last couple of decades when source control was an exotic 
+concept for most developers.</p>
+<p><img src="/img/170227-choose-devops-tools/git-logo.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Git logo."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-1.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Do you know a developer who strongly recommends a tool after 4+ years?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-2.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="What is the difference between a concept and an implementation?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/devops-1-layer.png" width="100%" class="technical-diagram img-rounded" alt="Source control (version control) as bottom layer in DevOps."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-3.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Question 3: On a 0 (lowest) -> 10 scale, how amenable is your organization to improving the technical environment?"&gt;</p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-4.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Question 4: How many people on your team get stoked about making incremental fixes to your technical environment?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/devops-2-layers.png" width="100%" class="technical-diagram img-rounded" alt="CI, automated tests and app dependencies as layer 2 in DevOps."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/continuous-integration-implementations.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Open source and hosted versions of CI, such as Jenkins, GoCD, and StriderCI, along with CircleCI, Travis CI and CodeBuild."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/test-automation.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Test automation concepts and their implementations in Python ecosystem as examples."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/bash.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="$bash."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/python-fabric-logo.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Python Fabric library logo."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/ansible-logo.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Ansible logo."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/devops-3-layers.png" width="100%" class="technical-diagram img-rounded" alt="Configuration management and automated deployments in layer 3 of DevOps."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/configuration-management-tools.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Configuration management implementations such as Ansible, Chef, Puppet and SaltStack."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/ansible-commands.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Example for Ansible YAML command to install packages through apt."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-5.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="How many times per day does your team deploy to test? How about production?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-6.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="How many times per day do you want to deploy to test? To production?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-7.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="What are the top 5 specific impediments to completing automating your deployments?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-8.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Who on your team gets excited about continuous delivery?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-9.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Who on your team is responsible for improving automated deployments and continuous delivery?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/django-logo.jpg" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Django logo."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/devops-4-layers.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Monitoring, logging and measuring in layer 4 of DevOps."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-10.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="What metrics do you collect that feed into every sprint?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-11.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="How many days would it take to put a new code library into production?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/deploys-2016.jpg" width="100%" class="technical-diagram img-rounded" alt="6,643 deploys per year for Twilio in 2015."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/question-12.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="How much money, if any, can you spend to jump start monitoring your environment?"></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/devops-4-layers.png" width="100%" class="technical-diagram img-rounded" alt="Repeat monitoring, loggin and measuring in 4 layer DevOps slide."></p>
+<p>...</p>
+<p><img src="/img/170227-choose-devops-tools/contact-info.png" width="100%" class="technical-diagram img-rounded" style="border: 1px solid #aaa" alt="Contact info end slide."></p>
+<p>My name is Matt Makai and I'm a Developer Evangelist with Twilio, a Python
+and Swift developer, as well as the author of 
+<a href="https://www.fullstackpython.com/">Full Stack Python</a>. You can get in
+touch with me via these channels. Thank you!</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/170227-choose-devops-tools/header.jpg" alt="带有代码的评论泡泡代表基于技术谈话的博客文章。" width="100%"> 
+ <div class="lg">
+<a href="/devops.html" class="lgi">DevOps</a>
+<a href="/source-control.html" class="lgi">Source Control</a>
+<a href="/git.html" class="lgi">Git</a>
+<a href="/development-environments.html" class="lgi">Development Environments</a>
+<a href="/operating-systems.html" class="lgi">Operating Systems</a>
+<a href="/configuration-management.html" class="lgi">Configuration Management</a>
+  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="使用 Rollbar 监控你在 Amazon Web Services (AWS) Lambda 的 Python 3.6 应用代码.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="在 AWS Lambda 上监控 Python 3.6 函数" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/180420-monitor-aws-lambda/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/monitor-python-3-6-example-code-aws-lambda-rollbar.html" />
+<meta property="og:title" content="在 AWS Lambda 上监控 Python 3.6 函数" />
+<meta property="og:description" content="使用 Rollbar 监控你在 Amazon Web Services (AWS) Lambda 的 Python 3.6 应用代码. Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/180420-monitor-aws-lambda/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/monitor-python-3-6-example-code-aws-lambda-rollbar.html" />
+<title>在 AWS Lambda 上监控 Python 3.6 函数 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">在 AWS Lambda 上监控 Python 3.6 函数</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     April 25, 2018. Originally posted
+     on April 20, 2018.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a> is a usage-based
+execution environment that can run Python 3.6 code. If you have never
+previously used AWS Lambda then you can read<br />
+<a href="/blog/aws-lambda-python-3-6.html">How to Create Your First Python 3.6 AWS Lambda Function</a>.
+However, this tutorial will give you every step to follow even if you
+are completely new to AWS.</p>
+<p>In this post we are going to monitor Python code that is running on AWS 
+Lambda by using a hosted <a href="/monitoring.html">monitoring</a> service, 
+<a href="/rollbar.html">Rollbar</a>.</p>
+<h2>Required Tools and Code</h2>
+<p>A local <a href="/development-environments.html">development environment</a> is not
+required to follow this tutorial. All the work will happen in a web
+browser through the <a href="https://console.aws.amazon.com/console/">AWS Console</a>.</p>
+<p>The example code can be copy and pasted from this blog post or you
+can access it on GitHub under the
+<a href="https://github.com/fullstackpython/blog-code-examples">Full Stack Python blog-post-examples</a>
+repository within the 
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/aws-lambda-python-3-6">monitor-aws-lambda-python-3-6 directory</a>.</p>
+<h2>Accessing the AWS Lambda Service</h2>
+<p><a href="https://aws.amazon.com/console">Sign into your existing AWS account</a> 
+or sign up for a <a href="https://aws.amazon.com/">new account</a>. AWS Lambda
+comes with a free tier so you can test code and execute basic 
+applications without cost.</p>
+<p><img src="/img/180420-monitor-aws-lambda/aws-amazon-com.jpg" width="100%" class="shot rnd outl" alt="AWS Lambda landing page."></p>
+<p>AWS has a boatload of services so use the search box to enter
+"lambda" and select "Lambda" when it appears to get to the appropriate
+starting page.</p>
+<p><img src="/img/180420-monitor-aws-lambda/search-for-lambda.jpg" width="100%" class="shot rnd outl" alt="Search for lambda in the dashboard text box."></p>
+<p>Click the "Create function" button.</p>
+<p><img src="/img/180420-monitor-aws-lambda/create-function.png" width="100%" class="shot rnd outl" alt="The create Lambda function screen."></p>
+<p>Select "Author from Scratch". Fill in a name so you can easily recognize this
+function for future reference. I chose "monitorPython3". Select "Python 3.6"
+for Runtime.</p>
+<p>Select "Create new role from template(s)", input a Role name, for example
+"basicEdgeLambdaRole". For Policy templates choose "Basic Edge Lambda 
+Permissions".</p>
+<p>Then click "Create function."</p>
+<p><img src="/img/180420-monitor-aws-lambda/monitorpython3.png" width="100%" class="shot rnd outl" alt="Blank AWS Lambda function named monitorPython3."></p>
+<p>Ok, finally we have arrived at the configuration screen where we can write
+our code.</p>
+<h2>Coding a Python Function</h2>
+<p>Scroll down to the "Function code" user interface section.</p>
+<p>Paste or type in the following code, replacing what is already in the 
+text box.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">rollbar</span>
+
+
+<span class="n">ROLLBAR_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ROLLBAR_SECRET_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;missing Rollbar secret key&#39;</span><span class="p">)</span>
+<span class="n">rollbar</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">ROLLBAR_KEY</span><span class="p">,</span> <span class="s1">&#39;production&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@rollbar.lambda_function</span>
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span>
+    <span class="n">print_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;print_count&quot;</span><span class="p">))</span>
+
+    <span class="c1"># check if message exists and how many times to print it</span>
+    <span class="k">if</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">print_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">print_count</span><span class="p">):</span>
+            <span class="c1"># formatted string literals are new in Python 3.6</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;message: {message}.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">print_count</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+
+<p>The code contains the required <code>lambda_handler</code> function. <code>lambda_handler</code> 
+is Lambda's hook for where to start execution the code.</p>
+<p>The Python code expects two environment variables that are read by the
+<code>os</code> module with the <code>getenv</code> function. The <code>message</code> and
+<code>print_count</code> variables are set by the environment variables.</p>
+<p><img src="/img/180420-monitor-aws-lambda/lambda-coded.png" width="100%" class="shot rnd outl" alt="Python 3.6 code within a Lambda function."></p>
+<p>Below the code input text box on this function configuration screen there 
+is a section to set environment variable key-value pairs. We need to input 
+two environment variables and then we can run our code.</p>
+<p>Enter the keys named <code>message</code> with a value of <code>Hello World!</code>. Then
+enter <code>print_count</code> as a second key with the value of <code>5</code>.</p>
+<p>Our Python code's error handling is not robust. A value other than a 
+number in the <code>print_count</code> variable will cause the script to throw 
+an exception when it is executed due to the forced casting of <code>print_count</code> 
+via the <code>int()</code> function. We will use the exception that can occur during 
+this forced casting as a trivial example that shows what happens when 
+errors in our code happen during Lambda function execution.</p>
+<p>Hit the "Save" button at the top right. Use the
+default "Hello World" test template values and name it "testHelloWorld".
+We do not need any of those values for our function. </p>
+<p><img src="/img/180420-monitor-aws-lambda/configure-test-event.png" width="100%" class="shot rnd outl" alt="Configure an empty test event for your Lambda function."></p>
+<p>Click "Create" and your test template will be created. Now click
+"Test" to run the function. You should see "Execution result: succeeded" 
+with the <code>message</code> variable printed five times.</p>
+<p><img src="/img/180420-monitor-aws-lambda/success-execution.png" width="100%" class="shot rnd outl" alt="Execution succeeds when there is an integer value for the print_count variable."></p>
+<p>Now change the value of <code>print_count</code> to <code>i dunno</code>. Save the function
+and click "Test" again. The function will fail.</p>
+<p><img src="/img/180420-monitor-aws-lambda/failed-execution-result.png" width="100%" class="shot rnd outl" alt="Execution fails when we do not have an integer value for print_count variable."></p>
+<p>It is obvious when we are working in the Console that an error just
+occurred. However, in most cases an error will happen sporadically 
+which is why we need a monitoring system in place to catch and report
+on those exceptions.</p>
+<h2>Monitoring our Lambda Function</h2>
+<p>Head over to the <a href="https://rollbar.com/">Rollbar homepage</a> 
+to obtain a free account and grab the necessary information to add their 
+hosted monitoring service into our Lambda application.</p>
+<p><img src="/img/180420-monitor-aws-lambda/rollbar-home.jpg" width="100%" class="shot rnd outl" alt="Rollbar homepage."></p>
+<p>Click "Sign Up" in the upper right-hand corner. Enter your 
+email address, username and desired password.</p>
+<p><img src="/img/180420-monitor-aws-lambda/sign-up-rollbar.jpg" width="100%" class="shot rnd outl" alt="Signing up for a Rollbar account in your browser."></p>
+<p>After the sign up page you will see the onboarding flow where you can
+enter a project name and select a programming language. For the project
+name type in "Full Stack Python" and then select that you are monitoring 
+a Python-based application.</p>
+<p><img src="/img/180420-monitor-aws-lambda/create-project.jpg" width="100%" class="shot rnd outl" alt="Name your project 'Full Stack Python' and select Python as your language."></p>
+<p>Press "Continue" at the bottom of the screen. The next
+page shows us a few instructions on how to add monitoring.</p>
+<p><img src="/img/180420-monitor-aws-lambda/configure-project.jpg" width="100%" class="shot rnd outl" alt="Configure project using your server-side access token."></p>
+<p>Take note of that server-side access token as we will need to set it
+as an environment variable on AWS Lambda.</p>
+<p>We can now update our Python function to collect and aggregate
+the errors that occur in our application. Add the following highlighted
+lines to your Lambda code:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="highlight"><span class="o"></span><span class="kn">import</span> <span class="nn">rollbar</span></span>
+<span class="highlight"><span class="o"></span></span>
+<span class="highlight"><span class="o"></span></span>
+<span class="highlight"><span class="o"></span><span class="n">ROLLBAR_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;ROLLBAR_SECRET_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;missing Rollbar secret key&#39;</span><span class="p">)</span></span>
+<span class="highlight"><span class="o"></span><span class="n">rollbar</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">ROLLBAR_KEY</span><span class="p">,</span> <span class="s1">&#39;production&#39;</span><span class="p">)</span></span>
+
+
+<span class="highlight"><span class="o"></span><span class="nd">@rollbar.lambda_function</span></span>
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span>
+    <span class="n">print_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;print_count&quot;</span><span class="p">))</span>
+
+    <span class="c1"># check if message exists and how many times to print it</span>
+    <span class="k">if</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">print_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">print_count</span><span class="p">):</span>
+            <span class="c1"># formatted string literals are new in Python 3.6</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;message: {message}.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">print_count</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+
+<p>The above highlighted new code lines incorporate the <code>rollbar</code> library
+into our application, set the <code>ROLLBAR_KEY</code> with our environment variable
+and use the <code>rollbar.lambda_function</code> decorator to catch all errors in
+our <code>lambda_handler</code> function.</p>
+<p>Add the following third environment variable named <code>ROLLBAR_SECRET_KEY</code>
+that is the server-side token from your new Rollbar project.</p>
+<p><img src="/img/180420-monitor-aws-lambda/rollbar-key-env-var.png" width="100%" class="shot rnd outl" alt="Add your Rollbar server-side key into a Lambda environment variable."></p>
+<p>There is just one issue with this function on Lambda as it stands: there is 
+no way for Lambda to know about the Rollbar package code. The external Rollbar
+dependency needs to be included. There are a couple of ways to handle the
+issue:</p>
+<ol>
+<li>Download 
+   <a href="https://github.com/fullstackpython/blog-code-examples/raw/master/monitor-aws-lambda-python-3-6/hello-rollbar.zip">this pre-made zip file</a>
+   from the GitHub repository which includes all of the Rollbar package
+   code and our code in the <code>lambda_function.py</code> file.</li>
+<li>Re-create the above code on your local system and 
+   <a href="https://haythamsalhi.wordpress.com/2017/10/04/creating-lambda-deployment-package-of-python/">use pip to obtain the dependencies and create a zip file locally</a>.</li>
+</ol>
+<p>I provided the pre-made zip file to save time in this tutorial so try
+that one now so we can see the final results. Under "Function code", change
+the "Code entry type" from "Edit code inline" to "Upload a .ZIP file".
+Hit the "Upload" button under "Function package".</p>
+<p><img src="/img/180420-monitor-aws-lambda/upload-zip-package.png" width="100%" class="shot rnd outl" alt="Upload the ZIP file with Rollbar dependency."></p>
+<p>Hit the "Save" button at the top. With our new code we can now see if 
+Rollbar will capture and report the exceptions. Hit the "Save" button and 
+then "Test".</p>
+<p>The function will fail as expected. If we move over to our Rollbar
+dashboard and refresh the page, we see the exceptions.</p>
+<p><img src="/img/180420-monitor-aws-lambda/rollbar-exceptions.png" width="100%" class="shot rnd outl" alt="Rollbar user interface with exceptions."></p>
+<p>Now we can track Lambda exceptions across many functions regardless
+of how frequently they are running.</p>
+<h2>What's Next?</h2>
+<p>We just wrote and executed a Python 3.6 function on AWS Lambda then
+captured the exception message into our Rollbar logs. Now you can
+continue building out your Python code knowing that when something
+goes wrong you will have full visibility on what happened.</p>
+<p>Check out the <a href="/aws-lambda.html">AWS Lambda section</a> for 
+more tutorials by other developers.</p>
+<p>Further questions? Contact me on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I am also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>Something wrong with this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/180420-monitor-aws-lambda-python-3-6.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/180420-monitor-aws-lambda/header.jpg" alt="Python, AWS Lambda 和 Rollbar logos 版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/learning-programming.html" class="lgi">Learning Programming</a>
+<a href="/serverless.html" class="lgi">Serverless Architectures</a>
+<a href="/aws-lambda.html" class="lgi">AWS Lambda</a>
+<a href="/monitoring.html" class="lgi">Monitoring</a>
+<a href="/deployment.html" class="lgi">Deployment</a>
+<a href="/rollbar.html" class="lgi">Rollbar</a>
+<a href="https://rollbar.com" class="lgi">Rollbar homepage <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="https://docs.rollbar.com/docs/python/#aws-lambda" class="lgi">Rollbar AWS Lambda docs <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

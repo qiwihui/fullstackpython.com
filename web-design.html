@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Web design creates a compelling user experience for your Python web app. Learn more about web design on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Web Design" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/web-design.html" />
+<meta property="og:title" content="Web Design" />
+<meta property="og:description" content="Web design creates a compelling user experience for your Python web app. Learn more about web design on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/web-design.html" />
+<title>Web Design - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Web Design</h1>
+<p>Web design is the creation of a web application's style and user interaction
+using CSS and JavaScript.</p>
+<h2>Why is web design important?</h2>
+<p>You wouldn’t use a web application that looked like the following screenshot, 
+would you?</p>
+<p><img src="/img/visuals/no-style-webpage.png" width="100%" alt="HTML with no CSS or JavaScript." class="shot rnd outl"> </p>
+<p>Creating web pages with their own style and interactivity so users can easily
+accomplish their tasks is a major part of building modern web applications.</p>
+<h2>Designing for various screen sizes</h2>
+<p>Separating the content from the rules for how to display the content allows 
+devices to render the output differently based on factors such as screen size
+and device type. Displaying content differently based on varying screen 
+attributes is often called <em>responsive design</em>. The responsiveness is 
+accomplished by implementing
+<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Media_queries">media queries</a>
+in the <a href="/cascading-style-sheets.html">CSS</a>. </p>
+<p>For example, a mobile device does not have as much space to display a 
+navigation bar on the side of a page so it is often pushed down 
+below the main content. The 
+<a href="http://getbootstrap.com/examples/blog/">Bootstrap Blog example</a> 
+shows that navigation bar relocation scenario when you resize the browser 
+width.</p>
+<h2>Fantastic design resources</h2>
+<p>There are way too many design resources on the web, so I picked out
+this short list as my absolute favorites that help developers become
+(hopefully much) better with design.</p>
+<ul>
+<li>
+<p><a href="http://www.visualmess.com/index.html">Clean up your mess: A Guide to Visual Design for Everyone</a>
+  walks through the basic principles for clean and effective design. You
+  can make a website go from terrible to well-designed often by following
+  a few principles on spacing, alignment, contrast and repetition of
+  page elements.</p>
+</li>
+<li>
+<p><a href="https://resilientwebdesign.com/">Resilient web design</a> is an incredible
+  online book that teaches how to create websitess that are accessible to
+  every reader and look great while doing it.</p>
+</li>
+<li>
+<p><a href="https://academy.realm.io/posts/christopher-downer-design-101-for-developers/">Design 101 for Developers</a>
+  gives away the "secrets" to good design that designers follow but that
+  can be similarly accessible to developers who understand what they want
+  their design to accomplish.</p>
+</li>
+<li>
+<p><a href="https://lawsofux.com/">Laws of UX</a> provides a beautiful overview of 
+  design principles for building user experiences. Highly recommended even
+  if just to see how the information is presented.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@JustinMezzell/how-i-work-with-color-8439c98ae5ed">How I Work with Color</a>
+  is a fantastic article from a professional designer on how he thinks
+  about color and uses it for certain effects in his designs.</p>
+</li>
+<li>
+<p>The <a href="http://bootstrappingdesign.com/">Bootstrapping Design</a> book is one of 
+  the clearest and concise resources for learning design that I've ever read. 
+  Highly recommended especially if you feel you have no design skills but 
+  need to learn them.</p>
+</li>
+<li>
+<p><a href="https://danluu.com/web-bloat/">Web bloat</a> is the story of traveling
+  and using the web with low bandwidth, high latency internet connections 
+  that often drop packets. The author explains how many websites are 
+  barely usable and that if you truly want your site to work well you need
+  to ensure it works for connections much worse than the fiber connection
+  you may have at the home or office.</p>
+</li>
+<li>
+<p><a href="https://css-tricks.com/average-web-page-data-analyzing-8-million-websites/">The Average Web Page (Data from Analyzing 8 Million Websites)</a>
+  shows the most frequently used HTML elements, metadata, text
+  content and other statistics from a large scale analysis of the web.</p>
+</li>
+<li>
+<p><a href="https://kuler.adobe.com/create/color-wheel/">Kuler</a> is a complementary
+  color picker by Adobe that helps choose colors for your designs.</p>
+</li>
+<li>
+<p>If you want to learn more about how browsers work behind the scenes
+  to render a webpage's design, 
+  here is a 
+  <a href="http://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html">blog post series on building a browser engine</a>
+  that will show you how to build a simple rendering engine.</p>
+</li>
+<li>
+<p><a href="https://pineco.de/defining-colors-in-css/">Defining Colors in CSS</a>
+  presents how to define color in your 
+  <a href="/cascading-style-sheets.html">Cascading Style Sheets (CSS)</a> and breaks
+  down the differences between specifying predefined color values, 
+  hexadecimal values, red-green-blue (RGB) and 
+  Hue-Saturation-Lightness (HSL).</p>
+</li>
+<li>
+<p><a href="https://envato.com/blog/13-terrible-web-trends-90s-recreate/">13 Terrible Web Trends From the 90s, and How to Recreate Them</a>
+  revisits a simpler and perhaps more... ugly time on the web where designs
+  were a bit out of control. Learn more about the history of web design and
+  styling techniques with this hilarious but useful blog post.</p>
+</li>
+</ul>
+<h3>Checklists and design guidelines</h3>
+<ul>
+<li>
+<p><a href="https://github.com/bendc/frontend-guidelines">Frontend Guidelines</a> is
+  an amazing write up of good practices for HTML, CSS and JS.</p>
+</li>
+<li>
+<p><a href="http://learndesignprinciples.com">Learn Design Principles</a> is a well
+  thought out clear explanation for how to think about design according to
+  specific rules such as axis, symmetry, hierarchy and rhythm.</p>
+</li>
+<li>
+<p><a href="https://github.com/thedaviddias/Front-End-Performance-Checklist">Front-end performance checklist</a>
+  is a comprehensive checklist useful when you are implementing a
+  web application's client side code.</p>
+</li>
+<li>
+<p><a href="https://frontendmasters.com/books/front-end-handbook/2018/">Front-end Developer Handbook 2018</a>
+  provides a high-level overview of many of the tools developers use
+  in the browser and some other useful information on average salaries
+  and where to search for front-end development jobs.</p>
+</li>
+</ul>
+<h3>您想要进一步了解CSS，JavaScript或静态文件吗？?</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/cascading-style-sheets.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M275 128h1505l-266 1333-804 267-698-267 71-356h297l-29 147 422 161 486-161 68-339h-1208l58-297h1209l38-191h-1208z" fill="#fff"/></svg></a>
+<p class="under-btn">我的应用运行起来了，但看起来很糟糕。如何设置用户界面的样式？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/static-content.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z" fill="#fff"/></svg></a>
+<p class="under-btn">我应该如何托管和提供静态内容文件？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/javascript.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1152 896q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm512-109v222q0 12-8 23t-20 13l-185 28q-19 54-39 91 35 50 107 138 10 12 10 25t-9 23q-27 37-99 108t-94 71q-12 0-26-9l-138-108q-44 23-91 38-16 136-29 186-7 28-36 28h-222q-14 0-24.5-8.5t-11.5-21.5l-28-184q-49-16-90-37l-141 107q-10 9-25 9-14 0-25-11-126-114-165-168-7-10-7-23 0-12 8-23 15-21 51-66.5t54-70.5q-27-50-41-99l-183-27q-13-2-21-12.5t-8-23.5v-222q0-12 8-23t19-13l186-28q14-46 39-92-40-57-107-138-10-12-10-24 0-10 9-23 26-36 98.5-107.5t94.5-71.5q13 0 26 10l138 107q44-23 91-38 16-136 29-186 7-28 36-28h222q14 0 24.5 8.5t11.5 21.5l28 184q49 16 90 37l142-107q9-9 24-9 13 0 25 10 129 119 165 170 7 8 7 22 0 12-8 23-15 21-51 66.5t-54 70.5q26 50 41 98l183 28q13 2 21 12.5t8 23.5z" fill="#fff"/></svg></a>
+<p class="under-btn">如何在 Python Web 应用程序中使用 JavaScript？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/web-frameworks.html" class="lgi sbc">Web Frameworks</a>
+<a href="/django.html" class="lgi sbc">Django</a>
+<a href="/flask.html" class="lgi sbc">Flask</a>
+<a href="/bottle.html" class="lgi sbc">Bottle</a>
+<a href="/pyramid.html" class="lgi sbc">Pyramid</a>
+<a href="/turbogears.html" class="lgi sbc">TurboGears</a>
+<a href="/falcon.html" class="lgi sbc">Falcon</a>
+<a href="/morepath.html" class="lgi sbc">Morepath</a>
+<a href="/sanic.html" class="lgi sbc">Sanic</a>
+<a href="/other-web-frameworks.html" class="lgi sbc">Other Web Frameworks</a>
+<a href="/template-engines.html" class="lgi sbc">Template Engines</a>
+<a href="/jinja2.html" class="lgi sbc">Jinja2</a>
+<a href="/mako.html" class="lgi sbc">Mako</a>
+<a href="/django-templates.html" class="lgi sbc">Django Templates</a>
+<a href="/web-design.html" class="lgi active sbc">Web Design</a>
+<a href="/hypertext-markup-language-html.html" class="lgi sbc">HTML</a>
+<a href="/cascading-style-sheets.html" class="lgi sbc">Cascading Style Sheets (CSS)</a>
+<a href="/responsive-design.html" class="lgi sbc">Responsive Design</a>
+<a href="/minification.html" class="lgi sbc">Minification</a>
+<a href="/css-frameworks.html" class="lgi sbc">CSS Frameworks</a>
+<a href="/bootstrap-css.html" class="lgi sbc">Bootstrap</a>
+<a href="/foundation-css.html" class="lgi sbc">Foundation</a>
+<a href="/javascript.html" class="lgi sbc">JavaScript</a>
+<a href="/react.html" class="lgi sbc">React</a>
+<a href="/vuejs.html" class="lgi sbc">Vue.js</a>
+<a href="/angular.html" class="lgi sbc">Angular</a>
+<a href="/task-queues.html" class="lgi sbc">Task Queues</a>
+<a href="/celery.html" class="lgi sbc">Celery</a>
+<a href="/redis-queue-rq.html" class="lgi sbc">Redis Queue (RQ)</a>
+<a href="/dramatiq.html" class="lgi sbc">Dramatiq</a>
+<a href="/static-site-generator.html" class="lgi sbc">Static Site Generators</a>
+<a href="/pelican.html" class="lgi sbc">Pelican</a>
+<a href="/lektor.html" class="lgi sbc">Lektor</a>
+<a href="/mkdocs.html" class="lgi sbc">MkDocs</a>
+<a href="/testing.html" class="lgi sbc">Testing</a>
+<a href="/unit-testing.html" class="lgi sbc">Unit Testing</a>
+<a href="/integration-testing.html" class="lgi sbc">Integration Testing</a>
+<a href="/debugging.html" class="lgi sbc">Debugging</a>
+<a href="/code-metrics.html" class="lgi sbc">Code Metrics</a>
+<a href="/networking.html" class="lgi sbc">Networking</a>
+<a href="/https.html" class="lgi sbc">HTTPS</a>
+<a href="/websockets.html" class="lgi sbc">WebSockets</a>
+<a href="/webrtc.html" class="lgi sbc">WebRTC</a>
+<a href="/application-programming-interfaces.html" class="lgi sbc">Web APIs</a>
+<a href="/microservices.html" class="lgi sbc">Microservices</a>
+<a href="/webhooks.html" class="lgi sbc">Webhooks</a>
+<a href="/bots.html" class="lgi sbc">Bots</a>
+<a href="/api-creation.html" class="lgi sbc">API Creation</a>
+<a href="/api-frameworks.html" class="lgi sbc">API Frameworks</a>
+<a href="/django-rest-framework-drf.html" class="lgi sbc">Django REST Framework</a>
+<a href="/api-integration.html" class="lgi sbc">API Integration</a>
+<a href="/twilio.html" class="lgi sbc">Twilio</a>
+<a href="/stripe.html" class="lgi sbc">Stripe</a>
+<a href="/slack.html" class="lgi sbc">Slack</a>
+<a href="/okta.html" class="lgi sbc">Okta</a>
+<a href="/web-application-security.html" class="lgi sbc">Security</a>
+<a href="/sql-injection.html" class="lgi sbc">SQL Injection</a>
+<a href="/cross-site-request-forgery-csrf.html" class="lgi sbc">CSRF</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+ <a href="/web-design.html" class="lgi active">&raquo; Web Design</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

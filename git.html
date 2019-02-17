@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Git is an implementation of the source (version) control concept. Learn more about Git and source control on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Git" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/git.html" />
+<meta property="og:title" content="Git" />
+<meta property="og:description" content="Git is an implementation of the source (version) control concept. Learn more about Git and source control on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/git.html" />
+<title>Git - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Git</h1>
+<p><a href="https://git-scm.com/">Git</a> is a distributed open source 
+<a href="/source-control.html">source control</a> (also referred to as "version 
+control") system commonly used to track and manage file changes. Git is 
+frequently used as the version control system for Python projects.</p>
+<p><a href="https://git-scm.com/" style="border: none;"><img src="/img/logos/git.png" width="100%" alt="Official Git logo." class="technical-diagram"></a></p>
+<div class="well see-also">Git is an implementation of the <a href="/source-control.html">source control</a> concept. Learn how these pieces fit together in the <a href="/development-environments.html">development environments</a> chapter or view the <a href="/table-of-contents.html">table of contents</a> for all topics.</div>
+
+<h2>Why is Git widely-used by developers?</h2>
+<p>Git is a <em>distributed</em> version control system (DVCS) compared to the 
+centralized models previously provided by 
+<a href="/apache-subversion.html">Subversion</a> and <a href="https://www.nongnu.org/cvs/">CVS</a>.
+Files would need to be "checked out" over the network by a single person at
+a time while she was woring. The network transfer speed as well as the 
+blocking check out model became a significant bottleneck, especially for 
+large development teams. </p>
+<p>Git clones a full repository and its entire history instead of just the 
+current state of a file. Developers only require a network connection when
+pulling updates and pushing changes to a backup repository. The commit log
+and file histories are stored and transmitted far more efficiently than
+prior version control systems to maximize the effectiveness of the 
+distributed version control design.</p>
+<p>Another issue with traditional VCS was that it was difficult to create 
+branches. Take a look
+<a href="http://www.sci.utah.edu/~macleod/docs/cvs-tips.html">at this tutorial on managing a CVS repository</a>
+as an example of the confusion the existing non-distributed models could
+cause. Git simplified the branching process with simplified commands 
+such as <code>git checkout -b</code> and faster branch merging and clean up. In contrast
+to earlier version control systems, Git encourages developers to create local 
+branches and experiment in them without impacting a stable <code>master</code> branch.</p>
+<p><a href="https://www.github.com/">GitHub</a> also helped to drive Git as the overwhelming
+version control favorite by providing the open source community with free open
+remote Git repositories. GitHub's web application user interface, issue 
+tracking and pull request features for maintainers and consumers also 
+encouraged more collaboration than Git alone. Recently, 
+<a href="https://github.com/marketplace">GitHub's third-party marketplace</a> has
+begun to add more features by integrating 
+<a href="/continuous-integration.html">continuous integration</a> servers like 
+as <a href="/jenkins.html">Jenkins</a> and <a href="/code-metrics.html">code metrics</a> services.</p>
+<h2>Beginner Git tutorials</h2>
+<p>Git can take awhile to wrap your head around, even for experienced software
+developers. The following tutorials can quickly get you up to speed.</p>
+<ul>
+<li>
+<p>The <a href="https://git-scm.com/book/en/v2">official Pro Git</a> book is available
+  online for free. It is awesome both as a step-by-step walkthrough and as
+  a bookmarked reference on specific topics.</p>
+</li>
+<li>
+<p><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a>
+  provides a spectacular walkthrough for developers who have used Git before
+  but want to go deeper in understanding what each command does under the 
+  covers instead of simply using the tool as a black box.</p>
+</li>
+<li>
+<p><a href="http://think-like-a-git.net/">Think like a Git</a> is another introduction
+  that focuses more on the graph theory and conceptual ideas behind Git
+  to help the reader understand what's happening as they use Git commands.</p>
+</li>
+<li>
+<p><a href="https://red-badger.com/blog/2016/11/29/gitgithub-in-plain-english">Git and GitHub in plain English</a>
+  is a high-level overview of both Git and GitHub. This guide is intended 
+  for both non-programmers and junior developers who want to learn everything
+  from terminology to workflow.</p>
+</li>
+<li>
+<p><a href="http://wildlyinaccurate.com/a-hackers-guide-to-git">A Hacker's Guide to Git</a>
+  is a free ebook written for experienced developers that contains both
+  the syntax and the conceptual ideas behind how Git works.</p>
+</li>
+<li>
+<p><a href="https://blog.marvelapp.com/designers-guide-git/">A Designer's Guide to Git</a>
+  gives a beginner's Git overview for non-programmers. The tutorial also 
+  covers using Git clients such as the GitHub desktop application.</p>
+</li>
+<li>
+<p><a href="http://maryrosecook.com/blog/post/git-in-six-hundred-words">Git in Six Hundred Words</a>
+  is a concise essay explaining what happens when you add and commit files
+  in a Git repository.</p>
+</li>
+<li>
+<p><a href="http://www.alexkras.com/19-git-tips-for-everyday-use/">19 Tips For Everyday Git Use</a>
+  is a laundry list of helpful Git tips on commands such as <code>git bisect</code>,
+  <code>git stash</code> and <code>git difftool</code>.</p>
+</li>
+<li>
+<p><a href="http://gitready.com/">git ready</a> presents beginner, intermediate and 
+  advanced tips for how to use Git. The example commands and their results
+  are great for learning Git piece-by-piece.</p>
+</li>
+</ul>
+<h2>Advanced Git tutorials and resources</h2>
+<p>You won't learn Git in an afternoon or even a few months of usage. After
+six-plus years of working with Git I still get tripped up and have a lot to
+learn. These tutorials have taught me some of the beyond-the-basics edge
+cases.</p>
+<ul>
+<li>
+<p><a href="https://github.com/k88hudson/git-flight-rules">Flight rules for git</a> 
+  contains common commands that answer specific desired tasks such as 
+  "I want to discard specific unstaged files" (<code>git checkout filename</code>) and
+  "I want to rename a branch" (<code>git branch -m newname</code>).</p>
+</li>
+<li>
+<p><a href="https://jqassistant.org/shadows-of-the-past-analysis-of-git-repositories/">Shadows Of The Past: Analysis Of Git Repositories</a>
+  explains how you can extract some surprising data from Git repositories'
+  commit history, such as which developers are domain experts in certain
+  tools, potential hot spots in the code and coupling between source code
+  files. This is a great read once you get past the basics of using Git.</p>
+</li>
+<li>
+<p><a href="https://philna.sh/">Phil Nash</a> shows how to use the <code>git reflog</code> command 
+  in <a href="https://philna.sh/blog/2017/01/04/git-back-to-the-future/">Git back to the future</a>.</p>
+</li>
+<li>
+<p><a href="https://sethrobertson.github.io/GitFixUm/fixup.html">On undoing, fixing, or removing commits in git</a>
+  is a fantastic overview of how to unscrew a whole slew of bad situations
+  you may find yourself in if you use Git for long enough.</p>
+</li>
+<li>
+<p><a href="https://gregoryszorc.com/blog/2017/12/11/high-level-problems-with-git-and-how-to-fix-them/">High-level Problems with Git and How to Fix Them</a>
+  is a long-form article on how to fork properly (and how not to use them)
+  and how to not go crazy using branches and remote repositories.</p>
+</li>
+</ul>
+<h2>Specific Git resources</h2>
+<p>Large tutorials are great for getting started with Git. However, sometimes
+you need tactical support or want to learn new tricks to add to your 
+workflow. These resources will come in handy for specific Git subjects.</p>
+<ul>
+<li>
+<p><a href="http://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message</a>
+  provides strong advice that will help you write consistent, concise and
+  contextual messages on your commits. Commit messages are especially 
+  important when working with others on a long-lasting project where you
+  dive through the commit history via <code>git log</code> and related commands.</p>
+</li>
+<li>
+<p><a href="http://ohshitgit.com/">Oh shit, Git!</a> is a profanity-filled description
+  of tips to get you out of binds you may find yourself in when you get too 
+  tricky with Git commands. </p>
+</li>
+<li>
+<p><a href="http://blog.plover.com/prog/git-tastrophe.html">Another Git catastrophe cleaned up</a> 
+  goes through a difficult merge scenario that required deep Git 
+  understanding to properly fix.</p>
+</li>
+<li>
+<p>Erlang's source code provides a concise explanation on 
+  <a href="https://github.com/erlang/otp/wiki/Writing-good-commit-messages">writing good commit messages</a>
+  that any programming ecosystem can learn from. </p>
+</li>
+<li>
+<p><a href="https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/use-git-microsoft">How Microsoft uses Git</a>
+  gives a high-level overview of their repository structure and hosting 
+  at the extremely large scale organization.</p>
+</li>
+<li>
+<p><a href="https://git.wiki.kernel.org/index.php/GitTips">GitTips</a> is a list of 
+  pro tips to clean up common issues and how to dive through Git history
+  to find specific text.</p>
+</li>
+<li>
+<p>Git allows command aliasing, which allowed one developer to create his 
+  own list of <a href="https://hackernoon.com/lesser-known-git-commands-151a1918a60">lesser known Git commands</a>
+  that alias more complicated Git lines.</p>
+</li>
+<li>
+<p><a href="https://csswizardry.com/2017/05/little-things-i-like-to-do-with-git/">Little things I like to do with Git</a>
+  has some nice tips such as easily viewing branches you recently worked
+  on and generating a changelog from your commits.</p>
+</li>
+<li>
+<p><a href="https://codewords.recurse.com/issues/two/git-from-the-inside-out">Git from the inside out</a>
+  demonstrates how Git's graph-based data structure produces certain behavior 
+  through example Git commands. This is a highly recommended read after you've
+  grasped the basics and are looking to go deeper with Git.</p>
+</li>
+<li>
+<p><a href="https://eklitzke.org/how-to-how-your-own-private-git-repositories">How To Host Your Own Private Git Repositories</a>
+  provides the steps for handling private Git repositories on your own
+  server. This setup is great for either mirroring GitHub repositories
+  or just getting away from hosted services entirely.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@Tiagojdferreira/how-i-set-up-my-git-in-a-new-computer-85bb461b089f">How I configure my git in a new computer</a>
+  shows how to handle a <code>.gitconfig</code> file, with 
+  <a href="https://gist.github.com/Tiagojdferreira/115ecac229e176e48d520c59b022e4fb">an example Gist</a> 
+  that the author uses for his own environment.</p>
+</li>
+<li>
+<p><a href="http://www.oilshell.org/blog/2017/09/19.html">How to Quickly and Correctly Generate a Git Log in HTML</a>
+  is an interesting look at how string processing on *nix systems works
+  by generating an HTML page from a Git log. If you need to output your
+  Git commits somewhere and are having trouble writing your own script
+  you should check out some of the interesting solutions the author
+  presents.</p>
+</li>
+<li>
+<p><a href="https://blog.scottnonnenberg.com/better-git-configuration/">Better Git configuration</a>
+  explains global config options, revisions and merging along with several
+  other commands that can be customized to your taste.</p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/28792784/why-does-git-use-a-cryptographic-hash-function">Why does Git use a cryptographic hash function?</a>
+  explains that the SHA-1 hash isn't used for security on Git, it's a
+  consistency check. <a href="https://shattered.io/">SHA-1 has been broken</a>
+  in practice so Git needs to transition to a stronger hash without proven
+  collisions but it's not quite as big of a concern compared to 
+  security-related projects that use SHA-1.</p>
+</li>
+<li>
+<p><a href="https://blog.thoughtram.io/git/2014/11/18/the-anatomy-of-a-git-commit.html">The anatomy of a git commit</a>
+  digs into the tree and commit objects that underpin the Git source control
+  system. This is an awesome read to get a view on how Git works under the
+  commands you're using to manipulate these objects.</p>
+</li>
+</ul>
+<h2>Git Workflows</h2>
+<p>Teams of developers can use Git in varying workflows because of Git's 
+distributed model and lightweight branching. There is no "right way" to 
+use Git, especially because development teams can range in size from a
+single developer up to entire companies with thousands of developers in
+a repository. The only correct answer is to let the developers decide on
+a workflow that maximizes their ability to frequently commit code and
+minimize merge conflicts.</p>
+<ul>
+<li>
+<p><a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a> shows
+  one possible way for small teams to use Git branches.
+  <a href="http://scottchacon.com/2011/08/31/github-flow.html">GitHub Flow</a> explains
+  why at GitHub they do not use the git-flow model and provides an 
+  alternative that solves some of the issues they found with git-flow.</p>
+</li>
+<li>
+<p><a href="http://blog.endpoint.com/2014/05/git-workflows-that-work.html">Git Workflows That Work</a>
+  is a helpful post with diagrams to show how teams can create a Git workflow
+  that will help their development process.</p>
+</li>
+<li>
+<p><a href="https://www.atlassian.com/git/tutorials/comparing-workflows">Comparing workflows</a>
+  provides a slew of examples for how developers on a team can handle merge
+  conflicts and other situations that commonly arise when using Git.</p>
+</li>
+</ul>
+<h3>GitHub resources</h3>
+<p>GitHub is a software-as-a-service application 
+<a href="https://blogs.microsoft.com/blog/2018/06/04/microsoft-github-empowering-developers/">owned by Microsoft</a>
+that makes it easier to collaborate with other developers on centralized
+Git repositories. The site also provides a remote backup location for
+repositories as well as secure, private repository storage. The following
+tutorials show how to get started using Git on GitHub.</p>
+<ul>
+<li>
+<p><a href="https://realpython.com/python-git-github-intro/">Introduction to Git and GitHub for Python Developers</a>
+  covers basic usage for Git and working with repositories locally and on
+  the GitHub service.</p>
+</li>
+<li>
+<p><a href="https://guides.github.com/activities/hello-world/">Hello World: GitHub edition</a> 
+  and
+  <a href="https://help.github.com/articles/git-and-github-learning-resources/">Git and GitHub learning resources</a>
+  are GitHub's official guide and learning resources.</p>
+</li>
+<li>
+<p><a href="https://blog.udacity.com/2015/06/a-beginners-git-github-tutorial.html">A Beginner’s Git and GitHub Tutorial</a>
+  shows how to perform your first commit and back it up on GitHub.</p>
+</li>
+</ul>
+<h3>你还想了解什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/deployment.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">我已经创建了一个 Python Web 应用，那我该如何部署呢？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/web-analytics.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1152q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm192-448q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm428 481l101-382q6-26-7.5-48.5t-38.5-29.5-48 6.5-30 39.5l-101 382q-60 5-107 43.5t-63 98.5q-20 77 20 146t117 89 146-20 89-117q16-60-6-117t-72-91zm660-33q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm-640-640q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm448 192q0-53-37.5-90.5t-90.5-37.5-90.5 37.5-37.5 90.5 37.5 90.5 90.5 37.5 90.5-37.5 37.5-90.5zm320 448q0 261-141 483-19 29-54 29h-1402q-35 0-54-29-141-221-141-483 0-182 71-348t191-286 286-191 348-71 348 71 286 191 191 286 71 348z" fill="#fff"/></svg></a>
+<p class="under-btn">我想通过网络分析了解有关应用用户的更多信息。</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/logging.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">如何记录应用程序中发生的错误？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/text-editors-ides.html" class="lgi sbc">Text Editors & IDEs</a>
+<a href="/vim.html" class="lgi sbc">Vim</a>
+<a href="/emacs.html" class="lgi sbc">Emacs</a>
+<a href="/sublime-text.html" class="lgi sbc">Sublime Text</a>
+<a href="/pycharm.html" class="lgi sbc">PyCharm</a>
+<a href="/jupyter-notebook.html" class="lgi sbc">Jupyter Notebook</a>
+<a href="/shells.html" class="lgi sbc">Shells</a>
+<a href="/bourne-again-shell-bash.html" class="lgi sbc">Bash shell</a>
+<a href="/zsh-shell.html" class="lgi sbc">Zsh</a>
+<a href="/powershell.html" class="lgi sbc">PowerShell</a>
+<a href="/terminal-multiplexers.html" class="lgi sbc">Terminal Multiplexers</a>
+<a href="/tmux.html" class="lgi sbc">tmux</a>
+<a href="/screen.html" class="lgi sbc">Screen</a>
+<a href="/environment-configuration.html" class="lgi sbc">Environment configuration</a>
+<a href="/application-dependencies.html" class="lgi sbc">Application Dependencies</a>
+<a href="/virtual-environments-virtualenvs-venvs.html" class="lgi sbc">Virtualenvs</a>
+<a href="/localhost-tunnels.html" class="lgi sbc">Localhost tunnels</a>
+<a href="/source-control.html" class="lgi sbc">Source Control</a>
+<a href="/git.html" class="lgi active sbc">Git</a>
+<a href="/mercurial.html" class="lgi sbc">Mercurial</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+ <a href="/git.html" class="lgi active">&raquo; Git</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

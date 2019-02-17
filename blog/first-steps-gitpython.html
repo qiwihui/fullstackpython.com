@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="学习使用GitPython库以编程方式与Git存储库进行交互。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="使用 GitPython 的第一步" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/171129-gitpython/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/first-steps-gitpython.html" />
+<meta property="og:title" content="使用 GitPython 的第一步" />
+<meta property="og:description" content="学习使用GitPython库以编程方式与Git存储库进行交互。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/171129-gitpython/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/first-steps-gitpython.html" />
+<title>使用 GitPython 的第一步 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">使用 GitPython 的第一步</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     November 30, 2017. Originally posted
+     on November 29, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="http://gitpython.readthedocs.io/">GitPython</a> is a Python code library
+for programmatically reading from and writing to <a href="/git.html">Git</a>
+<a href="/source-control.html">source control</a> repositories.</p>
+<p>Let's learn how to use GitPython by quickly installing it and reading from
+a local cloned Git repository.</p>
+<h2>Our Tools</h2>
+<p>This tutorial should work with either <a href="/python-2-or-3.html">Python 2.7 or 3</a>, 
+but Python 3, especially 3.6+, is strongly recommended for all new 
+applications. I used
+<a href="https://www.python.org/downloads/release/python-363/">Python 3.6.3</a> to 
+write this post. In addition to Python, throughout this tutorial we 
+will also use the following 
+<a href="/application-dependencies.html">application dependencies</a>: </p>
+<ul>
+<li><a href="/git.html">Git</a>, 
+  a <a href="/static-site-generator.html">source (version) control</a> implementation, 
+  <a href="https://github.com/git/git/tree/v2.15.1">version 2.15.1</a></li>
+<li><a href="https://github.com/gitpython-developers/GitPython/tree/2.1.7">GitPython</a>
+  version <a href="https://github.com/gitpython-developers/GitPython/tree/2.1.7">2.1.7</a></li>
+<li><a href="https://pip.pypa.io/en/stable/">pip</a> and 
+  <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>, which come
+  packaged with Python 3, to install and isolate the GitPython library
+  from any of your other Python projects</li>
+</ul>
+<p>Take a look at
+<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">this guide for setting up Python 3 and Flask on Ubuntu 16.04 LTS</a>
+if you need specific instructions to get a base
+<a href="/development-environments.html">Python development environment</a> set up.</p>
+<p>All code in this blog post is available open source under the MIT license 
+on GitHub under the 
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/first-steps-gitpython">first-steps-gitpython directory of the blog-code-examples repository</a>.
+Use and abuse the source code as you like for your own applications.</p>
+<h2>Install GitPython</h2>
+<p>Start by creating a new virtual environment for your project. My virtualenv
+is named <code>testgit</code> but you can name yours whatever matches the project 
+you are creating.</p>
+<div class="highlight"><pre><span></span>python3 -m venv gitpy
+</pre></div>
+
+
+<p>Activate the newly-created virtualenv.</p>
+<div class="highlight"><pre><span></span>source gitpy/bin/activate
+</pre></div>
+
+
+<p>The virtualenv's name will be prepended to the command prompt after 
+activation.</p>
+<p><img src="/img/171129-gitpython/activate-virtualenv.png" width="100%" class="shot rnd outl" alt="Create and activate the Python virtual environment."></p>
+<p>Now that the virutalenv is activated we can use the <code>pip</code> command to install
+GitPython.</p>
+<div class="highlight"><pre><span></span>pip install <span class="nv">gitpython</span><span class="o">==</span><span class="m">2</span>.1.7
+</pre></div>
+
+
+<p>Run the <code>pip</code> command and after everything is installed you should see output
+similar to the following "Successfully installed" message.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>gitpy<span class="o">)</span> $ pip install <span class="nv">gitpython</span><span class="o">==</span><span class="m">2</span>.1.7
+Collecting <span class="nv">gitpython</span><span class="o">==</span><span class="m">2</span>.1.7
+  Downloading GitPython-2.1.7-py2.py3-none-any.whl <span class="o">(</span>446kB<span class="o">)</span>
+    <span class="m">100</span>% <span class="p">|</span>████████████████████████████████<span class="p">|</span> 450kB 651kB/s 
+Collecting gitdb2&gt;<span class="o">=</span><span class="m">2</span>.0.0 <span class="o">(</span>from <span class="nv">gitpython</span><span class="o">==</span><span class="m">2</span>.1.7<span class="o">)</span>
+  Downloading gitdb2-2.0.3-py2.py3-none-any.whl <span class="o">(</span>63kB<span class="o">)</span>
+    <span class="m">100</span>% <span class="p">|</span>████████████████████████████████<span class="p">|</span> 71kB 947kB/s 
+Collecting smmap2&gt;<span class="o">=</span><span class="m">2</span>.0.0 <span class="o">(</span>from gitdb2&gt;<span class="o">=</span><span class="m">2</span>.0.0-&gt;gitpython<span class="o">==</span><span class="m">2</span>.1.7<span class="o">)</span>
+  Downloading smmap2-2.0.3-py2.py3-none-any.whl
+Installing collected packages: smmap2, gitdb2, gitpython
+Successfully installed gitdb2-2.0.3 gitpython-2.1.7 smmap2-2.0.3
+</pre></div>
+
+
+<p>Next we can start programmatically interacting with Git repositories in our
+Python applications with the GitPython installed.</p>
+<h2>Clone Repository</h2>
+<p>GitPython can work with remote repositories but for simplicity in this 
+tutorial we'll use a cloned repository on our local system.</p>
+<p>Clone a repository you want to work with to your local system. If you don't
+have a specific one in mind use the 
+<a href="https://github.com/mattmakai/fullstackpython.com">open source Full Stack Python Git repository</a>
+that is hosted on GitHub.</p>
+<div class="highlight"><pre><span></span>git clone git@github.com:mattmakai/fullstackpython.com fsp
+</pre></div>
+
+
+<p>Take note of the location where you cloned the repository because we need
+the path to tell GitPython what repository to handle. Change into the 
+directory for the new Git repository with <code>cd</code> then run the <code>pwd</code> (present
+working directory) command to get the full path.</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> fsp
+<span class="nb">pwd</span>
+</pre></div>
+
+
+<p>You will see some output like <code>/Users/matt/devel/py/fsp</code>. This path is your
+absolute path to the base of the Git repository.</p>
+<p>Use the <code>export</code> command to set an environment variable for the absolute path
+to the Git repository.</p>
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">GIT_REPO_PATH</span><span class="o">=</span><span class="s1">&#39;/Users/matt/devel/py/fsp&#39;</span> <span class="c1"># make sure this your own path</span>
+</pre></div>
+
+
+<p>Our Git repository and path environment variable are all set so let's write
+the Python code that uses GitPython.</p>
+<h2>Read Repository and Commit Data</h2>
+<p>Create a new Python file named <code>read_repo.py</code> and open it so we can start
+to code up a simple script.</p>
+<p>Start with a couple of imports and a constant:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">git</span> <span class="kn">import</span> <span class="n">Repo</span>
+
+
+<span class="n">COMMITS_TO_PRINT</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+
+
+<p>The <code>os</code> module makes it easy to read environment variables, such as our
+<code>GIT_REPO_PATH</code> variable we set earlier. <code>from git import Repo</code> gives our
+application access to the GitPython library when we create the <code>Repo</code> object.
+<code>COMMITS_TO_PRINT</code> is a constant that limits the number of lines of output
+based on the amount of commits we want our script to print information on.
+Full Stack Python has over 2,250 commits so there'd be a whole lot of output
+if we printed every commit.</p>
+<p>Next within our <code>read_repo.py</code> file create a function to print individual
+commit information:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_commit</span><span class="p">(</span><span class="n">commit</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;----&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">commit</span><span class="o">.</span><span class="n">hexsha</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">{}</span><span class="se">\&quot;</span><span class="s2"> by {} ({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">commit</span><span class="o">.</span><span class="n">summary</span><span class="p">,</span>
+                                     <span class="n">commit</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                                     <span class="n">commit</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">commit</span><span class="o">.</span><span class="n">authored_datetime</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;count: {} and size: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">commit</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span>
+                                              <span class="n">commit</span><span class="o">.</span><span class="n">size</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>The <code>print_commit</code> function takes in a GitPython commit object and
+prints the 40-character SHA-1 hash for the commit followed by:</p>
+<ol>
+<li>the commit summary</li>
+<li>author name </li>
+<li>author email</li>
+<li>commit date and time</li>
+<li>count and update size</li>
+</ol>
+<p>Below the <code>print_commit</code> function, create another function named 
+<code>print_repository</code> to print details of the <code>Repo</code> object:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_repository</span><span class="p">(</span><span class="n">repo</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Repo description: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">description</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Repo active branch is {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">active_branch</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">remote</span> <span class="ow">in</span> <span class="n">repo</span><span class="o">.</span><span class="n">remotes</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Remote named &quot;{}&quot; with URL &quot;{}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">remote</span><span class="p">,</span> <span class="n">remote</span><span class="o">.</span><span class="n">url</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Last commit for repo is {}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">commit</span><span class="o">.</span><span class="n">hexsha</span><span class="p">)))</span>
+</pre></div>
+
+
+<p><code>print_repository</code> is similar to <code>print_commit</code> but instead prints the
+repository description, active branch, all remote Git URLs configured
+for this repository and the latest commit.</p>
+<p>Finally, we need a "main" function for when we invoke the script from the
+terminal using the <code>python</code> command. Round out our </p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">repo_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;GIT_REPO_PATH&#39;</span><span class="p">)</span>
+    <span class="c1"># Repo object used to programmatically interact with Git repositories</span>
+    <span class="n">repo</span> <span class="o">=</span> <span class="n">Repo</span><span class="p">(</span><span class="n">repo_path</span><span class="p">)</span>
+    <span class="c1"># check that the repository loaded correctly</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">repo</span><span class="o">.</span><span class="n">bare</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Repo at {} successfully loaded.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">repo_path</span><span class="p">))</span>
+        <span class="n">print_repository</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span>
+        <span class="c1"># create list of commits then print some of them to stdout</span>
+        <span class="n">commits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">iter_commits</span><span class="p">(</span><span class="s1">&#39;master&#39;</span><span class="p">))[:</span><span class="n">COMMITS_TO_PRINT</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">commit</span> <span class="ow">in</span> <span class="n">commits</span><span class="p">:</span>
+            <span class="n">print_commit</span><span class="p">(</span><span class="n">commit</span><span class="p">)</span>
+            <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Could not load repository at {} :(&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">repo_path</span><span class="p">))</span>
+</pre></div>
+
+
+<p>The main function handles grabbing the <code>GIT_REPO_PATH</code> environment variable
+and creates a Repo object based on the path if possible.</p>
+<p>If the repository is not empty, which indicates a failure to find the 
+repository, then the <code>print_repository</code> and <code>print_commit</code> functions are 
+called to show the repository data.</p>
+<p>If you want to copy and paste all of the code found above at once, take a
+look at the 
+<a href="https://github.com/fullstackpython/blog-code-examples/blob/master/first-steps-gitpython/read_repo.py"><code>read_repo.py</code> file on GitHub</a>.</p>
+<p>Time to test our GitPython-using script. Invoke the <code>read_repo.py</code> file using
+the following command.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>gitpy<span class="o">)</span> $ python read_repo.py
+</pre></div>
+
+
+<p>If the virtualenv is activated and the <code>GIT_REPO_PATH</code> environment variable
+is set properly, we should see output similar to the following.</p>
+<div class="highlight"><pre><span></span>Repo at ~/devel/py/fsp/ successfully loaded.
+Repo description: Unnamed repository<span class="p">;</span> edit this file <span class="s1">&#39;description&#39;</span> to name the repository.
+Repo active branch is master
+Remote named <span class="s2">&quot;origin&quot;</span> with URL <span class="s2">&quot;git@github.com:mattmakai/fullstackpython.com&quot;</span>
+Last commit <span class="k">for</span> repo is 1fa2de70aeb2ea64315f69991ccada51afac1ced.
+----
+1fa2de70aeb2ea64315f69991ccada51afac1ced
+<span class="s2">&quot;update latest blog post with code&quot;</span> by Matt Makai <span class="o">(</span>matthew.makai@gmail.com<span class="o">)</span>
+<span class="m">2017</span>-11-30 <span class="m">17</span>:15:14-05:00
+count: <span class="m">2256</span> and size: <span class="m">254</span>
+----
+1b026e4268d3ee1bd55f1979e9c397ca99bb5864
+<span class="s2">&quot;new blog post, just needs completed code section&quot;</span> by Matt Makai <span class="o">(</span>matthew.makai@gmail.com<span class="o">)</span>
+<span class="m">2017</span>-11-30 <span class="m">09</span>:00:06-05:00
+count: <span class="m">2255</span> and size: <span class="m">269</span>
+----
+2136d845de6f332505c3df38efcfd4c7d84a45e2
+<span class="s2">&quot;change previous email newsletters list style&quot;</span> by Matt Makai <span class="o">(</span>matthew.makai@gmail.com<span class="o">)</span>
+<span class="m">2017</span>-11-20 <span class="m">11</span>:44:13-05:00
+count: <span class="m">2254</span> and size: <span class="m">265</span>
+----
+9df077a50027d9314edba7e4cbff6bb05c433257
+<span class="s2">&quot;ensure picture sizes are reasonable&quot;</span> by Matt Makai <span class="o">(</span>matthew.makai@gmail.com<span class="o">)</span>
+<span class="m">2017</span>-11-14 <span class="m">13</span>:29:39-05:00
+count: <span class="m">2253</span> and size: <span class="m">256</span>
+----
+3f6458c80b15f58a6e6c85a46d06ade72242c572
+<span class="s2">&quot;add databases logos to relational databases pagem&quot;</span> by Matt Makai <span class="o">(</span>matthew.makai@gmail.com<span class="o">)</span>
+<span class="m">2017</span>-11-14 <span class="m">13</span>:28:02-05:00
+count: <span class="m">2252</span> and size: <span class="m">270</span>
+</pre></div>
+
+
+<p>The specific commits you see will vary based on the last 5 commits I've
+pushed to the GitHub repository, but if you see something like the output
+above that is a good sign everything worked as expected.</p>
+<h2>What's next?</h2>
+<p>We just cloned a <a href="/git.html">Git</a> repository and used the GitPython 
+library to read a slew of data about the repository and all of its commits.</p>
+<p>GitPython can do more than just read data though - it can also create and 
+write to Git repositories! Take a look at the 
+<a href="http://gitpython.readthedocs.io/en/stable/tutorial.html#modifying-references">modifying references</a>
+documentation page in the official GitPython tutorial or check back here in
+the future when I get a chance to write up a more advanced GitPython 
+walkthrough.</p>
+<p>Questions? Let me know via 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">a GitHub issue ticket on the Full Stack Python repository</a>, 
+on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>.  </p>
+<p>See something wrong in this blog post? Fork
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/171129-first-steps-gitpython.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/171129-gitpython/header.jpg" alt="Python 和 Git logos，版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/source-control.html" class="lgi">Source control</a>
+<a href="/git.html" class="lgi">Git</a>
+<a href="https://github.com/" class="lgi">GitHub <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="http://gitpython.readthedocs.io/en/stable/index.html" class="lgi">Official GitPython Docs <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="https://github.com/fullstackpython/blog-code-examples/tree/master/first-steps-gitpython" class="lgi">Code for this post <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

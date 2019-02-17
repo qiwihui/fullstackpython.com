@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Web Real-Time Communications (WebRTC) is a protocol for web apps to transmit video, audio and data streams between client and server.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="WebRTC" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/webrtc.html" />
+<meta property="og:title" content="WebRTC" />
+<meta property="og:description" content="Web Real-Time Communications (WebRTC) is a protocol for web apps to transmit video, audio and data streams between client and server." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/webrtc.html" />
+<title>WebRTC - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>WebRTC</h1>
+<p><a href="https://tools.ietf.org/html/rfc7478">Web Real-Time Communications (WebRTC)</a> 
+is a specification for a protocol implementation that enables web apps to 
+transmit video, audio and data streams between client (typically a web
+browser) and server (usually a <a href="/web-servers.html">web server</a>).</p>
+<h3>WebRTC tutorials</h3>
+<ul>
+<li>
+<p><a href="https://bloggeek.me/started-learning-webrtc-development/">How to Get Started Learning WebRTC Development</a>
+  explains what you do and do not need to know as prerequisites for
+  building with WebRTC along with some sources for learning.</p>
+</li>
+<li>
+<p><a href="https://deepstreamhub.com/tutorials/protocols/webrtc-intro/">A real world guide to WebRTC</a>
+  goes through WebRTC fundamentals such as data channels, audio and video,
+  screen sharing and file transfers with the JavaScript code provided
+  for each concept.</p>
+</li>
+<li>
+<p>The 
+  <a href="https://www.youtube.com/watch?v=ujpIAWmK2Vo">Introduction to WebRTC video series</a>
+  (<a href="https://www.youtube.com/watch?v=cw2iTgIW-uk">part 2</a> and 
+  <a href="https://www.youtube.com/watch?v=ZeO6HgzF1jY">part 3</a>) can be a bit dry
+  at points but overall has a ton of good information that gives a solid
+  overview of the technology.</p>
+</li>
+<li>
+<p><a href="https://tokbox.com/blog/building-a-snapchat-like-app-with-webrtc-in-the-browser/">Building a Snapchat-like app with WebRTC in the browser</a>
+  walks through the front end JavaScript for building a photo filter
+  application using the WebRTC browser APIs.</p>
+</li>
+<li>
+<p><a href="https://blog.codeship.com/webrtc-issues-and-how-to-debug-them/">WebRTC issues and how to debug them</a>
+  explains the various ways that implementations can go wrong and where
+  to start looking when you run into errors.</p>
+</li>
+</ul>
+<h3>Other WebRTC resources</h3>
+<ul>
+<li>
+<p><a href="https://webrtc-security.github.io/">A Study of WebRTC Security</a> gives a
+  great overview of WebRTC and the new security concerns it can bring as it
+  is integrated into more web applications.</p>
+</li>
+<li>
+<p><a href="https://blog.discordapp.com/how-discord-handles-two-and-half-million-concurrent-voice-users-using-webrtc-ce01c3187429">How Discord Handles Two and Half Million Concurrent Voice Users using WebRTC</a>
+  provides detailed insight into the what and why of the highly scalable
+  <a href="https://discordapp.com/">Discord</a> technical architecture that relies
+  upon WebRTC for communication. There are a bunch of great examples here
+  for why some of the service must be centralized (to prevent client IP 
+  addresses from leaking to other clients) while others are decentralized
+  to assist with scaling the number of possible connections.</p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=m9QxBc0OeoI">Architectures for a kickass WebRTC application</a>
+  is a video of a technical talk that covers some of the tools and protocols 
+  that can be used to create your WebRTC projects and why you would choose 
+  one tool other another.</p>
+</li>
+<li>
+<p><a href="https://medium.com/the-making-of-appear-in/webrtc-connection-times-and-the-power-of-playing-around-with-data-ab11312737e9">WebRTC connection times and the power of playing around with data</a>
+  provides data on connection times and potential reasons for WebRTC 
+  connection quality suffers in some cases.</p>
+</li>
+<li>
+<p><a href="https://webkit.org/blog/7763/a-closer-look-into-webrtc/">A closer look into WebRTC</a>
+  covers the Safari WebRTC implementation in WebKit and explains some of the
+  nuances for that specific web browser's implementation.</p>
+</li>
+<li>
+<p>STUN/TURN servers are used to relay data to a non-public IP address in a
+  WebRTC application. This blog post on
+  <a href="https://bloggeek.me/turn-public-ip-address/">Do you still need TURN if your media server has a public IP address?</a>
+  answers some frequently asked questions about when a TURN server is
+  truly required.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@sebastianpatron/an-intro-to-webrtc-and-accessing-a-users-media-devices-76ca2e2edc73">An Intro to WebRTC and Accessing a User’s Media Devices</a>
+  goes into the JavaScript needed to use a computer's media devices such as
+  the microphone and video camera through the web browser's APIs.</p>
+</li>
+<li>
+<p><a href="https://www.podcastinit.com/aiortc-with-jeremy-laine-episode-191/">AIORTC: An Asynchronous WebRTC Framework</a>
+  is an interview with the developer of an async WebRTC framework that is
+  built upon asyncio.</p>
+</li>
+</ul>
+<h3>在 Web 应用程序后你需要学习什么？</h3>
+<div class="row">
+ <div class="c4">
+  <div class="well select-next">
+<a href="/development-environments.html" class="btn btn-success btn-full"><svg width="34" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1728 992v-832q0-13-9.5-22.5t-22.5-9.5h-1600q-13 0-22.5 9.5t-9.5 22.5v832q0 13 9.5 22.5t22.5 9.5h1600q13 0 22.5-9.5t9.5-22.5zm128-832v1088q0 66-47 113t-113 47h-544q0 37 16 77.5t32 71 16 43.5q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45q0-14 16-44t32-70 16-78h-544q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1600q66 0 113 47t47 113z" fill="#fff"/></svg></a>
+<p class="under-btn">我应该使用什么编辑器来编写我的 Python 应用程序？</p>  </div>
+ </div>
+ <div class="c4">
+  <div class="well select-next">
+<a href="/wsgi-servers.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" fill="#fff"/></svg></a>
+<p class="under-btn">在服务器上用什么运行 Python 应用程序？</p>  </div>
+ </div>
+ <div class="c4">
+  <div class="well select-next">
+<a href="/application-dependencies.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1088 832q0-26-19-45t-45-19h-256q-26 0-45 19t-19 45 19 45 45 19h256q26 0 45-19t19-45zm576-192v960q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-960q0-26 19-45t45-19h1408q26 0 45 19t19 45zm64-448v256q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-256q0-26 19-45t45-19h1536q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">应该如何在服务器上安装 Python 库？</p>  </div>
+ </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/web-frameworks.html" class="lgi sbc">Web Frameworks</a>
+<a href="/django.html" class="lgi sbc">Django</a>
+<a href="/flask.html" class="lgi sbc">Flask</a>
+<a href="/bottle.html" class="lgi sbc">Bottle</a>
+<a href="/pyramid.html" class="lgi sbc">Pyramid</a>
+<a href="/turbogears.html" class="lgi sbc">TurboGears</a>
+<a href="/falcon.html" class="lgi sbc">Falcon</a>
+<a href="/morepath.html" class="lgi sbc">Morepath</a>
+<a href="/sanic.html" class="lgi sbc">Sanic</a>
+<a href="/other-web-frameworks.html" class="lgi sbc">Other Web Frameworks</a>
+<a href="/template-engines.html" class="lgi sbc">Template Engines</a>
+<a href="/jinja2.html" class="lgi sbc">Jinja2</a>
+<a href="/mako.html" class="lgi sbc">Mako</a>
+<a href="/django-templates.html" class="lgi sbc">Django Templates</a>
+<a href="/web-design.html" class="lgi sbc">Web Design</a>
+<a href="/hypertext-markup-language-html.html" class="lgi sbc">HTML</a>
+<a href="/cascading-style-sheets.html" class="lgi sbc">Cascading Style Sheets (CSS)</a>
+<a href="/responsive-design.html" class="lgi sbc">Responsive Design</a>
+<a href="/minification.html" class="lgi sbc">Minification</a>
+<a href="/css-frameworks.html" class="lgi sbc">CSS Frameworks</a>
+<a href="/bootstrap-css.html" class="lgi sbc">Bootstrap</a>
+<a href="/foundation-css.html" class="lgi sbc">Foundation</a>
+<a href="/javascript.html" class="lgi sbc">JavaScript</a>
+<a href="/react.html" class="lgi sbc">React</a>
+<a href="/vuejs.html" class="lgi sbc">Vue.js</a>
+<a href="/angular.html" class="lgi sbc">Angular</a>
+<a href="/task-queues.html" class="lgi sbc">Task Queues</a>
+<a href="/celery.html" class="lgi sbc">Celery</a>
+<a href="/redis-queue-rq.html" class="lgi sbc">Redis Queue (RQ)</a>
+<a href="/dramatiq.html" class="lgi sbc">Dramatiq</a>
+<a href="/static-site-generator.html" class="lgi sbc">Static Site Generators</a>
+<a href="/pelican.html" class="lgi sbc">Pelican</a>
+<a href="/lektor.html" class="lgi sbc">Lektor</a>
+<a href="/mkdocs.html" class="lgi sbc">MkDocs</a>
+<a href="/testing.html" class="lgi sbc">Testing</a>
+<a href="/unit-testing.html" class="lgi sbc">Unit Testing</a>
+<a href="/integration-testing.html" class="lgi sbc">Integration Testing</a>
+<a href="/debugging.html" class="lgi sbc">Debugging</a>
+<a href="/code-metrics.html" class="lgi sbc">Code Metrics</a>
+<a href="/networking.html" class="lgi sbc">Networking</a>
+<a href="/https.html" class="lgi sbc">HTTPS</a>
+<a href="/websockets.html" class="lgi sbc">WebSockets</a>
+<a href="/webrtc.html" class="lgi active sbc">WebRTC</a>
+<a href="/application-programming-interfaces.html" class="lgi sbc">Web APIs</a>
+<a href="/microservices.html" class="lgi sbc">Microservices</a>
+<a href="/webhooks.html" class="lgi sbc">Webhooks</a>
+<a href="/bots.html" class="lgi sbc">Bots</a>
+<a href="/api-creation.html" class="lgi sbc">API Creation</a>
+<a href="/api-frameworks.html" class="lgi sbc">API Frameworks</a>
+<a href="/django-rest-framework-drf.html" class="lgi sbc">Django REST Framework</a>
+<a href="/api-integration.html" class="lgi sbc">API Integration</a>
+<a href="/twilio.html" class="lgi sbc">Twilio</a>
+<a href="/stripe.html" class="lgi sbc">Stripe</a>
+<a href="/slack.html" class="lgi sbc">Slack</a>
+<a href="/okta.html" class="lgi sbc">Okta</a>
+<a href="/web-application-security.html" class="lgi sbc">Security</a>
+<a href="/sql-injection.html" class="lgi sbc">SQL Injection</a>
+<a href="/cross-site-request-forgery-csrf.html" class="lgi sbc">CSRF</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+ <a href="/webrtc.html" class="lgi active">&raquo; WebRTC</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

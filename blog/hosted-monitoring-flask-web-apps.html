@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="学习使用Rollbar将托管监控添加到Flask Web应用程序。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何将托管监视添加到 Flask Web 应用程序" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/170723-monitor-flask-apps/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/hosted-monitoring-flask-web-apps.html" />
+<meta property="og:title" content="如何将托管监视添加到 Flask Web 应用程序" />
+<meta property="og:description" content="学习使用Rollbar将托管监控添加到Flask Web应用程序。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/170723-monitor-flask-apps/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/hosted-monitoring-flask-web-apps.html" />
+<title>如何将托管监视添加到 Flask Web 应用程序 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何将托管监视添加到 Flask Web 应用程序</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+     Posted by <a href="/about-author.html">Matt Makai</a> on 
+     July 23, 2017.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>How do you know whether your application is running properly with minimal 
+errors after <a href="/web-development.html">building</a> and 
+<a href="/deployment.html">deploying</a> it? The fastest and easiest way
+to monitor your operational <a href="/flask.html">Flask web application</a> is to 
+integrate one of the many available fantastic hosted 
+<a href="/monitoring.html">monitoring</a> tools.</p>
+<p>In this post we will quickly add <a href="https://rollbar.com">Rollbar monitoring</a>
+to catch errors and visualize our application is running properly. There
+are also many other great hosted monitoring tools, which you can check
+out on the <a href="/monitoring.html">monitoring</a> page.</p>
+<h2>Our Tools</h2>
+<p>We can use either <a href="/python-2-or-3.html">Python 2 or 3</a> to build this
+tutorial, but Python 3 is <em>strongly</em> recommended for all new applications. 
+I used 
+<a href="https://www.python.org/downloads/release/python-362/">Python 3.6.2</a> to 
+execute my code. We will also use the following 
+<a href="/application-dependencies.html">application dependencies</a> throughout
+the post: </p>
+<ul>
+<li><a href="/flask.html">Flask</a> web framework, 
+  <a href="https://github.com/pallets/flask/releases/tag/0.12.2">version 0.12.2</a></li>
+<li><a href="https://rollbar.com/docs/notifier/pyrollbar/">pyrollbar</a> monitoring 
+  instrumentation library,
+  <a href="https://github.com/rollbar/pyrollbar/tree/v0.13.12">version 0.13.12</a></li>
+<li><a href="https://pypi.org/project/blinker">blinker</a> for signaling support
+  in Flask applications so pyrollbar can report on all errors</li>
+<li>A <a href="https://rollbar.com/">free Rollbar account</a> where we will send error
+  data and view it when it is captured</li>
+<li><a href="https://pip.pypa.io/en/stable/">pip</a> and the 
+  <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> virtual environment
+  library, which come packaged with Python 3, to install and isolate the 
+  Flask and Rollbar libraries from other Python projects you are working on</li>
+</ul>
+<p>If you need help getting your 
+<a href="/development-environments.html">development environment</a> configured
+before running this code, take a look at
+<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">this guide for setting up Python 3 and Flask on Ubuntu 16.04 LTS</a>.</p>
+<p>All code in this blog post is available open source under the MIT license 
+on GitHub under the 
+<a href="https://github.com/fullstackpython/blog-code-examples">monitor-flask-apps directory of the blog-code-examples repository</a>. 
+Use and abuse the source code as you desire for your own applications.</p>
+<h2>Installing Dependencies</h2>
+<p>Change into the directory where you keep your Python virtualenvs. 
+Create a new virtual environment for this project using the following
+command.</p>
+<div class="highlight"><pre><span></span>python3 -m venv monitorflask
+</pre></div>
+
+
+<p>Activate the virtualenv.</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> monitorflask/bin/activate
+</pre></div>
+
+
+<p>The command prompt will change after activating the virtualenv:</p>
+<p><img src="/img/170723-monitor-flask-apps/activate-virtualenv.png" width="100%" class="shot rnd outl" alt="Activating our Python virtual environment on the command line."></p>
+<p>Remember that you need to activate the virtualenv in every new terminal 
+window where you want to use the virtualenv to run the project.</p>
+<p>Flask, Rollbar and Blinker can now be installed into the now-activated 
+virtualenv.</p>
+<div class="highlight"><pre><span></span>pip install flask==0.12.2 rollbar==0.13.12 blinker==1.4
+</pre></div>
+
+
+<p>Our required dependencies should be installed within our virtualenv 
+after a short installation period. Look for output like the following to 
+confirm everything worked.</p>
+<div class="highlight"><pre><span></span>Installing collected packages: blinker, itsdangerous, click, MarkupSafe, Jinja2, Werkzeug, Flask, idna, urllib3, chardet, certifi, requests, six, rollbar
+  Running setup.py install for blinker ... done
+  Running setup.py install for itsdangerous ... done
+  Running setup.py install for MarkupSafe ... done
+  Running setup.py install for rollbar ... done
+Successfully installed Flask-0.12.2 Jinja2-2.9.6 MarkupSafe-1.0 Werkzeug-0.12.2 blinker-1.4 certifi-2017.4.17 chardet-3.0.4 click-6.7 idna-2.5 itsdangerous-0.24 requests-2.18.1 rollbar-0.13.12 six-1.10.0 urllib3-1.21.1
+</pre></div>
+
+
+<p>Now that we have our Python dependencies installed into our virtualenv
+we can create the initial version of our application.</p>
+<h2>Building Our Flask App</h2>
+<p>Create a folder for your project named <code>monitor-flask-apps</code>. Change into
+the folder and then create a file named <code>app.py</code> with the following
+code.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">werkzeug.exceptions</span> <span class="kn">import</span> <span class="n">NotFound</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">MIN_PAGE_NAME_LENGTH</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&lt;string:page&gt;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_page</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">valid_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">MIN_PAGE_NAME_LENGTH</span>
+        <span class="n">valid_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^[a-z]+$&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">valid_length</span> <span class="ow">and</span> <span class="n">valid_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;{}.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Sorry, couldn&#39;t find page with name {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NotFound</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;404 Not Found&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The above application code has some standard Flask imports so we can
+create a Flask web app and render template files. We have a single
+function named <code>show_page</code> to serve a single Flask route. <code>show_page</code>
+checks if the URL path contains only lowercase alpha characters for a
+potential page name. If the page name can be found in the <code>templates</code>
+folder then the page is rendered, otherwise an exception is thrown
+that the page could not be found. We need to create at least one template
+file if our function is ever going to return a non-error reponse.</p>
+<p>Save <code>app.py</code> and make a new subdirectory named <code>templates</code> under your
+project directory. Create a new file named <code>battlegrounds.html</code> and put
+the following <a href="/jinja2.html">Jinja2</a> template markup into it.</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>You found the Battlegrounds GIF!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>PUBG so good.<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://media.giphy.com/media/3ohzdLMlhId2rJuLUQ/giphy.gif&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>The above <a href="/jinja2.html">Jinja2</a> template is basic HTML without any
+<a href="http://jinja.pocoo.org/docs/latest/templates/">embedded template tags</a>. 
+The template creates a very plain page with a header description of
+"PUBG so good" and a GIF from this
+<a href="http://store.steampowered.com/app/578080/PLAYERUNKNOWNS_BATTLEGROUNDS/">excellent computer game</a>.</p>
+<p>Time to run and test our code. Change into the base directory of your
+project where <code>app.py</code> file is located. Execute <code>app.py</code> using the <code>python</code>
+command as follows (make sure your virtualenv is still activated in the
+terminal where you are running this command):</p>
+<div class="highlight"><pre><span></span>python app.py
+</pre></div>
+
+
+<p>The Flask development server should start up and display a few lines
+of output.</p>
+<p><img src="/img/170723-monitor-flask-apps/python-app-py.png" width="100%" class="shot rnd outl" alt="Run the Flask development server locally."></p>
+<p>What happens when we access the application running on 
+<a href="http://localhost:5000">localhost port 5000</a>?</p>
+<p><img src="/img/170723-monitor-flask-apps/localhost-base-url.png" width="100%" class="shot rnd outl" alt="Testing our Flask application at the base URL receives an HTTP 404 error."></p>
+<p>HTTP status 404 page not found, which is what we expected because we only
+defined a single route and it did not live at the base path.</p>
+<p>We created a template named <code>battlegrounds.html</code> that should be accessible
+when we go to 
+<a href="http://localhost:5000/battlegrounds/">localhost:5000/battlegrounds/</a>.</p>
+<p><img src="/img/170723-monitor-flask-apps/localhost-pubg-gif.jpg" width="100%" class="shot rnd outl" alt="Testing our Flask application at /battlegrounds/ gets the proper template with a GIF."></p>
+<p>The application successfully found the <code>battlegrounds.html</code> template but
+that is the only one available. What if we try 
+<a href="http://localhost:5000/fullstackpython/">localhost:5000/fullstackpython/</a>?</p>
+<p><img src="/img/170723-monitor-flask-apps/localhost-no-template.jpg" width="100%" class="shot rnd outl" alt="If no template is found we receive a 500 error."></p>
+<p>HTTP 500 error. That's no good.</p>
+<p>The 404 and 500 errors are obvious to us right now because we are 
+testing the application locally. However, what happens when the app is 
+deployed and a user gets the error in their own web browser? They will 
+typically quit out of frustration and you will never know what happened 
+unless you add some error tracking and application monitoring.</p>
+<p>We will now modify our code to add Rollbar to catch and report those
+errors that occur for our users.</p>
+<h2>Handling Errors</h2>
+<p>Head to <a href="https://rollbar.com/">Rollbar's homepage</a> so we can add their
+hosted monitoring tools to our oft-erroring Flask app.</p>
+<p><img src="/img/170723-monitor-flask-apps/rollbar-homepage.jpg" width="100%" class="shot rnd outl" alt="Rollbar homepage in the web browser."></p>
+<p>Click the "Sign Up" button in the upper right-hand corner. Enter your 
+email address, a username and the password you want on the sign up page.</p>
+<p><img src="/img/170723-monitor-flask-apps/sign-up.jpg" width="100%" class="shot rnd outl" alt="Enter your basic account information on the sign up page."></p>
+<p>After the sign up page you will see the onboarding flow where you can
+enter a project name and select a programming language. For project
+name enter "Battlegrounds" and select that you are monitoring a Python app.</p>
+<p><img src="/img/170723-monitor-flask-apps/create-new-project.jpg" width="100%" class="shot rnd outl" alt="Create a new project named 'Battlegrounds' and select Python as the programming language."></p>
+<p>Press the "Continue" button at the bottom to move along. The next
+screen shows us a few quick instructions to add monitoring to our Flask
+application.</p>
+<p><img src="/img/170723-monitor-flask-apps/project-setup.jpg" width="100%" class="shot rnd outl" alt="Set up your project using your server-side access token."></p>
+<p>Let's modify our Flask application to test whether we can properly connect
+to Rollbar's service. Change <code>app.py</code> to include the following highlighted
+lines. </p>
+<span class="highlight"><div class="highlight"><pre><span></span><span class="o"></span><span class="kn">import</span> <span class="nn">os</span></span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="highlight"><span class="o"></span><span class="kn">import</span> <span class="nn">rollbar</span></span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">werkzeug.exceptions</span> <span class="kn">import</span> <span class="n">NotFound</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">MIN_PAGE_NAME_LENGTH</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="highlight"><span class="o"></span><span class="nd">@app.before_first_request</span></span>
+<span class="highlight"><span class="o"></span><span class="k">def</span> <span class="nf">add_monitoring</span><span class="p">():</span></span>
+<span class="highlight"><span class="o"></span>    <span class="n">rollbar</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ROLLBAR_SECRET&#39;</span><span class="p">))</span></span>
+<span class="highlight"><span class="o"></span>    <span class="n">rollbar</span><span class="o">.</span><span class="n">report_message</span><span class="p">(</span><span class="s1">&#39;Rollbar is configured correctly&#39;</span><span class="p">)</span></span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&lt;string:page&gt;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_page</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">valid_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">MIN_PAGE_NAME_LENGTH</span>
+        <span class="n">valid_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^[a-z]+$&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">valid_length</span> <span class="ow">and</span> <span class="n">valid_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;{}.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Sorry, couldn&#39;t find page with name {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NotFound</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;404 Not Found&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We added a couple of new imports, <code>os</code> and <code>rollbar</code>. <code>os</code> allows us to
+grab environment variable values, such as our Rollbar secret key. <code>rollbar</code>
+is the library we installed earlier. The two lines below the Flask app
+instantiation are to initialize Rollbar using the Rollbar secret token and
+send a message to the service that it started correctly.</p>
+<p>The <code>ROLLBAR_SECRET</code> token needs to be set in an environment variable.
+Save an quit the <code>app.py</code>. Run <code>export ROLLBAR_SECRET='token here'</code> on the
+command line where your virtualenv is activated. This token can be found
+on the Rollbar onboarding screen. </p>
+<p>I typically store all my environment variables in a file like 
+<a href="https://github.com/fullstackpython/blog-code-examples/blob/master/monitor-flask-apps/template.env">template.env</a> and invoke it from the terminal using
+the <code>. ./template.env</code> command. Make sure to avoid committing your secret
+tokens to a source control repository, especially if the repository is 
+public!</p>
+<p>After exporting your <code>ROLLBAR_SECRET</code> key as an environment variable
+we can test that Rollbar is working as we run our application. Run it
+now using <code>python</code>:</p>
+<div class="highlight"><pre><span></span>python app.py
+</pre></div>
+
+
+<p>Back in your web browser press the "Done! Go to Dashboard" button. Don't 
+worry about the "Report an Error" section code, we can get back to that in a 
+moment.</p>
+<p>If the event hasn't been reported yet we'll see a waiting screen like this
+one:</p>
+<p><img src="/img/170723-monitor-flask-apps/waiting.jpg" width="100%" class="shot rnd outl" alt="Waiting for data on the dashboard."></p>
+<p>Once Flask starts up though, the first event will be populated on the 
+dashboard.</p>
+<p><img src="/img/170723-monitor-flask-apps/first-event.jpg" width="100%" class="shot rnd outl" alt="First event populated on our dashboard for this project."></p>
+<p>Okay, our first test event has been populated, but we really want to see
+all the errors from our application, not a test event.</p>
+<h2>Testing Error Handling</h2>
+<p>How do we make sure real errors are reported rather than just a simple
+test event? We just need to add a few more lines of code to our app.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">rollbar</span>
+<span class="highlight"><span class="o"></span><span class="kn">import</span> <span class="nn">rollbar.contrib.flask</span></span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">Response</span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">got_request_exception</span></span>
+<span class="kn">from</span> <span class="nn">werkzeug.exceptions</span> <span class="kn">import</span> <span class="n">NotFound</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">MIN_PAGE_NAME_LENGTH</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<span class="nd">@app.before_first_request</span>
+<span class="k">def</span> <span class="nf">add_monitoring</span><span class="p">():</span>
+    <span class="n">rollbar</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ROLLBAR_SECRET&#39;</span><span class="p">))</span>
+<span class="highlight"><span class="o"></span>    <span class="c1">## delete the next line if you dont want this event anymore</span></span>
+    <span class="n">rollbar</span><span class="o">.</span><span class="n">report_message</span><span class="p">(</span><span class="s1">&#39;Rollbar is configured correctly&#39;</span><span class="p">)</span>
+<span class="highlight"><span class="o"></span>    <span class="n">got_request_exception</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">rollbar</span><span class="o">.</span><span class="n">contrib</span><span class="o">.</span><span class="n">flask</span><span class="o">.</span><span class="n">report_exception</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span></span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&lt;string:page&gt;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">show_page</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">valid_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">page</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">MIN_PAGE_NAME_LENGTH</span>
+        <span class="n">valid_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^[a-z]+$&#39;</span><span class="p">,</span> <span class="n">page</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">valid_length</span> <span class="ow">and</span> <span class="n">valid_name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;{}.html&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Sorry, couldn&#39;t find page with name {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">NotFound</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+<span class="highlight"><span class="o"></span>        <span class="n">rollbar</span><span class="o">.</span><span class="n">report_exc_info</span><span class="p">()</span></span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;404 Not Found&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The above highlighted code modifies the application so it reports all Flask
+errors as well as our HTTP 404 not found issues that happen within the
+<code>show_page</code> function. </p>
+<p>Make sure your Flask development server is running and try to go to 
+<a href="http://localhost:5000/b/">localhost:5000/b/</a>. You will receive an HTTP
+404 exception and it will be reported to Rollbar. Next go to 
+<a href="http://localhost:5000/fullstackpython/">localhost:5000/fullstackpython/</a> and 
+an HTTP 500 error will occur.</p>
+<p>You should see an aggregation of errors as you test out these errors:</p>
+<p><img src="/img/170723-monitor-flask-apps/error-aggregation.jpg" width="100%" class="shot rnd outl" alt="Rollbar dashboard showing aggregations of errors."></p>
+<p>Woohoo, we finally have our Flask app reporting all errors that occur
+for any user back to the hosted Rollbar monitoring service!</p>
+<h2>What's Next?</h2>
+<p>We just learned how to catch and handle errors with Rollbar as a hosted
+monitoring platform in a simple Flask application. Next you will want to 
+add monitoring to your more complicated web apps. You can also check out 
+some of Rollbar's more advanced features such as:</p>
+<ul>
+<li><a href="https://rollbar.com/docs/deploy-tracking/">tracking and debugging deployment issues</a></li>
+<li><a href="https://rollbar.com/docs/person-tracking/">sorting and viewing errors by user</a></li>
+<li><a href="https://rollbar.com/docs/custom-grouping/">setting up custom rules to group errors</a></li>
+</ul>
+<p>There is a lot more to learn about <a href="/web-development.html">web development</a>
+and <a href="/deployments.html">deployments</a> so keep learning by reading up on 
+<a href="/flask.html">Flask</a> and other <a href="/web-frameworks.html">web frameworks</a> 
+such as <a href="/django.html">Django</a>, <a href="/pyramid.html">Pyramid</a> and 
+<a href="/sanic.html">Sanic</a>. You can also learn more about integrating Rollbar
+with Python applications via 
+<a href="https://rollbar.com/docs/notifier/pyrollbar/">their Python documentation</a>.</p>
+<p>Questions? Let me know via 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">a GitHub issue ticket on the Full Stack Python repository</a>, 
+on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>.</p>
+<p>See something wrong in this blog post? Fork
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/170723-monitor-flask-apps.markdown">this page's source on GitHub</a>
+and submit a pull request with a fix.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/170723-monitor-flask-apps/header.jpg" alt="Flask, Python 和 Rollbar logos。版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/web-frameworks.html" class="lgi">Web Frameworks</a>
+<a href="/flask.html" class="lgi">Flask</a>
+<a href="/deployment.html" class="lgi">Deployment</a>
+<a href="/wsgi-servers.html" class="lgi">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi">Green Unicorn (Gunicorn)</a>
+<a href="/monitoring.html" class="lgi">Monitoring</a>
+<a href="https://rollbar.com" class="lgi">Rollbar <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

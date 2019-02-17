@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="如何快速给 Flask Web 应用使用 Okta 服务添加用户认证">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何给 Flask 应用用户认证添加 Okta" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/181008-flask-okta/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/add-user-authentication-flask-apps-okta.html" />
+<meta property="og:title" content="如何给 Flask 应用用户认证添加 Okta" />
+<meta property="og:description" content="如何快速给 Flask Web 应用使用 Okta 服务添加用户认证 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/181008-flask-okta/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/add-user-authentication-flask-apps-okta.html" />
+<title>如何给 Flask 应用用户认证添加 Okta - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何给 Flask 应用用户认证添加 Okta</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     October 10, 2018. Originally posted
+     on October 08, 2018.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>User authentication is a basic feature in 
+<a href="/web-development.html">web applications</a> so people can create and access 
+their own accounts. Unfortunately, authentication is not always easy to
+set up and there are many ways to incorrectly implement login and logout
+features. </p>
+<p>This tutorial walks through how to use the 
+<a href="https://developer.okta.com/use_cases/authentication/">secure identity authentication service</a>
+called <a href="https://developer.okta.com/">Okta</a>, which is free for up to 1,000
+active user accounts, to easily handle user data in <a href="/flask.html">Flask</a> 
+applications.</p>
+<h2>Our Tools</h2>
+<p>Python 3 is strongly recommended for building applications and this
+tutorial was built with Python 3.7 although earlier versions of Python 3 
+should also work fine. In addition to Python 3.x we will also use:</p>
+<ul>
+<li><a href="/flask.html">Flask</a> web framework <a href="https://pypi.org/project/Flask/1.0.2/">version 1.0.2</a></li>
+<li><a href="https://flask-oidc.readthedocs.io/en/latest/">Flask-OIDC</a> where
+  OIDC stands for "OpenID Connect". It provides support to use OpenID 
+  Connect in Flask applications.</li>
+<li><a href="https://pypi.org/project/okta/">Okta Python helper library</a></li>
+<li>A free <a href="https://developer.okta.com">Okta developer account</a></li>
+</ul>
+<p>All of the code in this blog post is provided as open source under the 
+MIT license on GitHub under the 
+<a href="https://github.com/fullstackpython/blog-code-examples">flask-auth-okta directory of the blog-code-examples</a> 
+repository. Use and abuse the source code for applications you want to 
+build.</p>
+<h2>Installing Dependencies</h2>
+<p>Create a new Python virtualenv for this project:</p>
+<div class="highlight"><pre><span></span>python3 -m venv flaskauth
+</pre></div>
+
+
+<p>Activate the virtual environment with the <code>activate</code> script:</p>
+<div class="highlight"><pre><span></span>. ./flaskauth/bin/activate
+</pre></div>
+
+
+<p>The command prompt should change after activation:</p>
+<p><img src="/img/181008-flask-okta/activate-virtualenv.jpg" width="100%" class="shot rnd outl" alt="Activating the flaskauth virtualenv."></p>
+<p>Remember that you will have to activate the virtualenv in every terminal 
+window where you want to use the dependencies contained in this virtualenv.</p>
+<p>Now we can install <a href="/flask.html">Flask</a> and the Okta dependencies.</p>
+<div class="highlight"><pre><span></span>pip install flask&gt;=1.0.2 flask-oidc&gt;=1.4.0 okta==0.0.4
+</pre></div>
+
+
+<p>Look for output similar to the following to confirm that the dependencies
+successfully installed:</p>
+<div class="highlight"><pre><span></span>...
+Collecting idna&lt;2.8,&gt;=2.5 (from requests&gt;=2.5.3-&gt;okta)
+  Downloading https://files.pythonhosted.org/packages/4b/2a/0276479a4b3caeb8a8c1af2f8e4355746a97fab05a372e4a2c6a6b876165/idna-2.7-py2.py3-none-any.whl (58kB)
+    100% |████████████████████████████████| 61kB 16.6MB/s 
+Collecting urllib3&lt;1.24,&gt;=1.21.1 (from requests&gt;=2.5.3-&gt;okta)
+  Downloading https://files.pythonhosted.org/packages/bd/c9/6fdd990019071a4a32a5e7cb78a1d92c53851ef4f56f62a3486e6a7d8ffb/urllib3-1.23-py2.py3-none-any.whl (133kB)
+    100% |████████████████████████████████| 143kB 14.0MB/s 
+Installing collected packages: MarkupSafe, Jinja2, click, itsdangerous, Werkzeug, flask, pyasn1, pyasn1-modules, rsa, httplib2, six, oauth2client, flask-oidc, chardet, certifi, idna, urllib3, requests, python-dateutil, okta
+  Running setup.py install for MarkupSafe ... done
+  Running setup.py install for itsdangerous ... done
+  Running setup.py install for httplib2 ... done
+  Running setup.py install for flask-oidc ... done
+  Running setup.py install for okta ... done
+Successfully installed Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 certifi-2018.8.24 chardet-3.0.4 click-6.7 flask-1.0.2 flask-oidc-1.4.0 httplib2-0.11.3 idna-2.7 itsdangerous-0.24 oauth2client-4.1.3 okta-0.0.4 pyasn1-0.4.4 pyasn1-modules-0.2.2 python-dateutil-2.7.3 requests-2.19.1 rsa-4.0 six-1.11.0 urllib3-1.23
+</pre></div>
+
+
+<p>We installed our required Flask and the Okta dependencies so let's get to building
+the Flask application.</p>
+<h2>Creating A Basic Flask App</h2>
+<p>The first step before adding authentication to our Flask application is
+to write some scaffolding functions. The authentication will hook into
+these functions, such as <code>signin</code> and <code>signout</code>, to ensure the auth
+process works properly.</p>
+<p>Create a directory for your project named <code>thundercats</code>. Why <code>thundercats</code>?
+Why <em>not</em> Thundercats?</p>
+<p>Within the <code>thundercats</code> directly create a file named <code>app.py</code> with the 
+following initial contents:</p>
+<div class="highlight"><pre><span></span><span class="c1"># imports for Flask</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/lair&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lair</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats (supposed to be hidden) lair.&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">landing_page</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats, Thundercats, hoooooooooooo!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We can run our Flask app using the following command:</p>
+<div class="highlight"><pre><span></span>set FLASK_APP=app.py
+flask run
+</pre></div>
+
+
+<p>Go to localhost:5000 in your web browser and you should see:</p>
+<p><img src="/img/181008-flask-okta/flask-app-running.png" width="100%" class="shot rnd outl" alt="Simple version of Flask application running."></p>
+<p>Now go to our "hidden lair" at localhost:5000/lair/. Eventually this
+page should require authentication to access, but for now it appears
+without any login challenge:</p>
+<p><img src="/img/181008-flask-okta/flask-app-lair.png" width="100%" class="shot rnd outl" alt="Part of Flask app that should be hidden behind a login page."></p>
+<p>Awesome, our basic app is up and running, let's get to the authentication
+functionality.</p>
+<h2>Auth-as-a-Service</h2>
+<p>Head to the <a href="https://developer.okta.com/signup">Okta developers sign up page</a>.</p>
+<p><img src="/img/181008-flask-okta/okta-sign-up.jpg" width="100%" class="shot rnd outl" alt="Okta developers landing page for signing up."></p>
+<p>Sign up for a new account or log into your existing account.</p>
+<p><img src="/img/181008-flask-okta/okta-dev.jpg" width="100%" class="shot rnd outl" alt="Okta developer sign up flow."></p>
+<p>The interesting bit about the Okta developer sign up flow is that now you 
+should check your email to finish creating your account. Look for an email 
+like this one:</p>
+<p><img src="/img/181008-flask-okta/okta-email.jpg" width="100%" class="shot rnd outl" alt="Okta sign up email."></p>
+<p>Click the "Sign In" button and log into developer account using 
+the temporary password found in the email. Set a new password and challenge
+question. Then pick an image to match your account login process.</p>
+<p><img src="/img/181008-flask-okta/okta-create-account.png" width="100%" class="shot rnd outl" alt="Okta finish creating an account."></p>
+<p>Click the "Create Account" button and you will be wisked away to the
+Okta developer dashboard.</p>
+<p><img src="/img/181008-flask-okta/dev-dashboard.png" width="100%" class="shot rnd outl" alt="Okta developer dashboard."></p>
+<p>Find the "Org URL" as shown in the following image.</p>
+<p><img src="/img/181008-flask-okta/okta-dev-dashboard-url.jpg" width="100%" class="shot rnd outl" alt="Okta Org URL value."></p>
+<p>We are going to use that URL in our secret credentials file so that
+our Flask web app can properly connect to the Okta service.</p>
+<p>Create a new file in your project directory named 
+<code>openidconnect_secrets.json</code> with the following contents:</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;web&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_ID }}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_SECRET }}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;auth_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_ORG_URL }}/oauth2/default/v1/authorize&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;token_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_ORG_URL }}/oauth2/default/v1/token&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;issuer&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_ORG_URL }}/oauth2/default&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;userinfo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_ORG_URL }}/oauth2/default/userinfo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;http://localhost:5000/oidc/callback&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Replace the four <code>{{ OKTA_ORG_URL }}</code> placeholders with the Org URL value
+found in your dashboard. We will fill in the rest of the placeholders with 
+actual values as we proceed through the tutorial. My 
+<code>openidconnect_secret.json</code> file would currently have the following
+values based on my developer dashboard Org URL. 
+<strong>Remember that your URL values will be different!</strong></p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;web&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_ID }}&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_SECRET }}&quot;</span><span class="p">,</span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;auth_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/v1/authorize&quot;</span><span class="p">,</span></span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;token_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/v1/token&quot;</span><span class="p">,</span></span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;issuer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default&quot;</span><span class="p">,</span></span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;userinfo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/userinfo&quot;</span><span class="p">,</span></span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;http://localhost:5000/oidc/callback&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Okay awesome, we have our Okta account set up so we can add the 
+authentication code to our Flask application.</p>
+<h2>Connecting Flask to Okta</h2>
+<p>We need to connect our Flask code to our new Okta account. The
+recommended way of including variables such as account credentials
+in a Flask application is through
+<a href="http://flask.pocoo.org/docs/1.0/config/">configuration handling</a> 
+so we will use that in our account.</p>
+<p>Update the Flask code with the following highlighted lines.</p>
+<div class="highlight"><pre><span></span><span class="c1"># imports for both Flask and Okta connection</span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span></span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">flask_oidc</span> <span class="kn">import</span> <span class="n">OpenIDConnect</span></span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">okta</span> <span class="kn">import</span> <span class="n">UsersClient</span></span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="highlight"><span class="o"></span><span class="c1"># secret credentials for Okta connection</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CLIENT_SECRETS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;openidconnect_secrets.json&quot;</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_COOKIE_SECURE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CALLBACK_ROUTE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/oidc/callback&quot;</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_SCOPES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;openid&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;profile&quot;</span><span class="p">]</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span></span>
+<span class="highlight"><span class="o"></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_ID_TOKEN_COOKIE_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;oidc_token&quot;</span></span>
+<span class="highlight"><span class="o"></span><span class="c1"># instantiate OpenID client to handle user session</span></span>
+<span class="highlight"><span class="o"></span><span class="n">oidc</span> <span class="o">=</span> <span class="n">OpenIDConnect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span></span>
+<span class="highlight"><span class="o"></span><span class="c1"># Okta client will determine if a user has an appropriate account</span></span>
+<span class="highlight"><span class="o"></span><span class="n">okta_client</span> <span class="o">=</span> <span class="n">UsersClient</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_ORG_URL&quot;</span><span class="p">),</span></span>
+<span class="highlight"><span class="o"></span>                          <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_AUTH_TOKEN&quot;</span><span class="p">))</span></span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/lair&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lair</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats (supposed to be hidden) lair.&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">landing_page</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats, Thundercats, hoooooooooooo!&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We first add three import lines, one to pull values from environment
+variables, and the next two imports to make it possible to use OpenID
+Connect and Okta in our application.</p>
+<p>The rest of the new code sets Flask application configuration
+values that can be used to instantiate the OpenID Connect and
+Okta clients.</p>
+<ul>
+<li><code>OIDC_CLIENT_SECRETS</code>: the location of the OpenID Connect secrets file</li>
+<li><code>OIDC_COOKIE_SECURE</code>: allows development mode for testing user login and
+  registration without SSL. Your application must set this to <code>True</code> in a
+  production application.</li>
+<li><code>OIDC_CALLBACK_ROUTE</code>: URL in the web app for handling user logins</li>
+<li><code>OIDC_SCOPES</code>: what data to request about the user when they log in. Our
+  application requests the basic email, name and profile information</li>
+<li><code>SECRET_KEY</code>: this is a Flask setting to keep sessions secure. The key 
+  must never be made public or your web application user sessions will be
+  compromised. </li>
+</ul>
+<p>Where do we get those application configuration values though? We
+need to obtain them from our Okta account so go back to the
+dashboard to create a new OpenID Connect application.</p>
+<p><img src="/img/181008-flask-okta/select-applications.jpg" width="100%" class="shot rnd outl" alt="Select applications on the Okta developer dashboard."></p>
+<p>OpenID Connect applications use a client ID and client secret in
+place of traditional usernames and passwords. The client ID and
+client secret will tell your authorization server to recognize your 
+application. Press the "Add Application" button.</p>
+<p><img src="/img/181008-flask-okta/add-application.jpg" width="100%" class="shot rnd outl" alt="Click the Add Application button."></p>
+<p>On the new application screen choose "Web" and then press "Next".</p>
+<p><img src="/img/181008-flask-okta/web-application.jpg" width="100%" class="shot rnd outl" alt="Choose a web application."></p>
+<p>On the next page there are numerous configuration options but only a 
+few values we need to fill in before we can get our credentials. Set
+the following values to the <code>Name</code>, <code>Base URIs</code> and <code>Login redirect URIs</code>
+properties:</p>
+<ol>
+<li><strong>ThunderFlaskCats</strong> for <code>Name</code></li>
+<li><strong>http://localhost:5000</strong> for <code>Base URIs</code></li>
+<li><strong>http://localhost:5000/oidc/callback</strong> for <code>Login redirect URIs</code></li>
+</ol>
+<p><img src="/img/181008-flask-okta/set-app-configuration.jpg" width="100%" class="shot rnd outl" alt="Set application configuration values."></p>
+<p>Those are the three values you need to fill in for now so save the 
+application to create it.</p>
+<p>On the next page scroll down to find your client and secret keys.</p>
+<p><img src="/img/181008-flask-okta/client-credentials.jpg" width="100%" class="shot rnd outl" alt="Save the client credentials for later use."></p>
+<p>Copy and paste the client ID and client secret into the following 
+highlighted lines to replace the <code>{{ OKTA_CLIENT_ID }}</code> and 
+<code>{{ OKTA_CLIENT_SECRET }}</code> placeholders.</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;web&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;client_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_ID }}&quot;</span><span class="p">,</span></span>
+<span class="highlight"><span class="err"></span>    <span class="nt">&quot;client_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ OKTA_CLIENT_SECRET }}&quot;</span><span class="p">,</span></span>
+    <span class="nt">&quot;auth_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/v1/authorize&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;token_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/v1/token&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;issuer&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;userinfo_uri&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-860408.oktapreview.com/oauth2/default/userinfo&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;redirect_uris&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;http://localhost:5000/oidc/callback&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Save the file and make sure to keep it out of version control as those
+secret values need to stay secret.</p>
+<p>We have one more step in the Okta developer dashboard before we upgrade 
+our Flask application with the authentication code: creating an 
+<a href="https://developer.okta.com/use_cases/api_access_management/">API authentication token</a>.
+Go to the API tab.</p>
+<p><img src="/img/181008-flask-okta/api-tab.jpg" width="100%" class="shot rnd outl" alt="Click the API tab in the dashboard."></p>
+<p>Click the "Create Token" button.</p>
+<p><img src="/img/181008-flask-okta/create-token.png" width="100%" class="shot rnd outl" alt="Create an authentication token to access Okta."></p>
+<p>Name the token <code>ThunderFlaskCatsToken</code> and copy it. Save the token somewhere
+safe as we will not be able to access it through the dashboard again. We
+are going to use this token when setting the <code>OKTA_AUTH_TOKEN</code> environment
+variable in the next section of this tutorial.</p>
+<p>Okay, we finally have all the Okta service configuration and tokens in
+our <code>openidconnect_secret.json</code> file that we need to finish our application.</p>
+<h2>Protecting the Lair</h2>
+<p>Our configuration is set so update the <code>app.py</code> file with the following 
+highlighted lines:</p>
+<div class="highlight"><pre><span></span><span class="c1"># imports for both Flask and Okta connection</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">url_for</span></span>
+<span class="kn">from</span> <span class="nn">flask_oidc</span> <span class="kn">import</span> <span class="n">OpenIDConnect</span>
+<span class="kn">from</span> <span class="nn">okta</span> <span class="kn">import</span> <span class="n">UsersClient</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># secret credentials for Okta connection</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CLIENT_SECRETS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;openidconnect_secrets.json&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_COOKIE_SECURE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CALLBACK_ROUTE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/oidc/callback&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_SCOPES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;openid&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;profile&quot;</span><span class="p">]</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_ID_TOKEN_COOKIE_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;oidc_token&quot;</span>
+<span class="c1"># instantiate OpenID client to handle user session</span>
+<span class="n">oidc</span> <span class="o">=</span> <span class="n">OpenIDConnect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="c1"># Okta client will determine if a user has an appropriate account</span>
+<span class="n">okta_client</span> <span class="o">=</span> <span class="n">UsersClient</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_ORG_URL&quot;</span><span class="p">),</span>
+                          <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_AUTH_TOKEN&quot;</span><span class="p">))</span>
+
+
+<span class="highlight"><span class="o"></span><span class="nd">@app.before_request</span></span>
+<span class="highlight"><span class="o"></span><span class="k">def</span> <span class="nf">before_request</span><span class="p">():</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">if</span> <span class="n">oidc</span><span class="o">.</span><span class="n">user_loggedin</span><span class="p">:</span></span>
+<span class="highlight"><span class="o"></span>        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">okta_client</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">oidc</span><span class="o">.</span><span class="n">user_getfield</span><span class="p">(</span><span class="s2">&quot;sub&quot;</span><span class="p">))</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">else</span><span class="p">:</span></span>
+<span class="highlight"><span class="o"></span>        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">None</span></span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/lair&quot;</span><span class="p">)</span>
+<span class="highlight"><span class="o"></span><span class="nd">@oidc.require_login</span></span>
+<span class="k">def</span> <span class="nf">lair</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats (supposed to be hidden) lair.&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">landing_page</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats, Thundercats, hoooooooooooo!&quot;</span><span class="p">)</span>
+
+
+<span class="highlight"><span class="o"></span><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span></span>
+<span class="highlight"><span class="o"></span><span class="nd">@oidc.require_login</span></span>
+<span class="highlight"><span class="o"></span><span class="k">def</span> <span class="nf">login</span><span class="p">():</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;.lair&quot;</span><span class="p">))</span></span>
+<span class="highlight"><span class="o"></span></span>
+<span class="highlight"><span class="o"></span></span>
+<span class="highlight"><span class="o"></span><span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span></span>
+<span class="highlight"><span class="o"></span><span class="k">def</span> <span class="nf">logout</span><span class="p">():</span></span>
+<span class="highlight"><span class="o"></span>    <span class="n">oidc</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;.landing_page&quot;</span><span class="p">))</span></span>
+</pre></div>
+
+
+<p>The above new highlighted lines check whether or not a user is logged in
+before each request. If a route requires a logged in user due to the 
+<code>@oidc.require_login</code> decorator then the user will be redirect to the
+sign in page. We also added routes under <code>/login</code> and <code>/logout</code> to make
+it possible to log in and out of the application.</p>
+<p>Set three environment variables so our application can use them when we
+run it. Make sure the placeholders <code>ORG_URL</code> and <code>AUTH_TOKEN</code> are set with 
+your actual Org URL value and auth token from the Okta developer dashboard.</p>
+<p>On the command line run the following commands, making sure to replace
+any placeholder values with your own tokens and URLs:</p>
+<div class="highlight"><pre><span></span># this tells Flask we want to run the built-in server in dev mode
+export FLASK_ENV=development
+# make sure to use a very long random string here that cannot be guessed
+export SECRET_KEY=&#39;a very long string with lots of numbers and letters&#39;
+# this is the same Org URL found on your developer dashboard
+# for example, https://dev-860408.oktapreview.com
+export OKTA_ORG_URL=&#39;ORG_URL&#39;
+# this is the API authentication token we created
+export OKTA_AUTH_TOKEN=&#39;AUTH_TOKEN&#39;
+</pre></div>
+
+
+<p>Now re-run the Flask application:</p>
+<div class="highlight"><pre><span></span>set FLASK_APP=app.py
+flask run
+</pre></div>
+
+
+<p>You should be in good shape if the development server starts up with output
+like this:</p>
+<div class="highlight"><pre><span></span>(flaskauth)$ flask run
+ * Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 415-920-546
+</pre></div>
+
+
+<p>Head to localhost:5000 in a browser where you are not already logged into
+your Okta account (an incognito window of your web browser works great).</p>
+<p><img src="/img/181008-flask-okta/landing-page-incognito.png" width="100%" class="shot rnd outl" alt="Landing page while in incognito mode."></p>
+<p>Let's test the redirect functionality when we try to go to the <code>/lair</code>
+route by going to localhost:5000/lair. We get redirected to the Okta
+login page.</p>
+<p><img src="/img/181008-flask-okta/lair-redirect.jpg" width="100%" class="shot rnd outl" alt="Getting redirected while in incognito mode."></p>
+<p>Enter your Okta developer username and password to log into your application.
+For development purposes this will work fine for testing but obviously in a
+production application you will create other accounts for users to log into.</p>
+<p><img src="/img/181008-flask-okta/enter-lair.jpg" width="100%" class="shot rnd outl" alt="Got into the lair URL after logging in."></p>
+<p>Let's tweak one more bit in our application to fix the glaring lack of
+excitement in successfully completing the authentication code for this 
+tutorial. Update the two highlighted lines to match what is in the code
+block below:</p>
+<div class="highlight"><pre><span></span><span class="c1"># imports for both Flask and Okta connection</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">url_for</span>
+<span class="kn">from</span> <span class="nn">flask_oidc</span> <span class="kn">import</span> <span class="n">OpenIDConnect</span>
+<span class="kn">from</span> <span class="nn">okta</span> <span class="kn">import</span> <span class="n">UsersClient</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1"># secret credentials for Okta connection</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CLIENT_SECRETS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;openidconnect_secrets.json&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_COOKIE_SECURE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_CALLBACK_ROUTE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/oidc/callback&quot;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_SCOPES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;openid&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;profile&quot;</span><span class="p">]</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;OIDC_ID_TOKEN_COOKIE_NAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;oidc_token&quot;</span>
+<span class="c1"># instantiate OpenID client to handle user session</span>
+<span class="n">oidc</span> <span class="o">=</span> <span class="n">OpenIDConnect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="c1"># Okta client will determine if a user has an appropriate account</span>
+<span class="n">okta_client</span> <span class="o">=</span> <span class="n">UsersClient</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_ORG_URL&quot;</span><span class="p">),</span>
+                          <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OKTA_AUTH_TOKEN&quot;</span><span class="p">))</span>
+
+
+<span class="nd">@app.before_request</span>
+<span class="k">def</span> <span class="nf">before_request</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">oidc</span><span class="o">.</span><span class="n">user_loggedin</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">okta_client</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">oidc</span><span class="o">.</span><span class="n">user_getfield</span><span class="p">(</span><span class="s2">&quot;sub&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">None</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/lair&quot;</span><span class="p">)</span>
+<span class="nd">@oidc.require_login</span>
+<span class="k">def</span> <span class="nf">lair</span><span class="p">():</span>
+<span class="highlight"><span class="o"></span>    <span class="n">thundercats_lair</span> <span class="o">=</span> <span class="s1">&#39;&lt;html&gt;&lt;head&gt;&lt;title&gt;Thundercats, hoooo!&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Thundercats now hidden lair.&lt;/h1&gt;&lt;iframe src=&quot;https://giphy.com/embed/ahXtBEbHiraxO&quot; width=&quot;480&quot; height=&quot;273&quot; frameBorder=&quot;0&quot; class=&quot;giphy-embed&quot; allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href=&quot;https://giphy.com/gifs/retro-cartoons-thundercats-ahXtBEbHiraxO&quot;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&#39;</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">thundercats_lair</span><span class="p">)</span></span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">landing_page</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;Thundercats, Thundercats, hoooooooooooo!&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/login&quot;</span><span class="p">)</span>
+<span class="nd">@oidc.require_login</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Force user to login and then redirect them to the lair.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;.lair&quot;</span><span class="p">))</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">logout</span><span class="p">():</span>
+    <span class="n">oidc</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;.landing_page&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Refresh the lair page.</p>
+<p><img src="/img/181008-flask-okta/refreshed-lair.jpg" width="100%" class="shot rnd outl" alt="Lair page with new GIF."></p>
+<p>Alright that's just a little bit better! Go to localhost:5000/logout to 
+unauthenticate your user. When you go to localhost:5000/lair again you 
+will now have to re-authenticate. </p>
+<h2>What Now?</h2>
+<p>We just built an example Flask application with user authentication via 
+the <a href="https://developer.okta.com/use_cases/api_access_management/">Okta API</a>.</p>
+<p>Next up try the following tutorials to add other features to your
+Flask application:</p>
+<ul>
+<li><a href="/blog/respond-sms-text-messages-python-flask.html">Responding to SMS Text Messages with Python &amp; Flask</a></li>
+<li><a href="/blog/hosted-monitoring-flask-web-apps.html">How to Add Hosted Monitoring to Flask Web Applications</a></li>
+<li><a href="/blog/develop-flask-web-apps-docker-containers-macos.html">Develop and Run Flask Apps within Docker Containers</a></li>
+</ul>
+<p>You can also determine what to code next in your Python project by reading 
+the <a href="/table-of-contents.html">Full Stack Python table of contents page</a>.</p>
+<p>Questions? Contact me via Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I'm also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>Something wrong with this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/181008-add-user-auth-flask-okta.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/181008-flask-okta/header.jpg" alt="Flask 和 Okta logos。版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="https://developer.okta.com/" class="lgi">Okta Dev Docs <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="/python-2-or-3.html" class="lgi">Python 2 or 3?</a>
+<a href="/web-frameworks.html" class="lgi">Web Frameworks</a>
+<a href="/flask.html" class="lgi">Flask</a>
+<a href="/wsgi-servers.html" class="lgi">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi">Green Unicorn (Gunicorn)</a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

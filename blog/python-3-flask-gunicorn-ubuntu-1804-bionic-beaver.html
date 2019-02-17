@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在 Ubuntu 18.04 Bionic Beaver 上配置 Python 3, Flask and Green Unicorn (Gunicorn) 的说明。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/180614-ubuntu-flask-gunicorn/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/python-3-flask-gunicorn-ubuntu-1804-bionic-beaver.html" />
+<meta property="og:title" content="在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn" />
+<meta property="og:description" content="在 Ubuntu 18.04 Bionic Beaver 上配置 Python 3, Flask and Green Unicorn (Gunicorn) 的说明。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/180614-ubuntu-flask-gunicorn/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/python-3-flask-gunicorn-ubuntu-1804-bionic-beaver.html" />
+<title>在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     June 15, 2018. Originally posted
+     on June 14, 2018.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p><a href="/ubuntu.html">Ubuntu Linux's</a> latest Long Term Support (LTS)
+<a href="/operating-systems.html">operating system</a> version is 
+<a href="http://releases.ubuntu.com/18.04/">18.04</a> and was released in April 2018.
+The 18.04 update is code named "Bionic Beaver" and it includes
+<a href="/python-2-or-3.html">Python 3</a> by default. However, there are bunch of
+dependencies you will need to install to get this release set up as a 
+<a href="/development-environments.html">development environment</a>.</p>
+<p>In this tutorial we will get Python 3.6 configured with development system
+packages to start a new <a href="/flask.html">Flask</a> web application project and 
+run it with <a href="/green-unicorn-gunicorn.html">Green Unicorn (Gunicorn)</a>.</p>
+<h2>Our Tools</h2>
+<p>Our project will use the Ubuntu 18.04 release along with a few other 
+libraries. Note that if you are using the older 16.04 LTS release, there
+is also 
+<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">a guide that will walk you through setting up that version</a>
+as your development environment.</p>
+<p>We will install the following tools as we step through the rest of 
+the sections in this tutorial:</p>
+<ul>
+<li><a href="http://releases.ubuntu.com/18.04/">Ubuntu 18.04 LTS (Bionic Beaver)</a></li>
+<li><a href="/why-use-python.html">Python</a> version 
+  <a href="https://docs.python.org/3/whatsnew/3.6.html">3.6.5</a> 
+  (default in Ubuntu 18.04)</li>
+<li><a href="/flask.html">Flask</a> web framework version 
+  <a href="http://flask.pocoo.org/docs/1.0/changelog/#version-1-0-2">1.0.2</a></li>
+<li><a href="/green-unicorn-gunicorn.html">Green Unicorn (Gunicorn)</a> version 
+  <a href="http://docs.gunicorn.org/en/stable/news.html">19.8.1</a></li>
+</ul>
+<p>If you're running on Mac OS X or Windows, use virtualization software such
+as <a href="https://www.parallels.com/products/desktop/">Parallels</a> or
+<a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> with the 
+<a href="http://releases.ubuntu.com/18.04/">Ubuntu .iso file</a>. Either the amd64 or
+i386 version for 18.04 will work. I am using amd64 for development and testing
+in this tutorial.</p>
+<p>When you boot up to the Ubuntu desktop you should see a screen like this one.</p>
+<p><img src="/img/180614-ubuntu-flask-gunicorn/ubuntu-desktop.jpg" width="100%" class="shot rnd outl"></p>
+<p>We're ready to get our development environment configured.</p>
+<h2>System Packages</h2>
+<p>Open up a terminal window to proceed with the setup.</p>
+<p>Use the following two commands to check which version of Python 3 is installed</p>
+<div class="highlight"><pre><span></span>python3 --version
+which python3
+</pre></div>
+
+
+<p>The Python version should be 3.6.5 and the location <code>/usr/bin/python3</code>.</p>
+<p>Our Ubuntu installation requires a few system packages to do development
+rather than just run Python scripts. Run the following <code>apt-get</code> command
+and enter your <code>sudo</code> password to allow restricted system access.</p>
+<div class="highlight"><pre><span></span>sudo apt-get install python3-dev python3-pip python3-virtualenv
+</pre></div>
+
+
+<p>We should see the following prompt requesting <code>sudo</code> access. Enter <code>y</code> to 
+let the system package manager complete the installation.</p>
+<div class="highlight"><pre><span></span>Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  linux-headers-4.15.0-20 linux-headers-4.15.0-20-generic
+  linux-image-4.15.0-20-generic linux-modules-4.15.0-20-generic
+  linux-modules-extra-4.15.0-20-generic
+Use <span class="s1">&#39;sudo apt autoremove&#39;</span> to remove them.
+The following additional packages will be installed:
+  dh-python libexpat1-dev libpython3-dev libpython3.6-dev python3-setuptools
+  python3-wheel python3.6-dev
+Suggested packages:
+  python-setuptools-doc
+The following NEW packages will be installed:
+  dh-python libexpat1-dev libpython3-dev libpython3.6-dev python3-dev
+  python3-pip python3-setuptools python3-virtualenv python3-wheel
+  python3.6-dev
+<span class="m">0</span> upgraded, <span class="m">10</span> newly installed, <span class="m">0</span> to remove and <span class="m">11</span> not upgraded.
+Need to get <span class="m">3</span>,617 kB/3,661 kB of archives.
+After this operation, <span class="m">20</span>.2 MB of additional disk space will be used.
+Do you want to <span class="k">continue</span>? <span class="o">[</span>Y/n<span class="o">]</span> 
+</pre></div>
+
+
+<p>The package manager will do the dirty work and should report when the
+installation finishes successfully.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>...clipped a bunch of installation lines <span class="k">for</span> brevity...<span class="o">)</span>
+Unpacking python3-wheel <span class="o">(</span><span class="m">0</span>.30.0-0.2<span class="o">)</span> ...
+Setting up python3-wheel <span class="o">(</span><span class="m">0</span>.30.0-0.2<span class="o">)</span> ...
+Setting up python3-virtualenv <span class="o">(</span><span class="m">15</span>.1.0+ds-1.1<span class="o">)</span> ...
+Setting up python3-pip <span class="o">(</span><span class="m">9</span>.0.1-2.3~ubuntu1<span class="o">)</span> ...
+Setting up libexpat1-dev:amd64 <span class="o">(</span><span class="m">2</span>.2.5-3<span class="o">)</span> ...
+Processing triggers <span class="k">for</span> man-db <span class="o">(</span><span class="m">2</span>.8.3-2<span class="o">)</span> ...
+Setting up python3-setuptools <span class="o">(</span><span class="m">39</span>.0.1-2<span class="o">)</span> ...
+Setting up dh-python <span class="o">(</span><span class="m">3</span>.20180325ubuntu2<span class="o">)</span> ...
+Setting up libpython3.6-dev:amd64 <span class="o">(</span><span class="m">3</span>.6.5-3<span class="o">)</span> ...
+Setting up python3.6-dev <span class="o">(</span><span class="m">3</span>.6.5-3<span class="o">)</span> ...
+Setting up libpython3-dev:amd64 <span class="o">(</span><span class="m">3</span>.6.5-3<span class="o">)</span> ...
+Setting up python3-dev <span class="o">(</span><span class="m">3</span>.6.5-3<span class="o">)</span> ...
+</pre></div>
+
+
+<p>The packages we need are now installed. We can continue on to install our 
+Python-specific dependencies.</p>
+<h2>Virtual environment</h2>
+<p>We installed <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> 
+and <a href="https://pypi.org/project/pip">pip</a> to handle our 
+<a href="/application-dependencies.html">application dependencies</a>.
+We can now use them to download and install Flask and Gunicorn.</p>
+<p>Create a directory to store your virtualenvs. Then create a new virtualenv
+within that directory.</p>
+<div class="highlight"><pre><span></span><span class="c1"># make sure pip and setuptools are the latest version</span>
+pip3 install --upgrade pip setuptools
+<span class="c1"># the tilde (&quot;~&quot;) specifies the user&#39;s home directory, such as &quot;/home/matt&quot;</span>
+<span class="nb">cd</span> ~
+mkdir venvs
+<span class="c1"># specify the system python3 installation</span>
+python3 -m venv venvs/flask1804
+</pre></div>
+
+
+<p>Activate the virtualenv.</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> ~/venvs/flask1804/bin/activate
+</pre></div>
+
+
+<p>Our prompt will change when the virutalenv is activated.</p>
+<p><img src="/img/180614-ubuntu-flask-gunicorn/venv-activated.jpg" width="100%" class="shot rnd outl"></p>
+<p>Our virtualenv is now activated with Python 3. We can install any
+dependencies we need such as Flask and Gunicorn.</p>
+<h2>Flask and Gunicorn</h2>
+<p>We're going to use <code>pip</code> within our new virtualenv but it's a good
+idea to update it to the latest version. We should also install the
+<code>wheel</code> package to remove installation warnings when <code>pip</code> tries to
+use <a href="https://pythonwheels.com/">Python wheels</a>, which are the newest 
+standard in an admittedly long line of Python distribution package
+models.</p>
+<div class="highlight"><pre><span></span>pip install --upgrade pip
+pip install wheel
+</pre></div>
+
+
+<p>We can now install Flask and Green Unicorn via the <code>pip</code> command.</p>
+<div class="highlight"><pre><span></span>pip install flask gunicorn
+</pre></div>
+
+
+<p>Look for output similar to the following to ensure the libraries installed
+without an issue.</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>flask1804<span class="o">)</span> matt@ubuntu:~$ pip install flask gunicorn
+Collecting flask
+  Using cached https://files.pythonhosted.org/packages/7f/e7/08578774ed4536d3242b14dacb4696386634607af824ea997202cd0edb4b/Flask-1.0.2-py2.py3-none-any.whl
+Collecting gunicorn
+  Using cached https://files.pythonhosted.org/packages/55/cb/09fe80bddf30be86abfc06ccb1154f97d6c64bb87111de066a5fc9ccb937/gunicorn-19.8.1-py2.py3-none-any.whl
+Collecting click&gt;<span class="o">=</span><span class="m">5</span>.1 <span class="o">(</span>from flask<span class="o">)</span>
+  Using cached https://files.pythonhosted.org/packages/34/c1/8806f99713ddb993c5366c362b2f908f18269f8d792aff1abfd700775a77/click-6.7-py2.py3-none-any.whl
+Collecting Werkzeug&gt;<span class="o">=</span><span class="m">0</span>.14 <span class="o">(</span>from flask<span class="o">)</span>
+  Using cached https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl
+Collecting itsdangerous&gt;<span class="o">=</span><span class="m">0</span>.24 <span class="o">(</span>from flask<span class="o">)</span>
+  Using cached https://files.pythonhosted.org/packages/dc/b4/a60bcdba945c00f6d608d8975131ab3f25b22f2bcfe1dab221165194b2d4/itsdangerous-0.24.tar.gz
+Collecting Jinja2&gt;<span class="o">=</span><span class="m">2</span>.10 <span class="o">(</span>from flask<span class="o">)</span>
+  Using cached https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl
+Collecting MarkupSafe&gt;<span class="o">=</span><span class="m">0</span>.23 <span class="o">(</span>from Jinja2&gt;<span class="o">=</span><span class="m">2</span>.10-&gt;flask<span class="o">)</span>
+  Using cached https://files.pythonhosted.org/packages/4d/de/32d741db316d8fdb7680822dd37001ef7a448255de9699ab4bfcbdf4172b/MarkupSafe-1.0.tar.gz
+Building wheels <span class="k">for</span> collected packages: itsdangerous, MarkupSafe
+  Running setup.py bdist_wheel <span class="k">for</span> itsdangerous ... <span class="k">done</span>
+  Stored in directory: /home/matt/.cache/pip/wheels/2c/4a/61/5599631c1554768c6290b08c02c72d7317910374ca602ff1e5
+  Running setup.py bdist_wheel <span class="k">for</span> MarkupSafe ... <span class="k">done</span>
+  Stored in directory: /home/matt/.cache/pip/wheels/33/56/20/ebe49a5c612fffe1c5a632146b16596f9e64676768661e4e46
+Successfully built itsdangerous MarkupSafe
+Installing collected packages: click, Werkzeug, itsdangerous, MarkupSafe, Jinja2, flask, gunicorn
+Successfully installed Jinja2-2.10 MarkupSafe-1.0 Werkzeug-0.14.1 click-6.7 flask-1.0.2 gunicorn-19.8.1 itsdangerous-0.24
+</pre></div>
+
+
+<p>Create a new directory named <code>flask1804</code> under your home directory (not
+within the <code>venvs</code> subdirectory) that will store our Flask test project. 
+Change directory into the new folder.</p>
+<div class="highlight"><pre><span></span>mkdir ~/flask1804
+<span class="nb">cd</span> ~/flask1804
+</pre></div>
+
+
+<p>Create a new file named <code>__init__.py</code> within our <code>flaskproj</code> directory so
+we can test to make sure Flask is working properly. I usually use
+<a href="/vim.html">Vim</a> but <a href="/emacs.html">Emacs</a> and other 
+<a href="/development-environments.html">development environments</a> work great as
+well.</p>
+<p>Within <code>__init__.py</code> write the following code.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;It works!&quot;</span><span class="p">),</span> <span class="mi">200</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>We could run our app with the Flask development server using the 
+<code>python __init__.py</code> command. Instead run the Flask app with
+Gunicorn. Go to the directory above the <code>flask1804</code> folder, in our
+case we can enter <code>cd ~</code> then use the <code>gunicorn</code> command:</p>
+<div class="highlight"><pre><span></span>gunicorn flask1804.app:app
+</pre></div>
+
+
+<p>We should see:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span><span class="m">2018</span>-06-15 <span class="m">15</span>:54:31 -0400<span class="o">]</span> <span class="o">[</span><span class="m">5174</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Starting gunicorn <span class="m">19</span>.8.1
+<span class="o">[</span><span class="m">2018</span>-06-15 <span class="m">15</span>:54:31 -0400<span class="o">]</span> <span class="o">[</span><span class="m">5174</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Listening at: http://127.0.0.1:8000 <span class="o">(</span><span class="m">5174</span><span class="o">)</span>
+<span class="o">[</span><span class="m">2018</span>-06-15 <span class="m">15</span>:54:31 -0400<span class="o">]</span> <span class="o">[</span><span class="m">5174</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Using worker: sync
+<span class="o">[</span><span class="m">2018</span>-06-15 <span class="m">15</span>:54:31 -0400<span class="o">]</span> <span class="o">[</span><span class="m">5177</span><span class="o">]</span> <span class="o">[</span>INFO<span class="o">]</span> Booting worker with pid: <span class="m">5177</span>
+</pre></div>
+
+
+<p>Great now we can bring up our shell Flask app in the web browser at
+the <code>localhost:8000</code> or <code>127.0.0.1:8000</code> address.</p>
+<p><img src="/img/180614-ubuntu-flask-gunicorn/it-works.jpg" width="100%" class="shot rnd outl"></p>
+<p>Now you're ready for some real <a href="/flask.html">Flask</a> development!</p>
+<h2>Ready to Code</h2>
+<p>That provides a quick configuration for getting started on 18.04 LTS 
+developing <a href="/flask.html">Flask</a> applications with the 
+<a href="/green-unicorn-gunicorn.html">Gunicorn</a> <a href="/wsgi-servers.html">WSGI server</a>.</p>
+<p>Next up you should check out the following tutorials that use this 
+Flask configuration:</p>
+<ul>
+<li><a href="/blog/respond-sms-text-messages-python-flask.html">Responding to SMS Text Messages with Python &amp; Flask</a></li>
+<li><a href="/blog/hosted-monitoring-flask-web-apps.html">How to Add Hosted Monitoring to Flask Web Applications</a>)</li>
+</ul>
+<p>Alternatively you can also determine what to code next in your Python 
+project by reading the 
+<a href="/table-of-contents.html">Full Stack Python table of contents page</a>.</p>
+<p>Questions? Contact me via Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I'm also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>Something wrong with this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/180614-flask-gunicorn-ubuntu-1804.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/180614-ubuntu-flask-gunicorn/header.jpg" alt="Flask, Green Unicorn 和 Ubuntu logos。版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/python-2-or-3.html" class="lgi">Python 2 or 3?</a>
+<a href="/operating-systems.html" class="lgi">Operating Systems</a>
+<a href="/ubuntu.html" class="lgi">Ubuntu</a>
+<a href="/wsgi-servers.html" class="lgi">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi">Green Unicorn (Gunicorn)</a>
+<a href="/web-frameworks.html" class="lgi">Web Frameworks</a>
+<a href="/flask.html" class="lgi">Flask</a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

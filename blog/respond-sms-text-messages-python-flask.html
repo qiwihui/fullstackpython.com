@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="在使用 Python 构建的 Flask 应用程序中接收和响应 SMS 文本消息的快速教程。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="使用 Python 和 Flask 响应 SMS 文本消息" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/160530-respond-sms-python-flask/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/respond-sms-text-messages-python-flask.html" />
+<meta property="og:title" content="使用 Python 和 Flask 响应 SMS 文本消息" />
+<meta property="og:description" content="在使用 Python 构建的 Flask 应用程序中接收和响应 SMS 文本消息的快速教程。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/160530-respond-sms-python-flask/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/respond-sms-text-messages-python-flask.html" />
+<title>使用 Python 和 Flask 响应 SMS 文本消息 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">使用 Python 和 Flask 响应 SMS 文本消息</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     May 11, 2017. Originally posted
+     on May 30, 2016.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>Short Message Service (SMS) text messages are 
+<a href="/blog/send-sms-text-messages-python.html">easy to send from Python applications</a> 
+with a
+<a href="/application-programming-interfaces.html">web application programming interface (API)</a>. 
+Flask applications can also receive incoming text messages and respond
+back to the sender with just a few lines of Python code.</p>
+<h2>Tools We Need</h2>
+<p>This tutorial is fine for both Python 2 and 3. Make sure you have one of 
+those two versions installed on your system.</p>
+<ul>
+<li>Either <a href="/python-2-or-3.html">Python 2 or 3</a></li>
+<li><a href="https://pip.pypa.io/en/stable/">pip</a> and 
+  <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a> to handle
+  <a href="/application-dependencies.html">application dependencies</a></li>
+<li>The <a href="/flask.html">Flask</a> micro web framework</li>
+<li>A free <a href="https://www.twilio.com/try-twilio">Twilio account</a> to use their 
+  <a href="https://www.twilio.com/docs/api/rest/sending-messages">SMS web API</a></li>
+<li>Open source 
+  <a href="https://pypi.org/project/twilio">Twilio Python helper library</a></li>
+<li><a href="https://ngrok.com/">Ngrok</a> for localhost tunneling to our Flask 
+  application while it's running on our local development environment</li>
+</ul>
+<p>If you need assistance getting pip and virtualenv installed, take a look at 
+the first few steps in the 
+<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">how to set up Python 3, Flask and Green Unicorn on Ubuntu 16.04 LTS</a>
+guide, which shows how to install system packages for those tools.</p>
+<h2>Installing Our Dependencies</h2>
+<p>Our code will use a helper library to make it easier to respond to text 
+messages from Python. The helper library dependency along with the Flask
+code library can be installed from <a href="https://pypi.python.org/pypi">PyPI</a> into 
+a virtualenv. In your terminal use the following command to generate a new 
+virtualenv. </p>
+<div class="highlight"><pre><span></span>virtualenv respondsms
+</pre></div>
+
+
+<p>Activate the virtualenv.</p>
+<div class="highlight"><pre><span></span>source respondsms/bin/activate
+</pre></div>
+
+
+<p>The command prompt will change after we properly activate the virtualenv
+to something like this:</p>
+<p><img src="/img/160530-respond-sms-python-flask/activate-virtualenv.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>Install Flask and the Twilio Python helper library into the virtualenv with
+the <code>pip</code> command. </p>
+<div class="highlight"><pre><span></span>pip install flask twilio==5.7.0
+</pre></div>
+
+
+<p>The dependencies are installed so that we can use it with our Python code.
+Now we can write our Python application.</p>
+<h2>Building Our Flask Web App</h2>
+<p>Our Flask application will have two routes: one to make sure the web app
+is running and another that handles incoming HTTP POST requests. Create
+a new file named <code>app.py</code> in your home directory or where you choose to
+store your Python project files.</p>
+<p>Within <code>app.py</code> write the following code. You can also see 
+<a href="https://gist.github.com/mattmakai/8ab434ccb604d3ba5bde817a183e0bde">this code in a GitHub Gist</a> 
+if that's easier to copy and paste.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">Response</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">twilio</span> <span class="kn">import</span> <span class="n">twiml</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_app</span><span class="p">():</span>
+    <span class="c1"># returns a simple string stating the app is working</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="s2">&quot;It works!&quot;</span><span class="p">),</span> <span class="mi">200</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&quot;/twilio&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">inbound_sms</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">twiml</span><span class="o">.</span><span class="n">Response</span><span class="p">()</span>
+    <span class="c1"># we get the SMS message from the request. we could also get the </span>
+    <span class="c1"># &quot;To&quot; and the &quot;From&quot; phone number as well</span>
+    <span class="n">inbound_message</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Body&quot;</span><span class="p">)</span>
+    <span class="c1"># we can now use the incoming message text in our Python application</span>
+    <span class="k">if</span> <span class="n">inbound_message</span> <span class="o">==</span> <span class="s2">&quot;Hello&quot;</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s2">&quot;Hello back to you!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s2">&quot;Hi! Not quite sure what you meant, but okay.&quot;</span><span class="p">)</span>
+    <span class="c1"># we return back the mimetype because Twilio needs an XML response</span>
+    <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="n">mimetype</span><span class="o">=</span><span class="s2">&quot;application/xml&quot;</span><span class="p">),</span> <span class="mi">200</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>The inline comments on the lines starting with <code>#</code> explain what the lines
+below them do. Flask applications define URL routes with the <code>@app.route</code>
+decorator. Our application needs two routes therefore we have two of those
+decorators defined.</p>
+<p>Give the application a try by running it with <code>python app.py</code>. If you have
+trouble running the program, make sure your virtualenv is still active so
+that the application can use the Flask and Twilio code libraries we installed
+earlier.</p>
+<p>Open a web browser and go to localhost:5000 (or 127.0.0.1:5000). We should
+see "It works!" on the screen.</p>
+<p><img src="/img/160530-respond-sms-python-flask/app-local.jpg" width="100%" class="technical-diagram img-rounded"></p>
+<p>There is one problem with our application running on our local development
+environment: there's no way for our server to receive HTTP POST requests 
+unless we use a localhost tunnel.</p>
+<h2>Localhost Tunneling with Ngrok</h2>
+<p><a href="https://ngrok.com">Ngrok</a> provides a localhost tunnel so that outside
+services can connect to a server running in your local development 
+environment. Download and install Ngrok.</p>
+<p>We can now run Ngrok locally and connect our Flask app running on port 5000. 
+Within the directory where you extracted Ngrok, run this command.</p>
+<div class="highlight"><pre><span></span>./ngrok http 5000
+</pre></div>
+
+
+<p><img src="/img/160530-respond-sms-python-flask/start-ngrok.jpg" width="100%" class="technical-diagram img-rounded"></p>
+<p>Awesome, now we can use that Ngrok Forwarding URL to access our application
+from any machine that has an internet connection. Replace the URL in the
+web browser with your own Forwarding URL, like I did in this screenshot.</p>
+<p><img src="/img/160530-respond-sms-python-flask/access-ngrok.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>We just need a phone number that'll hit our application with a POST request
+to respond to text messages.</p>
+<h2>Obtaining Our Phone Number</h2>
+<p>We can use our Flask application's route to respond to incoming web API 
+requests based on incoming SMS messages to a Twilio phone number. Go to the
+<a href="https://www.twilio.com/try-twilio">Twilio website and sign up for a free trial account</a>
+to use their API. If you already have a Twilio account then sign into your 
+existing account.</p>
+<p><img src="/img/160530-respond-sms-python-flask/try-twilio.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>The Twilio trial account allows you to send and receive text messages to 
+your own validated phone number. To send and respond to SMS to and from any 
+phone number then you need to upgrade your account. Trial accounts are 
+great for initial development before your application goes live.</p>
+<p>When you sign up, you receive a free Twilio phone number. We can
+configure that phone number to forward the SMS information to our web 
+application by setting up the response webhook.</p>
+<p>Go to the 
+<a href="https://www.twilio.com/console/phone-numbers">manage phone numbers screen</a> 
+and click on the phone number you want to configure for responding to 
+inbound text messages.</p>
+<p>Scroll down to near the bottom of the page and look for the "Messaging"
+header. Modify the "A Message Comes in" text box so that it has your
+ngrok Forwarding URL plus the "/twilio" route, as shown in this screenshot.</p>
+<p><img src="/img/160530-respond-sms-python-flask/number-configuration.png" width="100%" class="technical-diagram img-rounded"></p>
+<p>Now press the red "Save" button at the bottom to make our changes take
+effect.</p>
+<p>Our application is ready to go - time to give our phone number a try! 
+Send "Hello" or whatever text you want to your phone number. Here is what 
+the result looks like on my iPhone.</p>
+<p><img src="/img/160530-respond-sms-python-flask/success.jpg" width="100%" class="technical-diagram img-rounded"></p>
+<p>This simple Flask application is a good start to build more complicated
+responses such as
+<a href="https://www.twilio.com/blog/2014/06/using-natural-language-processing-for-better-sms-interfaces-using-twilio-and-pythons-textblob.html">adding natural language processing</a>,
+<a href="https://www.twilio.com/blog/2016/05/build-sms-slack-bot-python.html">building SMS Slack bots</a>
+or 
+<a href="https://www.twilio.com/blog/2015/08/romram-hacking-building-an-sms-powered-game-genie-with-lua-and-python.html">coding SMS-powered NES Game Genies</a>.</p>
+<h2>What's next?</h2>
+<p>Sweet, now our Flask web app automatically responds to incoming SMS text
+messages! It's pretty crazy to think that entire businesses such as 
+<a href="http://techcrunch.com/2016/03/07/superphone/">SuperPhone</a> and 
+<a href="https://www.remind.com/">Remind</a> are built off code that started out very
+similar to the code we just wrote.</p>
+<p>Questions? Contact me via Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>. I'm also on GitHub with
+the username <a href="https://github.com/mattmakai">mattmakai</a>.</p>
+<p>See something wrong in this post? Fork 
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/160530-respond-sms-text-messages-python-flask.markdown">this page's source on GitHub</a>
+and submit a pull request.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/160530-respond-sms-python-flask/header.jpg" alt="Twilio，Python 和 Flask logos，版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/web-frameworks.html" class="lgi">Web Frameworks</a>
+<a href="/flask.html" class="lgi">Flask</a>
+<a href="/application-programming-interfaces.html" class="lgi">APIs</a>
+<a href="/api-integration.html" class="lgi">API Integration</a>
+<a href="https://www.twilio.com/docs/" class="lgi">Twilio <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

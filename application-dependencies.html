@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Python web applications depend on many code libraries. Learn more about application dependencies on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Application Dependencies" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/application-dependencies.html" />
+<meta property="og:title" content="Application Dependencies" />
+<meta property="og:description" content="Python web applications depend on many code libraries. Learn more about application dependencies on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/application-dependencies.html" />
+<title>Application Dependencies - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Application Dependencies</h1>
+<p>Application dependencies are the libraries other than your project code
+that are required to create and run your application. </p>
+<h2>Why are application dependencies important?</h2>
+<p>Python web applications are built upon the work done by thousands of open
+source programmers. Application dependencies include not only web frameworks but
+also libraries for scraping, parsing, processing, analyzing, visualizing, 
+and many other tasks. Python's ecosystem facilitates discovery, retrieval and 
+installation so applications are easier for developers to create.</p>
+<h2>Finding libraries</h2>
+<p>Python libraries are stored in a central location known as the 
+<a href="https://pypi.org/">Python Package Index</a>. PyPi contains
+search functionality with results weighted by usage and relevance based on
+keyword terms.</p>
+<p>Besides PyPi there are numerous resources that list common or "must-have" 
+libraries. Ultimately the decision for which application dependencies are
+necessary for your project is up to you and the functionality you're looking
+to build. However, it's useful to browse through these lists in case you come 
+across a library to solve a problem by reusing the code instead of writing it
+all yourself. A few of the best collections of Python libraries are</p>
+<ul>
+<li>
+<p><a href="https://wiki.python.org/moin/UsefulModules">Python.org's useful modules</a>
+  which groups modules into categories.</p>
+</li>
+<li>
+<p><a href="https://github.com/trending?l=python">GitHub Explore Trending repositories</a>
+  shows the open source Python projects trending today, this week, and this 
+  month.</p>
+</li>
+<li>
+<p>This list of <a href="http://freepythontips.wordpress.com/2013/07/30/20-python-libraries-you-cant-live-without/">20 Python libraries you can’t live without</a>
+  is a wide-ranging collection from data analysis to testing tools.</p>
+</li>
+<li>
+<p>Wikipedia actually has an extensive 
+  <a href="http://en.wikipedia.org/wiki/List_of_Python_software">page dedicated to Python libraries</a> 
+  grouped by categories.</p>
+</li>
+</ul>
+<h2>Isolating dependencies</h2>
+<p>Dependencies are installed separately from system-level packages to prevent 
+library version conflicts. The most common isolation method is 
+<a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>. Each virtualenv is its
+own copy of the Python interpreter and dependencies in the site-packages
+directory. To use a virtualenv it must first be created with the virtualenv
+command and then activated.</p>
+<p>The virtualenv stores dependencies in an isolated environment. The web 
+application then relies only on that virtualenv instance which has a separate
+copy of the Python interpreter and site-packages directory. A high level of
+how a server configured with virtualenv can look is shown in the picture below.</p>
+<p><img src="/img/visuals/server-setup.png" alt="How the virtualenv separates dependencies on the server." width="100%" class="shot" /></p>
+<h2>Installing Python dependencies</h2>
+<p>The recommended way to install Python library dependencies is with the 
+<a href="http://www.pip-installer.org/en/latest/">pip</a> command when a virtualenv
+is activated.</p>
+<p>Pip and virtualenv work together and have complementary responsibilities.
+Pip downloads and installs application dependencies from the central
+<a href="https://pypi.python.org/pypi">PyPi</a> repository. </p>
+<h2>requirements.txt</h2>
+<p>The pip convention for specifying application dependencies is with a 
+<code>requirements.txt</code> file. When you build a Python web application you 
+should include <code>requirements.txt</code> in the base directory of your project.</p>
+<p>Python projects' dependencies for a web application should be specified 
+with pegged dependencies like the following:</p>
+<div class="highlight"><pre><span></span>django==1.11.0
+bpython==0.12
+django-braces==0.2.1
+django-model-utils==1.1.0
+logutils==0.3.3
+South==0.7.6
+requests==1.2.0
+stripe==1.9.1
+dj-database-url==0.2.1
+django-oauth2-provider==0.2.4
+djangorestframework==2.3.1
+</pre></div>
+
+
+<p>Pegged dependencies with precise version numbers or Git tags are important 
+because otherwise the latest version of a dependency will be used. While
+it may sound good to stay up to date, there's no telling if your application
+actually works with the latest versions of all dependencies. Developers should 
+deliberately upgrade and test to make sure there were no backwards-incompatible
+modifications in newer dependency library versions.</p>
+<h2>setup.py</h2>
+<p>There is another type of dependency specification for Python libraries
+known as 
+<a href="http://stackoverflow.com/questions/1471994/what-is-setup-py">setup.py</a>.
+Setup.py is a standard for distributing and installing Python libraries.
+If you're building a Python library, such as 
+<a href="http://www.python-requests.org/en/latest/">requests</a> or
+<a href="https://github.com/mattmakai/underwear">underwear</a> you must include setup.py
+so a dependency manager can correctly install both the library as well as
+additional dependencies for the library. There's still quite a bit of 
+confusion in the Python community over the difference between 
+requirements.txt and setup.py, so read this 
+<a href="https://caremad.io/2013/07/setup-vs-requirement/">well written post</a> for
+further clarification.</p>
+<h3>Application dependency resources</h3>
+<p>The following links provide advice on how to use Python packages as well
+as package your own dependencies for projects or consumption by other
+developers.</p>
+<ul>
+<li>
+<p><a href="https://glyph.twistedmatrix.com/2016/08/python-packaging.html">Python Packaging Is Good Now</a>
+  is a wonderfully written blog post. It provides historical context on why
+  Python's code library packaging was painful for a long time, and what's 
+  been fixed to make building and installing application dependencies so
+  much better.</p>
+</li>
+<li>
+<p><a href="http://andrewsforge.com/article/python-new-package-landscape/">Python's New Package Landscape</a>
+  covers the history of Python packaging tools and examines the
+  problems with dependency isolation and the dependency graphs that 
+  newer tools such as 
+  <a href="https://pipenv.readthedocs.io/en/latest/">Pipenv</a>, 
+  <a href="https://poetry.eustace.io/">Poetry</a>, 
+  <a href="https://github.com/ofek/hatch">Hatch</a> and 
+  <a href="https://github.com/mitsuhiko/pipsi">pipsi</a> 
+  aim to solve.</p>
+</li>
+<li>
+<p><a href="https://packaging.python.org/">Python Packaging User Guide</a>
+  provides a collection of resources to understand how to package and 
+  distribute Python code libraries.</p>
+</li>
+<li>
+<p><a href="https://veekaybee.github.io/2017/09/26/python-packaging/">Alice in Python projectland</a>
+  is an amazing post that takes the reader from simple Python script
+  into a complete Python package.</p>
+</li>
+<li>
+<p><a href="http://dabapps.com/blog/introduction-to-pip-and-virtualenv-python/">A non-magical introduction to virtualenv and pip</a> 
+  breaks down what problems these tools solve and how to use them.</p>
+</li>
+<li>
+<p><a href="https://www.recurse.com/blog/14-there-is-no-magic-virtualenv-edition">There’s no magic: virtualenv edition</a>
+  breaks open the virtual environment "black box" to show you what the
+  tool is doing when you use its commands.</p>
+</li>
+<li>
+<p><a href="https://hynek.me/articles/testing-packaging/">Testing &amp; Packaging</a> examines
+  a configuration for ensuring tests run against your code and how to
+  properly package your project.</p>
+</li>
+<li>
+<p><a href="https://hynek.me/articles/python-app-deps-2018/">Python Application Dependency Management in 2018</a>
+  presents some critical analysis and critique oof the existing Python
+  dependency management tools including newer ones such as pipenv and
+  Poetry.</p>
+</li>
+<li>
+<p>Occasionally arguments about using Python's dependency manager versus
+  one of Linux's dependency managers comes up. This provides
+  <a href="http://notes.pault.ag/debian-python/">one perspective on that debate</a>.</p>
+</li>
+<li>
+<p><a href="http://lucumr.pocoo.org/2016/3/24/open-source-trust-scaling/">Open source trust scaling</a>
+  is a good piece for the <a href="/python-community.html">Python community</a> 
+  (and other programming communities) that is based on the 
+  <a href="https://medium.com/@azerbike/i-ve-just-liberated-my-modules-9045c06be67c">left-pad NPM situation</a>
+  that broke many dependent packages in the Node.js community.</p>
+</li>
+<li>
+<p>Major speed improvements were made in pip 7 over previous versions. Read 
+  <a href="https://lincolnloop.com/blog/fast-immutable-python-deployments/">this article about the differences</a>
+  and be sure to upgrade.</p>
+</li>
+<li>
+<p><a href="https://incolumitas.com/2016/06/08/typosquatting-package-managers/">Typosquatting programming language package managers</a>
+  shows how many packages on centralized dependency servers for Python, 
+  Node.js and Ruby can be vulnerable to "typosquatting" where a developer
+  either confuses a fake package for the correct one or simply makes a
+  typo when specifying her dependency list.</p>
+</li>
+<li>
+<p><a href="https://malramsay.com/post/perils_of_packaging/">Perils of packaging</a>
+  covers several edge cases that come up when trying to put together
+  pieces like Travis CI, PyPI and conda. The post walks through the errors 
+  and how to get around them until they are smoothed out by updates to the 
+  tools.</p>
+</li>
+<li>
+<p><a href="https://sedimental.org/the_packaging_gradient.html">The Many Layers of Packaging</a>
+  goes up and down the packaging stack and even covers bits about virtual
+  environments and security. It's well worth investing some time to read
+  this post to get an overview of the many layers involved in dependency
+  packaging.</p>
+</li>
+<li>
+<p><a href="https://blog.jetbrains.com/pycharm/2017/05/how-to-publish-your-package-on-pypi/">How to Publish Your Package on PyPI</a>
+  is for developers who have created a code library they would like to
+  share and make installable for other developers.</p>
+</li>
+</ul>
+<h3>Open source app dependency projects</h3>
+<p><a href="https://docs.python.org/3/library/venv.html">pip and venv</a> are part of 
+Python 3's standard library as of version 3.3. However, there are numerous
+other open source libraries that can be helpful when managing application
+dependencies in your projects, as listed below.</p>
+<ul>
+<li>
+<p><a href="https://github.com/kennethreitz/autoenv">Autoenv</a> is a tool for activating
+  environment variables stored in a <code>.env</code> file in your projects' home
+  directories. Environment variables aren't managed by virtualenv and although
+  virtualenvwrapper has some hooks for handling them, it's often easiest to
+  use a shell script or <code>.env</code> file to set them in a development environment.</p>
+</li>
+<li>
+<p><a href="https://pipenv.readthedocs.io/en/latest/">Pipenv</a> is a newer Python 
+  packaging and dependency management library that has seen some adoption
+  in place of the standard <code>pip</code> library.</p>
+</li>
+<li>
+<p><a href="https://github.com/bndr/pipreqs">Pipreqs</a> searches through a project for
+  dependencies based on imports. It then generates a <code>requirements.txt</code> file
+  based on the libraries necessary to run those dependencies. Note though that
+  while this could come in handy with a legacy project, the version numbers
+  for those libraries will not be generated with the output.</p>
+</li>
+<li>
+<p><a href="https://github.com/bartTC/pip-check">pip-check</a> presents a nicely-formatted
+  list of all your installed dependencies and the status of whether or not
+  updates are available for each of them.</p>
+</li>
+<li>
+<p><a href="https://github.com/prakashdanish/pip-name">pip-name</a> is a straightforward
+  library that looks up package names on PyPI and tells you whether or not
+  the library name is already taken.</p>
+</li>
+</ul>
+<h3>Application dependencies learning checklist</h3>
+<ol>
+<li>
+<p>Ensure the libraries your web application depends on are all captured in 
+   a <code>requirement.txt</code> file with pegged versions. </p>
+</li>
+<li>
+<p>An easy way to capture currently installed dependencies is with the 
+   <code>pip freeze</code> command.</p>
+</li>
+<li>
+<p>Create a fresh virtualenv and install the dependencies from your 
+   <code>requirements.txt</code> file by using the <code>pip install -r requirements.txt</code> 
+   command.</p>
+</li>
+<li>
+<p>Check that your application runs properly with the fresh virtualenv and 
+   only the installed dependencies from the <code>requirements.txt</code> file.</p>
+</li>
+</ol>
+<h3>安装应用程序依赖项后的下一步是什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/wsgi-servers.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" fill="#fff"/></svg></a>
+<p class="under-btn">在服务器上用什么运行 Python 应用程序？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/databases.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1168 1216q0 33-23.5 56.5t-56.5 23.5-56.5-23.5-23.5-56.5 23.5-56.5 56.5-23.5 56.5 23.5 23.5 56.5zm256 0q0 33-23.5 56.5t-56.5 23.5-56.5-23.5-23.5-56.5 23.5-56.5 56.5-23.5 56.5 23.5 23.5 56.5zm112 160v-320q0-13-9.5-22.5t-22.5-9.5h-1216q-13 0-22.5 9.5t-9.5 22.5v320q0 13 9.5 22.5t22.5 9.5h1216q13 0 22.5-9.5t9.5-22.5zm-1230-480h1180l-157-482q-4-13-16-21.5t-26-8.5h-782q-14 0-26 8.5t-16 21.5zm1358 160v320q0 66-47 113t-113 47h-1216q-66 0-113-47t-47-113v-320q0-25 16-75l197-606q17-53 63-86t101-33h782q55 0 101 33t63 86l197 606q16 50 16 75z" fill="#fff"/></svg></a>
+<p class="under-btn">告诉我有关标准关系数据库的信息。</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/application-programming-interfaces.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1184v192q0 13-9.5 22.5t-22.5 9.5h-1376v192q0 13-9.5 22.5t-22.5 9.5q-12 0-24-10l-319-320q-9-9-9-22 0-14 9-23l320-320q9-9 23-9 13 0 22.5 9.5t9.5 22.5v192h1376q13 0 22.5 9.5t9.5 22.5zm0-544q0 14-9 23l-320 320q-9 9-23 9-13 0-22.5-9.5t-9.5-22.5v-192h-1376q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1376v-192q0-14 9-23t23-9q12 0 24 10l319 319q9 9 9 23z" fill="#fff"/></svg></a>
+<p class="under-btn">什么是Web应用程序编程接口（API）？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/text-editors-ides.html" class="lgi sbc">Text Editors & IDEs</a>
+<a href="/vim.html" class="lgi sbc">Vim</a>
+<a href="/emacs.html" class="lgi sbc">Emacs</a>
+<a href="/sublime-text.html" class="lgi sbc">Sublime Text</a>
+<a href="/pycharm.html" class="lgi sbc">PyCharm</a>
+<a href="/jupyter-notebook.html" class="lgi sbc">Jupyter Notebook</a>
+<a href="/shells.html" class="lgi sbc">Shells</a>
+<a href="/bourne-again-shell-bash.html" class="lgi sbc">Bash shell</a>
+<a href="/zsh-shell.html" class="lgi sbc">Zsh</a>
+<a href="/powershell.html" class="lgi sbc">PowerShell</a>
+<a href="/terminal-multiplexers.html" class="lgi sbc">Terminal Multiplexers</a>
+<a href="/tmux.html" class="lgi sbc">tmux</a>
+<a href="/screen.html" class="lgi sbc">Screen</a>
+<a href="/environment-configuration.html" class="lgi sbc">Environment configuration</a>
+<a href="/application-dependencies.html" class="lgi active sbc">Application Dependencies</a>
+<a href="/virtual-environments-virtualenvs-venvs.html" class="lgi sbc">Virtualenvs</a>
+<a href="/localhost-tunnels.html" class="lgi sbc">Localhost tunnels</a>
+<a href="/source-control.html" class="lgi sbc">Source Control</a>
+<a href="/git.html" class="lgi sbc">Git</a>
+<a href="/mercurial.html" class="lgi sbc">Mercurial</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+ <a href="/application-dependencies.html" class="lgi active">&raquo; Application Dependencies</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

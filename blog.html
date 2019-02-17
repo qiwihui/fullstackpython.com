@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="全栈 Python 开发者教程的博客。">
+<title>Blog - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="display:none">博客教程</h1>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/introduction-ansible-videos-released.html">《Ansible入门》视频课程发布！</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             January 13, 2019。
+     </div>
+    <p>Check out the just-launched video course, 
+<a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Introduction to Ansible</a>
+on
+<a href="https://training.talkpython.fm/">Talk Python Training</a>. This is the
+perfect course for you if you want to
+learn to configure servers and deploy web apps... (<a href="/blog/introduction-ansible-videos-released.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/181031-okta-exist-flask/header.jpg" alt="Flask 和 Okta logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/okta-user-auth-existing-flask-web-app.html">给现有 Flask Web 应用程序添加 Okta 认证</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             November 02, 2018， 首次发布于 October 31, 2018。
+     </div>
+    <p>It can be a lot of work to piece together a full authentication system
+if you have an existing <a href="/flask.html">Flask</a> web application that you are
+coding. <a href="https://developer.okta.com/signup/">Okta</a> makes it much easier
+to drop-in a complete user authentication system without a lot of
+additional effort. In this tutorial we... (<a href="/blog/okta-user-auth-existing-flask-web-app.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/fresh-tutorials-october-2018.html">全栈 Python 最新教材</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             October 22, 2018。
+     </div>
+    <p>There are a bunch of 
+<a href="https://www.fullstackpython.com/blog.html">new tutorials</a>
+on <a href="https://www.fullstackpython.com/">Full Stack Python</a> that were written
+since the last time I sent out an email newsletter. These range from getting 
+started with some popular open source projects to integrating third party 
+APIs to... (<a href="/blog/fresh-tutorials-october-2018.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/181014-digitalocean-ubuntu/header.jpg" alt="Flask, Green Unicorn 和 Ubuntu logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/provision-ubuntu-1804-linux-servers-digitalocean.html">如何在 DigitalOcean 上部署 Ubuntu 18.04 LTS 服务器</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             October 14, 2018。
+     </div>
+    <p><a href="/web-development.html">Python web applications</a> need to be 
+<a href="/deployment.html">deployed</a> to a production <a href="/servers.html">server</a> or 
+<a href="/platform-as-a-service.html">service</a> so your users have access to
+the application.</p>
+<p><a href="https://do.co/fullstackpython">DigitalOcean</a> is one such... (<a href="/blog/provision-ubuntu-1804-linux-servers-digitalocean.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/181008-flask-okta/header.jpg" alt="Flask 和 Okta logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/add-user-authentication-flask-apps-okta.html">如何给 Flask 应用用户认证添加 Okta</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             October 10, 2018， 首次发布于 October 08, 2018。
+     </div>
+    <p>User authentication is a basic feature in 
+<a href="/web-development.html">web applications</a> so people can create and access 
+their own accounts. Unfortunately, authentication is not always easy to
+set up and there are many ways to incorrectly implement login and logout
+features. </p>
+<p>This tutorial walks through how to use the 
+<a... (<a href="/blog/add-user-authentication-flask-apps-okta.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180614-ubuntu-flask-gunicorn/header.jpg" alt="Flask, Green Unicorn 和 Ubuntu logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-flask-gunicorn-ubuntu-1804-bionic-beaver.html">在 Ubuntu 18.04 LTS 上配置 Python 3, Flask 和 Gunicorn</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             June 15, 2018， 首次发布于 June 14, 2018。
+     </div>
+    <p><a href="/ubuntu.html">Ubuntu Linux's</a> latest Long Term Support (LTS)
+<a href="/operating-systems.html">operating system</a> version is 
+<a href="http://releases.ubuntu.com/18.04/">18.04</a> and was released in April 2018.
+The 18.04 update is code named "Bionic Beaver" and it includes
+<a href="/python-2-or-3.html">Python 3</a> by default.... (<a href="/blog/python-3-flask-gunicorn-ubuntu-1804-bionic-beaver.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180604-bottle-docker/header.jpg" alt="Bottle, Docker 和 Apple logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/first-steps-bottle-web-apps-docker-containers.html">在 macOS 上用 Docker 容器启动 Bottle 应用</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             June 05, 2018， 首次发布于 June 04, 2018。
+     </div>
+    <p>It can be confusing to figure out how to use <a href="/docker.html">Docker</a> 
+containers in your <a href="/why-use-python.html">Python</a> and 
+<a href="/flask.html">Bottle</a> 
+<a href="/development-environments.html">development environment</a> workflow.
+This tutorial will quickly show you the exact steps to get Docker
+up and running on... (<a href="/blog/first-steps-bottle-web-apps-docker-containers.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/talk-header.jpg" alt="带有代码的评论泡泡代表基于技术谈话的博客文章。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/explain-products-developers.html">如何向开发者解释你的产品</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             May 25, 2018。
+     </div>
+    <p>This blog post contains the slides along with a loose transcript
+from my talk on appropriately marketing products to 
+software developers that I gave at
+<a href="https://www.svb.com/">Silicon Valley Bank</a> during 
+<a href="http://www.ubiquity.vc/">Ubiquity.VC</a>'s summit for founders, investors and 
+technical advisors on May 24,... (<a href="/blog/explain-products-developers.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180519-django-maps/header.jpg" alt="Python, Django 和 Mapbox logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/maps-django-web-applications-projects-mapbox.html">如何用 Mapbox 在 Django Web 应用程序中添加地图</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             May 25, 2018， 首次发布于 May 19, 2018。
+     </div>
+    <p>Building interactive maps into a <a href="/django.html">Django</a> web application
+can seem daunting if you do not know where to begin, but it is easier
+than you think if you use a developer tool such as 
+<a href="https://www.mapbox.com/">Mapbox</a>.</p>
+<p>In this post we will build a simple Django project with a single app
+and add an... (<a href="/blog/maps-django-web-applications-projects-mapbox.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/full-stack-python-pycon-us-2018.html">全栈 Python 在 PyCon US 2018 上</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             May 09, 2018。
+     </div>
+    <p><a href="https://us.pycon.org/2018/about/">PyCon US 2018</a> kicked off today with the 
+<a href="https://us.pycon.org/2018/schedule/tutorials/">first day of tutorials</a>. I am
+flying in tomorrow and will be there through the end of the 
+weekend. If you're around, come by either the 
+<a href="https://www.twilio.com/">Twilio booth</a> or the... (<a href="/blog/full-stack-python-pycon-us-2018.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180420-monitor-aws-lambda/header.jpg" alt="Python, AWS Lambda 和 Rollbar logos 版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/monitor-python-3-6-example-code-aws-lambda-rollbar.html">在 AWS Lambda 上监控 Python 3.6 函数</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 25, 2018， 首次发布于 April 20, 2018。
+     </div>
+    <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a> is a usage-based
+execution environment that can run Python 3.6 code. If you have never
+previously used AWS Lambda then you can read<br />
+<a href="/blog/aws-lambda-python-3-6.html">How to Create Your First Python 3.6 AWS Lambda Function</a>.
+However, this tutorial will give you... (<a href="/blog/monitor-python-3-6-example-code-aws-lambda-rollbar.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180309-flask-docker/header.jpg" alt="Flask, Docker 和 Apple logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/develop-flask-web-apps-docker-containers-macos.html">在 macOS 上用 Docker 容器开发 Flask 应用程序</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             June 05, 2018， 首次发布于 March 09, 2018。
+     </div>
+    <p>Adding <a href="/docker.html">Docker</a> to your <a href="/why-use-python.html">Python</a> and 
+<a href="/flask.html">Flask</a> <a href="/development-environments.html">development environment</a> 
+can be confusing when you are just getting started with containers. Let's 
+quickly get Docker installed and configured for developing Flask web... (<a href="/blog/develop-flask-web-apps-docker-containers-macos.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-community-project-launches.html">ReportLab 和未来社区项目启动</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             March 04, 2018。
+     </div>
+    <p>Congratulations to fellow Python developer 
+<a href="https://github.com/driscollis">Mike Driscoll</a> for his successful 
+<strong><a href="https://www.kickstarter.com/projects/34257246/reportlab-pdf-processing-with-python/">ReportLab: PDF Processing with Python Kickstarter</a></strong> 
+that just concluded with over double his funding... (<a href="/blog/python-community-project-launches.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/180202-monitor-django/header.jpg" alt="Django 和 Rollbar logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/monitor-django-projects-web-apps-rollbar.html">使用 Rollbar 监控 Django 项目</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             May 20, 2018， 首次发布于 February 02, 2018。
+     </div>
+    <p>One fast way to scan for exceptions and errors in your
+<a href="/django.html">Django</a> web application projects is to add a few lines of 
+code to include a hosted <a href="/monitoring.html">monitoring</a> tool.</p>
+<p>In this tutorial we will learn to add the
+<a href="https://rollbar.com">Rollbar monitoring service</a>
+to a web app to... (<a href="/blog/monitor-django-projects-web-apps-rollbar.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/five-years-full-stack-python.html">全栈 Python 五周年</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             December 23, 2017。
+     </div>
+    <p><strong><a href="https://www.fullstackpython.com/">Full Stack Python</a></strong> began five years 
+ago today, on December 23, 2012, with 
+<a href="https://github.com/mattmakai/fullstackpython.com/commit/69f5f466196f572aab187504d52bc368cde840cd">Git commit 69f5f46</a>. </p>
+<p>I originally built the site to help out a group of junior... (<a href="/blog/five-years-full-stack-python.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/gitpython-git-tutorials.html">GitPython 和新的 Git 教程</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             December 11, 2017。
+     </div>
+    <p><a href="/blog/first-steps-gitpython.html"><strong>First Steps with GitPython</strong></a>
+is a quick tutorial that shows how to get started using the awesome
+<a href="https://gitpython.readthedocs.io/en/stable/">GitPython</a> library for
+programmatically interacting with Git repositories in your Python 
+applications. In the spirit of the... (<a href="/blog/gitpython-git-tutorials.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/171129-gitpython/header.jpg" alt="Python 和 Git logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/first-steps-gitpython.html">使用 GitPython 的第一步</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             November 30, 2017， 首次发布于 November 29, 2017。
+     </div>
+    <p><a href="http://gitpython.readthedocs.io/">GitPython</a> is a Python code library
+for programmatically reading from and writing to <a href="/git.html">Git</a>
+<a href="/source-control.html">source control</a> repositories.</p>
+<p>Let's learn how to use GitPython by quickly installing it and reading from
+a local cloned Git... (<a href="/blog/first-steps-gitpython.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。." width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/devops-python-maintaining-contributing-open-source.html">DevOps，感谢维护人员为开源做贡献</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             November 13, 2017。
+     </div>
+    <p><a href="/blog/devops-continuous-delivery-you.html"><strong>DevOps, Continuous Delivery... and You</strong></a>
+is a blog post with the slides and notes based on a class I taught at
+the <a href="http://www.virginia.edu/">University of Virginia</a> this past week. The
+talk is relevant as a brief introduction to 
+<a... (<a href="/blog/devops-python-maintaining-contributing-open-source.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/talk-header.jpg" alt="带有代码的评论泡泡代表基于技术谈话的博客文章。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/devops-continuous-delivery-you.html">DevOps, 持续交付... 和你</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             November 05, 2017， 首次发布于 November 01, 2017。
+     </div>
+    <p>This blog post contains the slides along with a loose transcript and 
+additional resources from my technical talk on DevOps and Continuous
+Delivery concepts given at my alma mater, the University of Virginia,
+to the <a href="https://www.commerce.virginia.edu/ms-mit">M.S. in Management of Information Technology program</a> on November 2nd and... (<a href="/blog/devops-continuous-delivery-you.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="Python 编程语言和全栈 Python logos。." width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/pydev-week-django-2-twilio-voices.html">本周 PyDev，Django 2.0 和 Twilio Voices</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             October 30, 2017。
+     </div>
+    <p><a href="https://www.blog.pythonlibrary.org/category/pydevoftheweek/"><strong>PyDev of the Week</strong></a> 
+is a developer interview series by 
+<a href="https://github.com/driscollis">Mike Driscoll</a> that asks Python programmers 
+how they started coding, the projects they're working on and what advice
+they have for beginners. Mike was... (<a href="/blog/pydev-week-django-2-twilio-voices.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="PyCon US 2018 Call for Proposals 现在开放了, 不错的 Python Bytes 和使用 Pelican 生成静态站点。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/pycon-us-2018-cfp-python-bytes-pelican.html">PyCon US 2018 CFP, Python Bytes 和 Pelican</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             October 09, 2017。
+     </div>
+    <p><a href="https://us.pycon.org/2018/"><strong>PyCon US 2018</strong></a> is coming up in Cleveland, Ohio
+on May 9th-17th. The 
+<a href="https://us.pycon.org/2018/speaking/talks/">call for proposals (CFP)</a> 
+went live in the past few days so now is the time to sharpen your keyboards 
+and get yourself into the proposal writing zone.... (<a href="/blog/pycon-us-2018-cfp-python-bytes-pelican.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170926-monitor-python-web-apps/header.jpg" alt="Python, Rollbar 和 Bottle logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/monitor-python-web-applications.html">如何监控 Python web 应用程序</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             September 29, 2017， 首次发布于 September 26, 2017。
+     </div>
+    <p>A quick way to check for errors and issues in your operational 
+<a href="/web-development.html">Python web application</a> is to drop-in one of many
+awesome hosted <a href="/monitoring.html">monitoring</a> tools.</p>
+<p>Let's learn to quickly add <a href="https://rollbar.com">Rollbar monitoring</a>
+to a web app to visualize when our... (<a href="/blog/monitor-python-web-applications.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170920-provision-ubuntu-linode/header.jpg" alt="Ubuntu Linux logo，版权归 Canonical Ltd. 和 Linode logo。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/provision-ubuntu-linux-servers-linode.html">如何在 Linode 上配置 Ubuntu 16.04 Linux 服务器</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             September 20, 2017。
+     </div>
+    <p>Your live web application must be <a href="/deployment.html">deployed</a> and run 
+somewhere other than your local 
+<a href="/development-environments.html">development environment</a>. That deployment 
+location is known as a "production environment" and it is built out of 
+one or more <a href="/servers.html">servers</a>.</p>
+<p>Let's learn... (<a href="/blog/provision-ubuntu-linux-servers-linode.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170725-bottle-bokeh-bar-charts/header.jpg" alt="Python, Bottle 和 Bokeh logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-bottle-bokeh-bar-charts.html">使用 Bokeh，Bottle 和 Python 3 创建条形图视觉效果</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             July 30, 2017， 首次发布于 July 25, 2017。
+     </div>
+    <p>The <a href="/bokeh.html">Bokeh</a> open source Python visualization library assists 
+developers with creating web browser visuals. You can build charts for 
+web applications <em>without coding any JavaScript</em>, like you'd need to do
+to use libraries such as <a href="https://d3js.org/">d3.js</a> and plotly.</p>
+<p>Bokeh can create many... (<a href="/blog/python-bottle-bokeh-bar-charts.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170723-monitor-flask-apps/header.jpg" alt="Flask, Python 和 Rollbar logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/hosted-monitoring-flask-web-apps.html">如何将托管监视添加到 Flask Web 应用程序</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             July 23, 2017。
+     </div>
+    <p>How do you know whether your application is running properly with minimal 
+errors after <a href="/web-development.html">building</a> and 
+<a href="/deployment.html">deploying</a> it? The fastest and easiest way
+to monitor your operational <a href="/flask.html">Flask web application</a> is to 
+integrate one of the many available fantastic... (<a href="/blog/hosted-monitoring-flask-web-apps.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170609-static-sites-pelican/header.jpg" alt="Pelican, Jinja2 和 Markdown logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/generating-static-websites-pelican-jinja2-markdown.html">如何使用 Pelican 和 Jinja2 创建你的第一个静态站点</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             June 09, 2017。
+     </div>
+    <p><a href="/pelican.html">Pelican</a> is an incredibly well-built Python tool for 
+<a href="/static-site-generator.html">creating static sites</a>. </p>
+<p><a href="https://www.fullstackpython.com/">Full Stack Python</a> is generated with 
+Pelican, <a href="/jinja2.html">Jinja2 templates</a> and <a href="/markdown.html">Markdown</a>.
+This site... (<a href="/blog/generating-static-websites-pelican-jinja2-markdown.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170526-bar-charts-bokeh-flask/header.jpg" alt="Python, Flask 和 Bokeh logos。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/responsive-bar-charts-bokeh-flask-python-3.html">使用 Bokeh，Flask 和 Python 3 创建条形图视觉效果</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             July 30, 2017， 首次发布于 May 26, 2017。
+     </div>
+    <p><a href="/bokeh.html">Bokeh</a> is a powerful open source Python library that allows 
+developers to generate JavaScript data visualizations for their web 
+applications <em>without writing any JavaScript</em>. While learning a 
+JavaScript-based data visualization library like <a href="https://d3js.org/">d3.js</a>
+can be useful, it's often far... (<a href="/blog/responsive-bar-charts-bokeh-flask-python-3.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170514-self-taught-developer/header.jpg" alt="博客文章的标题图片。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/become-successful-self-taught-software-developer.html">如何成为一名成功的自学软件开发者</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+ 
+             由 <a href="/about-author.html">Matt Makai</a> 发布于 
+             May 14, 2017。
+     </div>
+    <p>I received the following question via email from someone spending
+significant effort learning how to code in anticipation of obtaining 
+full-time job with those skills. The question is also frequently 
+asked by university students and coding bootcamp graduates. </p>
+<p>This post provides my current answer on how get your first full-time... (<a href="/blog/become-successful-self-taught-software-developer.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170429-aws-lambda-python-3-6/header.jpg" alt="AWS, AWS Lambda 和 Python logos 版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/aws-lambda-python-3-6.html">如何创建您的第一个 Python 3.6 AWS Lambda 函数</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 25, 2018， 首次发布于 April 29, 2017。
+     </div>
+    <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a>
+provides a usage-based compute service for running Python code in response 
+to developer-defined events. For example, if an inbound HTTP POST
+comes in to API Gateway or a new file is uploaded to 
+<a href="https://aws.amazon.com/s3/">AWS S3</a> then AWS Lambda can execute a... (<a href="/blog/aws-lambda-python-3-6.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170428-aws-lambda-python-2-7/header.jpg" alt="AWS, AWS Lambda 和 Python logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/aws-lambda-python-2-7.html">AWS Lambda 和 Python 2.7 入门</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 29, 2017， 首次发布于 April 28, 2017。
+     </div>
+    <p><a href="/aws-lambda.html">Amazon Web Services (AWS) Lambda</a>
+is a "serverless" compute service that executes arbitrary Python code in 
+response to developer-defined events, such as inbound API calls or file 
+uploads to <a href="https://aws.amazon.com/s3/">AWS S3</a>. Note that AWS Lambda has 
+nothing to do with the <code>lambda</code>... (<a href="/blog/aws-lambda-python-2-7.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170227-choose-devops-tools/header.jpg" alt="带有代码的评论泡泡代表基于技术谈话的博客文章。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/choose-right-devops-tools.html">如何为你和你的团队选择合适的 DevOps 工具</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             March 01, 2017， 首次发布于 February 27, 2017。
+     </div>
+    <p>This blog post contains a loose transcript along with the slides and 
+additional resources from my technical talk that will be given at 
+<a href="https://developer.oracle.com/code/sanfrancisco">Oracle Code SF 2017</a>
+and <a href="https://www.meetup.com/DC-continuous-delivery/">DC Continuous Delivery</a> 
+within the next couple of... (<a href="/blog/choose-right-devops-tools.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170220-ssh-keys-macos/header.jpg" alt="Apple logo，版权归属 Apple。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/ssh-keys-macos-sierra.html">在macOS Sierra上创建SSH密钥</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 February 20, 2017。
+     </div>
+    <p><a href="/deployment.html">Deploying</a> Python applications typically requires
+SSH keys. An SSH key has both a public and a private key file. You can 
+use the private key to authenticate when syncing remote <a href="/git.html">Git</a> 
+repositories, connect to remote <a href="/servers.html">servers</a> and automate 
+your application's... (<a href="/blog/ssh-keys-macos-sierra.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/170214-ssh-keys-ubuntu/header.jpg" alt="Ubuntu Linux logo，版权归属 Canonical Ltd." width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/ssh-keys-ubuntu-linux.html">在Ubuntu Linux 16.04 LTS上创建SSH密钥</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 February 14, 2017。
+     </div>
+    <p>SSH keys are a necessity for Python development when you are working with
+<a href="/git.html">Git</a>, connecting to remote servers and automating your
+<a href="/deployment.html">deployments</a>. Let's walk through how to generate SSH
+key pairs, which contain both a public and a private key within a single 
+pair, on Ubuntu... (<a href="/blog/ssh-keys-ubuntu-linux.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/161123-python-phone-calls/header.jpg" alt="Python 和 Twilio logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/make-phone-calls-python.html">如何用 Python 打电话</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             July 22, 2017， 首次发布于 November 23, 2016。
+     </div>
+    <p>Good old-fashioned phone calls remain one of the best forms of communication
+despite the slew of new smartphone apps that have popped up over the past
+several years. With just a few lines of Python code plus a 
+<a href="/application-programming-interfaces.html">web application programming interface</a> 
+we can make and receive phone calls... (<a href="/blog/make-phone-calls-python.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160830-phone-calls-bottle/header.jpg" alt="Bottle, Python 和 Twilio logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/dial-outbound-phone-calls-python-bottle.html">使用 Bottle Web 应用程序拨打出站电话</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             June 16, 2017， 首次发布于 August 30, 2016。
+     </div>
+    <p>Python web apps built with the <a href="/bottle.html">Bottle web framework</a> can 
+<a href="/blog/send-sms-text-messages-python.html">send</a> and 
+<a href="/blog/reply-sms-text-messages-python-bottle.html">receive SMS text messages</a>.
+In this tutorial we will go beyond texting and learn how to dial outbound 
+phone calls. The calls will... (<a href="/blog/dial-outbound-phone-calls-python-bottle.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160730-python-for-entrepreneurs/header.jpg" alt="Talk Python to Me, Full Stack Python 和 Python logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-entrepreneurs.html">企业 Python</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 25, 2017， 首次发布于 July 30, 2016。
+     </div>
+    <p><a href="https://www.kickstarter.com/projects/mikeckennedy/python-for-entrepreneurs-video-course">Python for Entrepreneurs</a>
+is a new video course by the creators of 
+<a href="https://talkpython.fm/">Talk Python to Me</a> and 
+<a href="https://fullstackpython.com/">Full Stack Python</a>.</p>
+<p><em>Update</em>: The Kickstarter has been... (<a href="/blog/python-entrepreneurs.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160626-mint-django-gunicorn/header.jpg" alt="Django, Green Unicorn 和 Linux Mint logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-django-gunicorn-linux-mint-17.html">在 Linux Mint 17.3 上设置 Python 3，Django 和 Gunicorn</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             July 22, 2016， 首次发布于 June 26, 2016。
+     </div>
+    <p>Linux Mint 17.3 "Rosa" is December 2015 release of the polished and 
+widely-used Linux distribution. This Mint release includes both Python 2.7 
+and 3.4 by default, but in this tutorial we will download and install the 
+latest Python 3.5.1 version to run our Django application. </p>
+<p>If you want to use a different Linux distribution such... (<a href="/blog/python-3-django-gunicorn-linux-mint-17.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160619-ubuntu-pyramid-gunicorn/header.jpg" alt="Pyramid, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-pyramid-gunicorn-ubuntu-1604-xenial-xerus.html">在 Ubuntu 16.04 上配置 Python 3，Pyramid 和 Gunicorn</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             August 10, 2016， 首次发布于 June 19, 2016。
+     </div>
+    <p><a href="/ubuntu.html">Canonical's Ubuntu 16.04 Long Term Support (LTS)</a> Linux
+<a href="/operating-systems.html">operating system</a>, also known as "Xenial Xerus",
+was released in April 2016. It is the first Ubuntu release to include 
+<a href="/python-2-or-3.html">Python 3</a> instead of Python 2 as its default Python... (<a href="/blog/python-3-pyramid-gunicorn-ubuntu-1604-xenial-xerus.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160605-reply-sms-python-bottle/header.jpg" alt="Twilio, Python 和 Bottle logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/reply-sms-text-messages-python-bottle.html">使用 Python 和 Bottle 回复 SMS 文本消息</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             August 10, 2016， 首次发布于 June 05, 2016。
+     </div>
+    <p>Python applications can 
+<a href="/blog/send-sms-text-messages-python.html">easily send SMS</a> 
+by using a <a href="/application-programming-interfaces.html">web API</a>. 
+Web apps built with the <a href="/bottle.html">Bottle</a> framework can also reply
+to incoming text messages by handling inbound HTTP POST webhooks. In
+this post we'll... (<a href="/blog/reply-sms-text-messages-python-bottle.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160604-simple-python-slack-bot/header.jpg" alt="Slack 和 Python logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/build-first-slack-bot-python.html">如何使用 Python 构建你的第一个 Slack 机器人</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             December 13, 2017， 首次发布于 June 04, 2016。
+     </div>
+    <p><a href="/bots.html">Bots</a> are a useful way to interact with chat services such as
+<a href="https://slack.com/">Slack</a>. If you have never built a bot before, this
+post provides an easy starter tutorial for combining the
+<a href="https://api.slack.com/">Slack API</a> with Python to create your first bot.</p>
+<p>We will walk through... (<a href="/blog/build-first-slack-bot-python.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160530-respond-sms-python-flask/header.jpg" alt="Twilio，Python 和 Flask logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/respond-sms-text-messages-python-flask.html">使用 Python 和 Flask 响应 SMS 文本消息</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             May 11, 2017， 首次发布于 May 30, 2016。
+     </div>
+    <p>Short Message Service (SMS) text messages are 
+<a href="/blog/send-sms-text-messages-python.html">easy to send from Python applications</a> 
+with a
+<a href="/application-programming-interfaces.html">web application programming interface (API)</a>. 
+Flask applications can also receive incoming text messages and respond
+back to the sender with... (<a href="/blog/respond-sms-text-messages-python-flask.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160528-mysql-ubuntu-1604/header.jpg" alt="MySQL 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/install-mysql-ubuntu-1604.html">如何在 Ubuntu 16.04 上安装和使用 MySQL</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             December 22, 2017， 首次发布于 May 28, 2016。
+     </div>
+    <p><a href="/mysql.html">MySQL</a> is a common open source 
+<a href="/databases.html">relational database</a> for creating, reading, updating 
+and deleting data in <a href="/web-frameworks.html">Python web applications</a>.
+Let's learn how to install MySQL on <a href="/ubuntu.html">Ubuntu 16.04</a> and then 
+run a few SQL queries within the... (<a href="/blog/install-mysql-ubuntu-1604.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160518-postgresql-ubuntu-1604/header.jpg" alt="PostgreSQL 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/postgresql-python-3-psycopg2-ubuntu-1604.html">在 Ubuntu 16.04 上使用 Python 3 和 psycopg 设置 PostgreSQL</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             December 25, 2017， 首次发布于 May 18, 2016。
+     </div>
+    <p><a href="/postgresql.html">PostgreSQL</a> is a powerful open source 
+<a href="/databases.html">relational database</a> frequently used to create, read,
+update and delete <a href="/web-frameworks.html">Python web application</a> data.
+<a href="http://initd.org/psycopg/">Psycopg2</a> is a PostgreSQL database 
+driver that serves as a Python... (<a href="/blog/postgresql-python-3-psycopg2-ubuntu-1604.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160516-redis-ubuntu-1604/header.jpg" alt="Redis 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/install-redis-use-python-3-ubuntu-1604.html">如何在 Ubuntu 16.04 上使用 Redis 和 Python 3 以及 redis-py</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 May 16, 2016。
+     </div>
+    <p><a href="/redis.html">Redis</a> is an in-memory key-value pair 
+<a href="/no-sql-datastore.html">NoSQL data store</a> often used 
+for <a href="/web-frameworks.html">web application</a> sessions,
+transient <a href="/data.html">data</a> and as a broker for 
+<a href="/task-queues.html">task queues</a>. redis-py is a common Python code 
+library... (<a href="/blog/install-redis-use-python-3-ubuntu-1604.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160515-mms-python/header.jpg" alt="Twilio 和 Python logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/send-mms-picture-messages-python.html">如何使用 Python 发送彩信图片信息</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             March 28, 2018， 首次发布于 May 15, 2016。
+     </div>
+    <p>Multimedia Message Service (MMS) picture and video messages are a common 
+extension to the Short Message Service (SMS) system for sending text 
+messages. Using a 
+<a href="/application-programming-interfaces.html">web application programming interface (API)</a>
+with Python makes it easy to send MMS messages from a web application or
+script.... (<a href="/blog/send-mms-picture-messages-python.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160513-ubuntu-bottle-gunicorn/header.jpg" alt="Bottle, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-bottle-gunicorn-ubuntu-1604-xenial-xerus.html">在 Ubuntu 16.04 LTS 上配置 Python 3，Bottle 和 Gunicorn 以进行开发</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 May 13, 2016。
+     </div>
+    <p>The <a href="/ubuntu.html">Ubuntu 16.04 Long Term Support (LTS)</a> Linux
+<a href="/operating-systems.html">operating system</a> was released in April 2016.
+This latest Ubuntu release is named "Xenial Xerus" and
+it is the first Ubuntu release to include <a href="/python-2-or-3.html">Python 3</a>,
+instead of Python 2.x, as the default Python... (<a href="/blog/python-3-bottle-gunicorn-ubuntu-1604-xenial-xerus.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160511-send-sms-python/header.jpg" alt="Twilio 和 Python logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/send-sms-text-messages-python.html">如何使用 Python 发送 SMS 文本消息</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 May 11, 2016。
+     </div>
+    <p>Short Message Service (SMS) text messages are ubiquitous for communication
+all over the world. It is easy to send SMS text messages from a 
+<a href="/why-use-python.html">Python</a> application using a 
+<a href="/application-programming-interfaces.html">web application programming interface (API)</a>. 
+Let's take a look at the tools we need... (<a href="/blog/send-sms-text-messages-python.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160510-ubuntu-flask-gunicorn/header.jpg" alt="Flask, Green Unicorn 和 Ubuntu logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">如何在 Ubuntu 16.04 LTS 上设置 Python 3，Flask 和 Green Unicorn</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             June 14, 2017， 首次发布于 May 10, 2016。
+     </div>
+    <p><a href="/ubuntu.html">Ubuntu</a>'s latest Long Term Support (LTS) 
+<a href="/operating-systems.html">operating system</a> was released last year, in 
+April 2016. The 16.04 update for Ubuntu is known as "Xenial Xerus" and
+it is the first Ubuntu release to include <a href="/python-2-or-3.html">Python 3</a> 
+as the default Python... (<a href="/blog/python-3-flask-green-unicorn-ubuntu-1604-xenial-xerus.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/160509-ubuntu-django-gunicorn/header.jpg" alt="Django, Green Unicorn 和 Ubuntu Linux logos，版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/python-3-django-gunicorn-ubuntu-1604-xenial-xerus.html">在 Ubuntu 16.04 LTS 上设置 Python 3，Django 和 Gunicorn</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             April 28, 2017， 首次发布于 May 09, 2016。
+     </div>
+    <p><a href="/ubuntu.html">Ubuntu</a> released the newest Long Term Support (LTS) 
+version of its <a href="/operating-systems.html">operating system</a> in April 2016. 
+The update brings Ubuntu to version 16.04 and its latest code name is 
+"Xenial Xerus". 16.04 is the first Ubuntu release to include 
+<a href="/python-2-or-3.html">Python 3</a> as... (<a href="/blog/python-3-django-gunicorn-ubuntu-1604-xenial-xerus.html">阅读更多</a>)
+     </div>
+    </div>
+    <div class="row" style="padding-top: 30px;">
+     <div class="c3">
+      <img src="/img/visuals/email-post-header.jpg" alt="全栈 Python 和 Python logos。版权归各自所有者所有。" width="100%" style="padding:4px 0 6px 0;border-radius:12px">
+     </div>
+     <div class="c9">
+   <h2 style="padding-top:0;margin-top:0"><a href="/blog/full-stack-python-blog.html">全栈 Python 博客</a></h2>
+   <div style="font-size:12px;color:#666;margin:0 0 10px">
+             由 <a href="/about-author.html">Matt Makai</a> 更新于 
+             December 28, 2017， 首次发布于 May 08, 2016。
+     </div>
+    <p><a href="https://www.fullstackpython.com/">Full Stack Python</a> began 
+<a href="/change-log.html">way back in December 2012</a>
+when I started writing the initial <a href="/deployment.html">deployment</a>, 
+<a href="/servers.html">server</a>, <a href="/operating-systems.html">operating system</a>, 
+<a href="/web-servers.html">web server</a>... (<a href="/blog/full-stack-python-blog.html">阅读更多</a>)
+     </div>
+    </div>
+ </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="WebSockets are a protocol for full-duplex web communications. Learn about WebSockets on Full Stack Python.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="WebSockets" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/websockets.html" />
+<meta property="og:title" content="WebSockets" />
+<meta property="og:description" content="WebSockets are a protocol for full-duplex web communications. Learn about WebSockets on Full Stack Python." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/websockets.html" />
+<title>WebSockets - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>WebSockets</h1>
+<p>A WebSocket is a <a href="http://tools.ietf.org/html/rfc6455">standard protocol</a> for 
+two-way data transfer between a client and server. The WebSockets protocol 
+does not run over HTTP, instead it is a separate implementation on top of 
+<a href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a>.</p>
+<h2>Why use WebSockets?</h2>
+<p>A WebSocket connection allows full-duplex communication between a client 
+and server so that either side can push data to the other through an 
+established connection. The reason why WebSockets, along with the related 
+technologies of 
+<a href="http://en.wikipedia.org/wiki/Server-sent_events">Server-sent Events</a> (SSE) 
+and 
+<a href="https://tools.ietf.org/html/draft-ietf-rtcweb-data-channel-12">WebRTC data channels</a>, 
+are important is that HTTP is not meant for keeping open a connection for
+the server to frequently push data to a web browser. Previously, most web
+applications would implement long polling via frequent
+Asynchronous JavaScript and XML (AJAX) requests as shown in the below diagram. </p>
+<p><img src="/img/visuals/ajax-long-polling.png" width="100%" alt="Long polling via AJAX is incredibly inefficient for some applications." class="technical-diagram" /></p>
+<p>Server push is more efficient and scalable than long polling because the 
+web browser does not have to constantly ask for updates through a stream 
+of AJAX requests.</p>
+<p><img src="/img/visuals/websockets-flow.png" width="100%" alt="WebSockets are more efficient than long polling for server sent updates." class="technical-diagram" /></p>
+<p>While the above diagram shows a server pushing data to the client, WebSockets
+is a full-duplex connection so the client can also push data to the server
+as shown in the diagram below.</p>
+<p><img src="/img/visuals/websockets-flow-with-client-push.png" width="100%" alt="WebSockets also allow client push in addition to server pushed updates." class="technical-diagram" /></p>
+<p>The WebSockets approach for server- and client-pushed updates works well for 
+certain categories of web applications such as chat room, which is why that's 
+often an example application for a WebSocket library.</p>
+<h2>Implementing WebSockets</h2>
+<p>Both the web browser and the server must implement the WebSockets protocol
+to establish and maintain the connection. There are important implications for 
+servers since WebSockets connections are long lived, unlike typical HTTP 
+connections. </p>
+<p>A multi-threaded or multi-process based server cannot scale appropriately for
+WebSockets because it is designed to open a connection, handle a request as 
+quickly as possible and then close the connection. An asynchronous server such 
+as <a href="http://www.tornadoweb.org/en/stable/">Tornado</a> or 
+<a href="http://gunicorn.org/">Green Unicorn</a> monkey patched with 
+<a href="http://www.gevent.org/">gevent</a> is necessary for any practical WebSockets 
+server-side implementation.</p>
+<p>On the client side, it is not necessary to use a JavaScript library for 
+WebSockets. Web browsers that implement WebSockets will expose all necessary
+client-side functionality through the 
+<a href="http://www.w3.org/TR/2011/WD-websockets-20110419/">WebSockets object</a>. </p>
+<p>However, a JavaScript wrapper library can make a developer's life easier by 
+implementing graceful degradation (often falling back to long-polling when 
+WebSockets are not supported) and by providing a wrapper around 
+browser-specific WebSocket quirks. Examples of JavaScript client libraries 
+and Python implementations are shown in a section below.</p>
+<h2>Nginx WebSocket proxying</h2>
+<p>Nginx officially supports WebSocket proxying as of 
+<a href="http://nginx.com/blog/websocket-nginx/">version 1.3</a>. However, you have
+to configure the Upgrade and Connection headers to ensure requests are
+passed through Nginx to your WSGI server. It can be tricky to set this up
+the first time. </p>
+<p>Here are the configuration settings I use in my Nginx file as part of my
+WebSockets proxy.</p>
+<div class="highlight"><pre><span></span><span class="err">#</span> <span class="nt">this</span> <span class="nt">is</span> <span class="nt">where</span> <span class="nt">my</span> <span class="nt">WSGI</span> <span class="nt">server</span> <span class="nt">sits</span> <span class="nt">answering</span> <span class="nt">only</span> <span class="nt">on</span> <span class="nt">localhost</span>
+<span class="err">#</span> <span class="nt">usually</span> <span class="nt">this</span> <span class="nt">is</span> <span class="nt">Gunicorn</span> <span class="nt">monkey</span> <span class="nt">patched</span> <span class="nt">with</span> <span class="nt">gevent</span>
+<span class="nt">upstream</span> <span class="nt">app_server_wsgiapp</span> <span class="p">{</span>
+  <span class="err">server</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span> <span class="n">fail_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">server</span> <span class="p">{</span>
+
+  <span class="err">#</span> <span class="err">typical</span> <span class="err">web</span> <span class="err">server</span> <span class="err">configuration</span> <span class="err">goes</span> <span class="err">here</span>
+
+  <span class="err">#</span> <span class="err">this</span> <span class="err">section</span> <span class="err">is</span> <span class="err">specific</span> <span class="err">to</span> <span class="err">the</span> <span class="err">WebSockets</span> <span class="err">proxying</span>
+  <span class="err">location</span> <span class="err">/socket.io</span> <span class="err">{</span>
+    <span class="err">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">app_server_wsgiapp</span><span class="o">/</span><span class="n">socket</span><span class="o">.</span><span class="n">io</span><span class="p">;</span>
+    <span class="err">proxy_redirect</span> <span class="err">off</span><span class="p">;</span>
+
+    <span class="err">proxy_set_header</span> <span class="err">Host</span> <span class="err">$host</span><span class="p">;</span>
+    <span class="err">proxy_set_header</span> <span class="err">X-Real-IP</span> <span class="err">$remote_addr</span><span class="p">;</span>
+    <span class="err">proxy_set_header</span> <span class="err">X-Forwarded-For</span> <span class="err">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+
+    <span class="err">proxy_http_version</span> <span class="err">1.1</span><span class="p">;</span>
+    <span class="err">proxy_set_header</span> <span class="err">Upgrade</span> <span class="err">$http_upgrade</span><span class="p">;</span>
+    <span class="err">proxy_set_header</span> <span class="err">Connection</span> <span class="err">&quot;upgrade&quot;</span><span class="p">;</span>
+    <span class="err">proxy_read_timeout</span> <span class="err">600</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>Note if you run into any issues with the above example configuration
+you'll want to scope out the 
+<a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html">official HTTP proxy module documentation</a>.</p>
+<p>The following resources are also helpful for setting up the configuration 
+properly.</p>
+<ul>
+<li>
+<p>Nginx has <a href="http://nginx.org/en/docs/http/websocket.html">an official page for WebSocket proxying</a>.</p>
+</li>
+<li>
+<p><a href="http://blog.martinfjordvald.com/2013/02/websockets-in-nginx/">WebSockets in Nginx</a>
+  walks through the Nginx WebSockets configuration directives.</p>
+</li>
+<li>
+<p><a href="https://chrislea.com/2013/02/23/proxying-websockets-with-nginx/">Proxying WebSockets with Nginx</a>
+  shows how to proxy with Socket.io.</p>
+</li>
+</ul>
+<h2>Python WebSockets implementations</h2>
+<p>The following projects either implement WebSockets in Python or provide
+example code you can follow to use WebSockets in your own projects.</p>
+<ul>
+<li>
+<p><a href="http://crossbar.io/autobahn/">Autobahn</a> uses Twisted and asyncio to
+  create the server-side WebSockets component while 
+  <a href="https://github.com/crossbario/autobahn-js">AutobahnJS</a> assists on the
+  client web browser side.</p>
+</li>
+<li>
+<p><a href="https://channels.readthedocs.io/en/stable/">Django Channels</a> is built
+  on top of WebSockets and is easy to integrate with existing or new 
+  <a href="/django.html">Django</a> projects.</p>
+</li>
+<li>
+<p><a href="https://flask-socketio.readthedocs.io/en/latest/">Flask-SocketIO</a> is 
+  a <a href="/flask.html">Flask</a> extension that relies upon eventlet or gevent to 
+  create server-side WebSockets connections.</p>
+</li>
+<li>
+<p><a href="https://github.com/websocket-client/websocket-client">websocket-client</a>
+  provides low level APIs for WebSockets and works with both 
+  <a href="/python-2-or-3.html">Python 2 and 3</a>.</p>
+</li>
+<li>
+<p><a href="http://crossbar.io/">Crossbar.io</a> builds upon Autobahn and includes a
+  separate server for handling the WebSockets connections if desired by
+  the web app developer.</p>
+</li>
+</ul>
+<h2>JavaScript client libraries</h2>
+<p>JavaScript is used to create the client side of the WebSocket connection
+because the client is typically a web browser. While you do not need one
+of these client-side libraries to use WebSockets, they are useful for 
+minimizing the amount of boilerplate code to establish and handle your
+connections.</p>
+<ul>
+<li>
+<p><a href="http://socket.io/">Socket.io</a>'s client side JavaScript library can be 
+  used to connect to a server side WebSockets implementation.</p>
+</li>
+<li>
+<p><a href="https://github.com/gimite/web-socket-js">web-socket-js</a> is a Flash-based
+  client-side WebSockets implementation.</p>
+</li>
+<li>
+<p><a href="https://github.com/crossbario/autobahn-js">AutobahnJS</a> assists on the
+  client web browser side.</p>
+</li>
+</ul>
+<h3>Example code for WebSockets in Python</h3>
+<p>There are numerous Python-based implementations for WebSockets so sometimes
+it's just easiest to examine an example so you can build something for your
+own project.</p>
+<ul>
+<li>
+<p>The Flask-SocketIO project has a 
+  <a href="https://github.com/miguelgrinberg/Flask-SocketIO/tree/master/example">chat web application</a> 
+  that demos sending server generated events as well as input from users
+  via a text box input on a form.</p>
+</li>
+<li>
+<p>The <a href="https://github.com/joshporter1/codenames">realtime codenames game</a> 
+  source code is a full-featured example for using WebSockets via 
+  Flask-SocketIO. There is also a 
+  <a href="https://secdevops.ai/weekend-project-part-1-creating-a-real-time-web-based-application-using-flask-vue-and-socket-b71c73f37df7">multi-part tutorial</a>
+  that walks through the code.</p>
+</li>
+<li>
+<p>The 
+  <a href="https://github.com/mattmakai/python-websockets-example">python-websockets-example</a>
+  contains code to create a simple web application that provides WebSockets
+  using Flask, Flask-SocketIO and gevent.</p>
+</li>
+</ul>
+<h3>Python-specific WebSockets resources</h3>
+<ul>
+<li>
+<p>The 
+  "<a href="https://youtu.be/L5YQbNrFfyw">Async Python Web Apps with WebSockets &amp; gevent</a>"
+  talk I gave at San Francisco Python in January 2015 is a live-coded example
+  Flask web app implementation that allows the audience to interact with
+  WebSockets as I built out the application.</p>
+</li>
+<li>
+<p><a href="https://secdevops.ai/weekend-project-part-1-creating-a-real-time-web-based-application-using-flask-vue-and-socket-b71c73f37df7">Creating a Real-time Web-based Application using Flask, Vue, and Socket.io: part 1</a>,
+  <a href="https://secdevops.ai/weekend-project-part-2-turning-flask-into-a-real-time-websocket-server-using-flask-socketio-ab6b45f1d896">part 2</a>
+  and
+  <a href="https://secdevops.ai/weekend-project-part-3-centralizing-state-management-with-vuex-5f4387ebc144">part 3</a>
+  are a complete front-to-backend WebSockets, Python and JavaScript front
+  end framework example with open source code.</p>
+</li>
+<li>
+<p><a href="http://mrjoes.github.io/2013/06/21/python-realtime.html">Real-time in Python</a>
+  provides Python-specific context for how the server push updates were 
+  implemented in the past and how Python's tools have evolved to perform
+  server side updates.</p>
+</li>
+<li>
+<p><a href="https://github.com/aaugustin/websockets">websockets</a> is a WebSockets 
+  implementation for Python 3.3+ written with the 
+  <a href="https://docs.python.org/3.4/library/asyncio.html">asyncio</a> module (or with 
+  <a href="https://code.google.com/p/tulip/">Tulip</a> if you're working with 
+  Python 3.3).</p>
+</li>
+<li>
+<p><a href="https://www.willmcgugan.com/blog/tech/post/speeding-up-websockets-60x/">Speeding up Websockets 60X</a>
+  is a cool experiment in coding loops different ways to eek out more 
+  performance from WebSockets connections. It is unclear how generalizable
+  the results in the blog post are to other programs but it is a good example
+  of how tweaking and tuning can produce outsized returns in some 
+  applications.</p>
+</li>
+<li>
+<p>The <a href="https://www.twilio.com/blog/2014/11/choose-your-own-adventure-presentations-with-reveal-js-python-and-websockets.html">Choose Your Own Adventure Presentations</a>
+  tutorial uses WebSockets via gevent on the server and socketio.js for 
+  pushing vote count updates from the server to the client. </p>
+</li>
+<li>
+<p><a href="http://crossbar.io/docs/Adding-Real-Time-to-Django-Applications/">Adding Real Time to Django Applications</a>
+  shows how to use Django and Crossbar.io to implement a publish/subscribe
+  feature in the application.</p>
+</li>
+<li>
+<p><a href="http://bottlepy.org/docs/dev/async.html">Async with Bottle</a> shows how to
+  use greenlets to support WebSockets with the Bottle web framework.</p>
+</li>
+<li>
+<p>If you're deploying to Heroku, there is a 
+  <a href="https://devcenter.heroku.com/articles/python-websockets">specific WebSockets guide</a>
+  for getting your Python application up and running.</p>
+</li>
+<li>
+<p>The 
+  <a href="http://www.reddit.com/r/Python/comments/2ujqd7/an_overview_of_using_websockets_in_python/">Reddit thread for this page</a>
+  has some interesting comments on what's missing from the above content that
+  I'm working to address.</p>
+</li>
+<li>
+<p><a href="http://pawelmhm.github.io/python/websockets/2016/01/02/playing-with-websockets.html">Creating Websockets Chat with Python</a>
+  shows code for a Twisted server that handles WebSockets connections
+  on the server side along with the JavaScript code for the client side.</p>
+</li>
+<li>
+<p><a href="http://www.matthieuamiguet.ch/blog/synchronize-clients-flask-application-websockets">Synchronize clients of a Flask application with WebSockets</a>
+  is a quick tutorial showing how to use Flask, the Flask-SocketIO extension 
+  and Socket.IO to update values between web browser clients when changes
+  occur.</p>
+</li>
+</ul>
+<h2>General WebSockets resources</h2>
+<p>WebSockets have wide browser support and therefore many 
+<a href="/web-frameworks.html">web frameworks</a> across all major programming languages
+have libraries to make creating WebSockets connections easier. The following
+resources are general guides and tutorials that provide context for the
+protocol without getting into the weeds of how to use WebSockets in
+Python.</p>
+<ul>
+<li>
+<p>The official W3C 
+  <a href="http://www.w3.org/TR/websockets/">candidate draft for WebSockets API</a> 
+  and the 
+  <a href="http://dev.w3.org/html5/websockets/">working draft for WebSockets</a> are 
+  good reference material but can be tough for those new to the WebSockets
+  concepts. I recommend reading the working draft after looking through some
+  of the more beginner-friendly resources list below.</p>
+</li>
+<li>
+<p><a href="http://lucumr.pocoo.org/2012/9/24/websockets-101/">WebSockets 101</a> by
+  Armin Ronacher provides a detailed assessment of the subpar state of HTTP
+  proxying in regards to WebSockets. He also discusses the complexities of
+  the WebSockets protocol including the packet implementation.</p>
+</li>
+<li>
+<p>The "Can I Use?" website has a 
+  <a href="http://caniuse.com/#feat=websockets">handy WebSockets reference chart</a> 
+  for which web browsers and specific versions support WebSockets.</p>
+</li>
+<li>
+<p>Mozilla's 
+  <a href="https://developer.mozilla.org/en-US/docs/WebSockets">Developer Resources for WebSockets</a>
+  is a good place to find documentation and tools for developing with 
+  WebSockets.</p>
+</li>
+<li>
+<p><a href="https://blog.pusher.com/websockets-from-scratch/">WebSockets from Scratch</a> 
+  gives a nice overview of the protocol then shows how the lower-level pieces
+  work with WebSockets, which are often a black box to developers who only
+  use libraries like Socket.IO.</p>
+</li>
+<li>
+<p><a href="http://websocketd.com/">websocketd</a> is a WebSockets server aiming to be
+  the "CGI of WebSockets". Worth a look.</p>
+</li>
+<li>
+<p><a href="https://thesocietea.org/2016/04/how-websockets-work-with-socket-io-demo/">How WebSockets Work – With Socket.io Demo</a>
+  walks through the HTTP-to-WebSocket upgrade handshake and explains a
+  bit about how WebSockets work. The provided code is NodeJS on the backend
+  but the SocketIO client side JavaScript is the same as you would implement
+  in a Python-backed web application.</p>
+</li>
+<li>
+<p><a href="http://www.infoq.com/articles/websocket-and-http2-coexist">Can WebSockets and HTTP/2 Co-exist?</a>
+  compares and contrasts the two protocols and shows how they have 
+  differences which will likely lead to WebSockets sticking around for
+  awhile longer.</p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=xj58VHRzG_g">A Brief Introduction to WebSockets and Socket.io by Saleh Hamadeh</a>
+  is a video on WebSockets basics and using the
+  <a href="https://github.com/socketio/socket.io">Socket.io</a> JavaScript library
+  to wrap WebSockets functionality in web browsers.</p>
+</li>
+<li>
+<p><a href="http://kemalcr.com/blog/2016/11/13/benchmarking-and-scaling-websockets-handling-60000-concurrent-connections/">Benchmarking and Scaling WebSockets: Handling 60000 concurrent connections</a>
+  is a detailed examination of how WebSockets connections can scale to tens
+  of thousands of users.</p>
+</li>
+<li>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers">Writing WebSocket servers</a>
+  gets into the nitty-gritty of how WebSockets work. Well worth reading to
+  get a deep understanding of WebSockets connections.</p>
+</li>
+</ul>
+<h3>您的 Web 应用程序下一步要做什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/wsgi-servers.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1576 927l-1328 738q-23 13-39.5 3t-16.5-36v-1472q0-26 16.5-36t39.5 3l1328 738q23 13 23 31t-23 31z" fill="#fff"/></svg></a>
+<p class="under-btn">在服务器上用什么运行 Python 应用程序？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/application-dependencies.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1088 832q0-26-19-45t-45-19h-256q-26 0-45 19t-19 45 19 45 45 19h256q26 0 45-19t19-45zm576-192v960q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-960q0-26 19-45t45-19h1408q26 0 45 19t19 45zm64-448v256q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-256q0-26 19-45t45-19h1536q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">应该如何在服务器上安装 Python 库？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/development-environments.html" class="btn btn-success btn-full"><svg width="34" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1728 992v-832q0-13-9.5-22.5t-22.5-9.5h-1600q-13 0-22.5 9.5t-9.5 22.5v832q0 13 9.5 22.5t22.5 9.5h1600q13 0 22.5-9.5t9.5-22.5zm128-832v1088q0 66-47 113t-113 47h-544q0 37 16 77.5t32 71 16 43.5q0 26-19 45t-45 19h-512q-26 0-45-19t-19-45q0-14 16-44t32-70 16-78h-544q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1600q66 0 113 47t47 113z" fill="#fff"/></svg></a>
+<p class="under-btn">我应该使用什么编辑器来编写我的 Python 应用程序？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/web-frameworks.html" class="lgi sbc">Web Frameworks</a>
+<a href="/django.html" class="lgi sbc">Django</a>
+<a href="/flask.html" class="lgi sbc">Flask</a>
+<a href="/bottle.html" class="lgi sbc">Bottle</a>
+<a href="/pyramid.html" class="lgi sbc">Pyramid</a>
+<a href="/turbogears.html" class="lgi sbc">TurboGears</a>
+<a href="/falcon.html" class="lgi sbc">Falcon</a>
+<a href="/morepath.html" class="lgi sbc">Morepath</a>
+<a href="/sanic.html" class="lgi sbc">Sanic</a>
+<a href="/other-web-frameworks.html" class="lgi sbc">Other Web Frameworks</a>
+<a href="/template-engines.html" class="lgi sbc">Template Engines</a>
+<a href="/jinja2.html" class="lgi sbc">Jinja2</a>
+<a href="/mako.html" class="lgi sbc">Mako</a>
+<a href="/django-templates.html" class="lgi sbc">Django Templates</a>
+<a href="/web-design.html" class="lgi sbc">Web Design</a>
+<a href="/hypertext-markup-language-html.html" class="lgi sbc">HTML</a>
+<a href="/cascading-style-sheets.html" class="lgi sbc">Cascading Style Sheets (CSS)</a>
+<a href="/responsive-design.html" class="lgi sbc">Responsive Design</a>
+<a href="/minification.html" class="lgi sbc">Minification</a>
+<a href="/css-frameworks.html" class="lgi sbc">CSS Frameworks</a>
+<a href="/bootstrap-css.html" class="lgi sbc">Bootstrap</a>
+<a href="/foundation-css.html" class="lgi sbc">Foundation</a>
+<a href="/javascript.html" class="lgi sbc">JavaScript</a>
+<a href="/react.html" class="lgi sbc">React</a>
+<a href="/vuejs.html" class="lgi sbc">Vue.js</a>
+<a href="/angular.html" class="lgi sbc">Angular</a>
+<a href="/task-queues.html" class="lgi sbc">Task Queues</a>
+<a href="/celery.html" class="lgi sbc">Celery</a>
+<a href="/redis-queue-rq.html" class="lgi sbc">Redis Queue (RQ)</a>
+<a href="/dramatiq.html" class="lgi sbc">Dramatiq</a>
+<a href="/static-site-generator.html" class="lgi sbc">Static Site Generators</a>
+<a href="/pelican.html" class="lgi sbc">Pelican</a>
+<a href="/lektor.html" class="lgi sbc">Lektor</a>
+<a href="/mkdocs.html" class="lgi sbc">MkDocs</a>
+<a href="/testing.html" class="lgi sbc">Testing</a>
+<a href="/unit-testing.html" class="lgi sbc">Unit Testing</a>
+<a href="/integration-testing.html" class="lgi sbc">Integration Testing</a>
+<a href="/debugging.html" class="lgi sbc">Debugging</a>
+<a href="/code-metrics.html" class="lgi sbc">Code Metrics</a>
+<a href="/networking.html" class="lgi sbc">Networking</a>
+<a href="/https.html" class="lgi sbc">HTTPS</a>
+<a href="/websockets.html" class="lgi active sbc">WebSockets</a>
+<a href="/webrtc.html" class="lgi sbc">WebRTC</a>
+<a href="/application-programming-interfaces.html" class="lgi sbc">Web APIs</a>
+<a href="/microservices.html" class="lgi sbc">Microservices</a>
+<a href="/webhooks.html" class="lgi sbc">Webhooks</a>
+<a href="/bots.html" class="lgi sbc">Bots</a>
+<a href="/api-creation.html" class="lgi sbc">API Creation</a>
+<a href="/api-frameworks.html" class="lgi sbc">API Frameworks</a>
+<a href="/django-rest-framework-drf.html" class="lgi sbc">Django REST Framework</a>
+<a href="/api-integration.html" class="lgi sbc">API Integration</a>
+<a href="/twilio.html" class="lgi sbc">Twilio</a>
+<a href="/stripe.html" class="lgi sbc">Stripe</a>
+<a href="/slack.html" class="lgi sbc">Slack</a>
+<a href="/okta.html" class="lgi sbc">Okta</a>
+<a href="/web-application-security.html" class="lgi sbc">Security</a>
+<a href="/sql-injection.html" class="lgi sbc">SQL Injection</a>
+<a href="/cross-site-request-forgery-csrf.html" class="lgi sbc">CSRF</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+ <a href="/websockets.html" class="lgi active">&raquo; WebSockets</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

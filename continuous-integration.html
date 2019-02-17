@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Continuous integration (CI) automatically rebuilds, tests and deploys applications as developers commit code.">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Continuous Integration" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/continuous-integration.html" />
+<meta property="og:title" content="Continuous Integration" />
+<meta property="og:description" content="Continuous integration (CI) automatically rebuilds, tests and deploys applications as developers commit code." />
+<meta property="og:image" content="https://www.fullstackpython.com/img/pages/default.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/continuous-integration.html" />
+<title>Continuous Integration - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style><link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c8">
+   <h1>Continuous Integration</h1>
+<p>Continuous integration automates the building, testing and deploying of 
+applications. Software projects, whether created by a single individual or 
+entire teams, typically use continuous integration as a hub to ensure 
+important steps such as unit testing are automated rather than manual 
+processes.</p>
+<h2>Why is continuous integration important?</h2>
+<p>When continuous integration (CI) is established as a step in a software 
+project's development process it can dramatically reduce deployment times 
+by minimizing steps that require human intervention. The only minor downside 
+to using CI is that it takes some initial time by a developer to set up and 
+then there is some ongoing maintainence if a project is broken into multiple 
+parts, such as going from a monolith architecture to 
+<a href="/microservices.html">microservices</a>.</p>
+<h2>Automated testing</h2>
+<p>Another major advantage with CI is that testing can be an automated step in 
+the deployment process. Broken deployments can be prevented by running a 
+comprehensive test suite of <a href="/unit-testing.html">unit</a> and 
+<a href="/integration-testing.html">integration tests</a> when developers check in code 
+to a source code repository. Any bugs accidentally introduced during a 
+check-in that are caught by the test suite are reported and prevent the 
+deployment from proceeding.</p>
+<p>The automated testing on checked in source code can be thought of like the 
+bumper guards in bowling that prevent code quality from going too far off 
+track. CI combined with unit and integration tests check that any code 
+modifications do not break existing tests to ensure the software works as 
+intended.</p>
+<h2>Continuous integration example</h2>
+<p>The following picture represents a high level perspective on how continuous
+integration and deployment can work. </p>
+<p><img src="/img/visuals/continuous-integration.png" width="100%" class="shot" alt="One potential way for continuous integration to work with source control and a deployment environment." /></p>
+<p>In the above diagram, when new code is committed to a source repository 
+there is a hook that notifies the continuous integration server that new 
+code needs to be built (the continuous integration server could also
+poll the source code repository if a notification is not possible).</p>
+<p>The continuous integration server pulls the code to build and test it. If
+all tests pass, the continuous integration server begins the deployment
+process. The new code is pulled down to the server where the deployment is
+taking place. Finally the deployment process is completed via restarting 
+services and related deployment activities.</p>
+<p>There are many other ways a continuous integration server and its 
+deployments can be structured. The above was just one example of a 
+relatively simple setup.</p>
+<h2>Open source CI projects</h2>
+<p>There are a variety of free and open source continuous integration servers 
+that are configurable based on a project's needs. </p>
+<p>Note that many of these servers are not written in Python but work 
+just fine for Python applications. Polyglot organizations (ones that 
+use more than a single language and ecosystem) often use a single CI 
+server for all of their  projects regardless of the programming language 
+the application was written in.</p>
+<ul>
+<li>
+<p><a href="/jenkins.html">Jenkins</a> is a common CI server for building and
+  deploying to test and production servers. 
+  <a href="https://github.com/jenkinsci/jenkins">Jenkins source code is on GitHub</a>.</p>
+</li>
+<li>
+<p><a href="http://www.go.cd/">Go CD</a> is a CI server by 
+  <a href="http://www.thoughtworks.com/">ThoughtWorks</a> that was designed with best 
+  practices for the build and test &amp; release cycles in mind. 
+  <a href="https://github.com/gocd/gocd">Go CD source code is on GitHub</a>.</p>
+</li>
+<li>
+<p><a href="http://buildbot.net/">BuildBot</a> is a continuous integration <strong>framework</strong> 
+  with a set of components for creating your own CI server. It's written in
+  Python and intended for development teams that want more control over
+  their build and deployment pipeline.
+  <a href="https://github.com/buildbot/buildbot">BuildBot source code is on GitHub</a>.</p>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/teamcity/">TeamCity</a> is JetBrains' closed source
+  CI server that requires a license to use.</p>
+</li>
+</ul>
+<h2>Jenkins CI resources</h2>
+<p><a href="/jenkins.html">Jenkins</a> is commonly used as a continuous integration 
+server implementation for Python projects because it is open source and 
+programming language agnostic. Learn more via the following resources or on 
+<a href="/jenkins.html">the dedicated Jenkins page</a>.</p>
+<ul>
+<li>
+<p>My book on <a href="http://www.deploypython.com/">deploying Python web applications</a>
+  walks through every step of setting up a Jenkins project with a WSGI 
+  application to enable continuous delivery. Take a look if you're not 
+  grokking all of the steps provided in these other blog posts.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@mondaini/assembling-a-continuous-integration-service-for-a-django-project-on-jenkins-5f979d4c4184">Assembling a continuous integration service for a Django project on Jenkins</a>
+  shows how to set up a Ubuntu instance with a Jenkins server that'll build a 
+  <a href="/django.html">Django</a> project.</p>
+</li>
+<li>
+<p><a href="http://michal.karzynski.pl/blog/2014/04/19/continuous-integration-server-for-django-using-jenkins/">Setting up Jenkins as a continuous integration server for Django</a>
+  is another solid tutorial that also shows how to send email notifications 
+  as part of the build process.</p>
+</li>
+</ul>
+<h2>General continuous integration resources</h2>
+<ul>
+<li>
+<p><a href="http://martinfowler.com/articles/continuousIntegration.html">What is continuous integration?</a>
+  is a classic detailed article by Martin Fowler on the concepts behind CI
+  and how to implement it.</p>
+</li>
+<li>
+<p><a href="http://www.airpair.com/continuous-deployment/posts/continuous-deployment-for-practical-people">Continuous Deployment For Practical People</a>
+  is not specific to Python but a great read on what it entails.</p>
+</li>
+<li>
+<p><a href="http://bitcubby.com/continuous-integration-delivery-illustrated/">Continuous Integration &amp; Delivery - Illustrated</a>
+  uses well done drawings to show how continuous integration and delivery 
+  works for testing and managing data.</p>
+</li>
+<li>
+<p><a href="http://www.rackspace.com/blog/diving-into-continuous-integration-as-a-newbie/">Diving into continuous integration as a newbie</a>
+  is a retrospective on learning CI from a Rackspace intern on how she learned
+  the subject.</p>
+</li>
+<li>
+<p><a href="https://opensource.com/business/15/7/six-continuous-integration-tools">6 top continuous integration tools</a>
+  gives a high level overview of six CI tools from a programming language
+  agnostic perspective.</p>
+</li>
+<li>
+<p><a href="https://gdstechnology.blog.gov.uk/2017/02/10/updating-the-gov-uk-continuous-integration-environment/">Updating the GOV.UK Continuous Integration environment</a>
+  explains the UK's Government Digital Service continuous integration
+  configuration that relies on <a href="/jenkins.html">Jenkins</a>.</p>
+</li>
+<li>
+<p><a href="http://stackshare.io/continuous-integration">StackShare's Continuous Integration tag</a> 
+  lists a slew of hosted CI services roughly ranked by user upvotes.</p>
+</li>
+<li>
+<p><a href="http://buildoutcoredev.readthedocs.org/en/latest/continous-integration.html">Good practices for continuous integration</a>
+  includes advice on checking in code, commit tests and reverting to
+  previous revisions.</p>
+</li>
+<li>
+<p><a href="https://blog.codeship.com/continuous-integration-important/">Why Continuous Integration Is Important</a>
+  is a high-level overview of how CI can build trust both among developers
+  and between developers and non-technical people in an organization. The
+  post also discusses tasks related to setting up reliable CI such as test 
+  environments, <a href="/integration-testing.html">integration testing</a> and 
+  visibility into the CI results.</p>
+</li>
+<li>
+<p><a href="https://www.blackhat.com/docs/eu-15/materials/eu-15-Mittal-Continuous-Intrusion-Why-CI-Tools-Are-An-Attackers-Best-Friend.pdf">Continuous Intrusion: Why CI tools are a hacker's best friend</a> (PDF)
+  strongly advises securing your continuous integration server just as you
+  would every other part of your production application, unless you want
+  your environment to be vulnerable to malicious actors.</p>
+</li>
+<li>
+<p><a href="https://blog.petegoo.com/2018/11/09/optimizing-ci-cd-pipelines/">Measuring and Improving your CI/CD Pipelines</a>
+  provides metrics for what you should measure with your CI/CD setup to 
+  improve the process for helping your development teams ship code.</p>
+</li>
+<li>
+<p><a href="https://rhonabwy.com/2016/01/31/six-rules-for-setting-up-continuous-integration-systems/">Six rules for setting up continuous integration systems</a>
+  has some solid general advice for culling problematic tests, ensuring
+  the integration speed supports the development culture you are building
+  and keeping all code in source control instead of having complicated
+  logic configured within the CI server.</p>
+</li>
+<li>
+<p><a href="https://blog.codeship.com/how-to-identify-major-blockers-in-a-cicd-pipeline/">How to Identify Major Blockers in a CI/CD Pipeline</a>
+  gives a high level overview of concepts such as shipping velocity, test
+  execution and environment provisioning with regards to CI configurations.</p>
+</li>
+</ul>
+<h3>您希望下次部署什么？</h3>
+<div class="row">
+    <div class="c4">
+        <div class="well select-next">
+<a href="/logging.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1792 1344v128q0 26-19 45t-45 19h-1664q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1664q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1280q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1280q26 0 45 19t19 45zm256-384v128q0 26-19 45t-45 19h-1536q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1536q26 0 45 19t19 45zm-384-384v128q0 26-19 45t-45 19h-1152q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1152q26 0 45 19t19 45z" fill="#fff"/></svg></a>
+<p class="under-btn">如何记录应用程序中发生的错误？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/web-application-security.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M640 768h512v-192q0-106-75-181t-181-75-181 75-75 181v192zm832 96v576q0 40-28 68t-68 28h-960q-40 0-68-28t-28-68v-576q0-40 28-68t68-28h32v-192q0-184 132-316t316-132 316 132 132 316v192h32q40 0 68 28t28 68z" fill="#fff"/></svg></a>
+<p class="under-btn">我可以做些什么来减少我的网络应用中的安全漏洞？</p>        </div>
+    </div>
+    <div class="c4">
+        <div class="well select-next">
+<a href="/docker.html" class="btn btn-success btn-full"><svg width="28" height="30" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M512 1248v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm0-512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm-640-1024v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm-640-1024v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm640 512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68zm0-512v192q0 40-28 68t-68 28h-320q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h320q40 0 68 28t28 68z" fill="#fff"/></svg></a>
+<p class="under-btn">什么是 Docker 以及它如何适合 Python 部署？</p>        </div>
+    </div>
+</div><div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div> </div>
+ <div class="co1 c3" id="sb">
+<div style="margin: 0 0 21px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 侧边广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-8935595858652656"
+     data-ad-slot="8685187303"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb"><a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p>
+ </div>
+</div>
+<div class="pn">
+ <div class="pnh"><h3>Learn More Python</h3></div>
+ <div class="pnb">
+  <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python"><img src="/img/logos/intro-to-ansible.jpg" alt="Introduction to Ansible video course logo." class="shot rnd outl" width="100%"></a>
+  <p style="font-size: .8em; margin-top: 10px;">Deploy web apps with the <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python">Ansible configuration management tool</a>.</p>
+ <hr>
+<a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp"><img src="/img/logos/testdriven.jpg" alt="TestDriven logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Build <a href="https://testdriven.io/courses/microservices-with-docker-flask-and-react/?utm_source=fsp">microservices with Docker, Flask &amp; React</a> in this great course.</p>
+ </div>
+</div><div class="pn" id="full-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Table of Contents</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+<a href="/hosting.html" class="lgi sbc">Hosting</a>
+<a href="/servers.html" class="lgi sbc">Servers</a>
+<a href="/static-content.html" class="lgi sbc">Static Content</a>
+<a href="/content-delivery-networks-cdns.html" class="lgi sbc">CDNs</a>
+<a href="/virtual-private-servers-vps.html" class="lgi sbc">Virtual Private Servers</a>
+<a href="/linode.html" class="lgi sbc">Linode</a>
+<a href="/digitalocean.html" class="lgi sbc">DigitalOcean</a>
+<a href="/lightsail.html" class="lgi sbc">Lightsail</a>
+<a href="/platform-as-a-service.html" class="lgi sbc">Platform-as-a-Service</a>
+<a href="/heroku.html" class="lgi sbc">Heroku</a>
+<a href="/pythonanywhere.html" class="lgi sbc">PythonAnywhere</a>
+<a href="/operating-systems.html" class="lgi sbc">Operating Systems</a>
+<a href="/ubuntu.html" class="lgi sbc">Ubuntu</a>
+<a href="/web-servers.html" class="lgi sbc">Web Servers</a>
+<a href="/apache-http-server.html" class="lgi sbc">Apache HTTP Server</a>
+<a href="/nginx.html" class="lgi sbc">Nginx</a>
+<a href="/caddy.html" class="lgi sbc">Caddy</a>
+<a href="/wsgi-servers.html" class="lgi sbc">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi sbc">Green Unicorn (Gunicorn)</a>
+<a href="/continuous-integration.html" class="lgi active sbc">Continuous Integration</a>
+<a href="/jenkins.html" class="lgi sbc">Jenkins</a>
+<a href="/configuration-management.html" class="lgi sbc">Configuration Management</a>
+<a href="/ansible.html" class="lgi sbc">Ansible</a>
+<a href="/docker.html" class="lgi sbc">Docker</a>
+<a href="/serverless.html" class="lgi sbc">Serverless</a>
+<a href="/aws-lambda.html" class="lgi sbc">AWS Lambda</a>
+<a href="/google-cloud-functions.html" class="lgi sbc">Google Cloud Functions</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> <div class="pn">
+  <div class="pnh"><h3>Full Stack Python</h3></div>
+  <div class="pnb">
+   <a href="/table-of-contents.html">Full Stack Python</a> 
+   is an open book that explains concepts in plain language and provides 
+   helpful resources for those topics.
+   <hr>
+   Updates via <a href="/email.html">newsletter</a>, 
+   <a href="https://twitter.com/fullstackpython">Twitter</a> &amp; 
+   <a href="https://www.facebook.com/fullstackpython">Facebook</a>.
+  </div>
+ </div>
+<div class="pn" id="mobile-toc">
+ <div class="pnh">
+  <h3><a href="/table-of-contents.html">Chapters</a></h3>
+ </div>
+ <div class="lg">
+<a href="/introduction.html" class="lgi ">1. 简介</a>
+<a href="/development-environments.html" class="lgi ">2. Development Environments</a>
+<a href="/data.html" class="lgi ">3. Data</a>
+<a href="/web-development.html" class="lgi ">4. Web Development</a>
+<a href="/deployment.html" class="lgi ">5. Deployment</a>
+ <a href="/continuous-integration.html" class="lgi active">&raquo; Continuous Integration</a>
+<a href="/devops.html" class="lgi ">6. DevOps</a>
+<a href="/change-log.html" class="lgi ">Change Log</a>
+<a href="/what-full-stack-means.html" class="lgi ">What Full Stack Means</a>
+<a href="/about-author.html" class="lgi ">About the Author</a>
+<a href="/future-directions.html" class="lgi ">Future Directions</a>
+<a href="/page-statuses.html" class="lgi ">Page Statuses</a>
+  <a href="/table-of-contents.html" class="lgi">...or view the full table of contents.</a>
+ </div>
+</div> </div>
+</div>
+<hr></div> 
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>

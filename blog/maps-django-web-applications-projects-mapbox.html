@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="如何在你的应用中用 Mapbox 添加地图和基于位置的数据。">
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="如何用 Mapbox 在 Django Web 应用程序中添加地图" />
+<meta name="twitter:image" content="https://www.fullstackpython.com/img/180519-django-maps/header.jpg" />
+<meta name="twitter:site" content="@fullstackpython" />
+<meta name="twitter:creator" content="@mattmakai" />
+<meta property="og:url" content="https://www.fullstackpython.com/blog/maps-django-web-applications-projects-mapbox.html" />
+<meta property="og:title" content="如何用 Mapbox 在 Django Web 应用程序中添加地图" />
+<meta property="og:description" content="如何在你的应用中用 Mapbox 添加地图和基于位置的数据。 Great post on fullstackpython.com!" />
+<meta property="og:image" content="https://www.fullstackpython.com/img/180519-django-maps/header.jpg" />
+<link rel="canonical" href="https://www.fullstackpython.com/blog/maps-django-web-applications-projects-mapbox.html" />
+<title>如何用 Mapbox 在 Django Web 应用程序中添加地图 - Full Stack Python</title> <style>hr,img{border:0}*,:after,:before{box-sizing:border-box}html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:18px;background:#fefefe}body{margin:0;font:18px Georgia,serif;line-height:1.4;color:#222;padding:0}img{vertical-align:middle}hr{height:0;box-sizing:content-box;margin:21px 0;border-top:1px solid #eee}h1,h2,h3,h4,h5,h6{font-family:"Helvetica Neue",sans-serif;font-weight:500;line-height:1.1;color:#000}h1,h2,h3{margin:32px 0 6px}h1{font-size:40px}h2{font-size:28px}h3{font-size:22px}h4,h5,h6{margin:11px 0;font-size:18px}p{margin:0 0 12px}ol,ul{margin:0 0 10px}code,pre{font:"Courier New",monospace;border-radius:4px;background-color:#f4f9ff;font-size:12px}code{padding:2px 4px;white-space:nowrap}pre{white-space:pre-wrap;display:block;padding:10px;margin:0 0 11px;line-height:1.4;word-break:break-all;word-wrap:break-word;border:1px solid #ccc}.cn{padding:0 15px 0 15px;margin-right:auto;margin-left:auto}.cn:before,.cn:after{display:table;content:" "}.cn:after{clear:both}.row:before,.row:after{display:table;content:" "}.row:after{clear:both}.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11,.c12{position:relative;min-height:1px;padding:0 15px 0 15px}a{background:transparent;text-decoration:none;border-bottom:1px dotted;color:#444}a:hover{text-decoration:none;color:#000}.ft{padding:0 0 24px;float:right}.sns{font-family:"Helvetica Neue",sans-serif}.sps{font-size:14px}.hd{margin:20px 0 15px 0}.hd>a{border-bottom:none}img.hdr{vertical-align:middle;border:none;height:52px;width:52px;padding:1px}.hdt a,.hdt a:hover{font:72px "Helvetica Neue",sans-serif;font-weight:normal;letter-spacing:.03em;vertical-align:middle;margin-left:5px;color:#000;text-decoration:none;border-bottom:none;line-height:.9em}.bk{margin:0 7px 0 7px}img.nob{border:none}.pn{margin:0 0 21px;background:#fff;border:1px solid transparent;border-radius:4px;border-color:#22b24c}.pnb{padding:15px}.pnb:before,.pnb:after{display:table;content:" "}.pnb:after{clear:both}.pn>.lg{margin-bottom:0}.pn>.lg .lgi{border-width:1px 0;font:14px 'Helvetica Neue',sans-serif;padding:5px 0 5px 10px}.pn>.lg .lgi:first-child{border-top-right-radius:0;border-top-left-radius:0}.pn>.lg .lgi:last-child{border-bottom:0;background-color:#22b24c;color:#fff}.pnh+.lg .lgi:first-child{border-top-width:0}.pnh{padding:10px 15px;border-bottom:1px solid transparent;border-top-right-radius:3px;border-top-left-radius:3px;color:#468847;background-color:#22b24c;border-color:#22b24c}.pn>.pnh>h3{margin:5px 0 0 0;color:#fff}.pn>.pnh>h3>a{color:#fff}.pn>.lg a.lgi.sbc{padding-left:27px}.pn>.lg a.lgi.sbc2{padding-left:35px}#sb{margin-top:40px}.lg{padding-left:0;margin-bottom:20px}.lgi{position:relative;display:block;padding:10px 15px;margin-bottom:-1px;background-color:#fff;border:1px solid #ddd}.lgi:first-child{border-top-right-radius:4px;border-top-left-radius:4px}.lgi:last-child{margin-bottom:0;border-bottom-right-radius:4px;border-bottom-left-radius:4px}a.lgi{color:#333}a.lgi:hover,a.lgi:focus{background:#ddd}a.lgi.active{z-index:2;background:#444;color:#fff;border:1px solid #222}.btn-full{width:100%;box-shadow:1px 2px 1px #222;padding-bottom:4px}p.under-btn{text-align:left;margin-top:20px}p.banner{font-weight:500;line-height:1.1;color:#fff;font-size:22px;margin:14px 0 18px 0}th{text-align:left;font-family:"Helvetica Neue",sans-serif}td{padding-right:20px}blockquote{border-left:4px solid #aaa;padding-left:10px;font-family:"Helvetica Neue"}.well{min-height:20px;padding:19px;margin:0 0 20px;background-color:#f5f5f5;border:1px solid #e3e3e3;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.05)}.see-also{margin-top:20px;background:#22B24C;color:#eee;font-family:"Helvetica Neue",sans-serif}.see-also a{color: #fff}.highlight{background:#ffff00}.form-control{display:block;width:100%;height:39px;padding:8px 12px;font-size:14px;color:#777;vertical-align:middle;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);transition:border-color ease-in-out .15s,box-shadow ease-in-out .15s}.form-control:focus{border-color:#66afe9;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}.btn{display:inline-block;padding:8px 12px;margin-bottom:0;font-size:15px;line-height:1.4;text-align:center;white-space:nowrap;vertical-align:middle;cursor:pointer;border:1px solid transparent;border-radius:4px;color:#fff;background-color:#22b24c;border-color:#22b24c}.btn:active,.btn.active{background-image:none;outline:0;box-shadow:inset 0 3px 5px rgba(0,0,0,0.125)}img.rnd{border:1px solid #ccc;border-radius:5px}.shot{border-radius:5px}.outl{border: 1px solid #ccc}.talk{margin-bottom:22px}@media (min-width:750px){.cn{width:730px}}@media (min-width:768px){.cn{width:750px}#full-toc{display:block}#mobile-toc{display:none}.c3,.c4,.c6,.c8,.c9,.c12{float:left}.c12{width:100%} .c9{width:75%} .c6{width:50%} .c8{width:66.66666666666666%} .c4{width:33.33333333333333%} .c3{width:25%} .co1{margin-left:8.333333333333332%} .select-next{min-height:300px}}@media (min-width:940px){.cn{width:920px}}@media (min-width:1140px){.cn{width:1120px}}.row{margin-right:-15px;margin-left:-15px} @media (max-width:767px){#full-toc{display:none} .hd{padding:8px 0 10px; margin:0} .hdt a,.hdt a:hover{font-size:34px} h1{font-size:28px} h2{font-size:24px} img.hdr{height:26px;width:26px} pre{font-size:60%}} @media (min-width:1140px){.select-next{min-height:220px}}</style> 
+<script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+<link rel="shortcut icon" href="/img/fsp-fav.png">
+</head>
+<body>
+<div class="cn">
+<div class="row"><div class="c12"><div class="hd"><a href="https://fullstackpython.qiwihui.com/"><img src="/img/logos/f.png" class="hdr" alt="Full Stack Python logo"></a><span class="hdt"> <a href="https://fullstackpython.qiwihui.com/">全栈 Python</a></span></div><div class="sns">
+<a href="/table-of-contents.html">全部主题</a> <span class="bk">|</span>
+<a href="/blog.html">博客</a> <span class="bk">|</span>
+<a href="/email.html">邮件订阅</a> <span class="bk">|</span>
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a> <span class="bk">|</span>
+<a href="https://www.facebook.com/fullstackpython">Facebook</a> <span class="bk">|</span>
+<a href="/change-log.html">更新日志</a> <span class="bk">|</span>
+<a href="https://github.com/qiwihui/fullstackpython.com">源码</a> 
+</div></div></div><div class="row">
+ <div class="c12">
+  <h1 style="font-size: 36px;">如何用 Mapbox 在 Django Web 应用程序中添加地图</h1>
+  <div style="font-size:12px;color:#666;margin:0 0 10px">
+     Post updated by <a href="/about-author.html">Matt Makai</a> on 
+     May 25, 2018. Originally posted
+     on May 19, 2018.
+  </div>
+ </div>
+</div>
+<div class="row">
+  <div class="c9">
+   <p>Building interactive maps into a <a href="/django.html">Django</a> web application
+can seem daunting if you do not know where to begin, but it is easier
+than you think if you use a developer tool such as 
+<a href="https://www.mapbox.com/">Mapbox</a>.</p>
+<p>In this post we will build a simple Django project with a single app
+and add an interactive map like the one you see below to the webpage that
+Django renders with the <a href="https://www.mapbox.com/maps/">Mapbox Maps</a> 
+<a href="/application-programming-interfaces.html">API</a>.</p>
+<div id='map' width="100%" style='height:280px;margin-bottom:16px' class="shot rnd outl"></div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWF0dG1ha2FpIiwiYSI6ImNqZzU0OXNtYjIzdmIyeHA5OG1sNnhid2YifQ.kzJityumPUk9f9i1vkmWAg';
+var map = new mapboxgl.Map({
+ container: 'map',
+ style: 'mapbox://styles/mapbox/streets-v10',
+ center: [-77.03, 38.91],
+ zoom: 9
+});
+</script>
+
+<h2>Our Tools</h2>
+<p><a href="/python-2-or-3.html">Python 3</a> is strongly recommended for this tutorial
+because Python 2 will no longer be supported starting January 1, 2020.
+<a href="https://www.python.org/downloads/release/python-365/">Python 3.6.5</a> to 
+was used to build this tutorial. We will also use the following 
+<a href="/application-dependencies.html">application dependencies</a> to build
+our application:</p>
+<ul>
+<li><a href="/django.html">Django</a> web framework, 
+  <a href="https://docs.djangoproject.com/en/2.0/">version 2.0.5</a></li>
+<li><a href="https://pip.pypa.io/en/stable/">pip</a> and 
+  <a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>, which come installed 
+  with Python 3, to install and isolate these Django and Rollbar libraries 
+  from your other applications</li>
+<li>A <a href="https://www.mapbox.com/">free Mapbox account</a> to interact with their
+  <a href="/application-programming-interfaces.html">web API</a> using 
+  <a href="/javascript.html">JavaScript</a></li>
+</ul>
+<p>If you need help getting your 
+<a href="/development-environments.html">development environment</a> configured
+before running this code, take a look at
+<a href="/blog/python-3-django-gunicorn-ubuntu-1604-xenial-xerus.html">this guide for setting up Python 3 and Django on Ubuntu 16.04 LTS</a>.</p>
+<p>This blog post's code is also available on GitHub within the
+<a href="https://github.com/fullstackpython/blog-code-examples">maps-django-mapbox directory of the blog-code-examples repository</a>. 
+Take the code and use it for your own purposes because it is all
+provided under the MIT open source license.</p>
+<h2>Installing Dependencies</h2>
+<p>Start the Django project by creating a new 
+<a href="/virtual-environments-virtualenvs-venvs.html">virtual environment</a> 
+using the following command. I recommend using a separate directory 
+such as <code>~/venvs/</code> (the tilde is a shortcut for your user's <code>home</code> 
+directory) so that you always know where all your virtualenvs are 
+located.</p>
+<div class="highlight"><pre><span></span>python3 -m venv djangomaps
+</pre></div>
+
+
+<p>Activate the virtualenv with the <code>activate</code> shell script:</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> djangomaps/bin/activate
+</pre></div>
+
+
+<p>The command prompt will change after activating the virtualenv:</p>
+<p><img src="/img/180519-django-maps/virtualenv.jpg" width="100%" class="shot rnd outl" alt="Activate your djangomaps virtualenv."></p>
+<p>Remember that you have to activate your virtualenv in every new terminal 
+window where you want to use dependencies in the virtualenv.</p>
+<p>We can now install the <a href="https://pypi.org/project/Django/2.0.5">Django</a> 
+package into the activated but otherwise empty virtualenv.</p>
+<div class="highlight"><pre><span></span>pip install django==2.0.5
+</pre></div>
+
+
+<p>Look for the following output to confirm Django installed
+correctly from PyPI.</p>
+<div class="highlight"><pre><span></span>  Downloading https://files.pythonhosted.org/packages/23/91/2245462e57798e9251de87c88b2b8f996d10ddcb68206a8a020561ef7bd3/Django-2.0.5-py3-none-any.whl (7.1MB)
+      100% |████████████████████████████████| 7.1MB 231kB/s 
+      Collecting pytz (from django==2.0.5)
+        Using cached https://files.pythonhosted.org/packages/dc/83/15f7833b70d3e067ca91467ca245bae0f6fe56ddc7451aa0dc5606b120f2/pytz-2018.4-py2.py3-none-any.whl
+        Installing collected packages: pytz, django
+        Successfully installed django-2.0.5 pytz-2018.4
+</pre></div>
+
+
+<p>The Django dependency is ready to go so now we can create our project
+and add some awesome maps to the application.</p>
+<h2>Building Our Django Project</h2>
+<p>We can use the <a href="/django.html">Django</a> <code>django-admin.py</code> tool to create
+the boilerplate code structure to get our project started.
+Change into the directory where you develop your applications. For 
+example, I typically use <code>/Users/matt/devel/py/</code>. Then run the following 
+command to start a Django project named <code>djmaps</code>:</p>
+<div class="highlight"><pre><span></span>django-admin.py startproject djmaps
+</pre></div>
+
+
+<p>The <code>django-admin.py</code> command will create a directory named <code>djmaps</code> along
+with several subdirectories that you should be familiar with if you have 
+previously worked with Django.</p>
+<p>Change directories into the new project.</p>
+<div class="highlight"><pre><span></span>cd djmaps
+</pre></div>
+
+
+<p>Create a new Django app within <code>djmaps</code>.</p>
+<div class="highlight"><pre><span></span>python manage.py startapp maps
+</pre></div>
+
+
+<p>Django will generate a new folder named <code>maps</code> for the project.
+We should update the URLs so the app is accessible before we write
+our <code>views.py</code> code.</p>
+<p>Open <code>djmaps/djmaps/urls.py</code>. Add the highlighted lines so that URLs
+will check the <code>maps</code> app for appropriate URL matching.</p>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; (comments)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="highlight"><span class="o"></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span></span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+<span class="highlight"><span class="o"></span>    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s1">&#39;maps.urls&#39;</span><span class="p">)),</span></span>
+    <span class="n">path</span><span class="p">(</span><span class="s1">&#39;admin/&#39;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+
+
+<p>Save <code>djmaps/djmaps/urls.py</code> and open <code>djmaps/djmaps/settings.py</code>.
+Add the <code>maps</code> app to <code>settings.py</code> by inserting the highlighted line:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Application definition</span>
+
+<span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span> 
+    <span class="s1">&#39;django.contrib.admin&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.auth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.contenttypes&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.sessions&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.messages&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;django.contrib.staticfiles&#39;</span><span class="p">,</span>
+<span class="highlight"><span class="o"></span>    <span class="s1">&#39;maps&#39;</span><span class="p">,</span></span>
+<span class="p">]</span>
+</pre></div>
+
+
+<p>Make sure you change the default <code>DEBUG</code> and <code>SECRET_KEY</code> 
+values in <code>settings.py</code> before you deploy any code to production. Secure 
+your app properly with the information from the Django
+<a href="https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/">production deployment checklist</a> 
+so that you do not add your project to the list of hacked applications
+on the web.</p>
+<p>Save and close <code>settings.py</code>.</p>
+<p>Next change into the <code>djmaps/maps</code> directory. Create a new file named 
+<code>urls.py</code> to contain routes for the <code>maps</code> app.</p>
+<p>Add these lines to the empty <code>djmaps/maps/urls.py</code> file.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span>                                                                                                                              
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span> 
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">default_map</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+
+
+<p>Save <code>djmaps/maps/urls.py</code> and open <code>djmaps/maps/views.py</code> add the
+following two highlighted lines. You can keep the boilerplate comment or 
+delete it.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+
+<span class="highlight"><span class="o"></span><span class="k">def</span> <span class="nf">default_map</span><span class="p">(</span><span class="n">request</span><span class="p">):</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;default.html&#39;</span><span class="p">,</span> <span class="p">{})</span></span>
+</pre></div>
+
+
+<p>Next, create a directory for your template files named <code>templates</code> under
+the <code>djmaps/maps</code> app directory.</p>
+<div class="highlight"><pre><span></span>mkdir templates
+</pre></div>
+
+
+<p>Create a new file named <code>default.html</code> within <code>djmaps/maps/templates</code> 
+that contains the following <a href="/django-templates.html">Django template</a> markup.</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Interactive maps for Django web apps<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Map time!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>We can test out this static page to make sure all of our code is
+correct, then we'll use Mapbox to embed a customizable map within
+the page. Change into the base directory of your Django project
+where the <code>manage.py</code> file is located. Execute the development
+server with the following command:</p>
+<div class="highlight"><pre><span></span>python manage.py runserver
+</pre></div>
+
+
+<p>The Django development server will start up with no issues other than an 
+unapplied migrations warning.</p>
+<div class="highlight"><pre><span></span>Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 14 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run &#39;python manage.py migrate&#39; to apply them.
+
+May 21, 2018 - 12:47:54
+Django version 2.0.5, using settings &#39;djmaps.settings&#39;
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+</pre></div>
+
+
+<p>Open a web browser and go to <code>localhost:8000</code>.</p>
+<p><img src="/img/180519-django-maps/map-time.png" width="100%" class="shot rnd outl" alt="Plain old HTML page."></p>
+<p>Our code works, but boy is that a plain-looking HTML page. Let's make the
+magic happen by adding JavaScript to the template to generate maps.</p>
+<h2>Adding Maps with Mapbox</h2>
+<p>Head to <a href="https://www.mapbox.com/">mapbox.com</a> in your web browser to
+access the Mapbox homepage.</p>
+<p><img src="/img/180519-django-maps/mapbox-homepage.jpg" width="100%" class="shot rnd outl" alt="Mapbox homepage."></p>
+<p>Click on "Get Started" or "Get Started for free" (the text depends on whether
+or not you already have a Mapbox account).</p>
+<p><img src="/img/180519-django-maps/sign-up.jpg" width="100%" class="shot rnd outl" alt="Sign up for a Mapbox account."></p>
+<p>Sign up for a new free developer account or sign in to your existing 
+account.</p>
+<p><img src="/img/180519-django-maps/add-mapbox.png" width="100%" class="shot rnd outl" alt="Add Mapbox to your application."></p>
+<p>Click the "JS Web" option.</p>
+<p><img src="/img/180519-django-maps/method-installation.png" width="100%" class="shot rnd outl" alt="Choose the method of installation."></p>
+<p>Choose "Use the Mapbox CDN" for the installation method. The next two screens
+show some code that you should add to your <code>djmaps/maps/templates/default.html</code> 
+template file. The code will look like the following but you will need to 
+replace the <code>mapboxgl.accessToken</code> line with your own access token.</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Interactive maps for Django web apps<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="highlight">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></span>
+<span class="highlight">    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css&#39;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#39;stylesheet&#39;</span> <span class="p">/&gt;</span></span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Map time!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="highlight">   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;map&#39;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100%&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#39;height:400px&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></span>
+<span class="highlight">   <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span></span>
+<span class="highlight"><span class="o"></span>    <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">accessToken</span> <span class="o">=</span> <span class="cp">{{</span> <span class="nv">mapbox_access_token</span> <span class="cp">}}</span><span class="p">;</span></span>
+<span class="highlight"><span class="o"></span>    <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">Map</span><span class="p">({</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">container</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;mapbox://styles/mapbox/streets-v10&#39;</span></span>
+<span class="highlight"><span class="o"></span>    <span class="p">});</span></span>
+<span class="highlight"><span class="o"></span>   <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span></span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>Re-open <code>djmaps/maps/views.py</code> to update the parameters passed into the
+Django template. </p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+
+<span class="k">def</span> <span class="nf">default_map</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="highlight"><span class="o"></span>    <span class="c1"># TODO: move this token to Django settings from an environment variable</span></span>
+<span class="highlight"><span class="o"></span>    <span class="c1"># found in the Mapbox account settings and getting started instructions</span></span>
+<span class="highlight"><span class="o"></span>    <span class="c1"># see https://www.mapbox.com/account/ under the &quot;Access tokens&quot; section</span></span>
+<span class="highlight"><span class="o"></span>    <span class="n">mapbox_access_token</span> <span class="o">=</span> <span class="s1">&#39;pk.my_mapbox_access_token&#39;</span></span>
+<span class="highlight"><span class="o"></span>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;default.html&#39;</span><span class="p">,</span> </span>
+<span class="highlight"><span class="o"></span>                  <span class="p">{</span> <span class="s1">&#39;mapbox_access_token&#39;</span><span class="p">:</span> <span class="n">mapbox_access_token</span> <span class="p">})</span></span>
+</pre></div>
+
+
+<p>The Mapbox access token should really be stored in the Django settings
+file, so we left a "TODO" note to handle that as a future step.</p>
+<p>Now we can try our webpage again. Refresh <code>localhost:8000</code> in your
+web browser.</p>
+<p><img src="/img/180519-django-maps/map-time-with-map.jpg" width="100%" class="shot rnd outl" alt="Screenshot of the Mapbox map showing up in our Django front end."></p>
+<p>Sweet, we've got a live, interactive map! It's kind of weird thought how it
+is zoomed out to view the entire world. Time to customize the map using
+a few JavaScript parameters.</p>
+<h2>Customizing the Map</h2>
+<p>We can modify the map by changing parameters for the style, zoom level,
+location and many other attributes.</p>
+<p>We'll start by changing the location that the initial map centers in
+on as well as the zoom level.</p>
+<p>Re-open <code>djmaps/maps/templates/default.html</code> and modify the first 
+highlighted lines so it ends with a commas and add the two new 
+highlighted lines shown below.</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Interactive maps for Django web apps<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css&#39;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#39;stylesheet&#39;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Map time!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;map&#39;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100%&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#39;height:400px&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">accessToken</span> <span class="o">=</span> <span class="cp">{{</span> <span class="nv">mapbox_access_token</span> <span class="cp">}}</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">Map</span><span class="p">({</span>
+     <span class="nx">container</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+<span class="highlight"><span class="o"></span>     <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;mapbox://styles/mapbox/streets-v10&#39;</span><span class="p">,</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">77.03</span><span class="p">,</span> <span class="mf">38.91</span><span class="p">],</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">zoom</span><span class="o">:</span> <span class="mi">9</span></span>
+    <span class="p">});</span>
+   <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>The first number, -77.03, for the <code>center</code> array is the longitude
+and the second number, 38.91, is the latitude. Zoom level 9 is much
+closer to the city than the default which was the entire world at
+level 0. All of the customization values are listed in the 
+<a href="https://www.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS API documentation</a>.</p>
+<p>Now refresh the page at <code>localhost:8000</code> to reload our map.</p>
+<p><img src="/img/180519-django-maps/map-updated-style-1.jpg" width="100%" class="shot rnd outl" alt="Updated map centered and zoomed in on Washington, D.C."></p>
+<p>Awesome, now we are zoomed in on Washington, D.C. and can still move
+around to see more of the map. Let's make a couple other changes to
+our map before wrapping up.</p>
+<p>Again back in <code>djmaps/maps/templates/default.html</code> change the highlighted
+line for the <code>style</code> key to the <code>mapbox://styles/mapbox/satellite-streets-v10</code>
+value. That will change the look from an abstract map style to satellite
+image data. Update <code>zoom: 9</code> so that it has a comma at the end of the line
+and add <code>bearing: 180</code> as the last key-value pair in the configuration.</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Interactive maps for Django web apps<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&#39;https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css&#39;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#39;stylesheet&#39;</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Map time!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;map&#39;</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;100%&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#39;height:400px&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">accessToken</span> <span class="o">=</span> <span class="cp">{{</span> <span class="nv">mapbox_access_token</span> <span class="cp">}}</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">mapboxgl</span><span class="p">.</span><span class="nx">Map</span><span class="p">({</span>
+     <span class="nx">container</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+<span class="highlight"><span class="o"></span>     <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;mapbox://styles/mapbox/satellite-streets-v10&#39;</span><span class="p">,</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">77.03</span><span class="p">,</span> <span class="mf">38.91</span><span class="p">],</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">zoom</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span></span>
+<span class="highlight"><span class="o"></span>     <span class="nx">bearing</span><span class="o">:</span> <span class="mi">180</span></span>
+    <span class="p">});</span>
+   <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>Save the template and refresh <code>localhost:8000</code>.</p>
+<p><img src="/img/180519-django-maps/map-updated-style-2.jpg" width="100%" class="shot rnd outl" alt="Updated map with satellite imagery and street map overlay."></p>
+<p>The map now provides a satellite view with streets overlay but it is
+also... "upside down"! At least the map is upside down compared to how 
+most maps are drawn, due to the <code>bearing: 180</code> value, which modified
+this map's rotation.</p>
+<p>Not bad for a few lines of JavaScript in our Django application.
+Remember to check the 
+<a href="https://www.mapbox.com/mapbox-gl-js/api/">Mapbox GL JS API documentation</a>
+for the exhaustive list of parameters that you can adjust.</p>
+<h2>What's Next?</h2>
+<p>We just learned how to add interactive JavaScript-based maps to our 
+<a href="/django.html">Django</a> web applications, as well as modify the look
+and feel of the maps. Next try out some of the other APIs Mapbox
+provides including: </p>
+<ul>
+<li><a href="https://www.mapbox.com/api-documentation/#directions">directions</a></li>
+<li><a href="https://www.mapbox.com/api-documentation/#map-matching">map matching</a></li>
+<li><a href="https://www.mapbox.com/api-documentation/#geocoding">geocoding</a></li>
+</ul>
+<p>Questions? Let me know via 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">a GitHub issue ticket on the Full Stack Python repository</a>, 
+on Twitter 
+<a href="https://twitter.com/fullstackpython">@fullstackpython</a>
+or <a href="https://twitter.com/mattmakai">@mattmakai</a>.</p>
+<p>Do you see a typo, syntax issue or wording that's confusing in this blog 
+post? Fork
+<a href="https://github.com/mattmakai/fullstackpython.com/blob/master/content/posts/180519-django-maps-mapbox.markdown">this page's source on GitHub</a>
+and submit a pull request with a fix or 
+<a href="https://github.com/mattmakai/fullstackpython.com/issues">file an issue ticket on GitHub</a>.</p>
+   <hr>
+<div id="mc_embed_signup">
+<form action="//mattmakai.us2.list-manage.com/subscribe/post?u=b7e774f0c4f05dcebbfee183d&amp;id=b22335388d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+  <h4>Sign up for a monthly email with Full Stack Python tutorials. No spam ever.</h4>
+  <div class="row">
+   <div class="c9">
+    <input type="email" value="" name="EMAIL" class="email form-control" id="mce-EMAIL" placeholder="email address" required>
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_b7e774f0c4f05dcebbfee183d_b22335388d" tabindex="-1" value=""></div>
+   </div>
+   <div class="c3">
+    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-success" style="font-family: 'Helvetica Neue'; margin-bottom:6px"></div>
+   </div>
+  </div>
+ </div>
+</form>
+</div>  </div>
+  <div class="c3">
+<div class="pn">
+ <div class="pnh">
+  <h3>Learn more</h3>
+ </div>
+ <img src="/img/180519-django-maps/header.jpg" alt="Python, Django 和 Mapbox logos。版权归各自所有者所有。" width="100%"> 
+ <div class="lg">
+<a href="/django.html" class="lgi">Django</a>
+<a href="/web-frameworks.html" class="lgi">Web Frameworks</a>
+<a href="/application-programming-interfaces.html" class="lgi">APIs</a>
+<a href="/deployment.html" class="lgi">Deployment</a>
+<a href="/wsgi-servers.html" class="lgi">WSGI Servers</a>
+<a href="/green-unicorn-gunicorn.html" class="lgi">Green Unicorn (Gunicorn)</a>
+<a href="https://www.mapbox.com/api-documentation/" class="lgi">Mapbox documentation <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="https://www.mapbox.com/" class="lgi">Mapbox <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>
+<a href="https://www.mapbox.com/maps" class="lgi">Mapbox Maps <svg width="20" height="12" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1408 928v320q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h704q14 0 23 9t9 23v64q0 14-9 23t-23 9h-704q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-320q0-14 9-23t23-9h64q14 0 23 9t9 23zm384-864v512q0 26-19 45t-45 19-45-19l-176-176-652 652q-10 10-23 10t-23-10l-114-114q-10-10-10-23t10-23l652-652-176-176q-19-19-19-45t19-45 45-19h512q26 0 45 19t19 45z"/></svg></a>  <a href="/table-of-contents.html" class="lgi">...or view all topics.</a>
+ </div>
+</div><div class="pn">
+ <div class="pnh"><h3>Sponsored By</h3></div>
+ <div class="pnb">
+<a href="https://rollbar.com/"><img src="/img/logos/rbw.jpg" alt="Rollbar logo" width="100%" style="padding:12px 0 18px"></a>
+<p class="sps">Fix errors in your Python code before your users see them by <a href="https://rollbar.com/">monitoring with Rollbar</a>.</p> </div>
+</div>  </div>
+</div>
+<hr></div> 
+<div style="margin: 0 0 12px;background-color: #22B24C;">
+ <div class="cn">
+  <p class="banner sns">
+   <a href="https://training.talkpython.fm/courses/explore_ansible/introduction-to-ansible-with-python" style="color: #fff">Learn to deploy and configure servers with Ansible in my latest video course</a>!
+  </p>
+ </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        This site is based on <a href="https://github.com/mattmakai">Matt Makai</a>'s project <a href="https://github.com/mattmakai/fullstackpython.com">Full Stack Python</a>, thanks for his excellent work!
+    </div>
+</div>
+<div class="container">
+    <div class="footer pull-right" style="text-align:right; font-size:85%;">
+        <p>此网站由 <a href="https://github.com/qiwihui">@qiwihui</a> 维护。
+          若发现错误或想贡献，请访问： <a href="https://github.com/qiwihui/fullstackpython.com">Github qiwihui/fullstackpython.com 项目</a>
+        </p>
+    </div>
+</div><script async src="https://www.googletagmanager.com/gtag/js?id=UA-46660488-4"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-46660488-4');</script>
+</body>
+</html>
