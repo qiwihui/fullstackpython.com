@@ -1,164 +1,105 @@
-title: Enterprise Python
+title: 企业 Python
 category: page
 slug: enterprise-python
 sortorder: 0105
 toc: False
-sidebartitle: Enterprise Python
-meta: Python is widely used to build enterprise application in large organizations around the world.
+sidebartitle: 企业 Python
+meta: Python 广泛用于在世界各地的大型组织中构建企业应用程序。
 
 
-# Enterprise Python
-One of the misconceptions around Python and other dynamically-typed languages 
-is that they cannot be reliably used to build enterprise-grade software. 
-However, almost all commercial and government enterprises already use 
-Python in some capacity, either as glue code between disparate applications 
-or to build the applications themselves. 
+# 企业 Python
 
+关于 Python 等动态类型语言的一个错误观念认为它们用于构建企业级应用还不太可靠。然而，几乎所有的商业和政府机构都已经或多或少使用 Python 了，无论是作为不同的应用程序之间的粘合代码还是构建应用程序本身。
 
-## What is enterprise software?
-Enterprise software is built for the requirements of an organization rather 
-than the needs of an individual. Software written for enterprises often 
-needs to integrate with legacy systems, such as existing databases and 
-non-web applications. There are often requirements to integrate with 
-authentication systems such as the 
-[Lightweight Directory Access Protocol (LDAP)](http://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) 
-and 
-[Active Directory (AD)](https://msdn.microsoft.com/en-us/library/aa746492%28v=vs.85%29.aspx).
+## 什么是企业软件？
 
-Organizations develop enterprise software with numerous custom requirements 
-to fit the specific needs of their operating model. Therefore the software
-development process often becomes far more complicated due to disparate 
-factions within an organization vying for the software to handle their 
-needs at the expense of other factions.
+企业软件是为机构的需求而非个人的需要创建的。为企业编写的软件通常需要与历史遗留系统，
+例如现有的数据库和单机应用程序进行整合。通常也需与[轻量级目录访问协议 (LDAP)](http://en.wikipedia.org/wiki/Lightweight_Directory_Access_Protocol) 和[活动目录 (AD)](https://msdn.microsoft.com/en-us/library/aa746492%28v=vs.85%29.aspx)这样的认证系统整合。
 
-The complexity due to the many stakeholders involved in the building of 
-enterprise software leads to large budgets and extreme scrutiny by 
-non-technical members of an organization. Typically those non-technical 
-people place irrational emphasis on the choice of programming language and 
-frameworks when otherwise they should not make technical design decisions.
+机构开发企业软件，包含大量的定制需求以适应其运营模式的具体需要。 因此，由于组织内部不同派系之间
+为争取软件能优先解决其各自的需求而罔顾他人的斗争，往往会导致软件开发过程变得异常复杂。
 
+因企业软件建设过程涉及到许多利益相关者而产生的复杂局面，导致了大量的预算以及由机构中非技术人员
+执行的过度审查。而这些非技术人员通常在编程语言和框架的选择上妄加评断--而他们是不应该做出技术设计决策的。
 
-## Why are there misconceptions about Python in enterprise environments?
-Traditionally large organizations building enterprise software have used 
-statically typed languages such as C++, .NET and Java. Throughout the 1980s 
-and 1990s large companies such as Microsoft, Sun Microsystems and Oracle 
-marketed these languages as "enterprise grade". The inherent snub to other
-languages was that they were not appropriate for CIOs' difficult technical 
-environments. Languages other than Java, C++ and .NET were seen as risky and
-therefore not worthy of investment.
+## 为什么企业环境中存在对 Python 的误解？
 
-In addition, "scripting languages" such as Python, Perl and Ruby were not
-yet robust enough in the 1990s because their core standard libraries were
-still being developed. Frameworks such as [Django](/django.html), 
-[Flask](/flask.html) and Rails (for Ruby) did not yet exist. The Web was
-just beginning and most enterprise applications were desktop apps built
-for Windows. Python simply wasn't made for such environments.
+传统大型机构使用静态类型语言如 C++、 .NET 和 Java 构建企业软件。上世纪80年代和90年代的大公司，
+如微软、Sun 和 甲骨文将这些语言标榜为”企业级“语言进行市场销售。其直接后果是，其它语言受到了冷落，
+并被看作不适应 CIO 的艰难技术环境。除了 Java、C++ 和 .NET，其它语言都被认为是有风险的，
+因而不值得投资使用。
 
+此外，在 20 世纪 90 年代，”脚本语言“如 Python、Perl 和 Ruby 都还不够强大，
+因为他们的核心标准库都仍处在开发阶段。像 [Django](/django.html)、[Flask](/flask.html) 
+以及 Rails (Ruby 语言) 这样的框架还没有产生。 那时的网络还刚刚开始，
+大多数企业应用还只是 Windows 系统上的桌面应用程序。 而 Python 根本不适合用于那样的环境。
 
-## Why is Python now appropriate for building enterprise software?
-From the early 2000s through today the languages and ecosystems for many
-dynamically typed languages have greatly improved and often surpassed some
-aspects of other ecosystems. Python, Ruby and other previously derided 
-languages now have vast, well-maintained open source ecosystems backed by 
-both independent developers and large companies including Microsoft, IBM, 
-Google, Facebook, Dropbox, Twilio and many, many others.
+## 为什么说 Python 现在适合于构建企业级软件？
 
-Python's open source libraries, especially for
-[web development](/web-frameworks.html) and data analysis, are some of the 
-best maintained and fully featured pieces of code for any language.
+从本世纪初到现在，许多动态类型语言及其生态系统有了很大的发展，而且在某些方面往往超越了其它生态系统。
+Python、 Ruby 以及其它之前被冷落的语言现在有了更广阔并且维护良好的开源生态系统，
+它们受到独立开发者和大公司的支持，包括微软、IBM、谷歌、Facebook、Dropbox、Twilio等等。
 
-Meanwhile, some of the traditional enterprise software development languages 
-such as Java have languished due to underinvestment by their major corporate 
-backers. When [Oracle purchased Sun Microsystems in 2009](http://www.oracle.com/us/corporate/press/018363)
-there was a long lag time before Java was enhanced with new language features
-in Java 7.  Oracle also 
-[bundles unwanted adware with the Java installation](http://www.engadget.com/2015/03/06/java-adware-mac/),
-whereas the Python community would never put up with such a situation because
-the language is open source and does not have a single corporate controller.
+Python的开源库，特别是针对[Web开发](/web-frameworks.html)和数据分析的那些代码，
+对于任何语言来说，都是维护良好功能完备的典范。
 
-Other ecosystems, such as the .NET platform by Microsoft have fared much 
-better. Microsoft continued to invest in moving the .NET platform along
-throughout the early part of the new millennium.
+同时，一些传统的企业软件开发语言如 Java 因受主要企业支持者投资不足影响，已经衰落了。
+当 [Oracle 于2009 年收购 Sun](http://www.oracle.com/us/corporate/press/018363) 时，
+在 Java 中增加新的语言特性以升级到 Java 7 的计划已被拖了很多一段时间。
+Oracle 还[在 Java 安装包中捆绑了不需要的广告软件](http://www.engadget.com/2015/03/06/java-adware-mac/)，
+而 Python 社区绝不会容忍这种情况发生，因为这门语言是开源的，并不受某一公司控制。
 
-However, Microsoft's enterprise products often have expensive licensing fees 
-for their application servers and associated software. In addition, Microsoft 
-is also a major backer of open source, [especially Python](http://www.hanselman.com/blog/OneOfMicrosoftsBestKeptSecretsPythonToolsForVisualStudioPTVS.aspx),
-and their 
-[Python tools for Visual Studio](https://www.visualstudio.com/vs/features/python/)
-provide a top-notch [development environment](/development-environments.html).
+其他的生态系统，如微软的 .NET 平台则发展的较好。微软在整个新世纪的早期阶段对 .NET 平台
+进行了持继投资以促进及发展。
 
-The end result is that enterprise software development has changed 
-dramatically over the past couple of decades. CIOs and technical executives
-can no longer ignore the progress of Python and the great open source 
-community in the enterprise software development landscape if they want to
-continue delivering business value to their business side customers.
+然而，微软的企业产品，它们的应用程序服务器和相关软件往往有昂贵的许可费用。此外，
+微软也是开源运动的主要支持者，[尤其对于 Python 来说](http://www.hanselman.com/blog/OneOfMicrosoftsBestKeptSecretsPythonToolsForVisualStudioPTVS.aspx)，
+他们的 [Visual Studio Python 工具集](https://www.visualstudio.com/vs/features/python/) 
+提供了一流的[开发环境](/development-environments.html)。
 
+最终的结果是企业软件开发在过去的几十年中发生了翻天覆地的变化。CIO和技术管理人员，
+如果想继续为他们的业务侧客户提供商业价值的话，
+不再能忽视 Python 及伟大的开源社区在企业软件开发领域所取得的进展了。
 
-### Open source enterprise Python projects
-Python is widely used across large enterprise organizations but the code
-is often not put out as open source. If you come across projects that are
-appropriate for this list, [contact me](/about-author.html) to let me know:
+### 开源企业 Python 项目
 
-* [Collab](https://github.com/cfpb/collab) by the 
-  U.S. government's 
-  [Consumer Financial Protection Bureau](http://www.consumerfinance.gov/) 
-  (CFPB) agency is a corporate intranet and collaboration platform for large
-  organizations. The project is currently running and in-use by thousands of
-  CFPB employees.
+Python广泛用于大型企业组织，但代码通常不作为开源提供。
+如果您遇到适合此列表的项目，请[联系我](/about-author.html)告诉我们：
 
-* [Pants](https://github.com/twitter/pants) is a build system for software
-  projects with many distinct parts and built with many different programming
-  languages as is often the case in large organizations.
+* 由美国政府机构[消费者金融保护局 (CFPB)](http://www.consumerfinance.gov/)
+  主导的 [Collab](https://github.com/cfpb/collab) 是一个为大型机构服务的企业内联网及协作平台。
+  该项目目前已投入运行，并被成千上万的 CFPB 员工使用着。
 
+* [Pants](https://github.com/twitter/pants) 是一个针对大型机构软件项目的构建系统，
+  这些项目通常包含许多个由不同的编程语言编写的子项目。
 
-### Enterprise Python software development resources
-The following articles cover topics in enterprise development that are 
-often not discussed when dealing with standard Python development.
+### 企业 Python 软件开发资源
 
-* Talk Python to Me's fourth episode interviewed PayPal's lead developer on
-  [Enterprise Python and Large-Scale Projects](http://www.talkpythontome.com/episodes/show/4/enterprise-python-and-large-scale-projects).
-  They rebuke many of the myths around Python for large scale projects
-  including the variable typing system and scalability.
+以下文章介绍了在处理标准 Python 开发时经常未讨论的企业开发主题。
 
-* [Building and deploying an Enterprise Django Web App in 16 hours](https://medium.com/python-pandemonium/building-and-deploying-an-enterprise-django-web-app-in-16-hours-79e018f7b94c)
-  covers one developer's experience researching, 
-  [building](/web-development.html) and [deploying](/deployment.html) an 
-  enterprise application in Python and [Django](/django.html).
+* “Talk Python to Me”的第四集采访了 PayPal 在[企业Python和大型项目](http://www.talkpythontome.com/episodes/show/4/enterprise-python-and-large-scale-projects)上的首席开发人员。
+  他们谴责围绕 Python 的许多神话，涉及大型项目，包括变量输入系统和可扩展性。
 
-* Mozilla's [Enterprise InfoSec](https://infosec.mozilla.org/) resources 
-  are programming language agnostic but very useful to developers trying 
-  to understand all the jargon that goes along with the enterprise 
-  security domain.
+* [在16小时内构建和部署企业 Django Web App](https://medium.com/python-pandemonium/building-and-deploying-an-enterprise-django-web-app-in-16-hours-79e018f7b94c) 
+  包括一个开发人员在[构建](/web-development.html)和[部署](/deployment.html) Python 和 [Django](/django.html) 企业应用程序的经验研究。
 
-* [The end of enterprise IT](http://www.leanessays.com/2017/01/the-end-of-enterprise-it.html)
-  is a fascinating essay that actually does not talk about Python in 
-  particular but shows how large enterprise IT departments such as the
-  one at ING Bank have to evolve their structure, processes and tools to
-  successfully ship software. Programming languages such as Python are more
-  likely to be used in these updated polyglot and 
-  [DevOps](/devops.html)-driven environments.
+* Mozilla 的 [Enterprise InfoSec](https://infosec.mozilla.org/) 资源是编程语言无关的，
+  但对于试图理解企业安全域所带来的所有术语的开发人员非常有用。
 
-* There are a couple of solid demystifying articles in CIO magazine including
-  [this broad overview of Python in enterprises](http://www.cio.com/article/2437137/developer/you-used-python-to-write-what-.html)
-  and this article on
-  [why dynamic languages are gaining share for enterprise development](http://www.cio.com/article/2431212/developer/dynamic-languages--not-just-for-scripting-any-more.html).
+* [企业IT的终结](http://www.leanessays.com/2017/01/the-end-of-enterprise-it.html)
+  是一篇引人入胜的文章，实际上并没有特别谈论 Python，而是展示了如何像 ING 银行那样的
+  大型企业 IT 部门必须改进其结构，流程和工具，以成功发布软件。诸如 Python 之类的编程语言
+  更有可能用于这些更新的多语言和 [DevOps](/devops.html) 驱动的环境中。
 
-* JavaWorld wrote an interesting article about 
-  [Python's inroads into enterprise software development](http://www.javaworld.com/article/2078655/scripting-jvm-languages/python-coming-to-the-enterprise--like-it-or-not.html).
+* CIO 期刊上有很多篇靠谱的揭密文章，如这篇 [Python 企业开发概述](http://www.cio.com/article/2437137/developer/you-used-python-to-write-what-.html) 和这篇[为什么动态语言在企业开发中占有越来越多的份额](http://www.cio.com/article/2431212/developer/dynamic-languages--not-just-for-scripting-any-more.html)。
 
-* I gave a talk at DjangoCon 2014 on 
-  [How to Solve the Top 5 Headaches with Django in the Enterprise](https://www.youtube.com/watch?v=aMtiCX38w20)
-  which covered both Python and Django in large organizations.
+* JavaWorld 上有一篇很有趣的文章叫 [Python 进军企业软件开发之路](http://www.javaworld.com/article/2078655/scripting-jvm-languages/python-coming-to-the-enterprise--like-it-or-not.html)。
 
-* This [StackExchange answer](http://programmers.stackexchange.com/questions/141411/what-is-enterprise-software-exactly)
-  contains a solid explanation what differentiates enterprise software
-  from traditional software.
+* 我在 2014 年 DjangoCon 上讲了[如何用 Django 解决企业的5个问题](https://www.youtube.com/watch?v=aMtiCX38w20)，内容覆盖如何在大型机构中使用 Python 和 Django。
 
-* There was a 
-  [Python subreddit thread about Python in the enterprise](https://www.reddit.com/r/Python/comments/3myppd/everyone_who_encounters_it_seems_to_love_python/)
-  that's worth a look for broader opinions on Python compared to Java and
-  .NET in enterprise environments.
+* 这篇 [StackExchange 答案](http://programmers.stackexchange.com/questions/141411/what-is-enterprise-software-exactly)详细阐述了企业软件与传统软件的区别。
 
-* [Why are enterprises so slow?](https://zwischenzugs.com/2018/10/02/why-are-enterprises-so-slow/)
-  is not specific to Python but is a fantastic article on the regulatory,
-  cultural and financial reasons why large companies often move so slowly.
+* 这篇 Reddit 上的 Python 主题文章[企业中的 Python](https://www.reddit.com/r/Python/comments/3myppd/everyone_who_encounters_it_seems_to_love_python/) 值得一读，里面有针对在企业环境中 Python 对比 Java 和 .NET 的更广泛观点。
+
+* [为什么企业这么慢？](https://zwischenzugs.com/2018/10/02/why-are-enterprises-so-slow/)并非特定于 Python，
+  而是关于监管，文化和财务原因讲述为什么大公司经常这么慢。
